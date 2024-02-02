@@ -4,25 +4,21 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.db import IntegrityError
-from .serializers import UserSerializer
+from .serializers import UserSerializer, LoginSerializer
 from rest_framework.permissions import IsAuthenticated
 
 User = get_user_model()
 
 class LoginView(APIView):
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            username = serializer.validated_data['username']
-            password = serializer.validated_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                token, _ = Token.objects.get_or_create(user=user)
-                return Response({'token': token.key}, status=status.HTTP_200_OK)
-            else:
-                return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        if user is not None:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=200)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid Credentials'}, status=400)
 
 class RegisterView(APIView):
     def post(self, request):
@@ -46,3 +42,10 @@ class ProfileView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+
+    def put(self, request):
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

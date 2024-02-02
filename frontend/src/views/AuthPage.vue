@@ -7,8 +7,8 @@
       <label for="password">Password</label>
       <input id="password" v-model="password" type="password" required>
 
-      <button type="submit" @click="isRegistering = false">Login</button>
-      <button type="submit" @click="isRegistering = true">Register</button>
+      <button type="button" @click="handleLogin">Login</button>
+      <button type="button" @click="handleRegister">Register</button>
     </form>
    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div> 
   </div>
@@ -22,17 +22,15 @@ export default {
     return {
       username: '',
       password: '',
-      isRegistering: false,
       errorMessage: ''
     }
   },
   methods: {
-    async handleSubmit() {
-      if (this.isRegistering) {
-        await this.register();
-      } else {
-        await this.login();
-      }
+    async handleLogin() {
+      await this.login();
+    },
+    async handleRegister() {
+      await this.register();
     },
 async login() {
     try {
@@ -64,7 +62,7 @@ async register() {
     } catch (error) {
         if (error.response && error.response.status === 400) {
             if (error.response.data.username) {
-                this.errorMessage = 'username already exists';
+                this.errorMessage = 'Email is already registered';
             } else {
                 this.errorMessage = 'Invalid data';
             }
