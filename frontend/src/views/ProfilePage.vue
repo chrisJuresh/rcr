@@ -1,6 +1,6 @@
 <template>
+    <h1 v-if="user">Edit: {{ user.username }}</h1>
   <div>
-    <p v-if="user">{{ user.username }}</p>
     <div v-if="user">
       <h2>Edit Profile</h2>
       <form @submit.prevent="updateProfile">

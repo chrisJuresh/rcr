@@ -8,10 +8,11 @@ User = get_user_model()
 class TrustSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trust
-        fields = ['name']
+        fields = ['id','name']
 
 class UserSerializer(serializers.ModelSerializer):
-    trust = TrustSerializer(read_only=True)
+    trust = serializers.PrimaryKeyRelatedField(queryset=Trust.objects.all())
+
     class Meta:
         model = User
         fields = ['username', 'password', 'first_name', 'last_name', 'trust']
