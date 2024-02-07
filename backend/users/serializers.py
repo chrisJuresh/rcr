@@ -1,21 +1,22 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Trust
+from .models import Trust, Role
 from django.contrib.auth import authenticate
 
 User = get_user_model()
 
-class TrustSerializer(serializers.ModelSerializer):
+class RoleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Trust
+        model = Role
         fields = ['id','name']
 
 class UserSerializer(serializers.ModelSerializer):
     trust = serializers.PrimaryKeyRelatedField(queryset=Trust.objects.all())
+    roles = serializers.PrimaryKeyRelatedField(many=True, queryset=Role.objects.all())
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'first_name', 'last_name', 'trust']
+        fields = ['username', 'password', 'first_name', 'last_name', 'trust', 'roles']
         extra_kwargs = {'password': {'write_only': True}}
 
 class LoginSerializer(serializers.Serializer):
@@ -27,3 +28,11 @@ class LoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Incorrect Credentials")
+    
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+    
+

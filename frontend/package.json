@@ -11,6 +11,7 @@
     "axios": "^1.6.7",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
+    "vue-next-select": "^2.10.5",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

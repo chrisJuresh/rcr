@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthPage from '../views/AuthPage.vue'
 import ProfilePage from '../views/ProfilePage.vue'
+import JD from '../views/JD.vue'
 
 const routes = [
     {
@@ -12,6 +13,11 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: ProfilePage
+    },
+    {
+        path: '/jd',
+        redirect: '/JD',
+        component: JD
     }
 ]
 

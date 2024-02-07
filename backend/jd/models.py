@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class JD(models.Model):
+    document = models.FileField(upload_to='jd_documents/')
+    submission_date = models.DateTimeField(auto_now_add=True)
