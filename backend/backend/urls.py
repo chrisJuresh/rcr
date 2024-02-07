@@ -19,15 +19,18 @@ from rest_framework.routers import DefaultRouter
 from users.views import LoginView, RegisterView, ProfileView, RoleViewSet
 from trusts.views import TrustViewSet
 from django.contrib import admin
+from jd.views import JDViewSet
 
 router = DefaultRouter()
 router.register(r'trusts', TrustViewSet)
 router.register(r'roles', RoleViewSet)
+router.register(r'jds', JDViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name='login'),
     path('register/', RegisterView.as_view(), name='register'),
     path('profile/', ProfileView.as_view(), name='profile_view'),
+    path('jd/', JDViewSet.as_view({'get': 'list'}), name='jd_view'),
     path('', include(router.urls)),
 ]

@@ -18,13 +18,19 @@
         </select>
 
 
-        <label for="roles">Title (hold ctrl to select multiple):</label>
-        <select id="roles" v-model="user.roles" multiple>
-          <option v-for="role in roles" :value="role.id" :key="role.id" :class="{ 'highlight-role': user.roles.includes(role.id) }">
-  {{ role.name }}
-</option>
-        </select>
-        <button type="submit">Update</button>
+<label for="roles">Title (hold ctrl to select multiple| message the rcr for permission to other roles):</label>
+<select id="roles" v-model="user.roles" multiple>
+  <option 
+    v-for="role in roles" 
+    :value="role.id" 
+    :key="role.id" 
+    :class="{ 'highlight-role': user.roles.includes(role.id) }" 
+    :disabled="!allowedRoles.includes(role.name)"
+  >
+    {{ role.name }}
+  </option>
+</select>
+<button type="submit">Update</button>
       </form>
     </div>
   </div>
@@ -40,6 +46,17 @@ export default {
       trusts: [],
       roles: [],
     };
+  },
+  computed: {
+    allowedRoles() {
+      const roles = [];
+    roles.push('TRUST_EMPLOYEE');
+    console.log(this.user);  // Add this line
+      if (this.user.can_be_reviewer) roles.push('REVIEWER');
+      if (this.user.can_be_representative) roles.push('REPRESENTATIVE');
+      if (this.user.can_be_rcr_employee) roles.push('RCR_EMPLOYEE');
+      return roles;
+    }
   },
   async created() {
     const token = localStorage.getItem('token');

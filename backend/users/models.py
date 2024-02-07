@@ -18,7 +18,23 @@ class Role(models.Model):
   
 class User(AbstractUser):
     trust = models.ForeignKey(Trust, on_delete=models.CASCADE, null=True, blank=True)
-    roles = models.ManyToManyField(Role, null=True, blank=True)
-    
+    roles = models.ManyToManyField(Role, blank=True)
 
+    can_be_reviewer = models.BooleanField(default=False)
+    can_be_representative = models.BooleanField(default=False)
+    can_be_rcr_employee = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        role = kwargs.pop('role', None)
+
+        super().save(*args, **kwargs)
+
+        if role:
+            if role.name == 'REVIEWER' and self.can_be_reviewer:
+                self.roles.add(role)
+            elif role.name == 'REPRESENTATIVE' and self.can_be_representative:
+                self.roles.add(role)
+            elif role.name == 'RCR_EMPLOYEE' and self.can_be_rcr_employee:
+                self.roles.add(role)
+            else:
+                raise Exception(f"User does not have permission to be assigned the {role.name} role.")
