@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Radiologist, Oncologist
+from .models import Specialty
 
-admin.site.register(Radiologist)
-admin.site.register(Oncologist)
+admin.site.register(Specialty)

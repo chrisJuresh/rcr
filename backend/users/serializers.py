@@ -13,10 +13,12 @@ class RoleSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     trust = serializers.PrimaryKeyRelatedField(queryset=Trust.objects.all())
     roles = serializers.PrimaryKeyRelatedField(many=True, queryset=Role.objects.all())
+    perms = serializers.PrimaryKeyRelatedField(queryset=Trust.objects.all())
+
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'first_name', 'last_name', 'trust', 'roles', 'can_be_reviewer', 'can_be_representative', 'can_be_rcr_employee']
+        fields = ['username', 'password', 'first_name', 'last_name', 'trust', 'roles', 'perms']
         extra_kwargs = {'password': {'write_only': True}}
 
 class LoginSerializer(serializers.Serializer):

@@ -51,6 +51,12 @@ INSTALLED_APPS = [
     'django_extensions',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', 
+    'guardian.backends.ObjectPermissionBackend',
+]
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
