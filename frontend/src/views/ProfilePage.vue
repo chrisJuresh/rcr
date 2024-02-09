@@ -2,16 +2,16 @@
     <h1 v-if="user">Edit: {{ user.username }}</h1>
   <div>
     <div v-if="user">
-      <h2>Edit Profile</h2>
       <form @submit.prevent="updateProfile">
         <label for="firstName">First Name:</label>
-        <input id="firstName" v-model="user.first_name" type="text" />
+        <input id="firstName" v-model="user.first_name" type="text" required />
 
         <label for="lastName">Last Name:</label>
-        <input id="lastName" v-model="user.last_name" type="text" />
+        <input id="lastName" v-model="user.last_name" type="text" required />
 
         <label for="trusts">Trust:</label>
-        <select id="trusts" v-model="user.trust">
+        <select id="trusts" v-model="user.trust" required>
+          <option disabled value="">Please select a trust</option>
           <option v-for="trust in trusts" :key="trust.id" :value="trust.id">
             {{ trust.name }}
           </option>
@@ -32,6 +32,9 @@
 </select>
 <button type="submit">Update</button>
       </form>
+      <button>
+  <router-link to="/panel">Go to Panel</router-link>
+</button>
     </div>
   </div>
 </template>
@@ -51,7 +54,7 @@ export default {
     allowedRoles() {
       const roles = [];
     roles.push('TRUST_EMPLOYEE');
-    console.log(this.user);  // Add this line
+    console.log(this.user); 
       if (this.user.can_be_reviewer) roles.push('REVIEWER');
       if (this.user.can_be_representative) roles.push('REPRESENTATIVE');
       if (this.user.can_be_rcr_employee) roles.push('RCR_EMPLOYEE');

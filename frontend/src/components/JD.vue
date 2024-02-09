@@ -3,23 +3,21 @@
     <table>
       <thead>
         <tr>
-          <th>Job Title</th>
-          <th>Description</th>
-          <!-- Add more columns as needed -->
+          <th class="job-title">Job Title</th>
+          <th class="submission-date">Submission Date</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="job in jobs" :key="job.id">
-          <td>{{ job.title }}</td>
-          <td>{{ job.description }}</td>
-          <!-- Add more data cells as needed -->
+          <td class="job-title">{{ job.document }}</td>
+          <td class="submission-date">{{ formatDate(job.submission_date) }}</td>
         </tr>
       </tbody>
     </table>
   </div>
   <router-link to="/newJD">
-  <button>Create New JD</button>
-</router-link>
+    <button>Create New JD</button>
+  </router-link>
 </template>
 
 <script>
@@ -31,8 +29,20 @@ export default {
       jobs: [],
     };
   },
+  methods: {
+    formatDate(isoDateString) {
+      const date = new Date(isoDateString);
+      return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    }
+  },
   async created() {
-    const response = await axios.get('http://localhost:8000/jds/');
+    const token = localStorage.getItem('token');
+  
+    const response = await axios.get('http://localhost:8000/jds/', {
+      headers: {
+        'Authorization': `Token ${token}`
+      },
+    });
     this.jobs = response.data;
   },
 };
@@ -43,4 +53,13 @@ export default {
   max-height: 400px; 
   overflow-y: auto;
 }
+
+.job-title {
+  padding-right: 20px;
+}
+
+.submission-date {
+  padding-right: 20px; 
+}
+
 </style>

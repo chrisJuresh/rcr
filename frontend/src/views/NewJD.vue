@@ -8,6 +8,7 @@
       </div>
       <button type="submit">Submit</button>
     </form>
+  <router-link to="/panel">Go to Panel</router-link>
     <div v-if="feedbackMessage">{{ feedbackMessage }}</div>
   </div>
 </template>
@@ -16,16 +17,13 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-// Reactive data for the file to be uploaded
 const file = ref(null);
 const feedbackMessage = ref('');
 
-// Handles file selection
 function handleFileUpload(event) {
   file.value = event.target.files[0];
 }
 
-// Submits the JD to the backend
 async function submitJD() {
   if (!file.value) {
     feedbackMessage.value = 'Please select a file to upload.';
@@ -43,12 +41,9 @@ const token = localStorage.getItem('token');
         'Authorization': `Token ${token}`
       },
     });
-
-    // Handle success
     feedbackMessage.value = 'JD submitted successfully!';
-    console.log(response.data); // For debugging
+    console.log(response.data); 
   } catch (error) {
-    // Handle error
     feedbackMessage.value = error.response.data.detail || 'An error occurred while submitting the JD.';
     console.error(error);
   }
@@ -56,5 +51,4 @@ const token = localStorage.getItem('token');
 </script>
 
 <style scoped>
-/* Add styles here */
 </style>

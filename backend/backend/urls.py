@@ -24,7 +24,7 @@ from jd.views import JDViewSet
 router = DefaultRouter()
 router.register(r'trusts', TrustViewSet)
 router.register(r'roles', RoleViewSet)
-router.register(r'jds', JDViewSet)
+router.register(r'jds', JDViewSet, basename='jd')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
