@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Specialty
+from .models import Speciality, ConsultantType
 
-admin.site.register(Specialty)
+admin.site.register(Speciality)
+admin.site.register(ConsultantType)

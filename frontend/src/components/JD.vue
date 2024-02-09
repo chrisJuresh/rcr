@@ -3,14 +3,20 @@
     <table>
       <thead>
         <tr>
-          <th class="job-title">Job Title</th>
+          <th class="id">Reference</th>
+          <th class="Consultant">Consultant</th>
           <th class="submission-date">Submission Date</th>
+          <th class="consultation-type">Primary Specialities</th>
+          <th class="speciality">Sub Specialities</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="job in jobs" :key="job.id">
-          <td class="job-title">{{ job.document }}</td>
-          <td class="submission-date">{{ formatDate(job.submission_date) }}</td>
+        <tr v-for="jd in jd" :key="jd.id">
+          <td class="id">{{ jd.id }}</td>
+          <td class="jd-title">{{ jd.consultantType }}</td>
+          <td class="submission-date">{{ formatDate(jd.submission_date) }}</td>
+          <td class="consultant-type">{{ jd.primarySpecialities }}</td>
+          <td class="speciality">{{ jd.subSpecialities }}</td>
         </tr>
       </tbody>
     </table>
@@ -26,7 +32,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      jobs: [],
+      jd: [],
     };
   },
   methods: {
@@ -43,7 +49,7 @@ export default {
         'Authorization': `Token ${token}`
       },
     });
-    this.jobs = response.data;
+    this.jd = response.data;
   },
 };
 </script>
@@ -54,7 +60,7 @@ export default {
   overflow-y: auto;
 }
 
-.job-title {
+.jd-title {
   padding-right: 20px;
 }
 

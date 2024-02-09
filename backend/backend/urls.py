@@ -20,11 +20,13 @@ from users.views import LoginView, RegisterView, ProfileView, RoleViewSet
 from trusts.views import TrustViewSet
 from django.contrib import admin
 from jd.views import JDViewSet
+from speciality.views import SpecialityViewSet
 
 router = DefaultRouter()
 router.register(r'trusts', TrustViewSet)
 router.register(r'roles', RoleViewSet)
 router.register(r'jds', JDViewSet, basename='jd')
+router.register(r'specialities', SpecialityViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
