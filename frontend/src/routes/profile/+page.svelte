@@ -111,4 +111,3 @@
       <button on:click={() => goto('/panel')}>Go to Panel</button>
     {/if}
   </div>
-  
