@@ -5,12 +5,11 @@ from speciality.models import Speciality, ConsultantType
 class JDSerializer(serializers.ModelSerializer):
     primarySpecialities = serializers.PrimaryKeyRelatedField(queryset=Speciality.objects.all(), many=True)
     subSpecialities = serializers.PrimaryKeyRelatedField(queryset=Speciality.objects.all(), many=True)
-
     consultantType = serializers.SlugRelatedField(slug_field='name', queryset=ConsultantType.objects.all())
 
     class Meta:
         model = JD
-        fields = ['document', 'submission_date', 'trust', 'consultantType','primarySpecialities', 'subSpecialities']
+        fields = ['document', 'submission_date', 'trust', 'consultantType', 'primarySpecialities', 'subSpecialities']
 
     def create(self, validated_data):
         primary_specialities = validated_data.pop('primarySpecialities', [])
