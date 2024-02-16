@@ -3,7 +3,13 @@
     import { goto } from '$app/navigation';
     import axios from 'axios';
     import { writable, derived } from 'svelte/store';
-  
+    import { Button } from "$lib/components/ui/button";
+    import * as Card from "$lib/components/ui/card";
+    import * as Select from "$lib/components/ui/select";
+    import { Input } from "$lib/components/ui/input";
+    import { Label } from "$lib/components/ui/label";
+
+
     // TypeScript interface definitions
     interface User {
       username?: string;
@@ -80,34 +86,58 @@
     }
   </script>
   
-  <div>
-    {#if $user}
-      <h1>Edit: {$user.username}</h1>
-      <form on:submit|preventDefault={updateProfile}>
-        <label for="firstName">First Name:</label>
-        <input id="firstName" bind:value={$user.first_name} type="text" required>
-  
-        <label for="lastName">Last Name:</label>
-        <input id="lastName" bind:value={$user.last_name} type="text" required>
-  
-        <label for="trusts">Trust:</label>
-        <select id="trusts" bind:value={$user.trust} required>
-          <option disabled value="">Please select a trust</option>
-          {#each $trusts as trust}
-            <option value={trust.id}>{trust.name}</option>
-          {/each}
-        </select>
-  
-        <label for="roles">Title (hold ctrl to select multiple| message the rcr for permission to other roles):</label>
-        <select id="roles" bind:value={$user.roles} multiple>
-          {#each $roles as role}
-            <option value={role.id} class:highlight-role={$user.roles && $user.roles.includes(role.id)} disabled={!$allowedRoles.includes(role.name)}>
-              {role.name}
-            </option>
-          {/each}
-        </select>
-        <button type="submit">Update</button>
+{#if $user}
+  <Card.Root class="max-w-xl mx-auto">
+    <Card.Header>
+      <Card.Title>Edit: {$user.username}</Card.Title>
+    </Card.Header>
+    <Card.Content>
+      <form on:submit|preventDefault={updateProfile} class="space-y-4">
+        <div class="flex flex-col space-y-1">
+          <Label for="firstName">First Name:</Label>
+          <Input id="firstName" bind:value={$user.first_name} type="text" required />
+        </div>
+
+        <div class="flex flex-col space-y-1">
+          <Label for="lastName">Last Name:</Label>
+          <Input id="lastName" bind:value={$user.last_name} type="text" required />
+        </div>
+
+        <div class="flex flex-col space-y-1">
+          <Label for="trusts">Trust:</Label>
+          <Select.Root bind:value={$user.trust} required>
+            <Select.Trigger id="trusts">
+              <Select.Value placeholder="Please select a trust" />
+            </Select.Trigger>
+            <Select.Content>
+              {#each $trusts as trust}
+                <Select.Item value={trust.id}>{trust.name}</Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
+        </div>
+
+        <div class="flex flex-col space-y-1">
+          <Label for="roles">Title (hold ctrl to select multiple| message the rcr for permission to other roles):</Label>
+          <Select.Root id="roles" multiple bind:value={$user.roles}>
+            <Select.Trigger>
+              <Select.Value placeholder="Select roles" />
+            </Select.Trigger>
+            <Select.Content>
+              {#each $roles as role}
+                <Select.Item value={role.id} disabled={!$allowedRoles.includes(role.name)}>
+                  {role.name}
+                </Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+          <Button type="button" variant="outline" on:click={() => goto('/panel')}>Go to Panel</Button>
+          <Button type="submit">Update</Button>
+        </div>
       </form>
-      <button on:click={() => goto('/panel')}>Go to Panel</button>
-    {/if}
-  </div>
+    </Card.Content>
+  </Card.Root>
+{/if}
