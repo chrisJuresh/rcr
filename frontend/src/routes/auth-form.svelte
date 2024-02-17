@@ -5,81 +5,59 @@
     import { formSchema } from "./schema"; 
     import type { FormSchema } from "./schema"; 
     import type { SuperValidated } from "sveltekit-superforms";
-    import axios from 'axios';
-    import { goto } from '$app/navigation';
 
     export let form: SuperValidated<FormSchema>;
 
-    let selectedTab = 'login'; 
-
-    async function handleSubmit(event, action) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const formObject = Object.fromEntries(formData);
-
-        try {
-            const url = `http://localhost:8000/${action}/`;
-            const response = await axios.post(url, formObject);
-            console.log(response.data);
-            goto('/profile');
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-    }
 </script>
 
 <div class="flex justify-center items-center min-h-screen">
     <Card.Root class="auth-page w-[400px]">
         <Card.Header>
-            <Card.Title>Login or Register</Card.Title>
+            <Card.Title>Authenticate</Card.Title>
             <Card.Description>Access your account or create a new one.</Card.Description>
         </Card.Header>
         <Card.Content>
-            <Tabs.Root bind:value={selectedTab} class="w-full">
+            <Tabs.Root value="login" class="w-full">
                 <Tabs.List>
                     <Tabs.Trigger value="login">Login</Tabs.Trigger>
                     <Tabs.Trigger value="register">Register</Tabs.Trigger>
                 </Tabs.List>
                 <Tabs.Content value="login">
-                    <Form.Root method="POST" {form} schema={formSchema} let:config class="flex flex-col space-y-4">
-                        <form on:submit={(event) => handleSubmit(event, 'login')}>
-                            <Form.Item>
+                    <Form.Root action="?/login"  method="POST" {form} schema={formSchema} let:config class="flex flex-col space-y-4">
                                 <Form.Field {config} name="username">
+                            <Form.Item>
                                     <Form.Label>Email</Form.Label>
                                     <Form.Input type="text" required />
                                     <Form.Validation />
-                                </Form.Field>
                             </Form.Item>
-                            <Form.Item>
+                                </Form.Field>
                                 <Form.Field {config} name="password">
+                            <Form.Item>
                                     <Form.Label>Password</Form.Label>
                                     <Form.Input type="password" required />
                                     <Form.Validation />
-                                </Form.Field>
                             </Form.Item>
-                            <button type="submit" class="form-button">Login</button>
-                        </form>
+                                </Form.Field>
+                            <Form.Button>Submit</Form.Button>
                     </Form.Root>
                 </Tabs.Content>
                 <Tabs.Content value="register">
-                    <Form.Root method="POST" {form} schema={formSchema} let:config class="flex flex-col space-y-4">
-                        <form on:submit={(event) => handleSubmit(event, 'register')}>
-                            <Form.Item>
+                    <Form.Root action="?/register" method="POST" {form} schema={formSchema} let:config class="flex flex-col space-y-4">
                                 <Form.Field {config} name="username">
+                            <Form.Item>
                                     <Form.Label>Email</Form.Label>
                                     <Form.Input type="text" required />
                                     <Form.Validation />
-                                </Form.Field>
                             </Form.Item>
-                            <Form.Item>
+                                </Form.Field>
                                 <Form.Field {config} name="password">
+                            <Form.Item>
                                     <Form.Label>Password</Form.Label>
                                     <Form.Input type="password" required />
                                     <Form.Validation />
-                                </Form.Field>
                             </Form.Item>
-                            <button type="submit" class="form-button">Register</button>
-                        </form>
+                                </Form.Field>
+                            <Form.Button>Submit</Form.Button>
                     </Form.Root>
                 </Tabs.Content>
             </Tabs.Root>
