@@ -1,10 +1,10 @@
 // app.d.ts
 declare global {
-	namespace App {
-		// interface Error {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
+	// src/app.d.ts
+	declare namespace App {
+		interface Locals {
+			user?: any; // Or a more specific type if you have one
+		}
 	}
 }
 

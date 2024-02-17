@@ -4,6 +4,7 @@
 	import type { SuperValidated } from 'sveltekit-superforms';
 
 	export let form: SuperValidated<LoginFormSchema>;
+
 </script>
 
 <Form.Root

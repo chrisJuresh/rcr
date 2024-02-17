@@ -22,3 +22,4 @@ class User(AbstractUser):
     can_be_reviewer = models.BooleanField(default=False)
     can_be_representative = models.BooleanField(default=False)
     can_be_rcr_employee = models.BooleanField(default=False)
+    title = models.CharField(max_length=4, blank=True, null=True)

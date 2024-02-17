@@ -64,12 +64,10 @@ class ValidateToken(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, format=None):
-        return Response({
-            'user_id': request.user.id,
-            'username': request.user.username,
-            'email': request.user.email
-        }, status=status.HTTP_200_OK)
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        print(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 from django.contrib.auth import logout
