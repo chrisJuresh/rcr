@@ -1,7 +1,8 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
-  import SettingsForm from "./auth-form.svelte";
-  export let data: PageData;
+	import type { PageData  } from './$types';
+	import { redirect } from '@sveltejs/kit';
+	export let data: PageData;
 </script>
 
-<SettingsForm form={data.form} />
+
+

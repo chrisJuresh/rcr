@@ -5,7 +5,7 @@ import { goto } from '$app/navigation';
 export const handle: Handle = async ({ event, resolve }) => {
  
     // Ensure session and session data are properly initialized
-const token = event.cookies.get('token'); 
+const token = event.cookies.get('cookie'); 
   console.log(token); // Check if the cookie was fetched
   if (token) {
     axios.defaults.headers.common['Authorization'] = `Token ${token}`;

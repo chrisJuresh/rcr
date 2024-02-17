@@ -21,6 +21,7 @@ from trusts.views import TrustViewSet
 from django.contrib import admin
 from jd.views import JDViewSet
 from speciality.views import SpecialityViewSet
+from users.views import ValidateToken, LogoutView
 
 router = DefaultRouter()
 router.register(r'trusts', TrustViewSet)
@@ -35,4 +36,6 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile_view'),
     path('jd/', JDViewSet.as_view({'get': 'list'}), name='jd_view'),
     path('', include(router.urls)),
+    path('validate_token/', ValidateToken.as_view(), name='validate_token'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
