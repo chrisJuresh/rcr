@@ -15,27 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import include, path
-from rest_framework.routers import DefaultRouter
-from users.views import LoginView, RegisterView, ProfileView, RoleViewSet
-from trusts.views import TrustViewSet
 from django.contrib import admin
-from jd.views import JDViewSet
-from speciality.views import SpecialityViewSet
-from users.views import ValidateToken, LogoutView
+from users.api import api as users_api
+from ninja import NinjaAPI
 
-router = DefaultRouter()
-router.register(r'trusts', TrustViewSet)
-router.register(r'roles', RoleViewSet)
-router.register(r'jds', JDViewSet, basename='jd')
-router.register(r'specialities', SpecialityViewSet)
+api = NinjaAPI()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(), name='login'),
-    path('register/', RegisterView.as_view(), name='register'),
-    path('profile/', ProfileView.as_view(), name='profile_view'),
-    path('jd/', JDViewSet.as_view({'get': 'list'}), name='jd_view'),
-    path('', include(router.urls)),
-    path('validate_token/', ValidateToken.as_view(), name='validate_token'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path("api/", api.urls),
+    path('api/users/', users_api.urls),
 ]

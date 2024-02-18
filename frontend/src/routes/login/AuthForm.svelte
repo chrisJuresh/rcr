@@ -3,8 +3,7 @@
 	import RegisterTab from './RegisterTab.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
-	
-	import { loginFormSchema, registerFormSchema, type LoginFormSchema, type RegisterFormSchema } from './schema';
+	import { type LoginFormSchema, type RegisterFormSchema } from './schema';
 	import type { SuperValidated } from 'sveltekit-superforms';
 
 	export let loginForm: SuperValidated<LoginFormSchema>;

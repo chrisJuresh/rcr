@@ -4,6 +4,5 @@
 	export let data: PageData;
 </script>
 
-
 <ProfileForm form={data.form} user={data.user}/>
 

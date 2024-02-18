@@ -18,7 +18,7 @@ export const actions: Actions = {
 	login: async (event) => {
 		const result = await handleFormSubmission({
 			event,
-			url: '/login/',
+			url: '/api/users/login',
 			successRedirect: '/panel',
 			schema: loginFormSchema
 		});
@@ -28,7 +28,7 @@ export const actions: Actions = {
 	register: async (event) => {
 		const result = await handleFormSubmission({
 			event,
-			url: '/register/',
+			url: '/api/users/register',
 			successRedirect: '/profile',
 			schema: registerFormSchema
 		});
@@ -41,6 +41,7 @@ async function handleFormSubmission({ event, url, successRedirect, schema }) {
     if (!form.valid) {
         throw error(400, { form }); // Correct usage of SvelteKit's error function
     }
+	console.log('form',form.data);
     try {
         const response = await axios.post(`http://localhost:8000${url}`, {
             username: form.data.username,
@@ -48,7 +49,8 @@ async function handleFormSubmission({ event, url, successRedirect, schema }) {
         });
         setAuthCookie(event, response.data.token);
     } catch (catchError) { // Renamed to avoid naming conflict
-        throw error(401, { form, error: `${url.split('/').pop()} failed` }); // Now 'error' refers to SvelteKit's function
+		console.log('response', catchError);
+		throw error(401, { error: `${url.split('/').pop()} failed` }); // Now 'error' refers to SvelteKit's function
     }
         throw redirect(302, successRedirect); // Correctly throw redirect
 }
@@ -61,4 +63,5 @@ function setAuthCookie(event, token) {
 		sameSite: 'strict',
 		maxAge: 60 * 60 * 24 // 24 hours
 	});
+	console.log('cookie',event.cookies.get('cookie'));
 }
