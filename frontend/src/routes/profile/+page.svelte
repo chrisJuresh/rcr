@@ -1,8 +1,0 @@
-<script lang="ts">
-	import type { PageData  } from './$types';
-	import ProfileForm from './ProfileForm.svelte';
-	export let data: PageData;
-</script>
-
-<ProfileForm form={data.form} user={data.user}/>
-
