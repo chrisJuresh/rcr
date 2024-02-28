@@ -25,10 +25,10 @@
 	action="?/register"
 	class="flex flex-col space-y-4"
 >
-	<Form.Field {form} name="username">
+	<Form.Field {form} name="email">
 		<Form.Control let:attrs>
 			<Form.Label>Email</Form.Label>
-			<Input {...attrs} bind:value={$formData.username} />
+			<Input {...attrs} bind:value={$formData.email} />
     <Form.FieldErrors />
 		</Form.Control>
 	</Form.Field>

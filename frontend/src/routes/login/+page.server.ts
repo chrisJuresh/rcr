@@ -31,7 +31,7 @@ const handleUserForm = async (event, schema, url) => {
     }
     try {
         const response = await axios.post(url, {
-            username: form.data.username,
+            email: form.data.email,
             password: form.data.password
         });
         setTokenCookie(event, response.data.access);
