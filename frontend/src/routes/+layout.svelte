@@ -6,24 +6,22 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { setMode, resetMode, ModeWatcher } from 'mode-watcher';
-    import Sun from "svelte-radix/Sun.svelte";
-    import Moon from "svelte-radix/Moon.svelte";
-    import Exit from "svelte-radix/Exit.svelte";
+	import Sun from 'svelte-radix/Sun.svelte';
+	import Moon from 'svelte-radix/Moon.svelte';
+	import Exit from 'svelte-radix/Exit.svelte';
 
 	function handleLogout() {
 		goto('/logout');
 	}
-
 	function editProfile() {
 		goto('/protected/profile');
 	}
-
 	function gotoPanel() {
 		goto('/protected/panel');
 	}
 </script>
 
-{#if $page.url.pathname !== '/login' }
+{#if $page.url.pathname !== '/login'}
 	<div class="absolute right-4 top-4 md:right-8 md:top-8">
 		<Button variant="destructive" on:click={handleLogout}>
 			<Exit class="mr-2 h-4 w-4" />
