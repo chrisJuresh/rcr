@@ -48,7 +48,7 @@ class UserProfileOut(Schema):
 @api.get("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def get_profile(request):
     user = request.auth
-    return UserProfileOut(email=user.email, first_name=user.first_name, last_name=user.last_name)
+    return user
 
 class UserProfileIn(Schema):
     first_name: str
@@ -60,4 +60,4 @@ def update_profile(request, payload: UserProfileIn):
     for attr, value in payload.dict().items():
         setattr(user, attr, value)
     user.save()
-    return UserProfileIn(first_name=user.first_name, last_name=user.last_name)
+    return user
