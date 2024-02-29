@@ -3,8 +3,10 @@ from django.contrib.auth.hashers import make_password
 from ninja import Schema, Field
 from ninja.errors import ValidationError
 from ninja_extra import NinjaExtraAPI
+from ninja_jwt.authentication import JWTAuth
 from ninja_jwt.controller import NinjaJWTDefaultController
 from ninja_jwt.tokens import RefreshToken
+from django.shortcuts import get_object_or_404
 
 api = NinjaExtraAPI()
 api.register_controllers(NinjaJWTDefaultController)
@@ -25,7 +27,7 @@ def get_token(user):
 @api.post("/register", url_name="register")
 def register(request, user_in: UserIn):
     if User.objects.filter(email=user_in.email).exists():
-        raise ValidationError({'email': 'A user with that email already exists.'})
+        raise ValidationError('A user with that email already exists')
 
     user = User.objects.create(
         email=user_in.email,
@@ -37,3 +39,25 @@ def register(request, user_in: UserIn):
     return {"tokens": tokens}
 
 #login at /api/token/pair
+ 
+class UserProfileOut(Schema):
+    email: str
+    first_name: str
+    last_name: str
+
+@api.get("/profile/", auth=JWTAuth(), response=UserProfileOut)
+def get_profile(request):
+    user = request.auth
+    return UserProfileOut(email=user.email, first_name=user.first_name, last_name=user.last_name)
+
+class UserProfileIn(Schema):
+    first_name: str
+    last_name: str
+
+@api.put("/profile/", auth=JWTAuth(), response=UserProfileIn)
+def update_profile(request, payload: UserProfileIn):
+    user = request.auth
+    for attr, value in payload.dict().items():
+        setattr(user, attr, value)
+    user.save()
+    return UserProfileIn(first_name=user.first_name, last_name=user.last_name)

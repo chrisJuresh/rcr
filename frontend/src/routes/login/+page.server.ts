@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
-import { fail, redirect } from '@sveltejs/kit'; 
+import { fail, redirect, error } from '@sveltejs/kit'; 
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { loginFormSchema, registerFormSchema } from './schema';
@@ -20,6 +20,7 @@ const setTokenCookie = (event, value) => {
 		secure: process.env.NODE_ENV === 'production',
 		maxAge: 60 * 60 * 24 * 7 // 1 week
 	});
+
 };
 
 const handleUserForm = async (event, schema, url) => {
@@ -27,16 +28,20 @@ const handleUserForm = async (event, schema, url) => {
 	if (!form.valid) {
 		return fail(400, { form });
 	}
-	try {
-		const response = await axios.post(url, {
+	const response = await axios.post(url, {
+			validateStatus:() => true,
 			email: form.data.email,
 			password: form.data.password
+		}).catch((error) => {
+			return error.response;
 		});
-		setTokenCookie(event, response.data.access);
-	} catch (error) {
-		console.error(error);
+	setTokenCookie(event, response.data.access);
+	if (response.status === 200) {
+		redirect(302, '/protected/profile');
+	} else {
+		console.log(response.data.detail)
+	return error(response.status, { message: response.data.detail});
 	}
-	throw redirect(302, '/protected/profile');
 };
 
 export const actions: Actions = {

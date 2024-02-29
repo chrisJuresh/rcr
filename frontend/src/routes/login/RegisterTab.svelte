@@ -8,10 +8,14 @@
 	export let data: SuperValidated<Infer<RegisterFormSchema>>;
 
 	const form = superForm(data, {
-		validators: zodClient(registerFormSchema)
+		validators: zodClient(registerFormSchema),
+		onError: (result) => {
+			console.log(result)
+			$message = result.result.error.message
+		},
 	});
 
-	const { form: formData, enhance } = form;
+	const { form: formData, enhance, message } = form;
 </script>
 
 <form method="POST" use:enhance action="?/register" class="flex flex-col space-y-4">
@@ -35,6 +39,11 @@
 			<Input {...attrs} bind:value={$formData.confirm_password} />
 			<Form.FieldErrors />
 		</Form.Control>
+	<Form.Description class="text-red-600">
+	{#if $message!==undefined}
+		<h1 >{$message}</h1>
+	{/if}
+	</Form.Description>
 	</Form.Field>
 	<Form.Button>Submit</Form.Button>
 </form>
