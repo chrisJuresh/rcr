@@ -45,6 +45,7 @@
 		"bits-ui": "^0.18.4",
 		"clsx": "^2.1.0",
 		"formsnap": "^0.5.1",
+		"js-cookie": "^3.0.5",
 		"mode-watcher": "^0.2.1",
 		"svelte-radix": "^1.0.1",
 		"sveltekit-superforms": "^2.6.2",
