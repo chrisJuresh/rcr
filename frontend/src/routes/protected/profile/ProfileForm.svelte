@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Form from "$lib/components/ui/form";
   import * as Select from "$lib/components/ui/select";
+  import * as Card from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
   import { formSchema, type FormSchema } from "./schema";
   import {
@@ -9,6 +10,7 @@
     superForm,
   } from "sveltekit-superforms";
   import { zodClient } from "sveltekit-superforms/adapters";
+	import { Description } from "formsnap";
  
   export let data: SuperValidated<Infer<FormSchema>>;
   export let user;
@@ -37,6 +39,12 @@ $: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: ro
  
 
 <div class="flex min-h-screen items-center justify-center">
+  <Card.Root class="w-[600px]">
+    <Card.Header>
+      <Card.Title>Edit {user.email}</Card.Title>
+      <Card.Description>These details must be correct as they will be tied to your JDs and AACs<br> Your email address is your unique identifier</Card.Description>
+      </Card.Header>
+      <Card.Content>
 <form method="POST" use:enhance>
   <Form.Field {form} name="title">
     <Form.Control let:attrs>
@@ -100,9 +108,9 @@ onSelectedChange={(s) => {
 }}
 			>
 					<input name={attrs.name} hidden value={selectedRoles} />
-				<Select.Trigger {...attrs}>
-					<Select.Value placeholder={getUserRolesAsString(user)} />
-				</Select.Trigger>
+<Select.Trigger {...attrs}> <!-- Adjusted height -->
+  <Select.Value placeholder={getUserRolesAsString(user)} /> <!-- Full height & text aligned left -->
+</Select.Trigger>
 				<Select.Content>
 					{#each roles as {id, name}}
 						<Select.Item value={id} label={name} />
@@ -113,6 +121,8 @@ onSelectedChange={(s) => {
 		</Form.Control>
   </Form.Field>
 
-  <Form.Button>Submit</Form.Button>
+  <Form.Button>Update</Form.Button>
 </form>
+</Card.Content>
+  </Card.Root>
 </div>	
