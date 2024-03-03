@@ -6,12 +6,15 @@ import { formSchema } from './schema';
 import axios from 'axios';
 
 export const load: PageServerLoad = async (event) => {
+	const rolesResponse = await axios.get('http://localhost:8000/users/api/roles');
 	const token = event.cookies.get('token');
-	const response = await axios.get('http://localhost:8000/users/api/profile', {
+	const userResponse = await axios.get('http://localhost:8000/users/api/profile', {
 		headers: { Authorization: `Bearer ${token}` }
 	});
-	event.locals.user = response.data;
+	event.locals.user = userResponse.data;
+	console.log(event.locals.user);
 	return {
+		roles: rolesResponse.data,
 		user: event.locals.user,
 		form: await superValidate(zod(formSchema))
 	};
@@ -26,15 +29,20 @@ export const actions: Actions = {
 			});
 		}
 		try {
+			console.log(form.data)
 			const token = event.cookies.get('token');
-			console.log(token);
-const response = await axios.put('http://localhost:8000/users/api/profile/', {
-  title: form.data.title,
-  first_name: form.data.first_name,
-  last_name: form.data.last_name
-}, {
-  headers: { Authorization: `Bearer ${token}` }
-});
+			const response = await axios.put(
+				'http://localhost:8000/users/api/profile/',
+				{
+					title: form.data.title || null,
+					first_name: form.data.first_name || null,
+					last_name: form.data.last_name || null,
+					roles: form.data.roles || null
+				},
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+			);
 			event.locals.user = response.data;
 		} catch (error) {
 			console.log(error);

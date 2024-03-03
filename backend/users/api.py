@@ -7,6 +7,9 @@ from ninja_jwt.authentication import JWTAuth
 from ninja_jwt.controller import NinjaJWTDefaultController
 from ninja_jwt.tokens import RefreshToken
 from django.shortcuts import get_object_or_404
+from ninja.orm import create_schema
+from .models import Role
+from typing import List
 
 api = NinjaExtraAPI()
 api.register_controllers(NinjaJWTDefaultController)
@@ -39,25 +42,57 @@ def register(request, user_in: UserIn):
     return {"tokens": tokens}
 
 #login at /api/token/pair
+#verify at /api/token/verify
  
+class UserRolesOut(Schema):
+    name: str
+
 class UserProfileOut(Schema):
-    email: str
-    first_name: str
-    last_name: str
+    email: str | None
+    title: str | None
+    first_name: str | None
+    last_name: str | None
+    roles: List[UserRolesOut] | None
 
 @api.get("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def get_profile(request):
     user = request.auth
-    return user
+    user_profile = {
+        'email': user.email,
+        'title': user.title,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'roles': [{
+            'name': role.get_name_display() 
+        } for role in user.roles.all()]
+    }
+    return user_profile
+
+class UserRolesIn(Schema):
+    id: int
+    name: str
 
 class UserProfileIn(Schema):
-    first_name: str
-    last_name: str
+    title: str | None  
+    first_name: str | None
+    last_name: str | None
+    roles: List[UserRolesIn] | None
 
 @api.put("/profile/", auth=JWTAuth(), response=UserProfileIn)
 def update_profile(request, payload: UserProfileIn):
     user = request.auth
     for attr, value in payload.dict().items():
-        setattr(user, attr, value)
+        if value is not None and value != "":
+            setattr(user, attr, value)
     user.save()
     return user
+
+class RoleOut(Schema):
+    id: int
+    name: str
+
+@api.get("/roles/", response=List[RoleOut])
+def get_roles(request):
+    roles = Role.objects.all()
+    readable_roles = [{'id': role.id, 'name': role.get_name_display()} for role in roles]
+    return readable_roles

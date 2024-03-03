@@ -1,25 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-
-class Role(models.Model):
-    """
-    Defines various roles available in the system.
-    """
-    class RoleChoices(models.TextChoices):
-        REVIEWER = 'REVIEWER', 'Reviewer'
-        REPRESENTATIVE = 'REPRESENTATIVE', 'Representative'
-        TRUST_EMPLOYEE = 'TRUST_EMPLOYEE', 'Trust Employee'
-        RCR_EMPLOYEE = 'RCR_EMPLOYEE', 'RCR Employee'
-
-    name = models.CharField(
-        max_length=20,
-        choices=RoleChoices.choices,
-        unique=True,
-        verbose_name='Role Name'
-    )
-
-    def __str__(self):
-        return self.get_name_display()
+from trusts.models import Region, Trust
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -48,6 +31,26 @@ class UserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
+class Role(models.Model):
+    """
+    Defines various roles available in the system.
+    """
+    class RoleChoices(models.TextChoices):
+        REVIEWER = 'REVIEWER', 'Reviewer'
+        REPRESENTATIVE = 'REPRESENTATIVE', 'Representative'
+        TRUST_EMPLOYEE = 'TRUST_EMPLOYEE', 'Trust Employee'
+        RCR_EMPLOYEE = 'RCR_EMPLOYEE', 'RCR Employee'
+
+    name = models.CharField(
+        max_length=20,
+        choices=RoleChoices.choices,
+        unique=True,
+        verbose_name='Role Name'
+    )
+
+    def __str__(self):
+        return self.get_name_display()
+
 class User(AbstractUser):
     """
     Custom user model that extends AbstractUser with roles and titles.
@@ -73,6 +76,7 @@ class User(AbstractUser):
         blank=True,
         verbose_name='Title'
     )
+
 
 class UserRole(models.Model):
     """
@@ -103,7 +107,7 @@ class UserRole(models.Model):
         verbose_name_plural = 'User Roles'
 
     def __str__(self):
-        return f"{self.user.username}'s role as {self.role}"
+        return f"{self.user.email}'s role as {self.role}"
 
 class ReviewerInfo(models.Model):
     """
@@ -117,8 +121,10 @@ class ReviewerInfo(models.Model):
         limit_choices_to={'role__name': Role.RoleChoices.REVIEWER}
     )
 
+    trust = models.ForeignKey(Trust, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Trust')
+
     def __str__(self):
-        return f"{self.user_role.user.username}'s reviewer info"
+        return f"{self.user_role.user.email}'s reviewer info"
 
 class RepresentativeInfo(models.Model):
     """
@@ -132,5 +138,41 @@ class RepresentativeInfo(models.Model):
         limit_choices_to={'role__name': Role.RoleChoices.REPRESENTATIVE}
     )
 
+    trust = models.ForeignKey(Trust, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Trust')
+
     def __str__(self):
-        return f"{self.user_role.user.username}'s representative info"
+        return f"{self.user_role.user.email}'s representative info"
+
+class TrustEmployeeInfo(models.Model):
+    """
+    Additional information for users with the Trust Employee role.
+    """
+    user_role = models.OneToOneField(
+        UserRole,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        verbose_name='User Role',
+        limit_choices_to={'role__name': Role.RoleChoices.TRUST_EMPLOYEE}
+    )
+
+    trust = models.ForeignKey(Trust, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Trust')
+
+    def __str__(self):
+        return f"{self.user_role.user.email}'s trust employee info"
+
+class RCREmployeeInfo(models.Model):
+    """
+    Additional information for users with the RCR Employee role.
+    """
+    user_role = models.OneToOneField(
+        UserRole,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        verbose_name='User Role',
+        limit_choices_to={'role__name': Role.RoleChoices.RCR_EMPLOYEE}
+    )
+
+    trust = "RCR"
+
+    def __str__(self):
+        return f"{self.user_role.user.email}'s RCR employee info"

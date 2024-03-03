@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as Form from "$lib/components/ui/form";
+  import * as Select from "$lib/components/ui/select";
   import { Input } from "$lib/components/ui/input";
   import { formSchema, type FormSchema } from "./schema";
   import {
@@ -10,7 +11,8 @@
   import { zodClient } from "sveltekit-superforms/adapters";
  
   export let data: SuperValidated<Infer<FormSchema>>;
-  export let user
+  export let user;
+  export let roles;
  
   const form = superForm(data, {
     validators: zodClient(formSchema),
@@ -18,6 +20,18 @@
   });
  
   const { form: formData, enhance } = form;
+ $: selectedTitle = $formData.title
+    ? {
+        label: $formData.title,
+        value: $formData.title
+      }
+    : undefined;
+
+$: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: role.value }));
+
+  function getUserRolesAsString(user) {
+    return user.roles.map(role => role.name).join(', ');
+  }
 
 </script>
  
@@ -26,8 +40,24 @@
 <form method="POST" use:enhance>
   <Form.Field {form} name="title">
     <Form.Control let:attrs>
+      
       <Form.Label>Title</Form.Label>
-      <Input {...attrs} bind:value={$formData.title} placeholder={user.title}/>
+<Select.Root
+        selected={selectedTitle}
+        onSelectedChange={(v) => {
+          v && ($formData.title = v.value);
+        }}
+      >
+        <Select.Trigger {...attrs}>
+          <Select.Value placeholder={user.title} />
+        </Select.Trigger>
+        <Select.Content>
+          <Select.Item value="Mr" label="Mr" />
+          <Select.Item value="Ms" label="Ms" />
+          <Select.Item value="Mrs" label="Mrs" />
+        </Select.Content>
+      </Select.Root>
+      <input hidden {...attrs} bind:value={$formData.title} placeholder={user.title}/>
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
@@ -47,7 +77,42 @@
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
-  
+
+	<Form.Field {form} name="roles">
+  <Form.Control let:attrs>
+			<Form.Label>Roles</Form.Label>
+			<Select.Root
+				multiple
+        selected={selectedRoles}
+
+onSelectedChange={(s) => {
+    if (s) {
+        $formData.roles = s.map((selected) => {
+            const role = roles.find((role) => role.id === selected.value);
+            return {
+                value: selected.value,
+                name: role ? role.name : ''
+            };
+        });
+    } else {
+        $formData.roles = [];
+    }
+}}
+			>
+					<input name={attrs.name} hidden value={selectedRoles} />
+				<Select.Trigger {...attrs}>
+					<Select.Value placeholder={getUserRolesAsString(user)} />
+				</Select.Trigger>
+				<Select.Content>
+					{#each roles as {id, name}}
+						<Select.Item value={id} label={name} />
+					{/each}
+				</Select.Content>
+			</Select.Root>
+			<Form.FieldErrors />
+		</Form.Control>
+  </Form.Field>
+
   <Form.Button>Submit</Form.Button>
 </form>
 </div>	

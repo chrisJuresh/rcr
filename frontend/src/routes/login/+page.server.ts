@@ -16,7 +16,7 @@ const setTokenCookie = (event, value) => {
 	event.cookies.set('token', value, {
 		path: '/',
 		httpOnly: true,
-		sameSite: 'strict',
+		sameSite: 'Strict',
 		secure: process.env.NODE_ENV === 'production',
 		maxAge: 60 * 60 * 24 * 7 // 1 week
 	});

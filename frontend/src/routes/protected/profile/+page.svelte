@@ -4,4 +4,4 @@
   export let data: PageData;
 </script>
  
-<ProfileForm data={data.form} user={data.user}/>
+<ProfileForm data={data.form} user={data.user} roles={data.roles}/>
