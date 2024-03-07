@@ -10,9 +10,9 @@
 	const form = superForm(data, {
 		validators: zodClient(registerFormSchema),
 		onError: (result) => {
-			console.log(result)
-			$message = result.result.error.message
-		},
+			console.log(result);
+			$message = result.result.error.message;
+		}
 	});
 
 	const { form: formData, enhance, message } = form;
@@ -39,11 +39,11 @@
 			<Input {...attrs} bind:value={$formData.confirm_password} />
 			<Form.FieldErrors />
 		</Form.Control>
-	<Form.Description class="text-red-600">
-	{#if $message!==undefined}
-		<h1 >{$message}</h1>
-	{/if}
-	</Form.Description>
+		<Form.Description class="text-red-600">
+			{#if $message !== undefined}
+				<h1>{$message}</h1>
+			{/if}
+		</Form.Description>
 	</Form.Field>
 	<Form.Button>Submit</Form.Button>
 </form>

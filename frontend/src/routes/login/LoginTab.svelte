@@ -6,12 +6,12 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 
 	export let data: SuperValidated<Infer<LoginFormSchema>>;
-	
+
 	const form = superForm(data, {
 		validators: zodClient(loginFormSchema),
 		onError: (result) => {
-			$message = result.result.error.message
-		},
+			$message = result.result.error.message;
+		}
 	});
 
 	const { form: formData, enhance, message } = form;
@@ -31,11 +31,11 @@
 			<Input {...attrs} bind:value={$formData.password} />
 			<Form.FieldErrors />
 		</Form.Control>
-	<Form.Description class="text-red-600" >
-	{#if $message!==undefined}
-		<h1 >{$message}</h1>
-	{/if}
-	</Form.Description>
+		<Form.Description class="text-red-600">
+			{#if $message !== undefined}
+				<h1>{$message}</h1>
+			{/if}
+		</Form.Description>
 	</Form.Field>
 	<Form.Button>Submit</Form.Button>
 </form>

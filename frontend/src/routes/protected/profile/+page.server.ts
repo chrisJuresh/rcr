@@ -29,7 +29,7 @@ export const actions: Actions = {
 			});
 		}
 		try {
-			console.log(form.data)
+			console.log(form.data);
 			const token = event.cookies.get('token');
 			const response = await axios.put(
 				'http://localhost:8000/api/users/profile/',
