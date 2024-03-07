@@ -11,11 +11,8 @@ def create_user(email, password):
     return user
 
 def get_token_for_user(user):
-    refresh = RefreshToken.for_user(user)
-    return {'refresh': str(refresh), 'access': str(refresh.access_token)}
-
-def get_all_roles():
-    return [{'id': role.id, 'name': role.get_name_display()} for role in Role.objects.all()]
+    token = RefreshToken.for_user(user)
+    return token
 
 def update_user_profile(user, payload):
     for attr, value in payload.items():

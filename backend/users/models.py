@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from trusts.models import Region, Trust
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from roles.models import Role
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -31,25 +32,6 @@ class UserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-class Role(models.Model):
-    """
-    Defines various roles available in the system.
-    """
-    class RoleChoices(models.TextChoices):
-        REVIEWER = 'REVIEWER', 'Reviewer'
-        REPRESENTATIVE = 'REPRESENTATIVE', 'Representative'
-        TRUST_EMPLOYEE = 'TRUST_EMPLOYEE', 'Trust Employee'
-        RCR_EMPLOYEE = 'RCR_EMPLOYEE', 'RCR Employee'
-
-    name = models.CharField(
-        max_length=20,
-        choices=RoleChoices.choices,
-        unique=True,
-        verbose_name='Role Name'
-    )
-
-    def __str__(self):
-        return self.get_name_display()
 
 class User(AbstractUser):
     """
@@ -71,7 +53,6 @@ class User(AbstractUser):
         verbose_name='User Roles'
     )
     title = models.CharField(
-        null=True,
         max_length=4,
         blank=True,
         verbose_name='Title'

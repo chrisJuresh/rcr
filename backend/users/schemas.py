@@ -5,10 +5,6 @@ class UserIn(Schema):
     email: str = Field(..., pattern=r'^\S+@\S+\.\S+$')
     password: str = Field(..., min_length=8)
 
-class RoleOut(Schema):
-    id: int
-    name: str
-
 class UserRolesIn(Schema):
     id: int
     name: str

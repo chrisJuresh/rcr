@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from ninja import NinjaAPI
 from users.api import router as users_router
+from roles.api import router as roles_router
 from .api import api
 
 api.add_router("/users/", users_router),
+api.add_router("/roles/", roles_router),
 
 urlpatterns = [
     path('admin/', admin.site.urls),

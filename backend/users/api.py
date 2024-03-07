@@ -1,8 +1,8 @@
 from ninja import Router
 from django.shortcuts import get_object_or_404
 from ninja_jwt.authentication import JWTAuth
-from .schemas import UserIn, UserProfileOut, UserProfileIn, RoleOut
-from .services import create_user, get_token_for_user, update_user_profile, get_user_roles, get_all_roles
+from .schemas import UserIn, UserProfileOut, UserProfileIn
+from .services import create_user, get_token_for_user, update_user_profile, get_user_roles
 from typing import List
 
 router = Router()
@@ -11,11 +11,10 @@ router = Router()
 def register(request, user_in: UserIn):
     user = create_user(user_in.email, user_in.password)
     tokens = get_token_for_user(user)
-    return {"tokens": tokens}
-
-@router.get("/roles/", response=List[RoleOut])
-def get_roles(request):
-    return get_all_roles()
+    return {
+        'refresh': str(tokens),
+        'access': str(tokens.access_token),
+    }
 
 @router.get("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def get_profile(request):

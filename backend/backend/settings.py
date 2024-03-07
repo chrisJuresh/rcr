@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'ninja_jwt',
     'users',
     'trusts',
+    'roles',
 ]
 
 MIDDLEWARE = [

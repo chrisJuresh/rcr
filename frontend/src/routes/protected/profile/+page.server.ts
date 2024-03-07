@@ -6,7 +6,7 @@ import { formSchema } from './schema';
 import axios from 'axios';
 
 export const load: PageServerLoad = async (event) => {
-	const rolesResponse = await axios.get('http://localhost:8000/api/users/roles');
+	const rolesResponse = await axios.get('http://localhost:8000/api/roles/roles');
 	const token = event.cookies.get('token');
 	const userResponse = await axios.get('http://localhost:8000/api/users/profile', {
 		headers: { Authorization: `Bearer ${token}` }

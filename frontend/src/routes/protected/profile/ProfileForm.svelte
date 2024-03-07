@@ -10,7 +10,6 @@
     superForm,
   } from "sveltekit-superforms";
   import { zodClient } from "sveltekit-superforms/adapters";
-	import { Description } from "formsnap";
  
   export let data: SuperValidated<Infer<FormSchema>>;
   export let user;
@@ -57,7 +56,7 @@ $: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: ro
         }}
       >
         <Select.Trigger {...attrs}>
-          <Select.Value placeholder={user.title} />
+          <Select.Value placeholder={user.title ? user.title : 'Select a title'} />
         </Select.Trigger>
         <Select.Content>
           <Select.Item value="Mr" label="Mr" />
@@ -65,7 +64,7 @@ $: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: ro
           <Select.Item value="Mrs" label="Mrs" />
         </Select.Content>
       </Select.Root>
-      <input hidden {...attrs} bind:value={$formData.title} placeholder={user.title}/>
+        <input hidden {...attrs} bind:value={$formData.title} placeholder={user.title}/>
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
@@ -73,7 +72,7 @@ $: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: ro
   <Form.Field {form} name="first_name">
     <Form.Control let:attrs>
       <Form.Label>First Name</Form.Label>
-      <Input {...attrs} bind:value={$formData.first_name} placeholder={user.first_name}/>
+      <Input {...attrs} bind:value={$formData.first_name} placeholder={user.first_name ? user.first_name : 'First Name'}/>
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
@@ -81,7 +80,7 @@ $: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: ro
   <Form.Field {form} name="last_name">
     <Form.Control let:attrs>
       <Form.Label>Last Name</Form.Label>
-      <Input {...attrs} bind:value={$formData.last_name} placeholder={user.last_name}/>
+      <Input {...attrs} bind:value={$formData.last_name} placeholder={user.last_name ? user.last_name : 'Last Name'}/>
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
@@ -109,7 +108,7 @@ onSelectedChange={(s) => {
 			>
 					<input name={attrs.name} hidden value={selectedRoles} />
 <Select.Trigger {...attrs}> <!-- Adjusted height -->
-  <Select.Value placeholder={getUserRolesAsString(user)} /> <!-- Full height & text aligned left -->
+  <Select.Value placeholder={getUserRolesAsString(user) ? getUserRolesAsString(user) : 'Select your roles'} />
 </Select.Trigger>
 				<Select.Content>
 					{#each roles as {id, name}}
