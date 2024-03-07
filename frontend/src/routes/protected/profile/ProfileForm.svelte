@@ -111,7 +111,6 @@
 						>
 							<input name={attrs.name} hidden value={selectedRoles} />
 							<Select.Trigger {...attrs}>
-								<!-- Adjusted height -->
 								<Select.Value
 									placeholder={getUserRolesAsString(user)
 										? getUserRolesAsString(user)

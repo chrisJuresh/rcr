@@ -58,6 +58,14 @@ class User(AbstractUser):
         verbose_name='Title'
     )
 
+    trust = models.ForeignKey(
+        Trust, 
+        on_delete=models.CASCADE, 
+        null = True,
+        blank=True, 
+        verbose_name='Trust'
+    )
+    
 
 class UserRole(models.Model):
     """
@@ -102,8 +110,6 @@ class ReviewerInfo(models.Model):
         limit_choices_to={'role__name': Role.RoleChoices.REVIEWER}
     )
 
-    trust = models.ForeignKey(Trust, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Trust')
-
     def __str__(self):
         return f"{self.user_role.user.email}'s reviewer info"
 
@@ -118,8 +124,6 @@ class RepresentativeInfo(models.Model):
         verbose_name='User Role',
         limit_choices_to={'role__name': Role.RoleChoices.REPRESENTATIVE}
     )
-
-    trust = models.ForeignKey(Trust, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Trust')
 
     def __str__(self):
         return f"{self.user_role.user.email}'s representative info"
@@ -136,8 +140,6 @@ class TrustEmployeeInfo(models.Model):
         limit_choices_to={'role__name': Role.RoleChoices.TRUST_EMPLOYEE}
     )
 
-    trust = models.ForeignKey(Trust, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Trust')
-
     def __str__(self):
         return f"{self.user_role.user.email}'s trust employee info"
 
@@ -152,8 +154,6 @@ class RCREmployeeInfo(models.Model):
         verbose_name='User Role',
         limit_choices_to={'role__name': Role.RoleChoices.RCR_EMPLOYEE}
     )
-
-    trust = "RCR"
 
     def __str__(self):
         return f"{self.user_role.user.email}'s RCR employee info"

@@ -12,7 +12,6 @@ export const load: PageServerLoad = async (event) => {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 	event.locals.user = userResponse.data;
-	console.log(event.locals.user);
 	return {
 		roles: rolesResponse.data,
 		user: event.locals.user,
@@ -29,7 +28,6 @@ export const actions: Actions = {
 			});
 		}
 		try {
-			console.log(form.data);
 			const token = event.cookies.get('token');
 			const response = await axios.put(
 				'http://localhost:8000/api/users/profile/',
@@ -37,7 +35,7 @@ export const actions: Actions = {
 					title: form.data.title || null,
 					first_name: form.data.first_name || null,
 					last_name: form.data.last_name || null,
-					roles: form.data.roles || null
+  					roles: form.data.roles ? form.data.roles.map(role => ({ id: role.value, name: role.name })) : []
 				},
 				{
 					headers: { Authorization: `Bearer ${token}` }

@@ -24,5 +24,6 @@ def get_profile(request):
 
 @router.put("/profile/", auth=JWTAuth(), response=UserProfileIn)
 def update_profile(request, payload: UserProfileIn):
-    updated_user = update_user_profile(request.auth, payload.dict())
+    user = request.auth
+    updated_user = update_user_profile(user, payload)
     return updated_user 
