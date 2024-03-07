@@ -6,9 +6,9 @@ import { formSchema } from './schema';
 import axios from 'axios';
 
 export const load: PageServerLoad = async (event) => {
-	const rolesResponse = await axios.get('http://localhost:8000/users/api/roles');
+	const rolesResponse = await axios.get('http://localhost:8000/api/users/roles');
 	const token = event.cookies.get('token');
-	const userResponse = await axios.get('http://localhost:8000/users/api/profile', {
+	const userResponse = await axios.get('http://localhost:8000/api/users/profile', {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 	event.locals.user = userResponse.data;
@@ -32,7 +32,7 @@ export const actions: Actions = {
 			console.log(form.data)
 			const token = event.cookies.get('token');
 			const response = await axios.put(
-				'http://localhost:8000/users/api/profile/',
+				'http://localhost:8000/api/users/profile/',
 				{
 					title: form.data.title || null,
 					first_name: form.data.first_name || null,

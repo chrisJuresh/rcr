@@ -13,6 +13,10 @@ def register(request, user_in: UserIn):
     tokens = get_token_for_user(user)
     return {"tokens": tokens}
 
+@router.get("/roles/", response=List[RoleOut])
+def get_roles(request):
+    return get_all_roles()
+
 @router.get("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def get_profile(request):
     user = request.auth
@@ -23,7 +27,3 @@ def get_profile(request):
 def update_profile(request, payload: UserProfileIn):
     updated_user = update_user_profile(request.auth, payload.dict())
     return updated_user 
-
-@router.get("/roles/", response=List[RoleOut])
-def get_roles(request):
-    return get_all_roles()

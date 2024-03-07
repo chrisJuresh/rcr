@@ -14,6 +14,9 @@ def get_token_for_user(user):
     refresh = RefreshToken.for_user(user)
     return {'refresh': str(refresh), 'access': str(refresh.access_token)}
 
+def get_all_roles():
+    return [{'id': role.id, 'name': role.get_name_display()} for role in Role.objects.all()]
+
 def update_user_profile(user, payload):
     for attr, value in payload.items():
         if value is not None:
@@ -23,6 +26,3 @@ def update_user_profile(user, payload):
 
 def get_user_roles(user):
     return [{'name': role.get_name_display()} for role in user.roles.all()]
-
-def get_all_roles():
-    return [{'id': role.id, 'name': role.get_name_display()} for role in Role.objects.all()]

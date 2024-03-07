@@ -46,10 +46,10 @@ const handleUserForm = async (event, schema, url) => {
 
 export const actions: Actions = {
 	login: async (event) => {
-		await handleUserForm(event, loginFormSchema, 'http://localhost:8000/users/api/token/pair');
+		await handleUserForm(event, loginFormSchema, 'http://localhost:8000/api/token/pair');
 	},
 
 	register: async (event) => {
-		await handleUserForm(event, registerFormSchema, 'http://localhost:8000/users/api/register');
+		await handleUserForm(event, registerFormSchema, 'http://localhost:8000/api/users/register');
 	}
 };
