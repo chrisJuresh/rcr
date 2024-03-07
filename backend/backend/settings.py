@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'ninja_extra',
+    'ninja_jwt',
     'users',
     'trusts',
 ]

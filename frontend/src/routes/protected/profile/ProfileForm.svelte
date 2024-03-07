@@ -42,7 +42,7 @@ $: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: ro
   <Card.Root class="w-[600px]">
     <Card.Header>
       <Card.Title>Edit {user.email}</Card.Title>
-      <Card.Description>These details must be correct as they will be tied to your JDs and/or AACs<br> Your email address is your unique identifier</Card.Description>
+      <Card.Description>Your email address is your unique identifier <br> These details must be correct as they will be tied to your JDs and/or AACs</Card.Description>
       </Card.Header>
       <Card.Content>
 <form method="POST" use:enhance>
