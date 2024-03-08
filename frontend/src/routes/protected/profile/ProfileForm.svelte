@@ -33,9 +33,9 @@
 </script>
 
 <div class="flex min-h-screen flex-row items-center justify-center">
-	<div class="mr-6 w-[300px]"></div>
+	<div class="mr-1 w-[255px]"></div>
 	<div>
-		<Card.Root class="w-[600px]">
+		<Card.Root class="w-[550px]">
 			<Card.Header>
 				<Card.Title>Edit {user.email}</Card.Title>
 				<Card.Description>Please ensure your details are up to date</Card.Description>
@@ -143,7 +143,7 @@
 
 	<div class="ml-6 w-[300px]">
 		{#if user.approved_roles.length > 0}
-			<Card.Root class="ml-6 w-[300px]">
+			<Card.Root class="ml-1 w-[255px]">
 				<Card.Header>
 					<Card.Title>Approved Roles</Card.Title>
 					<Card.Description>
