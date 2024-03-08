@@ -30,7 +30,6 @@
 	function getUserRolesAsString(user) {
 		return user.roles.map((role) => role.name).join(', ');
 	}
-
 </script>
 
 <div class="flex min-h-screen flex-row items-center justify-center">
