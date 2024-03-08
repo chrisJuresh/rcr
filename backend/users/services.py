@@ -15,15 +15,11 @@ def get_token_for_user(user):
     return token
 
 def extract_role_ids(roles):
-    if not isinstance(roles, list):
-        return set()
-    return {role_dict.get('id') for role_dict in roles if role_dict.get('id')}
+    return {role_dict.get('id') for role_dict in roles if isinstance(roles, list) and role_dict.get('id')}
 
 def update_existing_user_roles(user, requested_role_ids):
-    existing_user_roles = user.user_roles.prefetch_related('role').all()
     existing_role_ids = set()
-
-    for user_role in existing_user_roles:
+    for user_role in user.user_roles.prefetch_related('role').all():
         role_id = user_role.role.id
         existing_role_ids.add(role_id)
 
@@ -35,15 +31,16 @@ def update_existing_user_roles(user, requested_role_ids):
     return existing_role_ids
 
 def add_new_user_roles(user, requested_role_ids, existing_role_ids):
-    new_role_ids = requested_role_ids - existing_role_ids
     UserRole.objects.bulk_create([
-        UserRole(user=user, role_id=role_id, requested=True) for role_id in new_role_ids
+        UserRole(user=user, role_id=role_id, requested=True) 
+        for role_id in requested_role_ids - existing_role_ids
     ])
 
 def update_user_roles(user, roles):
     requested_role_ids = extract_role_ids(roles)
-    existing_role_ids = update_existing_user_roles(user, requested_role_ids)
-    add_new_user_roles(user, requested_role_ids, existing_role_ids)
+    if requested_role_ids:
+        existing_role_ids = update_existing_user_roles(user, requested_role_ids)
+        add_new_user_roles(user, requested_role_ids, existing_role_ids)
 
 def update_user_attribute(user, attr, value):
     if value is None:

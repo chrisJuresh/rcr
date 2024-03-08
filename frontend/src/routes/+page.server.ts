@@ -1,4 +1,5 @@
-import { redirect, type Handle } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 import axios from 'axios';
 
 export const load: PageServerLoad = async (event) => {

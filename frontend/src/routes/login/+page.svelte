@@ -10,26 +10,25 @@
 
 <div class="flex min-h-screen items-center justify-center">
 	<div class=" h-[400px]">
-	<Card.Root class="w-[400px]">
-		<Card.Header>
-			<Card.Title>Authenticate</Card.Title>
-			<Card.Description>Access your account or create a new one</Card.Description>
-		</Card.Header>
-		<Card.Content>
-			<Tabs.Root value="login" class="w-full">
-				<Tabs.List>
-					<Tabs.Trigger value="login">Login</Tabs.Trigger>
-					<Tabs.Trigger value="register">Register</Tabs.Trigger>
-				</Tabs.List>
-				<Tabs.Content value="login">
-					<LoginTab data={data.loginForm} />
-				</Tabs.Content>
-				<Tabs.Content value="register">
-					<RegisterTab data={data.registerForm} />
-				</Tabs.Content>
-			</Tabs.Root>
-		</Card.Content>
-	</Card.Root>
+		<Card.Root class="w-[400px]">
+			<Card.Header>
+				<Card.Title>Authenticate</Card.Title>
+				<Card.Description>Access your account or create a new one</Card.Description>
+			</Card.Header>
+			<Card.Content>
+				<Tabs.Root value="login" class="w-full">
+					<Tabs.List>
+						<Tabs.Trigger value="login">Login</Tabs.Trigger>
+						<Tabs.Trigger value="register">Register</Tabs.Trigger>
+					</Tabs.List>
+					<Tabs.Content value="login">
+						<LoginTab data={data.loginForm} />
+					</Tabs.Content>
+					<Tabs.Content value="register">
+						<RegisterTab data={data.registerForm} />
+					</Tabs.Content>
+				</Tabs.Root>
+			</Card.Content>
+		</Card.Root>
 	</div>
 </div>
-

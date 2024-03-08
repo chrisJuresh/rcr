@@ -7,21 +7,23 @@ import axios from 'axios';
 
 export const load: PageServerLoad = async (event) => {
 	const fetchRoles = async () => {
-		const rolesResponse = await axios.get('http://localhost:8000/api/roles/roles');
-		return rolesResponse.data;
+		const response = await axios.get('http://localhost:8000/api/roles/roles');
+		return response.data;
+	};
+	const fetchTrusts = async () => {
+		const response = await axios.get('http://localhost:8000/api/trusts/trusts');
+		return response.data;
 	};
 	const fetchUser = async () => {
-		const token = event.cookies.get('token');
-		const userResponse = await axios.get('http://localhost:8000/api/users/profile', {
-			headers: { Authorization: `Bearer ${token}` }
+		const response = await axios.get('http://localhost:8000/api/users/profile', {
+			headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 		});
-		event.locals.user = userResponse.data;
-		return event.locals.user;
+		return response.data;
 	};
-	
 	return {
 		roles: await fetchRoles(),
 		user: await fetchUser(),
+		trusts: await fetchTrusts(),
 		form: await superValidate(zod(formSchema))
 	};
 };
@@ -34,23 +36,20 @@ export const actions: Actions = {
 				form
 			});
 		}
+		console.log(form)
 		try {
-			const token = event.cookies.get('token');
-			const response = await axios.put(
+			await axios.put(
 				'http://localhost:8000/api/users/profile/',
 				{
 					title: form.data.title || null,
 					first_name: form.data.first_name || null,
 					last_name: form.data.last_name || null,
-					roles: form.data.roles
-						? form.data.roles.map((role) => ({ id: role.value, name: role.name }))
-						: []
+					roles: form.data.roles?.map((role) => ({ id: role.value })) ?? []
 				},
 				{
-					headers: { Authorization: `Bearer ${token}` }
+					headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 				}
 			);
-			event.locals.user = response.data;
 		} catch (error) {
 			console.log(error);
 		}

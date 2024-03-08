@@ -25,5 +25,6 @@ class UserProfileOut(Schema):
     title: Optional[str]
     first_name: Optional[str]
     last_name: Optional[str]
+    trust: Optional[str]
     roles: Optional[List[UserRolesOut]]
     approved_roles: Optional[List[UserApprovedRolesOut]]

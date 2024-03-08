@@ -2,7 +2,6 @@
 	import '../app.pcss';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { Separator } from '$lib/components/ui/separator';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { setMode, resetMode, ModeWatcher } from 'mode-watcher';
@@ -13,12 +12,25 @@
 	function handleLogout() {
 		goto('/logout');
 	}
-	function editProfile() {
-		goto('/protected/profile');
+
+	let buttons = [
+		{ label: 'Edit Profile', path: '/protected/profile' },
+		{ label: 'View Panel', path: '/protected/panel' }
+	];
+
+	function navigateTo(path) {
+		goto(path);
+		updateButtonStyles(path);
 	}
-	function gotoPanel() {
-		goto('/protected/panel');
+
+	function updateButtonStyles(activePath) {
+		buttons = buttons.map((button) => ({
+			...button,
+			variant: button.path === activePath ? 'default' : 'outline'
+		}));
 	}
+
+	$: updateButtonStyles($page.url.pathname);
 </script>
 
 {#if $page.url.pathname !== '/login'}
@@ -32,9 +44,9 @@
 	<div class="flex justify-center">
 		<div class="absolute top-4 md:top-8">
 			<div class="flex h-10 space-x-4">
-				<Button on:click={editProfile} variant="ghost">Edit Profile</Button>
-				<Separator orientation="vertical" />
-				<Button on:click={gotoPanel} variant="ghost">View Panel</Button>
+				{#each buttons as { label, path, variant }}
+					<Button on:click={() => navigateTo(path)} {variant}>{label}</Button>
+				{/each}
 			</div>
 		</div>
 	</div>

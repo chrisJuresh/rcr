@@ -5,7 +5,23 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { loginFormSchema, registerFormSchema } from './schema';
 import axios from 'axios';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async (event) => {
+	let loggedIn = false;
+	if (event.cookies.get('token')) {
+		try {
+			await axios.post('http://localhost:8000/api/token/verify', {
+				token: event.cookies.get('token')
+			});
+			loggedIn = true;
+		} catch (error) {
+			// stay on /login
+		} finally {
+			if (loggedIn) {
+				redirect(302, '/protected/profile');
+			}
+		}
+	}
+
 	return {
 		loginForm: await superValidate(zod(loginFormSchema)),
 		registerForm: await superValidate(zod(registerFormSchema))

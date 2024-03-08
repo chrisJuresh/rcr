@@ -7,12 +7,12 @@ export const formSchema = z.object({
 	roles: z
 		.array(
 			z.object({
-				value: z.number(),
+				value: z.number().optional(),
 				name: z.string().min(2).max(50).optional().or(z.literal(''))
 			})
 		)
 		.optional(),
-	trusts: z
+	trust: z
 		.object({
 			value: z.number(),
 			name: z.string().min(2).max(50).optional().or(z.literal(''))
