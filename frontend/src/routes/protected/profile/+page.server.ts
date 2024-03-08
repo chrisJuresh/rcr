@@ -36,7 +36,7 @@ export const actions: Actions = {
 				form
 			});
 		}
-		console.log(form)
+		console.log(form.data.trust ? { id: form.data.trust.value } : null)
 		try {
 			await axios.put(
 				'http://localhost:8000/api/users/profile/',
@@ -44,6 +44,7 @@ export const actions: Actions = {
 					title: form.data.title || null,
 					first_name: form.data.first_name || null,
 					last_name: form.data.last_name || null,
+					trust: form.data.trust.value || null,
 					roles: form.data.roles?.map((role) => ({ id: role.value })) ?? []
 				},
 				{

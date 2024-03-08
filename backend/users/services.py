@@ -1,5 +1,5 @@
 from django.contrib.auth.hashers import make_password
-from .models import UserRole, User  
+from .models import UserRole, User, Trust
 from ninja.errors import ValidationError
 from ninja_jwt.tokens import RefreshToken
 from .schemas import UserProfileIn
@@ -42,11 +42,17 @@ def update_user_roles(user, roles):
         existing_role_ids = update_existing_user_roles(user, requested_role_ids)
         add_new_user_roles(user, requested_role_ids, existing_role_ids)
 
+def update_user_trust(user, trust):
+    user.trust = Trust.objects.get(id=trust)
+    user.save()
+
 def update_user_attribute(user, attr, value):
     if value is None:
         return
     if attr == 'roles':
         update_user_roles(user, value)
+    elif attr == 'trust':
+        update_user_trust(user, value)
     else:
         setattr(user, attr, value)
 

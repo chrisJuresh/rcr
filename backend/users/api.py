@@ -21,10 +21,10 @@ def get_profile(request):
     user = request.auth
     user_roles = get_user_roles(user)
     approved_roles = get_approved_roles(user)
-    return {**user.__dict__, 'trust': user.trust, 'roles': user_roles, 'approved_roles': approved_roles}
+    return {**user.__dict__, 'trust': user.trust.name, 'roles': user_roles, 'approved_roles': approved_roles}
 
-@router.put("/profile/", auth=JWTAuth(), response=UserProfileIn)
+@router.put("/profile/", auth=JWTAuth())
 def update_profile(request, payload: UserProfileIn):
     user = request.auth
     updated_user = update_user_profile(user, payload)
-    return updated_user 
+    return

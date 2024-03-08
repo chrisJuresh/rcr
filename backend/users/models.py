@@ -60,7 +60,7 @@ class User(AbstractUser):
     trust = models.ForeignKey(
         Trust, 
         on_delete=models.CASCADE, 
-        null = True,
+        null=True,
         blank=True, 
         verbose_name='Trust'
     )
