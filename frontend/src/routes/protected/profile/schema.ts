@@ -8,9 +8,15 @@ export const formSchema = z.object({
 		.array(
 			z.object({
 				value: z.number(),
-				name: z.string()
+				name: z.string().min(2).max(50).optional().or(z.literal(''))
 			})
 		)
+		.optional(),
+	trusts: z
+		.object({
+			value: z.number(),
+			name: z.string().min(2).max(50).optional().or(z.literal(''))
+		})
 		.optional()
 });
 

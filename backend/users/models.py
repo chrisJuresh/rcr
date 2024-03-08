@@ -57,13 +57,16 @@ class User(AbstractUser):
         blank=True,
         verbose_name='Title'
     )
-
     trust = models.ForeignKey(
         Trust, 
         on_delete=models.CASCADE, 
         null = True,
         blank=True, 
         verbose_name='Trust'
+    )
+    trust_approved = models.BooleanField(
+        default=False,
+        verbose_name='Trust Approved'
     )
     
 
@@ -83,9 +86,13 @@ class UserRole(models.Model):
         related_name='role_users',
         verbose_name='Role'
     )
+    requested = models.BooleanField(
+        default=False,
+        verbose_name='Role Requested'
+    )
     approved = models.BooleanField(
         default=False,
-        verbose_name='Approved'
+        verbose_name='Role Approved'
     )
 
     class Meta:

@@ -7,9 +7,11 @@ class UserIn(Schema):
 
 class UserRolesIn(Schema):
     id: int
-    name: str
 
 class UserRolesOut(Schema):
+    name: str
+
+class UserApprovedRolesOut(Schema):
     name: str
 
 class UserProfileIn(Schema):
@@ -19,8 +21,9 @@ class UserProfileIn(Schema):
     roles: Optional[List[UserRolesIn]]
 
 class UserProfileOut(Schema):
-    email: Optional[str]
+    email: str
     title: Optional[str]
     first_name: Optional[str]
     last_name: Optional[str]
     roles: Optional[List[UserRolesOut]]
+    approved_roles: Optional[List[UserApprovedRolesOut]]

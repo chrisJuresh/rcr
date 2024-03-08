@@ -12,6 +12,7 @@ export const load: PageServerLoad = async (event) => {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 	event.locals.user = userResponse.data;
+	console.log(event.locals.user);
 	return {
 		roles: rolesResponse.data,
 		user: event.locals.user,
@@ -35,7 +36,9 @@ export const actions: Actions = {
 					title: form.data.title || null,
 					first_name: form.data.first_name || null,
 					last_name: form.data.last_name || null,
-  					roles: form.data.roles ? form.data.roles.map(role => ({ id: role.value, name: role.name })) : []
+					roles: form.data.roles
+						? form.data.roles.map((role) => ({ id: role.value, name: role.name }))
+						: []
 				},
 				{
 					headers: { Authorization: `Bearer ${token}` }
