@@ -6,16 +6,22 @@ import { formSchema } from './schema';
 import axios from 'axios';
 
 export const load: PageServerLoad = async (event) => {
-	const rolesResponse = await axios.get('http://localhost:8000/api/roles/roles');
-	const token = event.cookies.get('token');
-	const userResponse = await axios.get('http://localhost:8000/api/users/profile', {
-		headers: { Authorization: `Bearer ${token}` }
-	});
-	event.locals.user = userResponse.data;
-	console.log(event.locals.user);
+	const fetchRoles = async () => {
+		const rolesResponse = await axios.get('http://localhost:8000/api/roles/roles');
+		return rolesResponse.data;
+	};
+	const fetchUser = async () => {
+		const token = event.cookies.get('token');
+		const userResponse = await axios.get('http://localhost:8000/api/users/profile', {
+			headers: { Authorization: `Bearer ${token}` }
+		});
+		event.locals.user = userResponse.data;
+		return event.locals.user;
+	};
+	
 	return {
-		roles: rolesResponse.data,
-		user: event.locals.user,
+		roles: await fetchRoles(),
+		user: await fetchUser(),
 		form: await superValidate(zod(formSchema))
 	};
 };

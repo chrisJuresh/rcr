@@ -9,6 +9,7 @@
 </script>
 
 <div class="flex min-h-screen items-center justify-center">
+	<div class=" h-[400px]">
 	<Card.Root class="w-[400px]">
 		<Card.Header>
 			<Card.Title>Authenticate</Card.Title>
@@ -29,4 +30,6 @@
 			</Tabs.Root>
 		</Card.Content>
 	</Card.Root>
+	</div>
 </div>
+
