@@ -4,6 +4,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
 	import { toast } from 'svelte-sonner';
+	import Circle from 'svelte-radix/Circle.svelte';
 	import { formSchema, type FormSchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
@@ -30,6 +31,20 @@
 	function getUserRolesAsString(user) {
 		return user.roles.map((role) => role.name).join(', ');
 	}
+
+  const colorClasses = [
+    'fill-red-400 text-red-400',
+    'fill-green-400 text-green-400',
+    'fill-blue-400 text-blue-400',
+    'fill-yellow-400 text-yellow-400',
+    'fill-purple-400 text-purple-400',
+    'fill-pink-400 text-pink-400',
+    'fill-indigo-400 text-indigo-400',
+  ];
+
+  function getRandomColorClass() {
+    return colorClasses[Math.floor(Math.random() * colorClasses.length)];
+  }
 </script>
 
 <div class="flex min-h-screen flex-row items-center justify-center">
@@ -129,9 +144,8 @@
 							</Select.Root>
 						</Form.Control>
 						<Form.Description>
-							Select the roles you would like to have access to<br />
-							They must be approved by the RCR before you can use them<br />
-							Removal of roles in this field will not lose you approval status
+							Select the roles you would like to see on your dashboard<br />
+							You will not lose approval for roles you choose to remove
 						</Form.Description>
 						<Form.FieldErrors />
 					</Form.Field>
@@ -153,7 +167,10 @@
 				</Card.Header>
 				<Card.Content>
 					{#each user.approved_roles as approved_roles}
-						{approved_roles.name}<br />
+						<div class="flex items-center">
+    						<Circle class="mr-1 h-3 w-3 {getRandomColorClass()}" />
+							{approved_roles.name}<br />
+						</div>
 					{/each}
 				</Card.Content>
 			</Card.Root>
