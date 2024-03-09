@@ -13,6 +13,7 @@
 	export let user;
 	export let roles;
 	export let trusts;
+	console.log(trusts)
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema),
@@ -27,13 +28,13 @@
 			}
 		: undefined;
 
-	$: selectedTrust = $formData.trusts 
+	$: selectedTrust = $formData.trust 
 	? { 
 		label: $formData.trust.name, 
 		value: $formData.trust.value 
 	}
 	: null;
-		
+
 	$: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: role.value }));
 
 	function getUserRolesAsString(user) {
@@ -176,12 +177,12 @@
 								<Form.Control let:attrs>
 									<Form.Label>Trust</Form.Label>
 									<Select.Root
-										selected={selectedTrust}
+										bind:selected={selectedTrust}
 							onSelectedChange={(s) => {
 							if (s) {
 									const trust = trusts.find((trust) => trust.id === s.value);
 									$formData.trust = {
-										value: s.value,
+										value: trust.id,
 										name: trust ? trust.name : ''
 									};
 								} else {
@@ -194,8 +195,8 @@
 												placeholder={user.trust ? user.trust : 'Select your trust'}/>
 										</Select.Trigger>
 										<Select.Content>
-											{#each trusts as { id, name }}
-												<Select.Item value={id} label={name} />
+											{#each trusts as trust}
+												<Select.Item value={trust.id} label={trust.name} />
 											{/each}
 										</Select.Content>
 									</Select.Root>
@@ -206,7 +207,7 @@
 
 							
 							
-							<Form.Button on:click={() => toast('Event has been created')}>Update</Form.Button>
+							<Form.Button>Update</Form.Button>
 						</form>
 					</Card.Content>
 				</Card.Root>

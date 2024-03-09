@@ -37,6 +37,7 @@ export const actions: Actions = {
 			});
 		}
 		try {
+			console.log(form.data.trust?.value || null,)
 			await axios.put(
 				'http://localhost:8000/api/users/profile/',
 				{
