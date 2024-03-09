@@ -9,8 +9,8 @@
 </script>
 
 <div class="flex min-h-screen items-center justify-center">
-	<div class=" h-[400px]">
-		<Card.Root class="w-[400px]">
+	<div class=" h-[400px]" >
+		<Card.Root class="w-[400px] neu" >
 			<Card.Header>
 				<Card.Title>Authenticate</Card.Title>
 				<Card.Description>Access your account or create a new one</Card.Description>

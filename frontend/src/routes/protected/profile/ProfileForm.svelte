@@ -59,14 +59,15 @@
 <div class="flex min-h-screen flex-row items-center justify-center">
 	<div class=" h-[400px]">
 		<div class="flex justify-center">
-			<div class="mr-1 w-[255px]"></div>
+			
+			<div class="ml-6 w-[270px]">
+			</div>
 			<div>
-				<Card.Root class="w-[550px]">
+				<Card.Root class="w-[550px] neu">
 					<Card.Header>
-						<Card.Title>Edit {user.email}</Card.Title>
-						<Card.Description>Please ensure your details are up to date</Card.Description>
+						<Card.Title>Edit Profile</Card.Title>
+						<Card.Description>{user.email}</Card.Description>
 					</Card.Header>
-
 					<Card.Content>
 						<form method="POST" use:enhance>
 							<div class="grid grid-cols-2 gap-6">
@@ -130,9 +131,43 @@
 									</Form.Field>
 								</div>
 							{/if}
+	
+	
+							<Form.Field {form} name="trust">
+								<Form.Control let:attrs>
+									<Form.Label>Trust</Form.Label>
+									<Select.Root
+										bind:selected={selectedTrust}
+							onSelectedChange={(s) => {
+							if (s) {
+									const trust = trusts.find((trust) => trust.id === s.value);
+									$formData.trust = {
+										value: trust.id,
+										name: trust ? trust.name : ''
+									};
+								} else {
+									$formData.trust = null;
+								}
+							}}>
+      								<input hidden value={selectedTrust} name={attrs.name} />
+										<Select.Trigger {...attrs}>
+											<Select.Value
+												placeholder={user.trust ? user.trust : 'Select your trust'}/>
+										</Select.Trigger>
+										<Select.Content>
+											{#each trusts as trust}
+												<Select.Item value={trust.id} label={trust.name} />
+											{/each}
+										</Select.Content>
+									</Select.Root>
+									
+								</Form.Control>
+								<Form.FieldErrors />
+							</Form.Field>
+							
 							<Form.Field {form} name="roles">
 								<Form.Control let:attrs>
-									<Form.Label>Requested Roles</Form.Label>
+									<Form.Label>Roles</Form.Label>
 									<Select.Root
 										multiple
 										selected={selectedRoles}										
@@ -166,44 +201,12 @@
 									</Select.Root>
 								</Form.Control>
 								<Form.Description>
-									Select the roles you would like to see on your dashboard<br />
-									You will not lose approval for roles you choose to remove
+									You may select multiple roles
 								</Form.Description>
 								<Form.FieldErrors />
 							</Form.Field>
 
 
-							<Form.Field {form} name="trust">
-								<Form.Control let:attrs>
-									<Form.Label>Trust</Form.Label>
-									<Select.Root
-										bind:selected={selectedTrust}
-							onSelectedChange={(s) => {
-							if (s) {
-									const trust = trusts.find((trust) => trust.id === s.value);
-									$formData.trust = {
-										value: trust.id,
-										name: trust ? trust.name : ''
-									};
-								} else {
-									$formData.trust = null;
-								}
-							}}>
-      								<input hidden value={selectedTrust} name={attrs.name} />
-										<Select.Trigger {...attrs}>
-											<Select.Value
-												placeholder={user.trust ? user.trust : 'Select your trust'}/>
-										</Select.Trigger>
-										<Select.Content>
-											{#each trusts as trust}
-												<Select.Item value={trust.id} label={trust.name} />
-											{/each}
-										</Select.Content>
-									</Select.Root>
-									
-								</Form.Control>
-								<Form.FieldErrors />
-							</Form.Field>
 
 							
 							
@@ -213,23 +216,32 @@
 				</Card.Root>
 			</div>
 
-			<div class="ml-6 w-[255px]">
+			<div class="mr-6 w-[270px]">
 				{#if user.approved_roles.length > 0}
-					<Card.Root class="ml-1 w-[255px]">
+					<Card.Root class="ml-1 w-[270px] flat">
 						<Card.Header class="pb-2">
-							<Card.Title>Approved Roles</Card.Title>
+							<Card.Title>Approved</Card.Title>
 							<Card.Description>
-								The RCR has approved the<br />
-								following roles for you
+								You have been approved for the following by the RCR
 							</Card.Description>
 						</Card.Header>
 						<Card.Content>
+							Roles
 							{#each user.approved_roles as approved_roles}
 								<div class="flex items-center">
 									<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
 									<small>{approved_roles.name}<br /></small>
 								</div>
 							{/each}
+						</Card.Content>
+						<Card.Content>
+							Trusts
+							<!--{#each user.trust as trust}-->
+								<div class="flex items-center">
+									<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
+									<small>{user.trust}<br /></small>
+								</div>
+							<!--{/each}-->
 						</Card.Content>
 					</Card.Root>
 				{/if}
