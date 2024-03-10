@@ -1,9 +1,9 @@
 <script lang="ts">
-	import MixerHorizontal from "svelte-radix/MixerHorizontal.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-	import type { Task } from "../(data)/schemas.js";
-	import type { TableViewModel } from "svelte-headless-table";
+	import MixerHorizontal from 'svelte-radix/MixerHorizontal.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import type { Task } from '../(data)/schemas.js';
+	import type { TableViewModel } from 'svelte-headless-table';
 
 	export let tableModel: TableViewModel<Task>;
 	const { pluginStates, flatColumns } = tableModel;
@@ -17,7 +17,7 @@
 		.filter(([, hide]) => !hide)
 		.map(([id]) => id);
 
-	const hidableCols = ["title", "status", "priority"];
+	const hidableCols = ['title', 'status', 'priority'];
 </script>
 
 <DropdownMenu.Root>

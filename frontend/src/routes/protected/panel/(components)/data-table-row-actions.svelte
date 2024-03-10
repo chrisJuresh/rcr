@@ -1,9 +1,9 @@
 <script lang="ts">
-	import DotsHorizontal from "svelte-radix/DotsHorizontal.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-	import { labels } from "../(data)/data.js";
-	import { taskSchema, type Task } from "../(data)/schemas.js";
+	import DotsHorizontal from 'svelte-radix/DotsHorizontal.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { labels } from '../(data)/data.js';
+	import { taskSchema, type Task } from '../(data)/schemas.js';
 
 	export let row: Task;
 	const task = taskSchema.parse(row);

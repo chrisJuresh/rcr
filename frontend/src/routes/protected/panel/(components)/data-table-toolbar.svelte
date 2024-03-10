@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { Input } from "$lib/components/ui/input";
-	import { DataTableFacetedFilter, DataTableViewOptions } from "./index.js";
-	import type { Task } from "../(data)/schemas.js";
-	import type { TableViewModel } from "svelte-headless-table";
-	import Button from "$lib/components/ui/button/button.svelte";
-	import Cross2 from "svelte-radix/Cross2.svelte";
-	import { statuses, priorities } from "../(data)/data.js";
-	import type { Writable } from "svelte/store";
+	import { Input } from '$lib/components/ui/input';
+	import { DataTableFacetedFilter, DataTableViewOptions } from './index.js';
+	import type { Task } from '../(data)/schemas.js';
+	import type { TableViewModel } from 'svelte-headless-table';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import Cross2 from 'svelte-radix/Cross2.svelte';
+	import { statuses, priorities } from '../(data)/data.js';
+	import type { Writable } from 'svelte/store';
 
 	export let tableModel: TableViewModel<Task>;
 
 	const { pluginStates } = tableModel;
 	const {
-		filterValue,
+		filterValue
 	}: {
 		filterValue: Writable<string>;
 	} = pluginStates.filter;
 
 	const {
-		filterValues,
+		filterValues
 	}: {
 		filterValues: Writable<{
 			status: string[];
@@ -51,7 +51,7 @@
 		{#if showReset}
 			<Button
 				on:click={() => {
-					$filterValue = "";
+					$filterValue = '';
 					$filterValues.status = [];
 					$filterValues.priority = [];
 				}}

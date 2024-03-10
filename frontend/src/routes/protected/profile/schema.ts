@@ -17,7 +17,7 @@ export const formSchema = z.object({
 				name: z.string().min(2).max(50).optional().or(z.literal(''))
 			})
 		)
-		.optional(),
+		.optional()
 });
 
 export type FormSchema = typeof formSchema;

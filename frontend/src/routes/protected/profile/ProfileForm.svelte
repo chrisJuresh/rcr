@@ -12,7 +12,7 @@
 	export let user;
 	export let roles;
 	export let trusts;
-	console.log(trusts)
+	console.log(trusts);
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema),
@@ -27,12 +27,12 @@
 			}
 		: undefined;
 
-	$: selectedTrust = $formData.trust 
-	? { 
-		label: $formData.trust.name, 
-		value: $formData.trust.value 
-	}
-	: null;
+	$: selectedTrust = $formData.trust
+		? {
+				label: $formData.trust.name,
+				value: $formData.trust.value
+			}
+		: null;
 
 	$: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: role.value }));
 
@@ -58,11 +58,9 @@
 <div class="flex min-h-screen flex-row items-center justify-center">
 	<div class=" h-[400px]">
 		<div class="flex justify-center">
-			
-			<div class="ml-6 w-[270px]">
-			</div>
+			<div class="ml-6 w-[270px]"></div>
 			<div>
-				<Card.Root class="w-[550px] neu">
+				<Card.Root class="neu w-[550px]">
 					<Card.Header>
 						<Card.Title>Edit Profile</Card.Title>
 						<Card.Description>{user.email}</Card.Description>
@@ -130,28 +128,27 @@
 									</Form.Field>
 								</div>
 							{/if}
-	
-	
+
 							<Form.Field {form} name="trust">
 								<Form.Control let:attrs>
 									<Form.Label>Trust</Form.Label>
 									<Select.Root
 										bind:selected={selectedTrust}
-							onSelectedChange={(s) => {
-							if (s) {
-									const trust = trusts.find((trust) => trust.id === s.value);
-									$formData.trust = {
-										value: trust.id,
-										name: trust ? trust.name : ''
-									};
-								} else {
-									$formData.trust = null;
-								}
-							}}>
-      								<input hidden value={selectedTrust} name={attrs.name} />
+										onSelectedChange={(s) => {
+											if (s) {
+												const trust = trusts.find((trust) => trust.id === s.value);
+												$formData.trust = {
+													value: trust.id,
+													name: trust ? trust.name : ''
+												};
+											} else {
+												$formData.trust = null;
+											}
+										}}
+									>
+										<input hidden value={selectedTrust} name={attrs.name} />
 										<Select.Trigger {...attrs}>
-											<Select.Value
-												placeholder={user.trust ? user.trust : 'Select your trust'}/>
+											<Select.Value placeholder={user.trust ? user.trust : 'Select your trust'} />
 										</Select.Trigger>
 										<Select.Content>
 											{#each trusts as trust}
@@ -159,17 +156,16 @@
 											{/each}
 										</Select.Content>
 									</Select.Root>
-									
 								</Form.Control>
 								<Form.FieldErrors />
 							</Form.Field>
-							
+
 							<Form.Field {form} name="roles">
 								<Form.Control let:attrs>
 									<Form.Label>Roles</Form.Label>
 									<Select.Root
 										multiple
-										selected={selectedRoles}										
+										selected={selectedRoles}
 										onSelectedChange={(s) => {
 											if (s) {
 												$formData.roles = s.map((selected) => {
@@ -199,16 +195,10 @@
 										</Select.Content>
 									</Select.Root>
 								</Form.Control>
-								<Form.Description>
-									You may select multiple roles
-								</Form.Description>
+								<Form.Description>You may select multiple roles</Form.Description>
 								<Form.FieldErrors />
 							</Form.Field>
 
-
-
-							
-							
 							<Form.Button>Update</Form.Button>
 						</form>
 					</Card.Content>
@@ -217,7 +207,7 @@
 
 			<div class="mr-6 w-[270px]">
 				{#if user.approved_roles.length > 0}
-					<Card.Root class="ml-1 w-[270px] flat">
+					<Card.Root class="flat ml-1 w-[270px]">
 						<Card.Header class="pb-2">
 							<Card.Title>Approved</Card.Title>
 							<Card.Description>
@@ -236,10 +226,10 @@
 						<Card.Content>
 							Trusts
 							<!--{#each user.trust as trust}-->
-								<div class="flex items-center">
-									<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
-									<small>{user.trust}<br /></small>
-								</div>
+							<div class="flex items-center">
+								<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
+								<small>{user.trust}<br /></small>
+							</div>
 							<!--{/each}-->
 						</Card.Content>
 					</Card.Root>
