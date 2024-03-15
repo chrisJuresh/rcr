@@ -1,8 +1,12 @@
 from django.contrib.auth.hashers import make_password
-from .models import UserRole, User, Trust
+from .models import UserRole, User, Trust, UnauthenticatedUser
 from ninja.errors import ValidationError
 from ninja_jwt.tokens import RefreshToken
 from .schemas import UserProfileIn
+
+def user_exists(email):
+    if User.objects.filter(email=email).exists():
+        return True
 
 def create_user(email, password):
     if User.objects.filter(email=email).exists():
@@ -73,3 +77,6 @@ def get_approved_roles(user):
     approved_roles = [{'name': user_role.role.get_name_display()} for user_role in user_roles]
     return approved_roles
     
+def create_unauthenticated_user(email, password, token):
+    unauthenticated_user = UnauthenticatedUser.objects.create(email=email, password=make_password(password), token=token)
+    return unauthenticated_user

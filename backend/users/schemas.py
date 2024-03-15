@@ -5,6 +5,14 @@ class UserIn(Schema):
     email: str = Field(..., pattern=r'^\S+@\S+\.\S+$')
     password: str = Field(..., min_length=8)
 
+class TokenIn(Schema):
+    token: str
+
+class UnauthenticatedUserIn(Schema):
+    email: str = Field(..., pattern=r'^\S+@\S+\.\S+$')
+    password: str = Field(..., min_length=8)
+    token: str
+
 class UserRolesIn(Schema):
     id: int
 

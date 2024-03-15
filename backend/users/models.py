@@ -164,3 +164,8 @@ class RCREmployeeInfo(models.Model):
 
     def __str__(self):
         return f"{self.user_role.user.email}'s RCR employee info"
+
+class UnauthenticatedUser(models.Model):
+    email = models.EmailField()
+    password = models.CharField(max_length=128)
+    token = models.CharField(max_length=255)       
