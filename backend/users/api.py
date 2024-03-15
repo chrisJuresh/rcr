@@ -6,8 +6,6 @@ from .services import create_user, get_token_for_user, update_user_profile, get_
 from typing import List
 from .models import UnauthenticatedUser
 from django.db import transaction
-from django.contrib.auth.hashers import make_password
-from .models import UnauthenticatedUser, User
 
 router = Router()
 
@@ -19,25 +17,17 @@ def register_unauthenticated(request, user_in: UnauthenticatedUserIn):
         create_unauthenticated_user(user_in.email, user_in.password, user_in.token)
         return {"message": "User created successfully"}
 
-
 @router.post("/register-validate", url_name="register-validate")
 def register(request, user_in: TokenIn):
     unauth_user = get_object_or_404(UnauthenticatedUser, token=user_in.token)
-    
     if user_exists(unauth_user.email):
         return {"message": "A user with this email already exists"}
         
     with transaction.atomic():
-        # Create a new user instance without saving it to the database yet
-        user = User(email=unauth_user.email)
-        # Hash the unauthenticated user's password before setting it
-        user.set_password(unauth_user.password)
-        user.save()  # Now save the user after setting the hashed password
+        user = create_user(unauth_user.email, unauth_user.password)
+        
+        #unauth_user.delete()
 
-        # Delete the unauthenticated user record
-        unauth_user.delete()
-
-        # Generate JWT tokens for the new user
         tokens = get_token_for_user(user)
 
         return {

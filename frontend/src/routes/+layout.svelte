@@ -33,7 +33,7 @@
 	$: updateButtonStyles($page.url.pathname);
 </script>
 
-<ul class="fixed flex w-full justify-between" class:nav={$page.url.pathname !== '/login'}>
+<ul class="fixed flex w-full justify-between" class:nav={$page.url.pathname !== '/auth'}>
 	<li class="m-6">
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger asChild let:builder>
@@ -54,7 +54,7 @@
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
 	</li>
-	{#if $page.url.pathname !== '/login'}
+	{#if $page.url.pathname !== '/auth'}
 		<li class="m-6">
 			{#each buttons as { label, path, variant }}
 				<Button on:click={() => navigateTo(path)} {variant} class="mx-2">{label}</Button>

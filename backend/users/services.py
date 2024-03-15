@@ -11,7 +11,7 @@ def user_exists(email):
 def create_user(email, password):
     if User.objects.filter(email=email).exists():
         raise ValidationError('A user with that email already exists')
-    user = User.objects.create(email=email, password=make_password(password))
+    user = User.objects.create(email=email, password=password)
     return user
 
 def get_token_for_user(user):

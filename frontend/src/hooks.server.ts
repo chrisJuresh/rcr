@@ -8,7 +8,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				token: event.cookies.get('token')
 			});
 		} catch (error) {
-			throw redirect(303, '/login');
+			throw redirect(303, '/auth');
 		}
 	}
 

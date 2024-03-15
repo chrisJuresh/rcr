@@ -12,7 +12,7 @@
 		onError: (result) => {
 			console.log(result);
 			$message = result.result.error.message;
-		}
+		},
 	});
 
 	const { form: formData, enhance, message } = form;

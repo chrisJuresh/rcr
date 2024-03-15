@@ -16,7 +16,7 @@ export const load: PageServerLoad = async (event) => {
 			});
 			loggedIn = true;
 		} catch (error) {
-			// stay on /login
+			// stay on /auth
 		} finally {
 			if (loggedIn) {
 				redirect(302, '/protected/profile');
@@ -64,25 +64,25 @@ const handleUserForm = async (event, schema, url) => {
 };
 
 const sendVerificationEmail = async (email, token) => {
-  const verificationUrl = `http://localhost:5173/login/verify?token=${token}`;
-
+  const verificationUrl = `http://localhost:5173/auth/verify?token=${token}`;
+	console.log(verificationUrl)
  // Create a new Postmark client
- const client = new postmark.ServerClient("cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5");
+const client = new postmark.ServerClient("cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5");
 
- // Send an email using the Postmark client
- try {
-   await client.sendEmail({
-     "From": "verify@chrisj.uk",
-     "To": email,
-     "Subject": "Verify your email",
-     "HtmlBody": `<strong>Verify your email</strong> by clicking <a href="${verificationUrl}">here</a>.`,
-     "TextBody": `Verify your email by visiting this link: ${verificationUrl}`,
-     "MessageStream": "outbound"  // Remove this line if you are not using Postmark's message streams feature.
-   });
- } catch (error) {
-   console.error("Failed to send verification email:", error);
-   throw error; // Re-throw the error for upstream error handling
- }
+// Send an email using the Postmark client
+try {
+  await client.sendEmail({
+    "From": "verify@chrisj.uk",
+    "To": email,
+    "Subject": "Verify your email",
+    "HtmlBody": `<strong>Please verify your email</strong> by clicking <a href="${verificationUrl}">here</a>.`,
+    "TextBody": `Please verify your email by visiting this link: ${verificationUrl}`,
+    "MessageStream": "outbound"  // Remove this line if you are not using Postmark's message streams feature.
+  });
+} catch (error) {
+  console.error("Failed to send verification email:", error);
+  throw error; // Re-throw the error for upstream error handling
+}
 };
 
 export const actions: Actions = {

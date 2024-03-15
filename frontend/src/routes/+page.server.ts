@@ -8,7 +8,7 @@ export const load: PageServerLoad = async (event) => {
 			token: event.cookies.get('token')
 		});
 	} catch (error) {
-		throw redirect(303, '/login');
+		throw redirect(303, '/auth');
 	}
 	throw redirect(303, '/protected/profile');
 };
