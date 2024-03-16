@@ -6,22 +6,22 @@ from .services import create_user, get_token_for_user, update_user_profile, get_
 from typing import List
 from .models import UnauthenticatedUser
 from django.db import transaction
+from django.http import HttpResponse
 
 router = Router()
 
 @router.post("/register-unauthenticated", url_name="register-unauthenticated")
 def register_unauthenticated(request, user_in: UnauthenticatedUserIn):
     if user_exists(user_in.email):
-        return {"message": "A user with that email already exists"}
+        return HttpResponse("An authenticated user with that email already exists", status=400)
     else:
         create_unauthenticated_user(user_in.email, user_in.password, user_in.token)
-        return {"message": "User created successfully"}
 
 @router.post("/register-validate", url_name="register-validate")
 def register(request, user_in: TokenIn):
     unauth_user = get_object_or_404(UnauthenticatedUser, token=user_in.token)
     if user_exists(unauth_user.email):
-        return {"message": "A user with this email already exists"}
+        return HttpResponse("An authenticated user with that email already exists", status=400)
         
     with transaction.atomic():
         user = create_user(unauth_user.email, unauth_user.password)

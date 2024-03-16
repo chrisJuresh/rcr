@@ -65,25 +65,22 @@ const handleUserForm = async (event, schema, url) => {
 
 const sendVerificationEmail = async (email, token) => {
   const verificationUrl = `http://localhost:5173/auth/verify?token=${token}`;
-	console.log(verificationUrl)
- // Create a new Postmark client
-const client = new postmark.ServerClient("cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5");
+//const client = new postmark.ServerClient("cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5");
 
-// Send an email using the Postmark client
-try {
-  await client.sendEmail({
-    "From": "verify@chrisj.uk",
-    "To": email,
-    "Subject": "Verify your email",
-    "HtmlBody": `<strong>Please verify your email</strong> by clicking <a href="${verificationUrl}">here</a>.`,
-    "TextBody": `Please verify your email by visiting this link: ${verificationUrl}`,
-    "MessageStream": "outbound"  // Remove this line if you are not using Postmark's message streams feature.
-  });
-} catch (error) {
-  console.error("Failed to send verification email:", error);
-  throw error; // Re-throw the error for upstream error handling
-}
-};
+//try {
+//await client.sendEmail({
+//"From": "verify@chrisj.uk",
+//"To": email,
+//"Subject": "Verify your email",
+//"HtmlBody": `<strong>Please verify your email</strong> by clicking <a href="${verificationUrl}">here</a>.`,
+//"TextBody": `Please verify your email by visiting this link: ${verificationUrl}`,
+//"MessageStream": "outbound"  
+//});
+//} catch (error) {
+//console.error("Failed to send verification email:", error);
+//throw error; 
+//}
+	};
 
 export const actions: Actions = {
 	login: async (event) => {
@@ -104,7 +101,10 @@ export const actions: Actions = {
 			email: form.data.email,
 			password: form.data.password,
 			token: verificationToken
-		})
+		}).catch((issue) => {
+			console.log(issue)
+		error(400, {message: issue.response.data})
+	});
 	
 	sendVerificationEmail(form.data.email, verificationToken);
 	}

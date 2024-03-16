@@ -1,0 +1,65 @@
+\section{Literature Review}
+\subsection{Consultant Recruitment Process}
+\subsubsection{Job Description Process}
+\begin{center}
+\includegraphics[width=0.9\linewidth]{images/jd.png}
+\end{center}
+\vspace{-2em}
+\begin{multicols}{2}
+The Job Description (JD) process presented above reflects the meticulous approach followed by the Royal College of Radiologists (RCR) to ensure quality and precision. The process begins with the receipt of a job description, which is then subjected to preliminary checks. If the JD meets the initial criteria, it moves forward to a more detailed examination by a Regional Specialty Advisor (RSA). If the RSA is unavailable at any stage, a new RSA is promptly assigned. The diagram shows multiple checkpoints and potential loops that can occur if information is missing or incomplete, yet every effort must be made to complete this entire process within 2 weeks. The process concludes by informing the Trust that they are permitted to advertise their post and by sending them a form to complete to request a list of representatives.
+\end{multicols}
+\subsubsection{Appointment Committee Process}
+\begin{center}
+\includegraphics[width=0.85\linewidth]{images/aac.png}
+\end{center}
+\vspace{-2em}
+\begin{multicols}{2}
+The Advisory Appointment Committee (AAC) process, as illustrated above, is equally rigorous and focuses on giving Trusts the best chance of securing a representative. This process begins by checking whether the previous Job Description (JD) process was successful, only granting exceptions when requested by a Foundation Trust. Like the JD process, it often involves loops when sending multiple lists to the Trust. If the Trust opts to source their own representative, either upon request or after an unsuccessful search, the appropriate guidance and rules must be sent. All representatives must complete training and registration to attend panels. The process concludes when the representative returns an outcome form sent to them to complete after the panel is held, or if the Trust cancels the panel for any reason.
+\subsection{Related Works}
+\subsubsection{Existing Storage System}
+With Excel, the primary limitation is the lack of ability to store speciality data. This is because job posts often have multiple primary specialities and secondary sub-specialities. If opting for a single column, data integrity becomes almost impossible as Excel does not inherently support complex data validation for multiple entries within a single cell. This makes it difficult to ensure that the data entered is consistent and makes analysing and querying this data challenging. Using multiple columns for each specialisation provides a more structured way to store this data. However, in this context it quickly becomes unwieldy – in our case we are left with 44 columns. Here the spreadsheet becomes cluttered and difficult to navigate.
+
+The same issues apply to tracking the date of each step of the process, as due to loops in the workflow we often encounter multiple dates in each cell. With no automation whatsoever, these dates, as well as the workflow’s status, must be entered manually every time.
+
+The core issue with both approaches is the lack of normalisation. By splitting data into multiple related tables, and establishing relationships between them, we can reduce redundancy and improve data integrity. This is only realistic if we use a relational database management system like SQL.
+\subsubsection{Healthcare Recruitment Tools}
+Searching for software to assist with recruitment in the healthcare sector will bring up results such as ICIMS and The Access Group. Unfortunately, these programs are typically directed towards the Trust rather than Royal Colleges. Their intended user base is employers looking to advertise and interview candidates, not for those involved in the rigorous job plan review and representative selection process required by the Royal College of Radiology (RCR). These solutions typically require private meetings, so understanding their capabilities is difficult. For a set of requirements this specific, only personalised software is suitable.
+\subsubsection{Other Royal Colleges}
+Finding specific details on the software used by other Royal Colleges in the UK is not possible as this information is not typically disclosed publicly. Though the general process for Advisory Appointment Committees (AAC’s) is somewhat standardised across various Royal Colleges due to the strict requirements set out by the NHS, there is no central piece of software. The advantages to an open-source solution may span beyond just the Royal College of Radiology (RCR). 
+
+While the overall process is shared, there are still many differences between colleges. Each email and form would differ, and doctors in various departments have distinct needs. A software flexible enough to accommodate everyone is far beyond the scope of this project. For example, the Royal College of Physicians (RCP) requires that medical staffing departments complete the job description review form themselves, in contrast to the RCR filling it out for them. This may, however, be an indication that this project should accommodate any policy changes that the RCR may implement. The RCP also requires foundation Trusts to submit representative requests with a minimum of eight weeks’ notice, a guideline that is optional but recommended in many other colleges, and offers an optional kitemark (RCP London, 2017).
+
+With differing requirements, it’s no wonder that simply sharing software with each other is not a solution. A project that would suit every Royal College would be an expensive undertaking.
+\subsection{Technologies}
+\subsubsection{Backend}
+The following paragraphs will be edited to explain their advantages specifically for this project - rather than just being a general description.
+
+Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. It takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It follows the "battery-included" philosophy and provides a robust set of features to build web applications. It emphasises reusability and "pluggability" of components, less code, low coupling, rapid development, and the principle of don't repeat yourself (DRY). (SOURCE)
+
+It is preferred over XYZ because…
+
+Django-Ninja is a web framework for building APIs with Django and Pydantic. It is designed to be fast, easy to use, and type-safe. Django-Ninja leverages the Pydantic library for data validation and settings management using Python type annotations. This integration ensures that API requests and responses are type-checked, leading to cleaner and more maintainable code. It aims to provide a more intuitive and productive way to build Django APIs, with automatic OpenAPI documentation generation and much faster performance. (SOURCE)
+
+It is preferred over Django Rest Framework because….
+
+Django-Ninja-JWT is an extension for Django-Ninja, through Django-Ninja-Extra, that provides JSON Web Token (JWT) authentication for APIs. It allows for secure and scalable user authentication using JWTs. This tool integrates seamlessly with the Django-Ninja framework, enabling developers to easily add token-based authentication to their API endpoints. (SOURCE) It will be stored in a http only, same site strict cookie to ensure security. 
+
+CSRF token handling within django is not required, as the Django backend will not be connected to the internet at all, and SvelteKit handles anti CSRF protection by default. (SOURCE)
+
+\subsubsection{Frontend}
+SvelteKit is a framework for building web applications using Svelte, a modern JavaScript compiler that produces highly efficient code. SvelteKit provides a seamless development experience by offering server-side rendering, static site generation, and single-page application modes out of the box. It is designed to be flexible and modular, allowing developers to structure their applications as they see fit, while providing a rich set of tools and features to enhance productivity and performance.
+
+It is preferred over React and Vue3 because…
+
+TypeScript is an open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, adding optional static typing to the language. TypeScript is designed for the development of large applications and trans compiles to JavaScript. It can catch errors and bugs at compile time, providing a more robust and maintainable codebase.
+
+Shadcn-Svelte, a library created by Huntabyte, makes designing the User Interface easy. It also depends on a collection of Svelte-based tools and libraries aimed at enhancing web development workflows. This includes Formsnap, Superforms, and Zod, and Tailwind which are designed to streamline form creation, validation, and management within the Svelte ecosystem. 
+
+Axios is a promise-based javascript library, which provides a more streamlined and readable syntax than Fetch for handling asynchronous operations. It will be used by django to perform CRUD operations. It features a wide array of configurations and supports features such as intercepting requests and responses, cancelling requests, and automatic transformation of request and response data.
+
+Postmark is an email delivery service that provides fast and reliable transactional email sending. Its simple yet robust API will allow easy email verification and notifications directly from SvelteKit. It is preferred over self-hosted emailing as those are usually blocked as spam by all major email services.
+
+\subsection{Deployment}
+The project is depoloyed on an ubuntu server with nginx, gunicorn, and node at chrisj.uj. (Elaborate on the reasons)
+
+\end{multicols}

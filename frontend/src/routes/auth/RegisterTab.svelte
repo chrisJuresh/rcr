@@ -4,6 +4,8 @@
 	import { registerFormSchema, type RegisterFormSchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+  	import { toast } from "svelte-sonner";
+	
 
 	export let data: SuperValidated<Infer<RegisterFormSchema>>;
 
@@ -29,20 +31,23 @@
 	<Form.Field {form} name="password">
 		<Form.Control let:attrs>
 			<Form.Label>Password</Form.Label>
-			<Input {...attrs} bind:value={$formData.password} />
+			<Input type="password" {...attrs} bind:value={$formData.password} />
 			<Form.FieldErrors />
 		</Form.Control>
 	</Form.Field>
 	<Form.Field {form} name="confirm_password">
 		<Form.Control let:attrs>
 			<Form.Label>Confirm Password</Form.Label>
-			<Input {...attrs} bind:value={$formData.confirm_password} />
+			<Input type="password" {...attrs} bind:value={$formData.confirm_password} />
 			<Form.FieldErrors />
 		</Form.Control>
 		<Form.Description class="text-red-600">
 			{#if $message !== undefined}
 				<h1>{$message}</h1>
 			{/if}
+		</Form.Description>
+		<Form.Description>
+			You will receive an email to verify your account
 		</Form.Description>
 	</Form.Field>
 	<Form.Button>Submit</Form.Button>
