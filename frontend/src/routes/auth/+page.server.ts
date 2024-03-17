@@ -9,14 +9,20 @@ import postmark from 'postmark';
 
 export const load: PageServerLoad = async (event) => {
 	const token = event.cookies.get('token');
+	let success = false;
 	if (token) {
-		await axios
-			.post('http://localhost:8000/api/token/verify', {
+		try {
+			await axios.post('http://localhost:8000/api/token/verify', {
 				token: token
-			})
-			.then(() => {
-				redirect(302, '/protected/profile');
 			});
+			success = true;
+		} catch {
+			// Stay on auth page
+		}
+	}
+
+	if (success) {
+		redirect(302, '/protected/profile');
 	}
 
 	return {
@@ -62,18 +68,21 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		await axios
-			.post('http://localhost:8000/api/token/pair', {
+		let success = false;
+		try {
+			const response = await axios.post('http://localhost:8000/api/token/pair', {
 				email: form.data.email,
 				password: form.data.password
-			})
-			.then((response) => {
-				setTokenCookie(event, response.data.access);
-				redirect(302, '/protected/profile');
-			})
-			.catch((err) => {
-				error(400, { message: err.response.data.detail });
 			});
+			setTokenCookie(event, response.data.access);
+			success = true;
+		} catch (e) {
+			error(400, { message: e.response.data.detail });
+		}
+
+		if (success) {
+			redirect(302, '/protected/profile');
+		}
 	},
 
 	register: async (event) => {
@@ -83,17 +92,15 @@ export const actions: Actions = {
 		}
 
 		const verificationToken = uuidv4();
-		await axios
-			.post('http://localhost:8000/api/users/register-unauthenticated', {
+		try {
+			await axios.post('http://localhost:8000/api/users/register-unauthenticated', {
 				email: form.data.email,
 				password: form.data.password,
 				token: verificationToken
-			})
-			.then(() => {
-				sendVerificationEmail(form.data.email, verificationToken);
-			})
-			.catch((err) => {
-				error(400, { message: err.response.data });
 			});
+			sendVerificationEmail(form.data.email, verificationToken);
+		} catch (e) {
+			error(400, { message: e.response.data.detail });
+		}
 	}
 };

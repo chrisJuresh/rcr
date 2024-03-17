@@ -4,6 +4,7 @@ from trusts.models import Region, Trust
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from roles.models import Role
+from specialities.models import ConsultantType, Speciality
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -117,6 +118,8 @@ class ReviewerInfo(models.Model):
         limit_choices_to={'role__name': Role.RoleChoices.REVIEWER}
     )
 
+    specialities = models.ManyToManyField(Speciality, blank=True)
+
     def __str__(self):
         return f"{self.user_role.user.email}'s reviewer info"
 
@@ -132,38 +135,10 @@ class RepresentativeInfo(models.Model):
         limit_choices_to={'role__name': Role.RoleChoices.REPRESENTATIVE}
     )
 
+    specialities = models.ManyToManyField(Speciality, blank=True)
+
     def __str__(self):
         return f"{self.user_role.user.email}'s representative info"
-
-class TrustEmployeeInfo(models.Model):
-    """
-    Additional information for users with the Trust Employee role.
-    """
-    user_role = models.OneToOneField(
-        UserRole,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        verbose_name='User Role',
-        limit_choices_to={'role__name': Role.RoleChoices.TRUST_EMPLOYEE}
-    )
-
-    def __str__(self):
-        return f"{self.user_role.user.email}'s trust employee info"
-
-class RCREmployeeInfo(models.Model):
-    """
-    Additional information for users with the RCR Employee role.
-    """
-    user_role = models.OneToOneField(
-        UserRole,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        verbose_name='User Role',
-        limit_choices_to={'role__name': Role.RoleChoices.RCR_EMPLOYEE}
-    )
-
-    def __str__(self):
-        return f"{self.user_role.user.email}'s RCR employee info"
 
 class UnauthenticatedUser(models.Model):
     email = models.EmailField()

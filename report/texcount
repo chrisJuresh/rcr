@@ -1,0 +1,172 @@
+File: report.tex
+Encoding: ascii
+Words in text: 50
+Words in headers: 4
+Words outside text (captions, etc.): 0
+Number of headers: 3
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  24+2+0 (1/0/0/0) Subsection: Draft Notice
+  3+1+0 (1/0/0/0) Section: Testing
+  23+1+0 (1/0/0/0) Section: Bibliography
+
+Included file: ./chapters/title.tex
+Encoding: utf8
+Words in text: 0
+Words in headers: 0
+Words outside text (captions, etc.): 0
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapters/acknowledgements.tex
+Encoding: ascii
+Words in text: 91
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapters/abstract.tex
+Encoding: ascii
+Words in text: 25
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapters/introduction.tex
+Encoding: utf8
+Words in text: 1022
+Words in headers: 5
+Words outside text (captions, etc.): 0
+Number of headers: 4
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  0+1+0 (1/0/0/0) Section: Introduction
+  546+1+0 (1/0/0/0) Subsection: Background
+  339+2+0 (1/0/0/0) Subsection: Problem Statement
+  137+1+0 (1/0/0/0) Subsection: Aim
+
+Included file: ./chapters/literature.tex
+Encoding: utf8
+Words in text: 798
+Words in headers: 20
+Words outside text (captions, etc.): 0
+Number of headers: 8
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  0+2+0 (1/0/0/0) Section: Literature Review
+  264+7+0 (3/0/0/0) Subsection: Recruitment Process
+  534+11+0 (4/0/0/0) Subsection: Related Works
+
+Included file: ./chapters/design.tex
+Encoding: utf8
+Words in text: 774
+Words in headers: 9
+Words outside text (captions, etc.): 0
+Number of headers: 7
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  198+1+0 (1/0/0/0) Section: Design
+  264+1+0 (1/0/0/0) Subsection: Backend
+  243+1+0 (1/0/0/0) Subsection: Frontend
+  22+1+0 (1/0/0/0) Subsection: Deployment
+  47+5+0 (3/0/0/0) Subsection: Requirements
+
+
+!!! File implementation/database not found in path [./]. !!!
+
+!!! File implementation/dark not found in path [./]. !!!
+
+!!! File implementation/registration not found in path [./]. !!!
+
+!!! File implementation/profile not found in path [./]. !!!
+
+!!! File implementation/panel not found in path [./]. !!!
+Included file: ./chapters/implementation.tex
+Encoding: ascii
+Words in text: 4
+Words in headers: 6
+Words outside text (captions, etc.): 0
+Number of headers: 6
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  0+1+0 (1/0/0/0) Section: Implementation
+  4+4+0 (4/0/0/0) Subsection: Django
+  0+1+0 (1/0/0/0) Subsection: SvelteKit
+
+Included file: ./chapters/discussion.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapters/further.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 2
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ./chapters/appendices.tex
+Encoding: ascii
+Words in text: 0
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Sum of files: report.tex
+File(s) total: report.tex
+Words in text: 2764
+Words in headers: 50
+Words outside text (captions, etc.): 0
+Number of headers: 33
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+Files: 11
+Subcounts:
+  text+headers+captions (#headers/#floats/#inlines/#displayed)
+  50+4+0 (3/0/0/0) File: report.tex
+  91+1+0 (1/0/0/0) Included file: ./chapters/acknowledgements.tex
+  25+1+0 (1/0/0/0) Included file: ./chapters/abstract.tex
+  1022+5+0 (4/0/0/0) Included file: ./chapters/introduction.tex
+  798+20+0 (8/0/0/0) Included file: ./chapters/literature.tex
+  774+9+0 (7/0/0/0) Included file: ./chapters/design.tex
+  4+6+0 (6/0/0/0) Included file: ./chapters/implementation.tex
+  0+1+0 (1/0/0/0) Included file: ./chapters/discussion.tex
+  0+2+0 (1/0/0/0) Included file: ./chapters/further.tex
+  0+1+0 (1/0/0/0) Included file: ./chapters/appendices.tex
+
+(errors:5)

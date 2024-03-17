@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'users',
     'trusts',
     'roles',
+    'specialities',
+    'jds',
+    'aacs'
 ]
 
 MIDDLEWARE = [

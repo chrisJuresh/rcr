@@ -1,0 +1,57 @@
+Metadata-Version: 2.1
+Name: django-diagram
+Version: 0.0.1
+Summary: Generate an Entity Relationship Diagram for a Django project in Mermaid format
+Home-page: https://github.com/nick-solly/django-diagram.git
+Author: Nick Solly
+Author-email: nick@sudofox.co
+License: All Rights Reserved
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Framework :: Django
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: django (>=3.0)
+
+# django-diagram
+Generate an Entity Relationship Diagram for a Django project in Mermaid format
+
+![logo.png](logo.png)
+
+## Installation
+
+You can install via pip:
+
+```bash
+pip install django-diagram
+```
+
+## Usage
+
+Navigate to the directory containing your Django project (the folder containing manage.py) and run:
+
+```bash
+python -m django_diagram
+```
+
+The following options are available:
+
+`--settings=project.settings.local` - The dotted path to the settings module
+(either this option must be provided or the `DJANGO_SETTINGS_MODULE` environment
+variable must be set)
+
+`--title="My Title"` - The title to use for the diagram
+
+`--app=app_name` - Restrict to only a particular Django app
+
+`--output=diagram.txt` - The output file to write the diagram, if this option
+is not provided the output will be written to stdout

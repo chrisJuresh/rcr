@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
-import { fail } from '@sveltejs/kit';
+import { fail, error } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { formSchema } from './schema';
@@ -18,6 +18,7 @@ export const load: PageServerLoad = async (event) => {
 		const response = await axios.get('http://localhost:8000/api/users/profile', {
 			headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 		});
+		console.log(response.data);
 		return response.data;
 	};
 	return {
@@ -45,14 +46,14 @@ export const actions: Actions = {
 					first_name: form.data.first_name || null,
 					last_name: form.data.last_name || null,
 					trust: form.data.trust?.value || null,
-					roles: form.data.roles?.map((role) => ({ id: role.value })) ?? []
+					roles: form.data.roles?.map((role) => role.value) ?? []
 				},
 				{
 					headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 				}
 			);
-		} catch (error) {
-			console.log(error);
+		} catch {
+			// Do nothing
 		}
 		return {
 			form

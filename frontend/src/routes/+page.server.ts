@@ -7,8 +7,8 @@ export const load: PageServerLoad = async (event) => {
 		await axios.post('http://localhost:8000/api/token/verify', {
 			token: event.cookies.get('token')
 		});
-	} catch (error) {
-		throw redirect(303, '/auth');
+	} catch {
+		redirect(303, '/auth');
 	}
-	throw redirect(303, '/protected/profile');
+	redirect(303, '/protected/profile');
 };

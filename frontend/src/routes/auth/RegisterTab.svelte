@@ -4,8 +4,7 @@
 	import { registerFormSchema, type RegisterFormSchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-  	import { toast } from "svelte-sonner";
-	
+	import { toast } from 'svelte-sonner';
 
 	export let data: SuperValidated<Infer<RegisterFormSchema>>;
 
@@ -14,7 +13,7 @@
 		onError: (result) => {
 			console.log(result);
 			$message = result.result.error.message;
-		},
+		}
 	});
 
 	const { form: formData, enhance, message } = form;
@@ -46,9 +45,7 @@
 				<h1>{$message}</h1>
 			{/if}
 		</Form.Description>
-		<Form.Description>
-			You will receive an email to verify your account
-		</Form.Description>
+		<Form.Description>You will receive an email to verify your account</Form.Description>
 	</Form.Field>
 	<Form.Button>Submit</Form.Button>
 </form>

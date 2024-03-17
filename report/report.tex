@@ -1,39 +1,75 @@
-\documentclass[12pt]{article}
+\documentclass[12pt, a4paper]{article}
 
-\usepackage[margin=0.5in]{geometry}
+\usepackage[margin=0.5in, bmargin=0.7in, footskip=0.2in]{geometry}
 \usepackage{multicol}
 \usepackage{graphicx} 
 \usepackage{subfiles}
 \usepackage{wrapfig}
+\usepackage{minted}
+\usepackage{listings}
+
+\newcommand\wordcount{
+\immediate\write18{texcount -1 -sum -merge chapters/implementation/* \jobname.tex 2>&1 | grep '^[0-9][0-9]*' > \jobname-words.sum}
+  \input{\jobname-words.sum}
+}
 
 \begin{document}
 
-\subfile{content/title}
+\newgeometry{margin=4cm}
+\subfile{chapters/title}
 
 \newpage
-\subfile{content/acknowledgements}
+\subsection{Draft Notice}
+This document is a \textit{very} rough draft for Dr Fabrizio Smeraldi to check for major omissions or errors. It is to undergo major changes.
 
-\subfile{content/abstract}
+\newpage
+\subfile{chapters/acknowledgements}
+\newpage
+\subfile{chapters/abstract}
 
 \newpage
 \tableofcontents
 
-\newpage
-\subfile{content/introduction}
+\restoregeometry
 
 \newpage
-\subfile{content/literature}
+\subfile{chapters/introduction}
 
 \newpage
-\subfile{content/implementation}
+\subfile{chapters/literature}
 
-\subfile{content/discussion}
+\newpage
+\subfile{chapters/design}
 
-\subfile{content/further}
+\newpage
+\subfile{chapters/implementation}
+
+\section{Testing}
+django tests.py
+
+UAT
+\newpage
+\subfile{chapters/discussion}
+
+\subfile{chapters/further}
 
 %bib
 \section{Bibliography}
+This bibliography will be drastically overhauled in the future. It is only included to give credit to the sources used in this draft.
 
-\subfile{content/appendices}
+\begin{lstlisting}[breaklines=true]
+Clinical radiology job planning guidance for consultant and SAS doctors 2022. (2022). Available at: https://www.rcr.ac.uk/media/gzxjd252/rcr-publications_clinical-radiology-job-planning-guidance-for-consultant-and-sas-doctors_october-2022.pdf [Accessed 26 Nov. 2023].
+Consultant job planning: a best practice guide. (2017). Available at: https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
+Limb, M. (2022). Shortages of radiology and oncology staff putting cancer patients at risk, college warns. BMJ, p.o1430. doi:https://doi.org/10.1136/bmj.o1430.
+RCP London. (2017). Advisory Appointments Committees (AAC). [online] Available at: https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text= [Accessed 26 Nov. 2023].
+Strategic Framework for Cancer Workforce 05-07. (2018). Available at: https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf.
+The National Health Service (Appointment of Consultants) Regulations Good Practice Guidance. (2005). Available at: https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf [Accessed 26 Nov. 2023].
+www.rcr.ac.uk. (n.d.). Advisory Appointment Committee (AAC) | The Royal College of Radiologists. [online] Available at: https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/ [Accessed 26 Nov. 2023].
+www.rcr.ac.uk. (n.d.). Advisory Appointment Committee FAQs | The Royal College of Radiologists. [online] Available at: https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/advisory-appointment-committee-faqs/ [Accessed 26 Nov. 2023].
+www.rcr.ac.uk. (n.d.). RCR statement on industrial action | The Royal College of Radiologists. [online] Available at: https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017 [Accessed 26 Nov. 2023].
+www.rcseng.ac.uk (n.d.). Advisory Appointment Committees (AACs). [online] Royal College of Surgeons. Available at: https://www.rcseng.ac.uk/standards-and-research/support-for-surgeons-and-services/aacs/#:~:text=An%20Advisory%20Appointments%20Committee%20(AAC [Accessed 26 Nov. 2023].
+\end{lstlisting}
+
+\subfile{chapters/appendices}
 
 \end{document}

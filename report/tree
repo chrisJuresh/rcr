@@ -1,0 +1,50 @@
+.
+├── chapters
+│   ├── abstract.tex
+│   ├── acknowledgements.tex
+│   ├── appendices.tex
+│   ├── design.tex
+│   ├── discussion.tex
+│   ├── further.tex
+│   ├── implementation
+│   │   ├── dark.tex
+│   │   ├── database.tex
+│   │   ├── panel.tex
+│   │   ├── profile.tex
+│   │   └── registration.tex
+│   ├── implementation.tex
+│   ├── introduction.tex
+│   ├── literature.tex
+│   └── title.tex
+├── images
+│   ├── aacOLD.png
+│   ├── aac.png
+│   ├── darkMode.png
+│   ├── database.png
+│   ├── jdOLD.png
+│   ├── jd.png
+│   ├── panel.png
+│   ├── profile.png
+│   ├── profile-sidebar.png
+│   ├── qmul-logo.jpg
+│   └── register.png
+├── _minted-report
+│   ├── 611B2C1124CBBD274598FA39345C77661B2BC8CBAA2844E7289DF2A0428F3BAB.pygtex
+│   ├── 9F2B05E01E7EE74A786CF67E7BAE15E71B2BC8CBAA2844E7289DF2A0428F3BAB.pygtex
+│   ├── D648E8F93003E24D5F59F2C9CEAD76C9F73D778D6577DD371281B40198477396.pygtex
+│   ├── default.pygstyle
+│   └── EBC65523149AB9E663916D92AF4322BD1B2BC8CBAA2844E7289DF2A0428F3BAB.pygtex
+├── report.aux
+├── report.dvi
+├── report.fdb_latexmk
+├── report.fls
+├── report.log
+├── report.pdf
+├── report.synctex.gz
+├── report.tex
+├── report.toc
+├── report-words.sum
+├── texcount
+└── tree
+
+5 directories, 43 files

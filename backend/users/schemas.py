@@ -27,7 +27,7 @@ class UserProfileIn(Schema):
     first_name: Optional[str]
     last_name: Optional[str]
     trust: Optional[int]
-    roles: Optional[List[UserRolesIn]]
+    roles: Optional[List[int]]
 
 class UserProfileOut(Schema):
     email: str

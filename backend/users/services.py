@@ -3,51 +3,71 @@ from .models import UserRole, User, Trust, UnauthenticatedUser
 from ninja.errors import ValidationError
 from ninja_jwt.tokens import RefreshToken
 from .schemas import UserProfileIn
+from django.shortcuts import get_object_or_404
+from django.db import transaction
 
 def user_exists(email):
-    if User.objects.filter(email=email).exists():
-        return True
+    return User.objects.filter(email=email).exists()
 
 def create_user(email, password):
-    if User.objects.filter(email=email).exists():
-        raise ValidationError('A user with that email already exists')
     user = User.objects.create(email=email, password=password)
     return user
 
+def create_unauthenticated_user(user):
+    UnauthenticatedUser.objects.create(email=user.email, password=make_password(user.password), token=user.token)
+
 def get_token_for_user(user):
-    token = RefreshToken.for_user(user)
-    return token
+    return RefreshToken.for_user(user)
 
-def extract_role_ids(roles):
-    return {role_dict.get('id') for role_dict in roles if isinstance(roles, list) and role_dict.get('id')}
+def register_user(unauth_user, token):
+    with transaction.atomic():
+        user = create_user(unauth_user.email, unauth_user.password)
+        unauth_user.delete()
+        tokens = get_token_for_user(user)
+        return {
+            'message': 'User registered successfully',
+            'refresh': str(tokens),
+            'access': str(tokens.access_token),
+        }
 
-def update_existing_user_roles(user, requested_role_ids):
+def get_user_roles(user):
+    return [{'name': role.role.get_name_display()} for role in user.user_roles.filter(requested=True)]
+
+def get_user_approved_roles(user):
+    return [{'name': role.role.get_name_display()} for role in user.user_roles.filter(approved=True)]
+
+def get_user_profile(user):
+    return {
+        "email": user.email,
+        "title": user.title,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "trust": user.trust.name if user.trust else None,
+        "roles": get_user_roles(user),
+        "approved_roles": get_user_approved_roles(user)
+    }
+
+def update_user_roles(user, requested_role_ids):
+
+    requested_role_ids = set(requested_role_ids)
+
     existing_role_ids = set()
+
     for user_role in user.user_roles.prefetch_related('role').all():
         role_id = user_role.role.id
         existing_role_ids.add(role_id)
+        user_role.requested = role_id in requested_role_ids
+        user_role.save()
 
-        new_requested_status = role_id in requested_role_ids
-        if user_role.requested != new_requested_status:
-            user_role.requested = new_requested_status
-            user_role.save()
+    new_role_ids = requested_role_ids - existing_role_ids
+    if new_role_ids:
+        UserRole.objects.bulk_create([
+            UserRole(user=user, role_id=role_id, requested=True)
+            for role_id in new_role_ids
+        ])
 
-    return existing_role_ids
-
-def add_new_user_roles(user, requested_role_ids, existing_role_ids):
-    UserRole.objects.bulk_create([
-        UserRole(user=user, role_id=role_id, requested=True) 
-        for role_id in requested_role_ids - existing_role_ids
-    ])
-
-def update_user_roles(user, roles):
-    requested_role_ids = extract_role_ids(roles)
-    if requested_role_ids:
-        existing_role_ids = update_existing_user_roles(user, requested_role_ids)
-        add_new_user_roles(user, requested_role_ids, existing_role_ids)
-
-def update_user_trust(user, trust):
-    user.trust = Trust.objects.get(id=trust)
+def update_user_trust(user, trust_id):
+    user.trust = Trust.objects.get(id=trust_id)
     user.save()
 
 def update_user_attribute(user, attr, value):
@@ -67,16 +87,5 @@ def update_user_profile(user, payload):
     user.save()
     return user
 
-def get_user_roles(user):
-    user_roles = UserRole.objects.filter(user=user, requested=True)
-    requested_roles = [{'name': user_role.role.get_name_display()} for user_role in user_roles]
-    return requested_roles
 
-def get_approved_roles(user):
-    user_roles = UserRole.objects.filter(user=user, approved=True)
-    approved_roles = [{'name': user_role.role.get_name_display()} for user_role in user_roles]
-    return approved_roles
     
-def create_unauthenticated_user(email, password, token):
-    unauthenticated_user = UnauthenticatedUser.objects.create(email=email, password=make_password(password), token=token)
-    return unauthenticated_user

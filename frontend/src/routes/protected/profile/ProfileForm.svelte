@@ -3,10 +3,10 @@
 	import * as Select from '$lib/components/ui/select';
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
-	import Dash from 'svelte-radix/Dash.svelte';
 	import { formSchema, type FormSchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import Approved from './Approved.svelte';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let user;
@@ -40,27 +40,18 @@
 		return user.roles.map((role) => role.name).join(', ');
 	}
 
-	const colorClasses = [
-		'fill-red-400 text-red-400',
-		'fill-green-400 text-green-400',
-		'fill-blue-400 text-blue-400',
-		'fill-yellow-400 text-yellow-400',
-		'fill-purple-400 text-purple-400',
-		'fill-pink-400 text-pink-400',
-		'fill-indigo-400 text-indigo-400'
-	];
-
-	function getRandomColorClass() {
-		return colorClasses[Math.floor(Math.random() * colorClasses.length)];
-	}
 </script>
 
 <div class="flex min-h-screen flex-row items-center justify-center">
 	<div class=" h-[400px]">
 		<div class="flex justify-center">
-			<div class="ml-6 w-[270px]"></div>
-			<div>
-				<Card.Root class="neu w-[550px]">
+
+			
+			<div class="w-72">
+				<Approved user={user}></Approved>
+			</div>
+
+				<Card.Root class="neu w-128">
 					<Card.Header>
 						<Card.Title>Edit Profile</Card.Title>
 						<Card.Description>{user.email}</Card.Description>
@@ -203,38 +194,9 @@
 						</form>
 					</Card.Content>
 				</Card.Root>
-			</div>
 
-			<div class="mr-6 w-[270px]">
-				{#if user.approved_roles.length > 0}
-					<Card.Root class="flat ml-1 w-[270px]">
-						<Card.Header class="pb-2">
-							<Card.Title>Approved</Card.Title>
-							<Card.Description>
-								You have been approved for the following by the RCR
-							</Card.Description>
-						</Card.Header>
-						<Card.Content>
-							Roles
-							{#each user.approved_roles as approved_roles}
-								<div class="flex items-center">
-									<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
-									<small>{approved_roles.name}<br /></small>
-								</div>
-							{/each}
-						</Card.Content>
-						<Card.Content>
-							Trusts
-							<!--{#each user.trust as trust}-->
-							<div class="flex items-center">
-								<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
-								<small>{user.trust}<br /></small>
-							</div>
-							<!--{/each}-->
-						</Card.Content>
-					</Card.Root>
-				{/if}
+			<div class="w-72"></div>
+	
 			</div>
-		</div>
 	</div>
 </div>

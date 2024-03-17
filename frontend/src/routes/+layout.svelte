@@ -8,14 +8,16 @@
 	import Sun from 'svelte-radix/Sun.svelte';
 	import Moon from 'svelte-radix/Moon.svelte';
 	import Exit from 'svelte-radix/Exit.svelte';
+	import Person from 'svelte-radix/Person.svelte';
+	import EnvelopeClosed from 'svelte-radix/EnvelopeClosed.svelte';
 
 	function handleLogout() {
 		goto('/logout');
 	}
 
 	let buttons = [
-		{ label: 'Edit Profile', path: '/protected/profile' },
-		{ label: 'View Panel', path: '/protected/panel' }
+		{ icon: Person, label: 'Profile', path: '/protected/profile' },
+		{ icon: EnvelopeClosed, label: 'Panel', path: '/protected/panel' }
 	];
 
 	function navigateTo(path) {
@@ -33,8 +35,8 @@
 	$: updateButtonStyles($page.url.pathname);
 </script>
 
-<ul class="fixed flex w-full justify-between" class:nav={$page.url.pathname !== '/auth'}>
-	<li class="m-6">
+<ul class="fixed grid w-full grid-cols-5 gap-4" class:nav={$page.url.pathname !== '/auth'}>
+	<li class="m-6 place-self-start">
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger asChild let:builder>
 				<Button builders={[builder]} variant="outline" size="icon" class="">
@@ -55,20 +57,22 @@
 		</DropdownMenu.Root>
 	</li>
 	{#if $page.url.pathname !== '/auth'}
-		<li class="m-6">
-			{#each buttons as { label, path, variant }}
-				<Button on:click={() => navigateTo(path)} {variant} class="mx-2">{label}</Button>
+		<li class="col-span-3 m-6 place-self-center">
+			{#each buttons as { icon, label, path, variant }}
+				<Button on:click={() => navigateTo(path)} {variant} class="mx-2">
+					<svelte:component this={icon} class="mr-2 h-4 w-4" />
+					{label}</Button
+				>
 			{/each}
 		</li>
 
-		<li class="m-6">
+		<li class="m-6 place-self-end">
 			<Button variant="destructive" on:click={handleLogout}>
 				<Exit class="mr-2 h-4 w-4" />
 				Log Out
 			</Button>
 		</li>
 	{/if}
-	
 </ul>
 <ModeWatcher></ModeWatcher>
 <slot />

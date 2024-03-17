@@ -1,0 +1,728 @@
+Automating the Royal
+College of Radiology’s Job
+Plan and AAC Processes
+ECS635U Report
+Queen Mary University of London
+School of Electronic Engineering and
+Computer Science
+Christian Juresh
+
+Words: 3176
+Date: March 17, 2024
+Student ID: 210517307
+Supervisor: Dr Fabrizio Smeraldi
+
+0.1
+
+Draft Notice
+
+This document is a very rough draft for Dr Fabrizio Smeraldi to check
+for major omissions or errors. It is to undergo major changes.
+
+1
+
+Acknowledgements
+I would like to thank my supervisor Dr Fabrizio Smeraldi for his guidance
+and support throughout the project. I would also like to thank Dr Paulo
+Oliva for introducing me to django, as well as Vue3, which showed me
+the wonders of non-JSX frameworks, leading me to discover SvelteKit. I
+give a general thank you to all the other staff in the EECS department
+who made all of this possible. Finally, and most importantly, I would like
+to thank my family, friends, and partner for supporting me throughout
+my entire degree.
+
+2
+
+Abstract
+This project is to automate the long admistratration project of advertising job posts for consultant doctors, and then setting up interview panels
+for them. tbc
+
+3
+
+Contents
+0.1
+
+Draft Notice . . . . . . . . . . . . . . . . . . . . . . . . .
+
+1
+
+1 Introduction
+1.1 Background . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Problem Statement . . . . . . . . . . . . . . . . . . . . .
+1.3 Aim . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6
+6
+6
+7
+
+2 Literature Review
+2.1 Recruitment Process . . . . . . . . . . . . . . . . . . . .
+2.1.1 Job Descriptions . . . . . . . . . . . . . . . . . .
+2.1.2 Advisory Appointment Committees . . . . . . . .
+2.2 Related Works . . . . . . . . . . . . . . . . . . . . . . . .
+2.2.1 Existing Storage System . . . . . . . . . . . . . .
+2.2.2 Healthcare Recruitment Tools . . . . . . . . . . .
+2.2.3 Other Royal Colleges . . . . . . . . . . . . . . . .
+
+8
+8
+8
+8
+8
+8
+9
+9
+
+3 Design
+3.1 Backend . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2 Frontend . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.3 Deployment . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4 Requirements . . . . . . . . . . . . . . . . . . . . . . . .
+3.4.1 Functional Requirements . . . . . . . . . . . . . .
+3.4.2 Non-Functional Requirements . . . . . . . . . . .
+
+10
+10
+10
+11
+11
+11
+11
+
+4 Implementation
+4.1 Django . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.1.1 Database . . . . . . . . . . . . . . . . . . . . . .
+4.1.2 API . . . . . . . . . . . . . . . . . . . . . . . . .
+4.1.3 Schemas . . . . . . . . . . . . . . . . . . . . . . .
+4.1.4 Services . . . . . . . . . . . . . . . . . . . . . . .
+4.2 SvelteKit . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2.1 Dark Mode . . . . . . . . . . . . . . . . . . . . .
+4.2.2 Registration . . . . . . . . . . . . . . . . . . . . .
+4.2.3 Profile . . . . . . . . . . . . . . . . . . . . . . . .
+4.2.4 Panel . . . . . . . . . . . . . . . . . . . . . . . . .
+
+12
+12
+12
+12
+12
+12
+12
+12
+13
+15
+16
+
+5 Testing
+
+16
+
+6 Discussion
+
+17
+
+7 Further Work
+
+17
+4
+
+8 Bibliography
+
+17
+
+9 Appendices
+
+17
+
+5
+
+1
+
+Introduction
+
+1.1
+
+Background
+
+The Royal College of Radiologists (RCR) plays
+a pivotal role in ensuring high standards in the
+recruitment process within radiology and oncology. Of particular importance is the quality assurance provided by Job Description (JD) review and
+Advisory Appointment Committee (AAC) panels.
+The RCR states that its processes ensure “candidates have clarity and confidence in applications, recruiting organisations attract and retain
+the best possible appointee, and vacancies are filled
+efficiently, benefitting existing consultant staff.”
+(www.rcr.ac.uk, n.d.).
+The National Health Service (NHS) understands the complexity of this process, and states
+that “The administrative burden associated with
+job planning is considerable. Success depends on
+having systems in place and information available”,
+and Trusts are highly recommended to invest in
+electronic job planning software (Consultant job
+planning: a best practice guide, 2017).
+This is of particular importance, given the concerning shortfall in clinical radiology and oncology.
+With shortfalls of 17% in oncology and 29% in radiology, safe and effective care is limited. Moreover, these shortfalls are expected to worsen in
+the future. Doctors have had their pay cut, and
+83% report some form of burnout (www.rcr.ac.uk,
+n.d.). This has profound implications for patient
+care and service delivery. Shortages lead to longer
+wait times for diagnoses and treatments, potentially worsening patient outcomes, in fact every
+month of delayed cancer treatment increases patients’ risk of death by 10% (Limb, 2022). By 2029,
+these professions will need to grow by 45 percent
+(Strategic Framework for Cancer Workforce 05-07,
+2018).
+Annual job plans, as defined by the RCR,
+are agreements between doctors and their employers “setting out the duties, responsibilities and
+objectives of the doctor” (Clinical radiology job
+planning guidance for consultant and SAS doctors 2022, 2022). This process, which involves
+completing review forms in Microsoft Word and
+subsequent email communication, often leads to
+back-and-forth discussions between the NHS Trust,
+RCR, and Regional Speciality Advisor (RSA). Every detail, including every date an email is sent or
+received, is meticulously recorded in a large Excel
+
+spreadsheet. This process ensures that job plans
+are fair and realistic.
+On the other hand, the AAC process is “a
+legally constituted interview panel established by
+an employing body when appointing consultants.”
+(www.rcseng.ac.uk, n.d.). Representatives are
+mandated by the NHS to ensure that the panel
+constitutes a balanced Committee (The National
+Health Service (Appointment of Consultants) Regulations Good Practice Guidance, 2005). This process, involving the handling of sensitive data such
+as doctors’ emails and phone numbers, requires
+encryption and password protection. Trusts often require multiple lists to find an available representative, as these individuals, being consultant
+doctors themselves, typically have busy schedules.
+The RCR’s involvement ensures that the selection
+process adheres to high professional standards and
+that candidates are evaluated fairly and competently.
+Their process is deliberately extensive for good
+reason. Generic healthcare recruitment software
+does not address the specialised, nuanced steps
+that are required by the RCR. Many aspects are legal requirements by the NHS that must be followed
+by every non-foundation Trust and Royal College
+(www.rcseng.ac.uk, n.d.). Automation would allow for the streamlining of these operations, significantly reducing the administrative burden and
+likelihood of manual errors. Offering a more reliable and consistent approach to managing the recruitment process is a necessity to cope with the
+increasing demands of healthcare delivery, and to
+support the overburdened workforce.
+
+1.2
+
+Problem Statement
+
+Despite its critical role in maintaining employment
+standards, the RCR’s current system faces significant inefficiencies and limitations. Managed primarily through manual operations involving Excel, Outlook, and Word, the risk of errors is high,
+contributing to an already time-consuming and
+labour-intensive process. These stand-alone applications have limited integration capabilities, requiring manual data transfer, and making automation of repetitive tasks extremely difficult, unreliable, or downright impossible. Although Excel is
+6
+
+powerful for data manipulation, it is ill-suited for
+tracking complex workflows. It lacks the ability
+to monitor process stages, complex data integrity
+mechanisms, concurrency and multi-user environments, and handling of large datasets. Consequently, the RCR is forced to create a new spreadsheet annually, increasing time wasted searching
+through multiple different files. The lack of data
+normalisation and continuity makes it difficult to
+track and analyse specialities, which is essential for
+reporting.
+Data analysis is critical for improving efficiency. The RCR states that Advisory Appointment Committee (AAC) data is collected to “check
+that the appointee is qualified to train doctors for
+the future, track increasing or decreasing numbers of doctors, track increases or decreases in
+different types of posts, track where it may be
+difficult for NHS Trusts to attract new recruits”
+(www.rcr.ac.uk, n.d.). Without these metrics it
+becomes difficult to provide guidance on how to
+allocate resources correctly, which is essential for
+resolving consultant shortages.
+Delays and errors, inherent in manual systems,
+can cause Trusts to miss critical deadlines for filling vacancies and to lose out on high-quality candidates. This must be avoided at all costs, as
+the NHS Appointment of Consultants Regulations
+state that “Only in extreme circumstances should
+it be necessary to cancel an AAC.” (The National
+Health Service (Appointment of Consultants) Reg-
+
+ulations Good Practice Guidance, 2005). Significant staff time, which could be better utilised in
+more critical roles, is dedicated to this tedious and
+manual process. This issue affects not only the
+RCR, but also Trusts’ teams, Regional Speciality
+Advisors (RSAs) reviewing Job Plans, RCR representatives assessing panels, and the candidates who
+are pivotal in delivering lifesaving patient care.
+
+1.3
+
+Aim
+
+This project aims to develop an automated system
+specifically tailored for the Royal College of Radiology (RCR), to manage and accelerate their Job
+Plan and Advisory Appointment Committee processes. Integrating an SQL database will ensure
+that a more robust system cooperates with an automated workflow, works with large datasets and
+complex data relationships, and ensures data integrity and security. This integration will give the
+RCR the ability to analyse the data for reporting
+using tools such as PowerBI. Routine tasks are best
+automated with suitable web development frameworks such as SvelteKit and Django. Implementing data security and compliance with encryption
+software like OpenSSL, password protection, and
+secure data storage solutions will allow the project
+to comply with GDPR and NHS regulations. By
+creating a user-friendly, customised, and accessible
+interface, we can simplify the process for all stakeholders.
+
+7
+
+2
+
+Literature Review
+
+2.1
+
+Recruitment Process
+
+2.1.1
+
+Job Descriptions
+
+securing a representative. This process begins
+by checking whether the previous Job Description
+(JD) process was successful, only granting exceptions when requested by a Foundation Trust. Like
+the JD process, it often involves loops when sending multiple lists to the Trust. If the Trust opts
+to source their own representative, either upon request or after an unsuccessful search, the appropriate guidance and rules must be sent. All representatives must complete training and registration to attend panels. The process concludes when
+The Job Description (JD) process presented above the representative returns an outcome form sent to
+reflects the meticulous approach followed by the them to complete after the panel is held, or if the
+Royal College of Radiologists (RCR) to ensure Trust cancels the panel for any reason.
+quality and precision. The process begins with the
+receipt of a job description, which is then subjected
+2.2 Related Works
+to preliminary checks. If the JD meets the initial
+criteria, it moves forward to a more detailed exam- 2.2.1 Existing Storage System
+ination by a Regional Specialty Advisor (RSA). If
+the RSA is unavailable at any stage, a new RSA With Excel, the primary limitation is the lack of
+is promptly assigned. The diagram shows multiple ability to store speciality data. This is because job
+checkpoints and potential loops that can occur if posts often have multiple primary specialities and
+information is missing or incomplete, yet every ef- secondary sub-specialities. If opting for a single
+fort must be made to complete this entire process column, data integrity becomes almost impossible
+within 2 weeks. The process concludes by inform- as Excel does not inherently support complex data
+ing the Trust that they are permitted to advertise validation for multiple entries within a single cell.
+their post and by sending them a form to complete This makes it difficult to ensure that the data entered is consistent and makes analysing and queryto request a list of representatives.
+ing this data challenging. Using multiple columns
+for each specialisation provides a more structured
+2.1.2 Advisory Appointment Committees way to store this data. However, in this context it
+quickly becomes unwieldy – in our case we are left
+with 44 columns. Here the spreadsheet becomes
+cluttered and difficult to navigate.
+The same issues apply to tracking the date of
+each step of the process, as due to loops in the
+workflow we often encounter multiple dates in each
+cell. With no automation whatsoever, these dates,
+as well as the workflow’s status, must be entered
+manually every time.
+The core issue with both approaches is the lack
+of normalisation. By splitting data into multiple
+related tables, and establishing relationships between them, we can reduce redundancy and imThe Advisory Appointment Committee (AAC) prove data integrity. This is only realistic if we
+process, as illustrated above, is equally rigorous use a relational database management system like
+and focuses on giving Trusts the best chance of SQL.
+8
+
+2.2.2
+
+Healthcare Recruitment Tools
+
+tral piece of software. The advantages to an opensource solution may span beyond just the Royal
+College of Radiology (RCR).
+While the overall process is shared, there are
+still many differences between colleges. Each email
+and form would differ, and doctors in various departments have distinct needs. A software flexible enough to accommodate everyone is far beyond
+the scope of this project. For example, the Royal
+College of Physicians (RCP) requires that medical
+staffing departments complete the job description
+review form themselves, in contrast to the RCR
+filling it out for them. This may, however, be an
+indication that this project should accommodate
+any policy changes that the RCR may implement.
+The RCP also requires foundation Trusts to submit
+representative requests with a minimum of eight
+weeks’ notice, a guideline that is optional but recommended in many other colleges, and offers an
+optional kitemark (RCP London, 2017).
+With differing requirements, it’s no wonder
+that simply sharing software with each other is not
+a solution. A project that would suit every Royal
+College would be an expensive undertaking.
+
+Searching for software to assist with recruitment
+in the healthcare sector will bring up results such
+as ICIMS and The Access Group. Unfortunately,
+these programs are typically directed towards the
+Trust rather than Royal Colleges. Their intended
+user base is employers looking to advertise and interview candidates, not for those involved in the
+rigorous job plan review and representative selection process required by the Royal College of Radiology (RCR). These solutions typically require private meetings, so understanding their capabilities
+is difficult. For a set of requirements this specific,
+only personalised software is suitable.
+2.2.3
+
+Other Royal Colleges
+
+Finding specific details on the software used by
+other Royal Colleges in the UK is not possible as
+this information is not typically disclosed publicly.
+Though the general process for Advisory Appointment Committees (AAC’s) is somewhat standardised across various Royal Colleges due to the strict
+requirements set out by the NHS, there is no cen-
+
+9
+
+3
+
+Design
+
+The following paragraphs will be edited to explain their advantages specifically for this project
+- rather than just being a general description.
+Good design follows C.R.A.P principles. It is
+Consistent, it is Readable, it is Accessible, and it
+is Predictable. (SOURCE) This is a idea by a german ... for example in our design...
+We can also take ideas from Normans and the
+three paradigms of HCI (source source)
+The choice of background color in this project
+(dark and gray and light more) (source). The dotted background in lightmode gives users a .... easier on the eyes ... dark mode for those working late
+(which is common) ...
+This project uses the Noord font (source), a
+relatively unknown but very modern and clean...
+sans-serif because ...
+Shadcn-Svelte, a library for SvelteKit (see 3.2),
+created by Huntabyte, makes designing the User
+Interface easy. It also depends on a collection of
+Svelte-based tools and libraries aimed at enhancing web development workflows. This includes zod,
+and formsnap (which relies on superforms), which
+allows validation to be done on the client side. This
+allows for a responsive user experience which...
+Shadows give a ...
+The purple color is chosen because the RCR...
+Red for the logout button (source)
+
+ing to cleaner and more maintainable code. It aims
+to provide a more intuitive and productive way
+to build Django APIs, with automatic OpenAPI
+documentation generation and much faster performance. (SOURCE)
+It is preferred over Django Rest Framework because. . . .
+Django-Ninja-JWT is an extension for DjangoNinja, through Django-Ninja-Extra, that provides
+JSON Web Token (JWT) authentication for APIs.
+It allows for secure and scalable user authentication using JWTs. This tool integrates seamlessly
+with the Django-Ninja framework, enabling developers to easily add token-based authentication to
+their API endpoints. (SOURCE) It will be stored
+in a http only, same site strict cookie to ensure
+security.
+CSRF token handling within django is not required, as the Django backend will not be connected to the internet at all, and SvelteKit handles
+anti CSRF protection by default. (SOURCE)
+
+3.2
+
+Frontend
+
+SvelteKit is a framework for building web applications using Svelte, a modern JavaScript compiler that produces highly efficient code. SvelteKit
+provides a seamless development experience by offering server-side rendering, static site generation,
+and single-page application modes out of the box.
+3.1 Backend
+It is designed to be flexible and modular, allowDjango is a high-level Python web framework that ing developers to structure their applications as
+enables rapid development of secure and maintain- they see fit, while providing a rich set of tools and
+able websites. It takes care of much of the hassle features to enhance productivity and performance.
+of web development, so you can focus on writing (Source)
+It is preferred over React and Vue3 because. . .
+your app without needing to reinvent the wheel. It
+follows the ”battery-included” philosophy and proTypeScript is an open-source programming lanvides a robust set of features to build web applica- guage developed and maintained by Microsoft. It is
+tions. It emphasises reusability and ”pluggability” a strict syntactical superset of JavaScript, adding
+of components, less code, low coupling, rapid devel- optional static typing to the language. TypeScript
+opment, and the principle of don’t repeat yourself is designed for the development of large applica(DRY). (SOURCE)
+tions and trans compiles to JavaScript. It can
+catch errors and bugs at compile time, providing a
+It is preferred over XYZ because. . .
+Django-Ninja is a web framework for building more robust and maintainable codebase. (Source)
+APIs with Django and Pydantic. It is designed
+Axios is a promise-based javascript library,
+to be fast, easy to use, and type-safe. Django- which provides a more streamlined and readable
+Ninja leverages the Pydantic library for data val- syntax than Fetch for handling asynchronous operidation and settings management using Python ations. It will be used by django to perform CRUD
+type annotations. This integration ensures that operations. It features a wide array of configuraAPI requests and responses are type-checked, lead- tions and supports features such as intercepting
+10
+
+requests and responses, cancelling requests, and
+automatic transformation of request and response
+data. (Source)
+Postmark is an email delivery service that provides fast and reliable transactional email sending.
+Its simple yet robust API will allow easy email verification and notifications directly from SvelteKit.
+It is preferred over self-hosted emailing as those
+are usually blocked as spam by all major email services. (source)
+
+sons) sveltekit has adaptors to ... (sources)
+
+3.4
+
+Requirements
+
+3.4.1
+
+Functional Requirements
+
+Here will be a flowchart for each type of user (rep,
+rsa, trust, rcr) showing the UI process of the job
+plan and/or aac.
+3.4.2
+
+3.3
+
+Deployment
+
+Non-Functional Requirements
+
+Here will be a list of requirements such as security,
+The project is depoloyed on an ubuntu server with performance, and usability, (source) and explainanginx, gunicorn, and node (Elaborate on the rea- tions of how they will be met.
+
+11
+
+4
+
+Implementation
+
+4.1
+
+Django
+
+4.1.1
+
+Database
+
+models (incomplete)
+4.1.2
+
+API
+
+django-ninja & django-ninja-jwt
+4.1.3
+
+Schemas
+
+pydantic
+4.1.4
+
+Services
+
+django
+
+4.2
+
+SvelteKit
+
+4.2.1
+
+Dark Mode
+
+There are options to select light or dark mode, so there is the option of working
+later in the day without it impacting your sleep (SOURCE).
+
+12
+
+4.2.2
+
+Registration
+
+Users are met by an authentication page where they
+can choose to login or register. The registration
+form is validated in sveltekit using zod, and also
+communicates with the django backend to tell users
+if the email is already registered in the database.
+Upon registration, the user is sent an email by postmark to verify their account. When the link is
+pressed, the user is logged in and redirected to the
+profile page.
+
+The schema in figure X is used to validate the
+registration form. It checks if the email is a valid
+email, and if the password and confirm password
+fields match. If the form is invalid, the user is
+shown an error message.
+
+export const registerFormSchema = z
+.object({
+email: z.string().email(),
+password: z.string().min(8).max(50),
+confirm_password: z.string().min(8).max(50)
+})
+.refine((data) => data.password ===
+,→ data.confirm_password, {
+message: 'Passwords do not match',
+path: ['confirm_password']
+});
+export type RegisterFormSchema = typeof
+,→ registerFormSchema;
+
+export const load: PageServerLoad = async (event) => {
+const token = event.cookies.get('token');
+if (token) {
+await axios
+.post('http://localhost:8000/api/token/verify', {
+token: token
+})
+.then(() => {
+redirect(302, '/protected/profile');
+});
+}
+
+The code in figure X occurs when the page loads.
+It checks if the user is already logged in with
+django-ninja-JWT, and if so, redirects them to
+the profile page. Otherwise, the login and registration schema are returned to be used in the
+frontend.
+
+return {
+loginForm: await superValidate(zod(loginFormSchema)),
+registerForm: await
+,→ superValidate(zod(registerFormSchema))
+};
+};
+
+13
+
+const sendVerificationEmail = async (email, token) => {
+const verificationUrl =
+,→ `http://localhost:5173/auth/verify?token=${token}`;
+const client = new
+,→ postmark.ServerClient('INSERT-SECRET-TOKEN-HERE');
+
+Here is the api for sending emails. The token
+from figure X is used in line 3 to create a verification url. The postmark server client is then
+used to send the email to the user.
+
+try {
+await client.sendEmail({
+From: 'verify@chrisj.uk',
+To: email,
+Subject: 'Verify your email',
+HtmlBody: `<strong>Please verify your email</strong>
+,→ by clicking <a
+,→ href="${verificationUrl}">here</a>.`,
+TextBody: `Please verify your email by visiting this
+,→ link: ${verificationUrl}`,
+MessageStream: 'outbound'
+});
+} catch (error) {
+console.error('Failed to send verification email:',
+,→ error);
+throw error;
+}
+};
+
+Users are initially registered as unauthenticated
+users, and are sent an email to verify their account. The code in figure X is used to handle
+the CRUD and storange of unauthenticated and
+authenticated users in the django backend.
+
+router = Router()
+@router.post("/register-unauthenticated",
+,→ url_name="register-unauthenticated")
+def register_unauthenticated(request, user_in:
+,→ UnauthenticatedUserIn):
+if user_exists(user_in.email):
+return HttpResponse("An authenticated user with
+,→ that email already exists", status=400)
+else:
+create_unauthenticated_user(user_in.email,
+,→ user_in.password, user_in.token)
+@router.post("/register-validate",
+,→ url_name="register-validate")
+def register(request, user_in: TokenIn):
+unauth_user = get_object_or_404(UnauthenticatedUser,
+,→ token=user_in.token)
+if user_exists(unauth_user.email):
+return HttpResponse("An authenticated user with
+,→ that email already exists", status=400)
+with transaction.atomic():
+user = create_user(unauth_user.email,
+,→ unauth_user.password)
+unauth_user.delete()
+tokens = get_token_for_user(user)
+return {
+'message': 'User registered successfully',
+'refresh': str(tokens),
+'access': str(tokens.access_token),
+}
+
+14
+
+4.2.3
+
+Profile
+
+The profile page also includes
+zod validation, and users are
+able to select multiple roles to
+request validation for. A sidebar shows the roles and trusts
+the logged in user has been approved for.
+
+15
+
+4.2.4
+
+Panel
+
+This page is incomplete. This is where the list of JDs and AACs will be displayed.
+
+5
+
+Testing
+
+django tests.py
+UAT
+
+16
+
+6
+
+Discussion
+
+7
+
+Further Work
+
+8
+
+Bibliography
+
+This bibliography will be drastically overhauled in the future. It is only included to give credit to the
+sources used in this draft.
+C l i n i c a l r a d i o l o g y j o b p l a n n i n g g u i d a n c e f o r c o n s u l t a n t and SAS d o c t o r s
+2 0 2 2 . ( 2 0 2 2 ) . A v a i l a b l e a t : h t t p s : / /www. r c r . ac . uk/ media / g z x j d 2 5 2 / r c r −
+p u b l i c a t i o n s c l i n i c a l −r a d i o l o g y −job−plannin g −guidance −f o r −c o n s u l t a n t −
+and−s a s −d o c t o r s o c t o b e r −2022. pdf [ A c c e s s e d 26 Nov . 2 0 2 3 ] .
+Consultant job planning : a best p r a c t i c e guide . (2017) . Available at :
+h t t p s : / /www. england . nhs . uk/wp−c o n t e n t / u p l o a d s /2022/05/ c o n s u l t a n t −job−
+p l a n n i n g −b es t −p r a c t i c e −g u i d a n c e . pdf .
+Limb , M. ( 2 0 2 2 ) . S h o r t a g e s o f r a d i o l o g y and o n c o l o g y s t a f f p u t t i n g c a n c e r
+p a t i e n t s a t r i s k , c o l l e g e warns . BMJ, p . o1430 . d o i : h t t p s : / / d o i . o rg
+/ 1 0 . 1 1 3 6 / bmj . o1430 .
+RCP London . ( 2 0 1 7 ) . Advisory Appointments Committees (AAC) . [ o n l i n e ]
+A v a i l a b l e a t : h t t p s : / /www. r c p l o n d o n . ac . uk/ e d u c a t i o n −p r a c t i c e / a d v i c e /
+a d v i s o r y −appointments−committees−aac #:˜: t e x t= [ A c c e s s e d 26 Nov . 2 0 2 3 ] .
+S t r a t e g i c Framework f o r Cancer Workforce 05 −07. ( 2 0 1 8 ) . A v a i l a b l e a t :
+h t t p s : / /www. hee . nhs . uk/ s i t e s / d e f a u l t / f i l e s / documents / Cancer−Workforce−
+Document FINAL%20 f o r %20web . pdf .
+The N a t i o n a l Health S e r v i c e ( Appointment o f C o n s u l t a n t s ) R e g u l a t i o n s Good
+P r a c t i c e Guidance . ( 2 0 0 5 ) . A v a i l a b l e a t : h t t p s : / /www. r c s e n g . ac . uk/−/
+media / F i l e s /RCS/ Standards−and−r e s e a r c h / Support−f o r −s u r g e o n s /
+NHS AAC20GoodPractice Guidance . pdf [ A c c e s s e d 26 Nov . 2 0 2 3 ] .
+www. r c r . ac . uk . ( n . d . ) . Advisory Appointment Committee (AAC) | The Royal
+C o l l e g e o f R a d i o l o g i s t s . [ o n l i n e ] A v a i l a b l e a t : h t t p s : / /www. r c r . ac . uk/
+our−s e r v i c e s /management−s e r v i c e −d e l i v e r y / a d v i s o r y −appointment−committee
+−aac / [ A c c e s s e d 26 Nov . 2 0 2 3 ] .
+www. r c r . ac . uk . ( n . d . ) . Advisory Appointment Committee FAQs | The Royal
+C o l l e g e o f R a d i o l o g i s t s . [ o n l i n e ] A v a i l a b l e a t : h t t p s : / /www. r c r . ac . uk/
+our−s e r v i c e s /management−s e r v i c e −d e l i v e r y / a d v i s o r y −appointment−committee
+−aac / a d v i s o r y −appointment−committee−f a q s / [ A c c e s s e d 26 Nov . 2 0 2 3 ] .
+www. r c r . ac . uk . ( n . d . ) . RCR s t a t e m e n t on i n d u s t r i a l a c t i o n | The Royal
+C o l l e g e o f R a d i o l o g i s t s . [ o n l i n e ] A v a i l a b l e a t : h t t p s : / /www. r c r . ac . uk/
+news−p o l i c y / l a t e s t −updates / r c r −statement −on−i n d u s t r i a l −a c t i o n /#:˜: t e x t=
+There%20 i s %20 c u r r e n t l y %20a%2017 [ A c c e s s e d 26 Nov . 2 0 2 3 ] .
+www. r c s e n g . ac . uk ( n . d . ) . Advisory Appointment Committees (AACs) . [ o n l i n e ]
+Royal C o l l e g e o f Surgeons . A v a i l a b l e a t : h t t p s : / /www. r c s e n g . ac . uk/
+s t a n d a r d s −and−r e s e a r c h / support −f o r −s u r g e o n s −and−s e r v i c e s / a a c s /#:˜: t e x t=
+An%20Advisory%20Appointments%20Committee%20(AAC [ A c c e s s e d 26 Nov .
+2023].
+
+9
+
+Appendices
+
+17
+
+

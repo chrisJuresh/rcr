@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{router} \PYG{o}{=} \PYG{n}{Router}\PYG{p}{()}
+\PYG{n+nd}{@router}\PYG{o}{.}\PYG{n}{post}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}/register\PYGZhy{}unauthenticated\PYGZdq{}}\PYG{p}{,} \PYG{n}{url\PYGZus{}name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}register\PYGZhy{}unauthenticated\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{def} \PYG{n+nf}{register\PYGZus{}unauthenticated}\PYG{p}{(}\PYG{n}{request}\PYG{p}{,} \PYG{n}{user\PYGZus{}in}\PYG{p}{:} \PYG{n}{UnauthenticatedUserIn}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{user\PYGZus{}exists}\PYG{p}{(}\PYG{n}{user\PYGZus{}in}\PYG{o}{.}\PYG{n}{email}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{HttpResponse}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}An authenticated user with that email already exists\PYGZdq{}}\PYG{p}{,} \PYG{n}{status}\PYG{o}{=}\PYG{l+m+mi}{400}\PYG{p}{)}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{create\PYGZus{}unauthenticated\PYGZus{}user}\PYG{p}{(}\PYG{n}{user\PYGZus{}in}\PYG{o}{.}\PYG{n}{email}\PYG{p}{,} \PYG{n}{user\PYGZus{}in}\PYG{o}{.}\PYG{n}{password}\PYG{p}{,} \PYG{n}{user\PYGZus{}in}\PYG{o}{.}\PYG{n}{token}\PYG{p}{)}
+
+\PYG{n+nd}{@router}\PYG{o}{.}\PYG{n}{post}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}/register\PYGZhy{}validate\PYGZdq{}}\PYG{p}{,} \PYG{n}{url\PYGZus{}name}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}register\PYGZhy{}validate\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{def} \PYG{n+nf}{register}\PYG{p}{(}\PYG{n}{request}\PYG{p}{,} \PYG{n}{user\PYGZus{}in}\PYG{p}{:} \PYG{n}{TokenIn}\PYG{p}{):}
+    \PYG{n}{unauth\PYGZus{}user} \PYG{o}{=} \PYG{n}{get\PYGZus{}object\PYGZus{}or\PYGZus{}404}\PYG{p}{(}\PYG{n}{UnauthenticatedUser}\PYG{p}{,} \PYG{n}{token}\PYG{o}{=}\PYG{n}{user\PYGZus{}in}\PYG{o}{.}\PYG{n}{token}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{user\PYGZus{}exists}\PYG{p}{(}\PYG{n}{unauth\PYGZus{}user}\PYG{o}{.}\PYG{n}{email}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{HttpResponse}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}An authenticated user with that email already exists\PYGZdq{}}\PYG{p}{,} \PYG{n}{status}\PYG{o}{=}\PYG{l+m+mi}{400}\PYG{p}{)}
+
+    \PYG{k}{with} \PYG{n}{transaction}\PYG{o}{.}\PYG{n}{atomic}\PYG{p}{():}
+        \PYG{n}{user} \PYG{o}{=} \PYG{n}{create\PYGZus{}user}\PYG{p}{(}\PYG{n}{unauth\PYGZus{}user}\PYG{o}{.}\PYG{n}{email}\PYG{p}{,} \PYG{n}{unauth\PYGZus{}user}\PYG{o}{.}\PYG{n}{password}\PYG{p}{)}
+
+        \PYG{n}{unauth\PYGZus{}user}\PYG{o}{.}\PYG{n}{delete}\PYG{p}{()}
+
+        \PYG{n}{tokens} \PYG{o}{=} \PYG{n}{get\PYGZus{}token\PYGZus{}for\PYGZus{}user}\PYG{p}{(}\PYG{n}{user}\PYG{p}{)}
+
+        \PYG{k}{return} \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s1}{\PYGZsq{}message\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}User registered successfully\PYGZsq{}}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}refresh\PYGZsq{}}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{tokens}\PYG{p}{),}
+            \PYG{l+s+s1}{\PYGZsq{}access\PYGZsq{}}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{tokens}\PYG{o}{.}\PYG{n}{access\PYGZus{}token}\PYG{p}{),}
+        \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

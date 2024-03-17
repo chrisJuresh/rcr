@@ -1,6 +1,16 @@
+@font-face {
+    font-family: 'Noord Regular';
+    src: url('../src/lib/Noord Regular/Noord Regular.woff2') format('woff2'),
+         url('../src/lib/Noord Regular/Noord-Regular.woff') format('woff'),
+         url('../src/lib/Noord Regular/Noord Regular.otf') format('opentype'),
+         url('../src/lib/Noord Regular/Noord Regular.ttf') format('truetype');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+
  
 @layer base {
   :root {
@@ -25,12 +35,15 @@
     --ring: 20 14.3% 4.1%;
     --radius: 0.5rem;
     --shadow: 0 0% 100%;
-    --contrast-shadow: 0 0% 70%;
+    --shadow-size: 0px;
+    --contrast-shadow: 0 0% 0%;
     --nbgh: 0;
     --nbgs: 0%;
     --nbgl: 100%;
-    --nbgo: 0.25;
+    --nbl: 90%;
+    --nbgo: 0.5;
     --border-width: 0px;
+    --dots: 0 0% 80%
   }
   .dark {
     --background: 20 14.3% 4.1%;
@@ -53,21 +66,31 @@
     --input: 12 6.5% 15.1%;
     --ring: 24 5.7% 82.9%;
     --shadow: 20 14.3% 6%;
+    --shadow-size: -15px;
     --contrast-shadow: 20 14.3% 0%;
     --nbgh: 10;
     --nbgs: 14.3%;
     --nbgl: 4.1%;
+    --nbl: 4.1%;
     --nbgo: 0.75;
     --border-width: 1px;
+    --dots: 20 14.3% 4.1%;
   }
 }
  
 @layer base {
   * {
     @apply border-border;
+    @apply tracking-wide !important;
+    @apply font-thin !important;
+    font-family: 'Noord Regular', sans-serif; 
   }
   body {
-    @apply bg-background text-foreground;
+        --tw-bg-opacity: 1; 
+        background-image: radial-gradient(hsl(var(--dots)) 1px, transparent 1px);
+        background-size: 20px 20px; 
+        @apply bg-background text-foreground;
+
   }
 }
 
@@ -76,8 +99,8 @@
   --tw-shadow-colored: 0px !important;
   border-width: var(--border-width) !important;
 	border-radius: 1em !important;
- box-shadow:  15px 15px 30px hsl(var(--contrast-shadow)),
-             -15px -15px 30px hsl(var(--shadow));
+  box-shadow:  15px 15px 30px hsl(var(--contrast-shadow)/0.5),
+             var(--shadow-size) var(--shadow-size) 30px hsl(var(--shadow));
 }
 
 .flat{
@@ -92,5 +115,5 @@
   background:hsla(var(--nbgh), var(--nbgs), var(--nbgl), var(--nbgo));
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid hsla(var(--nbgh), var(--nbgs), var(--nbgl), 0.18);
+  border: 1px solid hsla(var(--nbgh), var(--nbgs), var(--nbl), 1);
 }

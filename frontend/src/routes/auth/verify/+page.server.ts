@@ -15,12 +15,12 @@ export const load: PageServerLoad = async (event) => {
 	const urlToken = event.url.searchParams.get('token');
 	if (urlToken) {
 		try {
-			const response = await axios.post('http://localhost:8000/api/users/register-validate', {
+			const response = await axios.post('http://localhost:8000/api/users/register-authenticate', {
 				token: urlToken
 			});
 			setTokenCookie(event, response.data.access);
-		} catch (error) {
-			console.log(error);
+		} catch {
+			// Do nothing
 		}
 	}
 };
