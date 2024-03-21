@@ -10,14 +10,17 @@
 	import Exit from 'svelte-radix/Exit.svelte';
 	import Person from 'svelte-radix/Person.svelte';
 	import EnvelopeClosed from 'svelte-radix/EnvelopeClosed.svelte';
-
+	import Pencil2 from 'svelte-radix/Pencil2.svelte';
+  import { Toaster } from "$lib/components/ui/sonner";
+ 
 	function handleLogout() {
 		goto('/logout');
 	}
 
 	let buttons = [
 		{ icon: Person, label: 'Profile', path: '/protected/profile' },
-		{ icon: EnvelopeClosed, label: 'Panel', path: '/protected/panel' }
+		{ icon: EnvelopeClosed, label: 'Panel', path: '/protected/panel' },
+		{ icon: Pencil2, label: 'New JD', path: '/protected/newJD' }
 	];
 
 	function navigateTo(path) {
@@ -35,44 +38,49 @@
 	$: updateButtonStyles($page.url.pathname);
 </script>
 
-<ul class="fixed grid w-full grid-cols-5 gap-4" class:nav={$page.url.pathname !== '/auth'}>
-	<li class="m-6 place-self-start">
-		<DropdownMenu.Root>
-			<DropdownMenu.Trigger asChild let:builder>
-				<Button builders={[builder]} variant="outline" size="icon" class="">
-					<Sun
-						class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-					/>
-					<Moon
-						class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-					/>
-					<span class="sr-only">Toggle theme</span>
-				</Button>
-			</DropdownMenu.Trigger>
-			<DropdownMenu.Content align="end">
-				<DropdownMenu.Item on:click={() => setMode('light')}>Light</DropdownMenu.Item>
-				<DropdownMenu.Item on:click={() => setMode('dark')}>Dark</DropdownMenu.Item>
-				<DropdownMenu.Item on:click={() => resetMode()}>System</DropdownMenu.Item>
-			</DropdownMenu.Content>
-		</DropdownMenu.Root>
-	</li>
-	{#if $page.url.pathname !== '/auth'}
-		<li class="col-span-3 m-6 place-self-center">
-			{#each buttons as { icon, label, path, variant }}
-				<Button on:click={() => navigateTo(path)} {variant} class="mx-2">
-					<svelte:component this={icon} class="mr-2 h-4 w-4" />
-					{label}</Button
-				>
-			{/each}
+<header class="fixed w-full" class:nav={$page.url.pathname !== '/auth'}>
+	<ul class="grid grid-cols-5 gap-4">
+		<li class="m-6 place-self-start">
+			<DropdownMenu.Root>
+				<DropdownMenu.Trigger asChild let:builder>
+					<Button builders={[builder]} variant="outline" size="icon" class="">
+						<Sun
+							class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+						/>
+						<Moon
+							class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+						/>
+						<span class="sr-only">Toggle theme</span>
+					</Button>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content align="end">
+					<DropdownMenu.Item on:click={() => setMode('light')}>Light</DropdownMenu.Item>
+					<DropdownMenu.Item on:click={() => setMode('dark')}>Dark</DropdownMenu.Item>
+					<DropdownMenu.Item on:click={() => resetMode()}>System</DropdownMenu.Item>
+				</DropdownMenu.Content>
+			</DropdownMenu.Root>
 		</li>
+		{#if $page.url.pathname !== '/auth'}
+			<li class="col-span-3 m-6 place-self-center">
+				{#each buttons as { icon, label, path, variant }}
+					<Button on:click={() => navigateTo(path)} {variant} class="mx-2">
+						<svelte:component this={icon} class="mr-2 h-4 w-4" />
+						{label}</Button
+					>
+				{/each}
+			</li>
 
-		<li class="m-6 place-self-end">
-			<Button variant="destructive" on:click={handleLogout}>
-				<Exit class="mr-2 h-4 w-4" />
-				Log Out
-			</Button>
-		</li>
-	{/if}
-</ul>
-<ModeWatcher></ModeWatcher>
+			<li class="m-6 place-self-end">
+				<Button variant="destructive" on:click={handleLogout}>
+					<Exit class="mr-2 h-4 w-4" />
+					Log Out
+				</Button>
+			</li>
+		{/if}
+	</ul>
+</header>
+
+<ModeWatcher />
+<Toaster />
+ 
 <slot />

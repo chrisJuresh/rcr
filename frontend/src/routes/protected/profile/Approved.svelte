@@ -20,8 +20,8 @@
 </script>
 
 {#if user.approved_roles.length > 0}
-	<Card.Root class="flat">
-		<Card.Header class="pb-2">
+	<Card.Root>
+		<Card.Header>
 			<Card.Title>Approved</Card.Title>
 			<Card.Description>You have been approved for the following by the RCR</Card.Description>
 		</Card.Header>
@@ -36,12 +36,10 @@
 		</Card.Content>
 		<Card.Content>
 			Trusts
-			<!--{#each user.trust as trust}-->
 			<div class="flex items-center">
 				<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
 				<small>{user.trust}<br /></small>
 			</div>
-			<!--{/each}-->
 		</Card.Content>
 	</Card.Root>
 {/if}

@@ -52,6 +52,7 @@ export const actions: Actions = {
 					headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 				}
 			);
+			return {form};
 		} catch {
 			// Do nothing
 		}

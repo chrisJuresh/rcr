@@ -9,12 +9,9 @@
 
 	const form = superForm(data, {
 		validators: zodClient(loginFormSchema),
-		onError: (result) => {
-			$message = result.result.error.message;
-		}
 	});
 
-	const { form: formData, enhance, message } = form;
+	const { form: formData, enhance, errors } = form;
 </script>
 
 <form method="POST" use:enhance action="?/login" class="flex flex-col space-y-4">
@@ -32,8 +29,8 @@
 			<Form.FieldErrors />
 		</Form.Control>
 		<Form.Description class="text-red-600">
-			{#if $message !== undefined}
-				<h1>{$message}</h1>
+			{#if $errors._errors !== undefined}
+				<h1 class="">{$errors._errors}</h1>
 			{/if}
 		</Form.Description>
 	</Form.Field>

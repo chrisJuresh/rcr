@@ -1,6 +1,6 @@
 import type { PageServerLoad, Actions } from './$types';
 import { fail, redirect, error } from '@sveltejs/kit';
-import { superValidate } from 'sveltekit-superforms';
+import { superValidate, setError } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { loginFormSchema, registerFormSchema } from './schema';
 import { v4 as uuidv4 } from 'uuid';
@@ -77,7 +77,7 @@ export const actions: Actions = {
 			setTokenCookie(event, response.data.access);
 			success = true;
 		} catch (e) {
-			error(400, { message: e.response.data.detail });
+			return setError(form, "", e.response.data.detail );
 		}
 
 		if (success) {
@@ -99,8 +99,9 @@ export const actions: Actions = {
 				token: verificationToken
 			});
 			sendVerificationEmail(form.data.email, verificationToken);
+			return {form};
 		} catch (e) {
-			error(400, { message: e.response.data.detail });
+			return setError(form, 'email', e.response.data.detail );
 		}
 	}
 };

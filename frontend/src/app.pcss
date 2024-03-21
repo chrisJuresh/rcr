@@ -1,17 +1,9 @@
-@font-face {
-    font-family: 'Noord Regular';
-    src: url('../src/lib/Noord Regular/Noord Regular.woff2') format('woff2'),
-         url('../src/lib/Noord Regular/Noord-Regular.woff') format('woff'),
-         url('../src/lib/Noord Regular/Noord Regular.otf') format('opentype'),
-         url('../src/lib/Noord Regular/Noord Regular.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
 
- 
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -81,9 +73,7 @@
 @layer base {
   * {
     @apply border-border;
-    @apply tracking-wide !important;
-    @apply font-thin !important;
-    font-family: 'Noord Regular', sans-serif; 
+    font-family: 'Manrope', sans-serif; 
   }
   body {
         --tw-bg-opacity: 1; 
