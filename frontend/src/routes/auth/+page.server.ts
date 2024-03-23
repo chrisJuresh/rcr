@@ -77,7 +77,7 @@ export const actions: Actions = {
 			setTokenCookie(event, response.data.access);
 			success = true;
 		} catch (e) {
-			return setError(form, "", e.response.data.detail );
+			return setError(form, '', e.response.data.detail);
 		}
 
 		if (success) {
@@ -99,9 +99,9 @@ export const actions: Actions = {
 				token: verificationToken
 			});
 			sendVerificationEmail(form.data.email, verificationToken);
-			return {form};
+			return { form };
 		} catch (e) {
-			return setError(form, 'email', e.response.data.detail );
+			return setError(form, 'email', e.response.data.detail);
 		}
 	}
 };

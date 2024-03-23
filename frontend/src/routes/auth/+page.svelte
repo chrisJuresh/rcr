@@ -7,8 +7,7 @@
 	export let data: PageData;
 </script>
 
-<div class="flex min-h-screen items-center justify-center">
-	<div class="w-96">
+	<div class="w-96 h-96">
 		<Card.Root class="neu">
 			<Card.Header>
 				<Card.Title>Authenticate</Card.Title>
@@ -30,4 +29,3 @@
 			</Card.Content>
 		</Card.Root>
 	</div>
-</div>

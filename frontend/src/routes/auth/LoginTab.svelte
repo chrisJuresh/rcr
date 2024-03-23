@@ -8,7 +8,7 @@
 	export let data: SuperValidated<Infer<LoginFormSchema>>;
 
 	const form = superForm(data, {
-		validators: zodClient(loginFormSchema),
+		validators: zodClient(loginFormSchema)
 	});
 
 	const { form: formData, enhance, errors } = form;

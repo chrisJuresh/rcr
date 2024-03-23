@@ -4,9 +4,7 @@
 	import * as Card from '$lib/components/ui/card';
 </script>
 
-<div class="flex min-h-screen flex-row items-center justify-center">
-	<div class="h-[1000px] w-[1080px]">
-		<Card.Root class="neu">
+<Card.Root class="neu xl:w-[1080px] w-11/12">
 			<Card.Header>
 				<h2 class="text-2xl font-bold tracking-tight">Welcome back!</h2>
 			</Card.Header>
@@ -14,5 +12,3 @@
 				<DataTable {data} />
 			</Card.Content>
 		</Card.Root>
-	</div>
-</div>

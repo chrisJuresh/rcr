@@ -6,7 +6,8 @@ from .services import (
     register_user,
     get_user_profile, 
     update_user_profile,
-    user_exists
+    user_exists,
+    get_tokens_for_user
 )
 from ninja_jwt.authentication import JWTAuth
 from django.shortcuts import get_object_or_404
@@ -23,19 +24,22 @@ def register_unauthenticated(request, user: UnauthenticatedUserIn):
     create_unauthenticated_user(user)
 
 @router.post("/register-authenticate")
-def register_authenticate(request, user: TokenIn):
-    unauth_user = get_object_or_404(UnauthenticatedUser, token=user.token)
+def register_authenticate(request, token: TokenIn):
+    unauth_user = get_object_or_404(UnauthenticatedUser, token=token.token)
     if user_exists(unauth_user.email):
         raise HttpError(400, "An authenticated user with that email already exists")
     
-    tokens = register_user(unauth_user, user.token)
+    user = register_user(unauth_user, token.token)
+    tokens = get_tokens_for_user(user)
     return tokens
 
 @router.get("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def get_profile(request):
-    return get_user_profile(request.auth)
+    profile = get_user_profile(request.auth)
+    return profile
 
 @router.put("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def update_profile(request, payload: UserProfileIn):
     update_user_profile(request.auth, payload)
-    return get_user_profile(request.auth)
+    profile = get_user_profile(request.auth)
+    return profile

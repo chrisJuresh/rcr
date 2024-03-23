@@ -10,4 +10,8 @@ class RoleOut(Schema):
 
 @router.get("/roles/", response=List[RoleOut])
 def get_roles(request):
-    return [{'id': role.id, 'name': role.get_name_display()} for role in Role.objects.all()]
+    roles = [
+        {'id': role.id, 'name': role.get_name_display()}
+        for role in Role.objects.all()
+    ]
+    return roles

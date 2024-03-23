@@ -5,13 +5,7 @@
 	export let user;
 
 	const colorClasses = [
-		'fill-red-400 text-red-400',
-		'fill-green-400 text-green-400',
-		'fill-blue-400 text-blue-400',
-		'fill-yellow-400 text-yellow-400',
 		'fill-purple-400 text-purple-400',
-		'fill-pink-400 text-pink-400',
-		'fill-indigo-400 text-indigo-400'
 	];
 
 	function getRandomColorClass() {
@@ -19,7 +13,6 @@
 	}
 </script>
 
-{#if user.approved_roles.length > 0}
 	<Card.Root>
 		<Card.Header>
 			<Card.Title>Approved</Card.Title>
@@ -27,19 +20,23 @@
 		</Card.Header>
 		<Card.Content>
 			Roles
-			{#each user.approved_roles as approved_roles}
-				<div class="flex items-center">
-					<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
-					<small>{approved_roles.name}<br /></small>
-				</div>
-			{/each}
+{#each user.approved_roles as approved_roles}
+	<div class="flex items-center">
+		<Dash class="mr-1 h-3 w-3 fill-purple-400 text-purple-400" />
+		<small>{approved_roles.name}<br /></small>
+	</div>
+{:else}
+	<div class="flex items-center">
+		<Dash class="mr-1 h-3 w-3 fill-purple-400 text-purple-400" />
+		<small>None<br /></small>
+	</div>
+{/each}
 		</Card.Content>
 		<Card.Content>
 			Trusts
 			<div class="flex items-center">
 				<Dash class="mr-1 h-3 w-3 {getRandomColorClass()}" />
-				<small>{user.trust}<br /></small>
+				<small>{user.trust ? user.trust : 'None'}<br /></small>
 			</div>
 		</Card.Content>
 	</Card.Root>
-{/if}

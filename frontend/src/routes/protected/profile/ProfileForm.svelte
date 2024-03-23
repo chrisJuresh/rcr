@@ -6,7 +6,7 @@
 	import { formSchema, type FormSchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-import { toast } from 'svelte-sonner';
+	import { toast } from 'svelte-sonner';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let user;
@@ -17,9 +17,9 @@ import { toast } from 'svelte-sonner';
 	const form = superForm(data, {
 		validators: zodClient(formSchema),
 		dataType: 'json',
-		onUpdated: ({form}) => {
+		onUpdated: ({ form }) => {
 			if (form.valid) {
-			toast.success('Profile Updated Successfully');
+				toast.success('Profile Updated Successfully');
 			}
 		}
 	});
@@ -46,7 +46,7 @@ import { toast } from 'svelte-sonner';
 	}
 </script>
 
-<Card.Root class="neu">
+<Card.Root class="neu w-11/12 sm:w-[500px] mb-6">
 	<Card.Header>
 		<Card.Title>Edit Profile</Card.Title>
 		<Card.Description>{user.email}</Card.Description>

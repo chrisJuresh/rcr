@@ -10,9 +10,9 @@
 
 	const form = superForm(data, {
 		validators: zodClient(registerFormSchema),
-		onUpdated: ({form}) => {
+		onUpdated: ({ form }) => {
 			if (form.valid) {
-			toast.success('Please check your email and verify your account');
+				toast.success('Please check your email and verify your account');
 			}
 		}
 	});

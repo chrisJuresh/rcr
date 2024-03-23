@@ -14,27 +14,32 @@ def create_user(email, password):
     return user
 
 def create_unauthenticated_user(user):
-    UnauthenticatedUser.objects.create(email=user.email, password=make_password(user.password), token=user.token)
+    UnauthenticatedUser.objects.create(
+        email=user.email, 
+        password=make_password(user.password), 
+        token=user.token
+    )
 
-def get_token_for_user(user):
-    return RefreshToken.for_user(user)
+def get_tokens_for_user(user):
+    tokens = RefreshToken.for_user(user)
+    return {
+            'message': 'User registered successfully',
+            'refresh': str(tokens),
+            'access': str(tokens.access_token),
+    }
 
 def register_user(unauth_user, token):
     with transaction.atomic():
         user = create_user(unauth_user.email, unauth_user.password)
         unauth_user.delete()
-        tokens = get_token_for_user(user)
-        return {
-            'message': 'User registered successfully',
-            'refresh': str(tokens),
-            'access': str(tokens.access_token),
-        }
+        return user
 
-def get_user_roles(user):
-    return [{'name': role.role.get_name_display()} for role in user.user_roles.filter(requested=True)]
-
-def get_user_approved_roles(user):
-    return [{'name': role.role.get_name_display()} for role in user.user_roles.filter(approved=True)]
+def get_user_roles(user, status):
+    roles = [
+        {'name': user_role.role.get_name_display()}
+        for user_role in user.user_roles.filter(**{status: True})
+    ]
+    return roles
 
 def get_user_profile(user):
     return {
@@ -43,23 +48,24 @@ def get_user_profile(user):
         "first_name": user.first_name,
         "last_name": user.last_name,
         "trust": user.trust.name if user.trust else None,
-        "roles": get_user_roles(user),
-        "approved_roles": get_user_approved_roles(user)
+        "roles": get_user_roles(user, 'requested'),
+        "approved_roles": get_user_roles(user, 'approved')
     }
 
 def update_user_roles(user, requested_role_ids):
 
     requested_role_ids = set(requested_role_ids)
-
     existing_role_ids = set()
 
+    # Update existing roles
     for user_role in user.user_roles.prefetch_related('role').all():
-        role_id = user_role.role.id
-        existing_role_ids.add(role_id)
-        user_role.requested = role_id in requested_role_ids
+        existing_role_ids.add(user_role.role.id)
+        user_role.requested = user_role.role_id in requested_role_ids
         user_role.save()
 
     new_role_ids = requested_role_ids - existing_role_ids
+
+    # Create new roles
     if new_role_ids:
         UserRole.objects.bulk_create([
             UserRole(user=user, role_id=role_id, requested=True)
@@ -70,7 +76,7 @@ def update_user_trust(user, trust_id):
     user.trust = Trust.objects.get(id=trust_id)
     user.save()
 
-def update_user_attribute(user, attr, value):
+def update_user_attributes(user, attr, value):
     if value is None:
         return
     if attr == 'roles':
@@ -81,11 +87,9 @@ def update_user_attribute(user, attr, value):
         setattr(user, attr, value)
 
 def update_user_profile(user, payload):
-    payload_dict = payload.dict()
-    for attr, value in payload_dict.items():
-        update_user_attribute(user, attr, value)
+    for attr, value in payload.dict().items():
+        update_user_attributes(user, attr, value)
     user.save()
-    return user
 
 
     
