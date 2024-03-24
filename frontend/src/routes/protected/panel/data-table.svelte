@@ -67,7 +67,7 @@
 							{#each headerRow.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
 									<Table.Head {...attrs}>
-                    <Button variant="ghost" class="pl-0" on:click={props.sort.toggle}>
+                    <Button variant="ghost" class="-ml-4" on:click={props.sort.toggle}>
                     <Render of={cell.render()} />
                     <ArrowUpDown class={"ml-2 h-4 w-4"} />
                   </Button>
