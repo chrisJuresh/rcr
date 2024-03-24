@@ -1,24 +1,25 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.3.10)  17 MAR 2024 22:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.3.23)  24 MAR 2024 22:15
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **/home/chris/rcr/report/report.tex
 (/home/chris/rcr/report/report.tex
-LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-02-22> (/usr/share/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (/usr/share/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count185
-\c@section=\count186
-\c@subsection=\count187
-\c@subsubsection=\count188
-\c@paragraph=\count189
-\c@subparagraph=\count190
-\c@figure=\count191
-\c@table=\count192
+\c@part=\count188
+\c@section=\count189
+\c@subsection=\count190
+\c@subsubsection=\count191
+\c@paragraph=\count192
+\c@subparagraph=\count193
+\c@figure=\count194
+\c@table=\count195
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
@@ -26,15 +27,15 @@ File: size12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 ) (/usr/share/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
  (/usr/share/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count193
-\Gm@cntv=\count194
-\c@Gm@tempcnt=\count195
+\Gm@cnth=\count196
+\Gm@cntv=\count197
+\c@Gm@tempcnt=\count198
 \Gm@bindingoffset=\dimen141
 \Gm@wd@mp=\dimen142
 \Gm@odd@mp=\dimen143
@@ -43,17 +44,17 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 \Gm@layoutheight=\dimen146
 \Gm@layouthoffset=\dimen147
 \Gm@layoutvoffset=\dimen148
-\Gm@dimlist=\toks17
+\Gm@dimlist=\toks18
 ) (/usr/share/texmf-dist/tex/latex/tools/multicol.sty
-Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
-\c@tracingmulticols=\count196
+Package: multicol 2023/03/30 v1.9f multicolumn formatting (FMi)
+\c@tracingmulticols=\count199
 \mult@box=\box51
 \multicol@leftmargin=\dimen149
-\c@unbalance=\count197
-\c@collectmore=\count198
-\doublecol@number=\count199
-\multicoltolerance=\count266
-\multicolpretolerance=\count267
+\c@unbalance=\count266
+\c@collectmore=\count267
+\doublecol@number=\count268
+\multicoltolerance=\count269
+\multicolpretolerance=\count270
 \full@width=\dimen150
 \page@free=\dimen151
 \premulticols=\dimen152
@@ -62,12 +63,12 @@ Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
 \multicolbaselineskip=\skip51
 \partial@page=\box52
 \last@line=\box53
+\mc@boxedresult=\box54
 \maxbalancingoverflow=\dimen154
-\mult@rightbox=\box54
-\mult@grightbox=\box55
-\mult@firstbox=\box56
-\mult@gfirstbox=\box57
-\@tempa=\box58
+\mult@rightbox=\box55
+\mult@grightbox=\box56
+\mult@firstbox=\box57
+\mult@gfirstbox=\box58
 \@tempa=\box59
 \@tempa=\box60
 \@tempa=\box61
@@ -103,15 +104,16 @@ Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
 \@tempa=\box91
 \@tempa=\box92
 \@tempa=\box93
-\c@minrows=\count268
-\c@columnbadness=\count269
-\c@finalcolumnbadness=\count270
+\@tempa=\box94
+\c@minrows=\count271
+\c@columnbadness=\count272
+\c@finalcolumnbadness=\count273
 \last@try=\dimen155
 \multicolovershoot=\dimen156
 \multicolundershoot=\dimen157
-\mult@nat@firstbox=\box94
-\colbreak@box=\box95
-\mc@col@check@num=\count271
+\mult@nat@firstbox=\box95
+\colbreak@box=\box96
+\mc@col@check@num=\count274
 ) (/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
@@ -134,90 +136,83 @@ Package: import 2020/04/01  v 6.2
 )) (/usr/share/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen160
 \WF@size=\dimen161
-\c@WF@wrappedlines=\count272
-\WF@box=\box96
-\WF@everypar=\toks18
+\c@WF@wrappedlines=\count275
+\WF@box=\box97
+\WF@everypar=\toks19
 Package: wrapfig 2003/01/31  v 3.6
 ) (/usr/share/texmf-dist/tex/latex/minted/minted.sty
-Package: minted 2022/12/12 v2.7 Yet another Pygments shim for LaTeX
+Package: minted 2023/12/18 v2.9 Yet another Pygments shim for LaTeX
  (/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
  (/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
 ) (/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )) (/usr/share/texmf-dist/tex/latex/fvextra/fvextra.sty
-Package: fvextra 2022/11/30 v1.5 fvextra - extensions and patches for fancyvrb
+Package: fvextra 2023/11/28 v1.6.1 fvextra - extensions and patches for fancyvrb
  (/usr/share/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count273
+\etb@tempcnta=\count276
 ) (/usr/share/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
-\FV@CodeLineNo=\count274
+Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
+\FV@CodeLineNo=\count277
 \FV@InFile=\read2
-\FV@TabBox=\box97
-\c@FancyVerbLine=\count275
-\FV@StepNumber=\count276
+\FV@TabBox=\box98
+\c@FancyVerbLine=\count278
+\FV@StepNumber=\count279
 \FV@OutFile=\write3
 ) (/usr/share/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
 ) (/usr/share/texmf-dist/tex/latex/lineno/lineno.sty
-Package: lineno 2023/01/19 line numbers on paragraphs v5.1
-\linenopenalty=\count277
-\output=\toks19
-\linenoprevgraf=\count278
+Package: lineno 2023/05/20 line numbers on paragraphs v5.3
+\linenopenalty=\count280
+\output=\toks20
+\linenoprevgraf=\count281
 \linenumbersep=\dimen162
 \linenumberwidth=\dimen163
-\c@linenumber=\count279
-\c@pagewiselinenumber=\count280
-\c@LN@truepage=\count281
-\c@internallinenumber=\count282
-\c@internallinenumbers=\count283
+\c@linenumber=\count282
+\c@pagewiselinenumber=\count283
+\c@LN@truepage=\count284
+\c@internallinenumber=\count285
+\c@internallinenumbers=\count286
 \quotelinenumbersep=\dimen164
 \bframerule=\dimen165
 \bframesep=\dimen166
-\bframebox=\box98
-LaTeX Info: Redefining \\ on input line 3131.
+\bframebox=\box99
+LaTeX Info: Redefining \\ on input line 3180.
 )
-\c@FV@TrueTabGroupLevel=\count284
-\c@FV@TrueTabCounter=\count285
-\FV@TabBox@Group=\box99
+\c@FancyVerbWriteLine=\count287
+\c@FancyVerbBufferIndex=\count288
+\c@FancyVerbBufferLength=\count289
+\c@FancyVerbBufferLine=\count290
+\c@FV@oldbufferlength=\count291
+\c@FV@TrueTabGroupLevel=\count292
+\c@FV@TrueTabCounter=\count293
+\FV@TabBox@Group=\box100
 \FV@TmpLength=\skip52
-\c@FV@HighlightLinesStart=\count286
-\c@FV@HighlightLinesStop=\count287
-\FV@LoopCount=\count288
-\FV@NCharsBox=\box100
+\c@FV@HighlightLinesStart=\count294
+\c@FV@HighlightLinesStop=\count295
+\FV@LoopCount=\count296
+\FV@NCharsBox=\box101
 \FV@BreakIndent=\dimen167
-\FV@BreakIndentNChars=\count289
+\FV@BreakIndentNChars=\count297
 \FV@BreakSymbolSepLeft=\dimen168
-\FV@BreakSymbolSepLeftNChars=\count290
+\FV@BreakSymbolSepLeftNChars=\count298
 \FV@BreakSymbolSepRight=\dimen169
-\FV@BreakSymbolSepRightNChars=\count291
+\FV@BreakSymbolSepRightNChars=\count299
 \FV@BreakSymbolIndentLeft=\dimen170
-\FV@BreakSymbolIndentLeftNChars=\count292
+\FV@BreakSymbolIndentLeftNChars=\count300
 \FV@BreakSymbolIndentRight=\dimen171
-\FV@BreakSymbolIndentRightNChars=\count293
-\c@FancyVerbLineBreakLast=\count294
-\FV@LineBox=\box101
-\FV@LineIndentBox=\box102
-\c@FV@BreakBufferDepth=\count295
+\FV@BreakSymbolIndentRightNChars=\count301
+\c@FancyVerbLineBreakLast=\count302
+\FV@LineBox=\box102
+\FV@LineIndentBox=\box103
+\c@FV@BreakBufferDepth=\count303
 \FV@LineWidth=\dimen172
 ) (/usr/share/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
-) (/usr/share/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count296
-\calc@Bcount=\count297
-\calc@Adimen=\dimen173
-\calc@Bdimen=\dimen174
-\calc@Askip=\skip53
-\calc@Bskip=\skip54
-LaTeX Info: Redefining \setlength on input line 80.
-LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count298
-\calc@Cskip=\skip55
 ) (/usr/share/texmf-dist/tex/latex/tools/shellesc.sty
-Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
+Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
 Package shellesc Info: Unrestricted shell escape enabled on input line 75.
 ) (/usr/share/texmf-dist/tex/latex/ifplatform/ifplatform.sty
 Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
@@ -242,82 +237,84 @@ runsystem(uname -s > "report.w18")...executed.
 runsystem(rm -- "report.w18")...executed.
 
 ) (/usr/share/texmf-dist/tex/generic/xstring/xstring.sty (/usr/share/texmf-dist/tex/generic/xstring/xstring.tex
-\integerpart=\count299
-\decimalpart=\count300
+\xs_counta=\count304
+\xs_countb=\count305
 )
-Package: xstring 2023/01/14 v1.85 String manipulations (CT)
+Package: xstring 2023/08/22 v1.86 String manipulations (CT)
 ) (/usr/share/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip56
-\fb@frw=\dimen175
-\fb@frh=\dimen176
-\FrameRule=\dimen177
-\FrameSep=\dimen178
+\OuterFrameSep=\skip53
+\fb@frw=\dimen173
+\fb@frh=\dimen174
+\FrameRule=\dimen175
+\FrameSep=\dimen176
 ) (/usr/share/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count301
-\float@exts=\toks20
-\float@box=\box103
-\@float@everytoks=\toks21
-\@floatcapt=\box104
+\c@float@type=\count306
+\float@exts=\toks21
+\float@box=\box104
+\@float@everytoks=\toks22
+\@floatcapt=\box105
 )
 \minted@appexistsfile=\read3
-\minted@bgbox=\box105
+\minted@bgbox=\box106
 \minted@code=\write4
-\c@minted@FancyVerbLineTemp=\count302
-\c@minted@pygmentizecounter=\count303
-\@float@every@listing=\toks22
-\c@listing=\count304
+\c@minted@FancyVerbLineTemp=\count307
+\c@minted@pygmentizecounter=\count308
+\@float@every@listing=\toks23
+\c@listing=\count309
 )
 runsystem(mkdir -p _minted-report)...executed.
 
  (/usr/share/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count305
-\lst@gtempboxa=\box106
-\lst@token=\toks23
-\lst@length=\count306
-\lst@currlwidth=\dimen179
-\lst@column=\count307
-\lst@pos=\count308
-\lst@lostspace=\dimen180
-\lst@width=\dimen181
-\lst@newlines=\count309
-\lst@lineno=\count310
-\lst@maxwidth=\dimen182
- (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count311
-\lst@skipnumbers=\count312
-\lst@framebox=\box107
+\lst@mode=\count310
+\lst@gtempboxa=\box107
+\lst@token=\toks24
+\lst@length=\count311
+\lst@currlwidth=\dimen177
+\lst@column=\count312
+\lst@pos=\count313
+\lst@lostspace=\dimen178
+\lst@width=\dimen179
+\lst@newlines=\count314
+\lst@lineno=\count315
+\lst@maxwidth=\dimen180
+ (/usr/share/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/02/21 1.10 (Carsten Heinz)
+) (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
+\c@lstnumber=\count316
+\lst@skipnumbers=\count317
+\lst@framebox=\box108
 ) (/usr/share/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2023/02/27 1.9 listings configuration
+File: listings.cfg 2024/02/21 1.10 listings configuration
 ))
-Package: listings 2023/02/27 1.9 (Carsten Heinz)
+Package: listings 2024/02/21 1.10 (Carsten Heinz)
  (/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
  (/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 227.
+Package xcolor Info: Driver file: pdftex.def on input line 274.
  (/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx)
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
-Package xcolor Info: Model `RGB' extended on input line 1369.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
 )
-runsystem(which pygmentize && touch report.aex)...executed.
+runsystem(command -v pygmentize && touch report.aex)...executed.
 
 runsystem(rm report.aex)...executed.
 
  (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count313
-\l__pdf_internal_box=\box108
+File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count318
+\l__pdf_internal_box=\box109
 ) (./report.aux)
 \openout1 = `report.aux'.
 
@@ -372,17 +369,17 @@ LaTeX Font Info:    ... okay on input line 16.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count314
-\scratchdimen=\dimen183
-\scratchbox=\box109
-\nofMPsegments=\count315
-\nofMParguments=\count316
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count317
-\MPscratchDim=\dimen184
-\MPnumerator=\count318
-\makeMPintoPDFobject=\count319
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count319
+\scratchdimen=\dimen181
+\scratchbox=\box110
+\nofMPsegments=\count320
+\nofMParguments=\count321
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count322
+\MPscratchDim=\dimen182
+\MPnumerator=\count323
+\makeMPintoPDFobject=\count324
+\everyMPtoPDFconversion=\toks26
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -391,7 +388,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 )) (/usr/share/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )
-\c@lstlisting=\count320
+\c@lstlisting=\count325
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
 * paper: a4paper
@@ -514,24 +511,28 @@ Package pdftex.def Info: images/panel.png  used on input line 2.
 )) [15 <./images/profile.png>] [16 <./images/panel.png>] (./chapters/discussion.tex) (./chapters/further.tex)
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 67.
  (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 67.
  (./chapters/appendices.tex) [17{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] (./report.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+ ***********
 runsystem(rm report.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 8411 strings out of 477985
- 150813 string characters out of 5840058
- 2200388 words of memory out of 5000000
- 28417 multiletter control sequences out of 15000+600000
- 518773 words of font info for 54 fonts, out of 8000000 for 9000
+ 8443 strings out of 476076
+ 152047 string characters out of 5793775
+ 2276187 words of memory out of 5000000
+ 30362 multiletter control sequences out of 15000+600000
+ 564555 words of font info for 58 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 77i,10n,76p,1132b,1264s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 77i,10n,79p,1132b,1264s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on report.pdf (18 pages, 1117806 bytes).
+Output written on report.pdf (18 pages, 1118035 bytes).
 PDF statistics:
  124 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream
