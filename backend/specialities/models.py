@@ -1,15 +1,20 @@
 from django.db import models
 
 class ConsultantType(models.Model):
-    CONSULTANT = (
-        ('RADIOLOGY', 'Radiologist'),
-        ('ONCOLOGY', 'Oncologist')
+    class ConsultantChoices(models.TextChoices):
+        RADIOLOGY = 'RADIOLOGY', 'Radiologist'
+        ONCOLOGY = 'ONCOLOGY', 'Oncologist'
+
+    name = models.CharField(
+        max_length=20,
+        choices=ConsultantChoices.choices,
+        unique=True,
+        verbose_name='Role Name'
     )
 
-    name = models.CharField(max_length=20, choices=CONSULTANT, unique=True)
-
     def __str__(self):
-        return self.name
+        return self.get_name_display()
+
 
 class Speciality(models.Model):
     name = models.CharField(max_length=100)
@@ -17,3 +22,5 @@ class Speciality(models.Model):
 
     def __str__(self):
         return f"{self.consultant_type.name} - {self.name}"
+
+        

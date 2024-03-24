@@ -1,6 +1,6 @@
 from ninja import Router
 from django.http import JsonResponse
-from .schemas import UnauthenticatedUserIn, TokenIn, UserProfileOut, UserProfileIn
+from .schemas import UnauthenticatedUserIn, TokenIn, UserProfileOut, UserProfileIn, JDPanel
 from .services import (
     create_unauthenticated_user,
     register_user,
@@ -13,6 +13,8 @@ from ninja_jwt.authentication import JWTAuth
 from django.shortcuts import get_object_or_404
 from .models import UnauthenticatedUser
 from ninja.errors import HttpError
+
+from jds.models import JD
 
 router = Router()
 
@@ -35,11 +37,35 @@ def register_authenticate(request, token: TokenIn):
 
 @router.get("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def get_profile(request):
-    profile = get_user_profile(request.auth)
+    profile = get_user_profile(request.user)
     return profile
 
 @router.put("/profile/", auth=JWTAuth(), response=UserProfileOut)
 def update_profile(request, payload: UserProfileIn):
     update_user_profile(request.auth, payload)
-    profile = get_user_profile(request.auth)
+    profile = get_user_profile(request.user)
     return profile
+
+from django.utils.dateformat import DateFormat  # Import Django's date format utility
+
+@router.get("/jds/", auth=JWTAuth(), response=JDPanel)
+def get_jd_panel(request):
+    jds = JD.objects.filter(trust=request.user.trust)
+    jd_panel = []
+
+    for jd in jds:
+        primary_specialties = [ps.name for ps in jd.primary_specialities.all()]
+        sub_specialties = [ss.name for ss in jd.sub_specialities.all()]
+
+        latest_edit_date = jd.history.first().history_date if jd.history.exists() else jd.submission_date
+        latest_edit_date_str = DateFormat(latest_edit_date).format('Y-m-d H:i:s')  
+ 
+        jd_panel.append({
+            'id': jd.id,
+            'consultant_type': jd.consultant_type.get_name_display(),
+            'primary_specialties': primary_specialties,
+            'sub_specialties': sub_specialties,
+            'date': latest_edit_date_str 
+        })
+
+    return {'jd_panel': jd_panel}

@@ -26,3 +26,4 @@ def get_trusts(request):
         } 
         for trust in Trust.objects.all()
     ]
+
