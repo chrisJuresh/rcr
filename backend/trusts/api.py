@@ -10,15 +10,14 @@ class RegionOut(Schema):
 class TrustOut(Schema):
     id: int
     name: str
-
-class TrustInfoOut(Schema):
-    id: int
-    name: str
     region: RegionOut
 
-@router.get("/trusts/", response=List[TrustInfoOut])
+class TrustsOut(Schema):
+    trusts: List[TrustOut]
+
+@router.get("/trusts/", response=TrustsOut)
 def get_trusts(request):
-    return [
+    trusts = [
         {
             'id': trust.id, 
             'name': trust.name, 
@@ -26,4 +25,6 @@ def get_trusts(request):
         } 
         for trust in Trust.objects.all()
     ]
+
+    return {'trusts': trusts}
 

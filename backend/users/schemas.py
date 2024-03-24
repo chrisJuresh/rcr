@@ -46,4 +46,4 @@ class PanelJD(Schema):
     date: str
 
 class JDPanel(Schema):
-    jd_panel: List[PanelJD]
+    jds: List[PanelJD]

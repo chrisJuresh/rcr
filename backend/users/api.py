@@ -50,17 +50,17 @@ from django.utils.dateformat import DateFormat  # Import Django's date format ut
 
 @router.get("/jds/", auth=JWTAuth(), response=JDPanel)
 def get_jd_panel(request):
-    jds = JD.objects.filter(trust=request.user.trust)
-    jd_panel = []
+    all_jds = JD.objects.filter(trust=request.user.trust)
+    jds = []
 
-    for jd in jds:
+    for jd in all_jds:
         primary_specialties = [ps.name for ps in jd.primary_specialities.all()]
         sub_specialties = [ss.name for ss in jd.sub_specialities.all()]
 
         latest_edit_date = jd.history.first().history_date if jd.history.exists() else jd.submission_date
         latest_edit_date_str = DateFormat(latest_edit_date).format('Y-m-d H:i:s')  
  
-        jd_panel.append({
+        jds.append({
             'id': jd.id,
             'consultant_type': jd.consultant_type.get_name_display(),
             'primary_specialties': primary_specialties,
@@ -68,4 +68,4 @@ def get_jd_panel(request):
             'date': latest_edit_date_str 
         })
 
-    return {'jd_panel': jd_panel}
+    return {'jds': jds}

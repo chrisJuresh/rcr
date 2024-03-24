@@ -7,25 +7,25 @@
 	export let data: PageData;
 </script>
 
-	<div class="w-96 h-96">
-		<Card.Root class="neu">
-			<Card.Header>
-				<Card.Title>Authenticate</Card.Title>
-				<Card.Description>Access your account or create a new one</Card.Description>
-			</Card.Header>
-			<Card.Content>
-				<Tabs.Root value="login" class="w-full">
-					<Tabs.List>
-						<Tabs.Trigger value="login">Login</Tabs.Trigger>
-						<Tabs.Trigger value="register">Register</Tabs.Trigger>
-					</Tabs.List>
-					<Tabs.Content value="login">
-						<LoginTab data={data.loginForm} />
-					</Tabs.Content>
-					<Tabs.Content value="register">
-						<RegisterTab data={data.registerForm} />
-					</Tabs.Content>
-				</Tabs.Root>
-			</Card.Content>
-		</Card.Root>
-	</div>
+<div class="h-96 w-96">
+	<Card.Root class="neu">
+		<Card.Header>
+			<Card.Title>Authenticate</Card.Title>
+			<Card.Description>Access your account or create a new one</Card.Description>
+		</Card.Header>
+		<Card.Content>
+			<Tabs.Root value="login" class="w-full">
+				<Tabs.List>
+					<Tabs.Trigger value="login">Login</Tabs.Trigger>
+					<Tabs.Trigger value="register">Register</Tabs.Trigger>
+				</Tabs.List>
+				<Tabs.Content value="login">
+					<LoginTab data={data.loginForm} />
+				</Tabs.Content>
+				<Tabs.Content value="register">
+					<RegisterTab data={data.registerForm} />
+				</Tabs.Content>
+			</Tabs.Root>
+		</Card.Content>
+	</Card.Root>
+</div>

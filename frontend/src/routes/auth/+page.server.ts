@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
-import { fail, redirect, error } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { superValidate, setError } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { loginFormSchema, registerFormSchema } from './schema';

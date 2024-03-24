@@ -4,21 +4,28 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { formSchema } from './schema';
 import axios from 'axios';
+import type { components } from '$lib/types.d.ts';
 
 export const load: PageServerLoad = async (event) => {
 	const fetchRoles = async () => {
-		const response = await axios.get('http://localhost:8000/api/roles/roles');
-		return response.data;
+		const response = await axios.get<components['schemas']['RolesOut']>(
+			'http://localhost:8000/api/roles/roles'
+		);
+		return response.data.roles;
 	};
 	const fetchTrusts = async () => {
-		const response = await axios.get('http://localhost:8000/api/trusts/trusts');
-		return response.data;
+		const response = await axios.get<components['schemas']['TrustsOut']>(
+			'http://localhost:8000/api/trusts/trusts'
+		);
+		return response.data.trusts;
 	};
 	const fetchUser = async () => {
-		const response = await axios.get('http://localhost:8000/api/users/profile', {
-			headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
-		});
-		console.log(response.data);
+		const response = await axios.get<components['schemas']['UserProfileOut']>(
+			'http://localhost:8000/api/users/profile',
+			{
+				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
+			}
+		);
 		return response.data;
 	};
 	return {

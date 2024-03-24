@@ -11,17 +11,17 @@
 
 <div class="flex min-h-screen flex-col">
 	<svlete:head>
-	<header class="fixed w-full " class:bar-head={$page.url.pathname !== '/auth'}>
-		<Nav />
-	</header>
-</svlete:head>
+		<header class="fixed w-full" class:bar-head={$page.url.pathname !== '/auth'}>
+			<Nav />
+		</header>
+	</svlete:head>
 
-	<div class="flex flex-grow items-center justify-center mt-24">
-	<slot />
+	<div class="mt-24 flex flex-grow items-center justify-center">
+		<slot />
 	</div>
 
 	<footer class="w-full">
-		<div class="flex justify-end mr-6">
+		<div class="mr-6 flex justify-end">
 			<Logo {size} />
 		</div>
 	</footer>

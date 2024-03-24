@@ -1,9 +1,11 @@
 import { z } from 'zod';
 
-const fileUploadSchema = z.object({
-	filename: z.string(),
-	mimeType: z.string(),
-	size: z.number().min(1) // Minimum file size of 1 byte
+export const formSchema = z.object({
+	file: z
+		.instanceof(File, { message: 'Please upload a file.' })
+		.refine((f) => f.size < 1000_000_000, 'Max 1GB upload size.'),
+	primary_speciality: z.string(),
+	size: z.number().min(1)
 });
 
 export type FormSchema = typeof formSchema;
