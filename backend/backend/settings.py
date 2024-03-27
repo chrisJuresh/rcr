@@ -70,6 +70,7 @@ MIDDLEWARE = [
     'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [

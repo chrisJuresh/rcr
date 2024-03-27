@@ -35,9 +35,6 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    """
-    Custom user model that extends AbstractUser with roles and titles.
-    """
     username = None
     email = models.EmailField(unique=True, verbose_name='Email Address')
 
@@ -72,9 +69,6 @@ class User(AbstractUser):
     
 
 class UserRole(models.Model):
-    """
-    Intermediate model to represent the many-to-many relationship between Users and Roles.
-    """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -106,10 +100,7 @@ class UserRole(models.Model):
     def __str__(self):
         return f"{self.user.email}'s role as {self.role}"
 
-class ReviewerInfo(models.Model):
-    """
-    Additional information for users with the Reviewer role.
-    """
+class Reviewer(models.Model):
     user_role = models.OneToOneField(
         UserRole,
         on_delete=models.CASCADE,
@@ -118,15 +109,12 @@ class ReviewerInfo(models.Model):
         limit_choices_to={'role__name': Role.RoleChoices.REVIEWER}
     )
 
-    specialities = models.ManyToManyField(Speciality, blank=True)
+    consultant_type = models.ManyToManyField(ConsultantType, blank=True)
 
     def __str__(self):
         return f"{self.user_role.user.email}'s reviewer info"
 
-class RepresentativeInfo(models.Model):
-    """
-    Additional information for users with the Representative role.
-    """
+class Representative(models.Model):
     user_role = models.OneToOneField(
         UserRole,
         on_delete=models.CASCADE,
@@ -139,6 +127,7 @@ class RepresentativeInfo(models.Model):
 
     def __str__(self):
         return f"{self.user_role.user.email}'s representative info"
+
 
 class UnauthenticatedUser(models.Model):
     email = models.EmailField()
