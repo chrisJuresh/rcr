@@ -20,7 +20,7 @@
 	const { form: formData, enhance, message } = form;
 </script>
 
-<form method="POST" use:enhance action="?/register" class="flex flex-col space-y-4">
+<form method="POST" use:enhance action="?/register" class="flex flex-col space-y-1">
 	<Form.Field {form} name="email">
 		<Form.Control let:attrs>
 			<Form.Label>Email</Form.Label>
@@ -41,12 +41,9 @@
 			<Input type="password" {...attrs} bind:value={$formData.confirm_password} />
 			<Form.FieldErrors />
 		</Form.Control>
-		<Form.Description class="text-red-600">
-			{#if $message !== undefined}
-				<h1>{$message}</h1>
-			{/if}
+		<Form.Description >
+			You will receive an email to verify your account
 		</Form.Description>
-		<Form.Description>You will receive an email to verify your account</Form.Description>
 	</Form.Field>
-	<Form.Button>Submit</Form.Button>
+	<Form.Button>Sign Up</Form.Button>
 </form>

@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["0290e683_controller_obtain_token"];
+        post: operations["243aa61a_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["b8ce4183_controller_refresh_token"];
+        post: operations["7395fb1e_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["0a7b1dad_controller_verify_token"];
+        post: operations["ed8db929_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -117,7 +117,8 @@ export interface paths {
         /** Get Jd Panel */
         get: operations["users_api_get_jd_panel"];
         put?: never;
-        post?: never;
+        /** Upload Jd */
+        post: operations["users_api_upload_jd"];
         delete?: never;
         options?: never;
         head?: never;
@@ -269,6 +270,22 @@ export interface components {
             /** Date */
             date: string;
         };
+        /** JDCreate */
+        JDCreate: {
+            /** Trust */
+            trust: number;
+            /** Consultant Type */
+            consultant_type: string;
+            /** Primary Specialities */
+            primary_specialities: number[];
+            /**
+             * Sub Specialities
+             * @default []
+             */
+            sub_specialities: number[];
+            /** Creator */
+            creator: number;
+        };
         /** RoleOut */
         RoleOut: {
             /** Id */
@@ -308,7 +325,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "0290e683_controller_obtain_token": {
+    "243aa61a_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -332,7 +349,7 @@ export interface operations {
             };
         };
     };
-    b8ce4183_controller_refresh_token: {
+    "7395fb1e_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -356,7 +373,7 @@ export interface operations {
             };
         };
     };
-    "0a7b1dad_controller_verify_token": {
+    ed8db929_controller_verify_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -485,6 +502,35 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["JDPanel"];
                 };
+            };
+        };
+    };
+    users_api_upload_jd: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * File
+                     * Format: binary
+                     */
+                    file: string;
+                    jd: components["schemas"]["JDCreate"];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

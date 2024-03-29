@@ -1,6 +1,6 @@
 import type { PageServerLoad, Actions } from './$types';
 import { fail } from '@sveltejs/kit';
-import { superValidate } from 'sveltekit-superforms';
+import { superValidate, setError } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { formSchema } from './schema';
 import axios from 'axios';
@@ -60,11 +60,8 @@ export const actions: Actions = {
 				}
 			);
 			return { form };
-		} catch {
-			// Do nothing
+		} catch (e) {
+			return setError(form, '', e);
 		}
-		return {
-			form
-		};
 	}
 };

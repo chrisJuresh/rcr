@@ -10,7 +10,7 @@
 <div class="h-96 w-96">
 	<Card.Root class="neu">
 		<Card.Header>
-			<Card.Title>Authenticate</Card.Title>
+			<Card.Title class="text-2xl font-bold" >Authenticate</Card.Title>
 			<Card.Description>Access your account or create a new one</Card.Description>
 		</Card.Header>
 		<Card.Content>

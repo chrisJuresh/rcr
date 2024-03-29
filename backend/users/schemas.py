@@ -38,12 +38,3 @@ class UserProfileOut(Schema):
     roles: Optional[List[UserRolesOut]]
     approved_roles: Optional[List[UserApprovedRolesOut]]
 
-class PanelJD(Schema):
-    id: int
-    consultant_type: str
-    primary_specialties: List[str]
-    sub_specialties: Optional[List[str]]
-    date: str
-
-class JDPanel(Schema):
-    jds: List[PanelJD]

@@ -36,8 +36,6 @@ CORS_ALLOWED_ORIGINS = [
     # Add any other domains you want to allow
 ]
 
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,11 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+
     'corsheaders',
     'ninja_extra',
     'ninja_jwt',
     'simple_history',
-    'users',
+         'viewflow',
+        'viewflow.workflow',
+ 
+        'users',
     'trusts',
     'roles',
     'specialities',
@@ -68,10 +70,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
+    "ninja_put_patch_file_upload_middleware.middlewares.process_put_patch",
+
 ]
 
 
 ROOT_URLCONF = 'backend.urls'
+
 
 TEMPLATES = [
     {

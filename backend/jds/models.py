@@ -1,8 +1,10 @@
 from django.db import models
 from trusts.models import Trust
 from specialities.models import ConsultantType, Speciality
-from users.models import User
+from users.models import User, Reviewer
 from simple_history.models import HistoricalRecords 
+
+from viewflow.workflow.models import Process
 
 class JD(models.Model):
     file = models.FileField(upload_to='JDs/')
@@ -15,6 +17,21 @@ class JD(models.Model):
 
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    history = HistoricalRecords() 
+
+    def __str__(self):
+        return str(self.id)
+
+class JDProcess(Process):
+    jd = models.ForeignKey(JD, on_delete=models.CASCADE)
+
     submission_date = models.DateTimeField(auto_now_add=True)
 
-    history = HistoricalRecords()  
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
+    rcr_approved = models.BooleanField(default=False)
+    rsa_approved = models.BooleanField(default=False)
+    ammended = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
+
+    history = HistoricalRecords() 

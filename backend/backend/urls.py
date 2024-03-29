@@ -20,13 +20,30 @@ from ninja import NinjaAPI
 from users.api import router as users_router
 from roles.api import router as roles_router
 from trusts.api import router as trusts_router
+from jds.api import router as jds_router
 from .api import api
 
-api.add_router("/users/", users_router),
-api.add_router("/roles/", roles_router),
-api.add_router("/trusts/", trusts_router),
+from viewflow.contrib.auth import AuthViewset
+from viewflow.urls import Application, Site
+from viewflow.workflow.flow import FlowAppViewset
+from jds.flows import JDFlow
+
+site = Site(
+    title="JD Flow",
+    viewsets=[
+        FlowAppViewset(JDFlow),
+    ]
+)
+
+
+api.add_router("/users/", users_router, tags=["users"]),
+api.add_router("/roles/", roles_router, tags=["roles"]),
+api.add_router("/trusts/", trusts_router, tags=["trusts"]),
+api.add_router("/jds/", jds_router, tags=["jds"]),
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("flows/", AuthViewset().urls),
+    path('', site.urls),
     path('api/', api.urls),
 ]

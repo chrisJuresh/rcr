@@ -14,7 +14,7 @@
 	const { form: formData, enhance, errors } = form;
 </script>
 
-<form method="POST" use:enhance action="?/login" class="flex flex-col space-y-4">
+<form method="POST" use:enhance action="?/login" class="flex flex-col space-y-1">
 	<Form.Field {form} name="email">
 		<Form.Control let:attrs>
 			<Form.Label>Email</Form.Label>
@@ -31,8 +31,10 @@
 		<Form.Description class="text-red-600">
 			{#if $errors._errors !== undefined}
 				<h1 class="">{$errors._errors}</h1>
+			{:else}
+				<h1 class=invisible>Placeholder</h1>
 			{/if}
 		</Form.Description>
 	</Form.Field>
-	<Form.Button>Submit</Form.Button>
+	<Form.Button>Log In</Form.Button>
 </form>
