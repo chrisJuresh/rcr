@@ -4,12 +4,7 @@ export const formSchema = z.object({
 	title: z.string().min(2).max(4).optional().or(z.literal('')),
 	first_name: z.string().min(2).max(50).optional().or(z.literal('')),
 	last_name: z.string().min(2).max(50).optional().or(z.literal('')),
-	trust: z
-		.object({
-			value: z.number(),
-			name: z.string().min(2).max(100).optional().or(z.literal(''))
-		})
-		.optional(),
+	trust: z.number().optional(),
 	roles: z
 		.array(
 			z.object({

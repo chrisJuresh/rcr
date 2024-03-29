@@ -15,8 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from ninja import NinjaAPI
+from django.urls import path
 from users.api import router as users_router
 from roles.api import router as roles_router
 from trusts.api import router as trusts_router
@@ -24,7 +23,7 @@ from jds.api import router as jds_router
 from .api import api
 
 from viewflow.contrib.auth import AuthViewset
-from viewflow.urls import Application, Site
+from viewflow.urls import Site
 from viewflow.workflow.flow import FlowAppViewset
 from jds.flows import JDFlow
 

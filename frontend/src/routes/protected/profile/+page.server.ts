@@ -45,14 +45,13 @@ export const actions: Actions = {
 			});
 		}
 		try {
-			console.log(form.data.trust?.value || null);
 			await axios.put(
 				'http://localhost:8000/api/users/profile/',
 				{
 					title: form.data.title || null,
 					first_name: form.data.first_name || null,
 					last_name: form.data.last_name || null,
-					trust: form.data.trust?.value || null,
+					trust: form.data.trust || null,
 					roles: form.data.roles?.map((role) => role.value) ?? []
 				},
 				{

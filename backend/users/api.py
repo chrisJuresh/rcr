@@ -1,6 +1,9 @@
 from ninja import Router
-from django.http import JsonResponse
-from .schemas import UnauthenticatedUserIn, TokenIn, UserProfileOut, UserProfileIn
+from ninja.errors import HttpError
+from ninja_jwt.authentication import JWTAuth
+from django.shortcuts import get_object_or_404
+
+from .schemas import UnauthenticatedUserIn, TokenIn, UserProfileIn, UserProfileOut
 from .services import (
     create_unauthenticated_user,
     register_user,
@@ -9,10 +12,7 @@ from .services import (
     user_exists,
     get_tokens_for_user
 )
-from ninja_jwt.authentication import JWTAuth
-from django.shortcuts import get_object_or_404
 from .models import UnauthenticatedUser
-from ninja.errors import HttpError
 
 router = Router()
 

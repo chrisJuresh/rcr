@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["243aa61a_controller_obtain_token"];
+        post: operations["7130cddb_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["7395fb1e_controller_refresh_token"];
+        post: operations["50dfec55_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["ed8db929_controller_verify_token"];
+        post: operations["e8e98a16_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -107,24 +107,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/users/jds/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Jd Panel */
-        get: operations["users_api_get_jd_panel"];
-        put?: never;
-        /** Upload Jd */
-        post: operations["users_api_upload_jd"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/roles/roles/": {
         parameters: {
             query?: never;
@@ -151,6 +133,57 @@ export interface paths {
         };
         /** Get Trusts */
         get: operations["trusts_api_get_trusts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/jds/jd/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Jd */
+        post: operations["jds_api_create_jd"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/jds/jd/{jd_id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Update Jd */
+        put: operations["jds_api_update_jd"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/jds/jds/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Jd Panel */
+        get: operations["jds_api_get_jd_panel"];
         put?: never;
         post?: never;
         delete?: never;
@@ -227,8 +260,7 @@ export interface components {
             first_name: string | null;
             /** Last Name */
             last_name: string | null;
-            /** Trust */
-            trust: string | null;
+            trust: components["schemas"]["UserTrustOut"] | null;
             /** Roles */
             roles: components["schemas"]["UserRolesOut"][] | null;
             /** Approved Roles */
@@ -236,6 +268,13 @@ export interface components {
         };
         /** UserRolesOut */
         UserRolesOut: {
+            /** Name */
+            name: string;
+        };
+        /** UserTrustOut */
+        UserTrustOut: {
+            /** Id */
+            id: number;
             /** Name */
             name: string;
         };
@@ -251,40 +290,6 @@ export interface components {
             trust: number | null;
             /** Roles */
             roles: number[] | null;
-        };
-        /** JDPanel */
-        JDPanel: {
-            /** Jds */
-            jds: components["schemas"]["PanelJD"][];
-        };
-        /** PanelJD */
-        PanelJD: {
-            /** Id */
-            id: number;
-            /** Consultant Type */
-            consultant_type: string;
-            /** Primary Specialties */
-            primary_specialties: string[];
-            /** Sub Specialties */
-            sub_specialties: string[] | null;
-            /** Date */
-            date: string;
-        };
-        /** JDCreate */
-        JDCreate: {
-            /** Trust */
-            trust: number;
-            /** Consultant Type */
-            consultant_type: string;
-            /** Primary Specialities */
-            primary_specialities: number[];
-            /**
-             * Sub Specialities
-             * @default []
-             */
-            sub_specialities: number[];
-            /** Creator */
-            creator: number;
         };
         /** RoleOut */
         RoleOut: {
@@ -316,6 +321,33 @@ export interface components {
             /** Trusts */
             trusts: components["schemas"]["TrustOut"][];
         };
+        /** JDIn */
+        JDIn: {
+            /** Consultant Type */
+            consultant_type: string;
+            /** Primary Specialities */
+            primary_specialities: number[];
+            /** Sub Specialities */
+            sub_specialities: number[] | null;
+        };
+        /** JDPanel */
+        JDPanel: {
+            /** Jds */
+            jds: components["schemas"]["PanelJD"][];
+        };
+        /** PanelJD */
+        PanelJD: {
+            /** Id */
+            id: number;
+            /** Consultant Type */
+            consultant_type: string;
+            /** Primary Specialties */
+            primary_specialties: string[];
+            /** Sub Specialties */
+            sub_specialties: string[] | null;
+            /** Date */
+            date: string;
+        };
     };
     responses: never;
     parameters: never;
@@ -325,7 +357,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "243aa61a_controller_obtain_token": {
+    "7130cddb_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -349,7 +381,7 @@ export interface operations {
             };
         };
     };
-    "7395fb1e_controller_refresh_token": {
+    "50dfec55_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -373,7 +405,7 @@ export interface operations {
             };
         };
     };
-    ed8db929_controller_verify_token: {
+    e8e98a16_controller_verify_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -485,55 +517,6 @@ export interface operations {
             };
         };
     };
-    users_api_get_jd_panel: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["JDPanel"];
-                };
-            };
-        };
-    };
-    users_api_upload_jd: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": {
-                    /**
-                     * File
-                     * Format: binary
-                     */
-                    file: string;
-                    jd: components["schemas"]["JDCreate"];
-                };
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
     roles_api_get_roles: {
         parameters: {
             query?: never;
@@ -570,6 +553,86 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TrustsOut"];
+                };
+            };
+        };
+    };
+    jds_api_create_jd: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * File
+                     * Format: binary
+                     */
+                    file: string;
+                    jd: components["schemas"]["JDIn"];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    jds_api_update_jd: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jd_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * File
+                     * Format: binary
+                     */
+                    file: string;
+                    jd: components["schemas"]["JDIn"];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    jds_api_get_jd_panel: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JDPanel"];
                 };
             };
         };

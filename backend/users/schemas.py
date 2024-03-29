@@ -19,6 +19,10 @@ class UserRolesIn(Schema):
 class UserRolesOut(Schema):
     name: str
 
+class UserTrustOut(Schema):
+    id: int
+    name: str
+
 class UserApprovedRolesOut(Schema):
     name: str
 
@@ -34,7 +38,7 @@ class UserProfileOut(Schema):
     title: Optional[str]
     first_name: Optional[str]
     last_name: Optional[str]
-    trust: Optional[str]
+    trust: Optional[UserTrustOut]
     roles: Optional[List[UserRolesOut]]
     approved_roles: Optional[List[UserApprovedRolesOut]]
 

@@ -1,5 +1,5 @@
 from viewflow import this
-from viewflow.workflow import flow, lock, act
+from viewflow.workflow import flow, act
 from viewflow.workflow.flow import views
 from .models import JDProcess
 

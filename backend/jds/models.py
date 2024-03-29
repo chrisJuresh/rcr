@@ -1,7 +1,7 @@
 from django.db import models
 from trusts.models import Trust
 from specialities.models import ConsultantType, Speciality
-from users.models import User, Reviewer
+from users.models import User
 from simple_history.models import HistoricalRecords 
 
 from viewflow.workflow.models import Process

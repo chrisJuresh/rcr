@@ -35,8 +35,8 @@
 
 	$: selectedTrust = $formData.trust
 		? {
-				label: $formData.trust.name,
-				value: $formData.trust.value
+        		label: trusts.find(trust => trust.id === $formData.trust)?.name,
+				value: $formData.trust
 			}
 		: null;
 
@@ -114,23 +114,15 @@
 			<Form.Field {form} name="trust">
 				<Form.Control let:attrs>
 					<Form.Label>Trust</Form.Label>
-					<Select.Root
-						bind:selected={selectedTrust}
-						onSelectedChange={(s) => {
-							if (s) {
-								const trust = trusts.find((trust) => trust.id === s.value);
-								$formData.trust = {
-									value: trust.id,
-									name: trust ? trust.name : ''
-								};
-							} else {
-								$formData.trust = null;
-							}
-						}}
-					>
+						<Select.Root
+   							selected={selectedTrust ? selectedTrust : undefined}
+							onSelectedChange={(v) => {
+								v && ($formData.trust = v.value);
+							}}
+						>
 						<input hidden value={selectedTrust} name={attrs.name} />
 						<Select.Trigger {...attrs}>
-							<Select.Value placeholder={user.trust ? user.trust : 'Select your trust'} />
+<Select.Value placeholder={user.trust && user.trust.name ? user.trust.name : 'Select your trust'} />
 						</Select.Trigger>
 						<Select.Content>
 							{#each trusts as trust}
