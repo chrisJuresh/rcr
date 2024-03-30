@@ -71,20 +71,6 @@ class Migration(migrations.Migration):
             name='roles',
             field=models.ManyToManyField(blank=True, related_name='users', through='users.UserRole', to='roles.role', verbose_name='User Roles'),
         ),
-        migrations.CreateModel(
-            name='RepresentativeInfo',
-            fields=[
-                ('user_role', models.OneToOneField(limit_choices_to={'role__name': 'REPRESENTATIVE'}, on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='users.userrole', verbose_name='User Role')),
-                ('specialities', models.ManyToManyField(blank=True, to='specialities.speciality')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='ReviewerInfo',
-            fields=[
-                ('user_role', models.OneToOneField(limit_choices_to={'role__name': 'REVIEWER'}, on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='users.userrole', verbose_name='User Role')),
-                ('specialities', models.ManyToManyField(blank=True, to='specialities.speciality')),
-            ],
-        ),
         migrations.AddConstraint(
             model_name='userrole',
             constraint=models.UniqueConstraint(fields=('user', 'role'), name='unique_user_role'),

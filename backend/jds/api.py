@@ -2,7 +2,6 @@ from ninja import Router, File
 from ninja.errors import HttpError
 from ninja.files import UploadedFile
 from ninja_jwt.authentication import JWTAuth
-from django.shortcuts import get_object_or_404
 from django.utils.dateformat import DateFormat  
 
 from .schemas import JDIn, JDPanel

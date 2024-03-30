@@ -1,14 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from trusts.models import Trust
-from django.dispatch import receiver
 from roles.models import Role
 from specialities.models import ConsultantType, Speciality
-
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import Permission
-import logging
 
 class UnauthenticatedUser(models.Model):
     email = models.EmailField()
@@ -49,87 +46,47 @@ class User(AbstractUser):
         Role,
         through='UserRole',
         blank=True,
-        related_name='users',
-        verbose_name='User Roles'
     )
     title = models.CharField(
         max_length=4,
         blank=True,
-        verbose_name='Title'
     )
     trust = models.ForeignKey(
         Trust, 
         on_delete=models.CASCADE, 
         null=True,
         blank=True, 
-        verbose_name='Trust'
     )
     trust_approved = models.BooleanField(
         default=False,
-        verbose_name='Trust Approved'
     )
     
 class UserRole(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='user_roles',
-        verbose_name='User'
     )
     role = models.ForeignKey(
         Role,
         on_delete=models.CASCADE,
-        related_name='role_users',
-        verbose_name='Role'
     )
     requested = models.BooleanField(
         default=False,
-        verbose_name='Role Requested'
     )
     approved = models.BooleanField(
         default=False,
-        verbose_name='Role Approved'
     )
 
+    consultant_type = models.ManyToManyField(ConsultantType, blank=True)
+    specialities = models.ManyToManyField(Speciality, blank=True)
+ 
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['user', 'role'], name='unique_user_role')
         ]
-        verbose_name = 'User Role'
-        verbose_name_plural = 'User Roles'
 
     def __str__(self):
         return f"{self.user.email}'s role as {self.role}"
-
-class Reviewer(models.Model):
-    user_role = models.OneToOneField(
-        UserRole,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        verbose_name='User Role',
-        limit_choices_to={'role__name': Role.RoleChoices.REVIEWER}
-    )
-
-    consultant_type = models.ManyToManyField(ConsultantType, blank=True)
-
-    def __str__(self):
-        return f"{self.user_role.user.email}'s reviewer info"
-
-class Representative(models.Model):
-    user_role = models.OneToOneField(
-        UserRole,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        verbose_name='User Role',
-        limit_choices_to={'role__name': Role.RoleChoices.REPRESENTATIVE}
-    )
-
-    specialities = models.ManyToManyField(Speciality, blank=True)
-
-    def __str__(self):
-        return f"{self.user_role.user.email}'s representative info"
-
-logger = logging.getLogger(__name__)
 
 ROLE_PERMISSION_MAPPING = {
     Role.RoleChoices.RCR_EMPLOYEE: 'can_rcr_review_jdprocess',
@@ -138,15 +95,12 @@ ROLE_PERMISSION_MAPPING = {
 }
 
 def manage_user_permission(user, codename, add_permission=True):
-    try:
-        permission = Permission.objects.get(content_type__app_label='jds', codename=codename)
-        if add_permission:
-            user.user_permissions.add(permission)
-        else:
-            user.user_permissions.remove(permission)
-        user.save()
-    except Permission.DoesNotExist:
-        logger.error(f"Permission '{codename}' not found. Ensure you have the correct codename and app label.")
+    permission = Permission.objects.get(content_type__app_label='jds', codename=codename)
+    if add_permission:
+        user.user_permissions.add(permission)
+    else:
+        user.user_permissions.remove(permission)
+    user.save()
 
 @receiver(post_save, sender=UserRole)
 def update_permissions(sender, instance, **kwargs):
