@@ -33,5 +33,3 @@ class JDProcess(Process):
     rsa_approved = models.BooleanField(default=False)
     ammended = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
-
-    history = HistoricalRecords() 

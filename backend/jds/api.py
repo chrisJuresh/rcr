@@ -12,7 +12,7 @@ router = Router()
 
 @router.post("/jd/", auth=JWTAuth())
 def create_jd(request, jd: JDIn, file: File[UploadedFile]):
-    trust = request.user.trust
+    trust = request.user.profile.trust
     consultant_type = ConsultantType.objects.get(name=jd.consultant_type)
     creator = request.user
 
@@ -32,7 +32,7 @@ def create_jd(request, jd: JDIn, file: File[UploadedFile]):
 
 @router.put("/jd/{jd_id}/", auth=JWTAuth())
 def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
-    trust = request.user.trust
+    trust = request.user.profile.trust
     try:
         jd_instance = JD.objects.get(id=jd_id, trust=trust)
     except JD.DoesNotExist:
@@ -52,7 +52,7 @@ def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
 
 @router.get("/jds/", auth=JWTAuth(), response=JDPanel)
 def get_jd_panel(request):
-    all_jds = JD.objects.filter(trust=request.user.trust)
+    all_jds = JD.objects.filter(trust=request.user.profile.trust)
     jds = []
 
     for jd in all_jds:

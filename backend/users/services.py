@@ -39,7 +39,7 @@ def get_user_profile(user):
         "title": user.title,
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "trust": user.trust if user.trust else None,
+        "trust": user.profile.trust if user.profile.trust else None,
         "roles": get_user_roles(user, 'requested'),
         "approved_roles": get_user_roles(user, 'approved')
     }
@@ -50,7 +50,7 @@ def update_user_attributes(user, attr, value):
     if attr == 'roles':
         update_user_roles(user, value)
     elif attr == 'trust':
-        update_user_trust(user, value)
+        update_user_trust(user.profile, value)
     else:
         setattr(user, attr, value)
 
