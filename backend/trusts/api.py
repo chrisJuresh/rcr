@@ -27,4 +27,3 @@ def get_trusts(request):
     ]
 
     return {'trusts': trusts}
-

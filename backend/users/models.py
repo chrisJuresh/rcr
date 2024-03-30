@@ -47,40 +47,51 @@ class User(AbstractUser):
         blank=True,
     )
 
-    roles = models.ManyToManyField(
-        Role,
-        through='UserRole',
+class UserTrust(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_trusts',
+    )
+    trust = models.ForeignKey(
+        Trust,
+        on_delete=models.CASCADE,
+    )
+    requested = models.BooleanField(
+        default=False,
+    )
+    approved = models.BooleanField(
+        default=False,
+    )
+    comments = models.TextField(
         blank=True,
     )
 
-class UserProfile(models.Model):
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'trust'], name='unique_user_trust')
+        ]
+
+    def __str__(self):
+        return f"{self.user.email}'s association with {self.trust.name}"
+
+class UserSpecialities(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        related_name='profile',
-    )
-
-    trust = models.ForeignKey(
-        Trust, 
-        on_delete=models.CASCADE, 
-        null=True,
-        blank=True, 
-    )
-
-    trust_approved = models.BooleanField(
-        default=False,
+        related_name='user_specialities',
     )
 
     consultant_type = models.ManyToManyField(ConsultantType, blank=True)
     specialities = models.ManyToManyField(Speciality, blank=True)
 
     def __str__(self):
-        return f"{self.user.email}'s Profile"
+        return f"{self.user.email}'s Specialities"
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
+#   @receiver(post_save, sender=User)
+#   def create_user_profile(sender, instance, created, **kwargs):
+#       if created:
+#           UserProfile.objects.create(user=instance)
 
 class UserRole(models.Model):
     user = models.ForeignKey(

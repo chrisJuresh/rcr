@@ -59,7 +59,7 @@
 	}
 
 	function trustPlaceholder(user) {
-		return user.trust && user.trust.name ? user.trust.name : 'Select your trust';
+		return user.trust && user.trust ? user.trust : 'Select your trust';
 	}
 
 	let oncologySpecialities = [];
@@ -84,6 +84,14 @@
 			label: specialities.find((speciality) => speciality.id === specialityId)?.name,
 			value: specialityId
 		})) || [];
+
+	$: hasRole = (roleNames) => {
+	  const roleArray = [].concat(roleNames);
+	  if (selectedRoles.length) {
+		return selectedRoles.some(role => roleArray.includes(role.label));
+	  }
+	  return user.roles?.some(role => roleArray.includes(role.name)) || false;
+	};
 </script>
 
 <Card.Root class="neu mb-6 w-11/12 sm:w-[500px]">
@@ -185,15 +193,12 @@
 						}}
 					>
 						<input hidden value={selectedTrust} name={attrs.name} />
-						{#if selectedRoles.some((role) => role.label !== 'RCR Employee') || (user.roles && user.roles.some((role) => role.name !== 'RCR Employee'))}
-							<Select.Trigger {...attrs}>
-								<Select.Value placeholder={trustPlaceholder(user)} />
-							</Select.Trigger>
-						{:else}
-							<Select.Trigger disabled {...attrs}>
-								<Select.Value placeholder={trustPlaceholder(user)} />
-							</Select.Trigger>
-						{/if}
+						<Select.Trigger
+							disabled={!hasRole(['Reviewer', 'Representative', 'Trust Employee'])}
+							{...attrs}
+						>
+							<Select.Value placeholder={trustPlaceholder(user)} />
+						</Select.Trigger>
 						<Select.Content>
 							{#each trusts as trust}
 								<Select.Item value={trust.id} label={trust.name} />
@@ -214,15 +219,9 @@
 							v && ($formData.consultant_type = v.value);
 						}}
 					>
-						{#if selectedRoles.some((role) => role.label === 'Reviewer' || role.label === 'Representative') || (user.roles && user.roles.some((role) => role.name === 'Reviewer' || role.name === 'Representative'))}
-							<Select.Trigger {...attrs}>
-								<Select.Value placeholder={'Select a Consultant Type'} />
-							</Select.Trigger>
-						{:else}
-							<Select.Trigger disabled {...attrs}>
-								<Select.Value placeholder={'Select a Consultant Type'} />
-							</Select.Trigger>
-						{/if}
+						<Select.Trigger disabled={!hasRole(['Reviewer', 'Representative'])} {...attrs}>
+							<Select.Value placeholder={'Select a Consultant Type'} />
+						</Select.Trigger>
 						<Select.Content>
 							<Select.Item value="Radiology" label="Radiology" />
 							<Select.Item value="Oncology" label="Oncology" />
@@ -248,15 +247,9 @@
 							<input name={attrs.name} hidden value={speciality} />
 						{/each}
 
-						{#if selectedRoles.some((role) => role.label === 'Representative') || (user.roles && user.roles.some((role) => role.name === 'Representative'))}
-							<Select.Trigger {...attrs}>
-								<Select.Value placeholder={'Select a speciality'} />
-							</Select.Trigger>
-						{:else}
-							<Select.Trigger disabled {...attrs}>
-								<Select.Value placeholder={'Select a speciality'} />
-							</Select.Trigger>
-						{/if}
+						<Select.Trigger disabled={!hasRole('Representative')} {...attrs}>
+							<Select.Value placeholder={'Select your specialities'} />
+						</Select.Trigger>
 						<Select.Content>
 							{#if $formData.consultant_type === 'Radiology'}
 								{#each radiologySpecialities as { id, name }}

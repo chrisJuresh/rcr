@@ -3,7 +3,7 @@ from .models import User, UnauthenticatedUser
 from ninja_jwt.tokens import RefreshToken
 from django.db import transaction
 from roles.services import get_user_roles, update_user_roles
-from trusts.services import update_user_trust
+from trusts.services import update_user_trust, get_user_trusts
 
 def user_exists(email):
     return User.objects.filter(email=email).exists()
@@ -39,7 +39,8 @@ def get_user_profile(user):
         "title": user.title,
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "trust": user.profile.trust if user.profile.trust else None,
+        "trust": get_user_trusts(user, 'requested'),
+        "approved_trusts": get_user_trusts(user, 'approved'),
         "roles": get_user_roles(user, 'requested'),
         "approved_roles": get_user_roles(user, 'approved')
     }
@@ -50,7 +51,7 @@ def update_user_attributes(user, attr, value):
     if attr == 'roles':
         update_user_roles(user, value)
     elif attr == 'trust':
-        update_user_trust(user.profile, value)
+        update_user_trust(user, value)
     else:
         setattr(user, attr, value)
 

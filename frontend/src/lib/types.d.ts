@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["87678f17_controller_obtain_token"];
+        post: operations["624ab399_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["71b91f06_controller_refresh_token"];
+        post: operations["b4934e11_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["0a45544d_controller_verify_token"];
+        post: operations["2e52b312_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -262,11 +262,6 @@ export interface components {
             /** Token */
             token: string;
         };
-        /** UserApprovedRolesOut */
-        UserApprovedRolesOut: {
-            /** Name */
-            name: string;
-        };
         /** UserProfileOut */
         UserProfileOut: {
             /** Email */
@@ -278,20 +273,20 @@ export interface components {
             /** Last Name */
             last_name: string | null;
             trust: components["schemas"]["UserTrustOut"] | null;
+            /** Approved Trusts */
+            approved_trusts: components["schemas"]["UserTrustOut"][] | null;
             /** Roles */
-            roles: components["schemas"]["UserRolesOut"][] | null;
+            roles: components["schemas"]["UserRoleOut"][] | null;
             /** Approved Roles */
-            approved_roles: components["schemas"]["UserApprovedRolesOut"][] | null;
+            approved_roles: components["schemas"]["UserRoleOut"][] | null;
         };
-        /** UserRolesOut */
-        UserRolesOut: {
+        /** UserRoleOut */
+        UserRoleOut: {
             /** Name */
             name: string;
         };
         /** UserTrustOut */
         UserTrustOut: {
-            /** Id */
-            id: number;
             /** Name */
             name: string;
         };
@@ -392,7 +387,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "87678f17_controller_obtain_token": {
+    "624ab399_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -416,7 +411,7 @@ export interface operations {
             };
         };
     };
-    "71b91f06_controller_refresh_token": {
+    b4934e11_controller_refresh_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -440,7 +435,7 @@ export interface operations {
             };
         };
     };
-    "0a45544d_controller_verify_token": {
+    "2e52b312_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;

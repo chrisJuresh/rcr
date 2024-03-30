@@ -6,13 +6,14 @@ from django.utils.dateformat import DateFormat
 
 from .schemas import JDIn, JDPanel
 from .models import JD
+from trusts.services import get_user_trust
 from specialities.models import ConsultantType, Speciality
 
 router = Router()
 
 @router.post("/jd/", auth=JWTAuth())
 def create_jd(request, jd: JDIn, file: File[UploadedFile]):
-    trust = request.user.profile.trust
+    trust = get_user_trust(request.user)
     consultant_type = ConsultantType.objects.get(name=jd.consultant_type)
     creator = request.user
 
@@ -32,7 +33,7 @@ def create_jd(request, jd: JDIn, file: File[UploadedFile]):
 
 @router.put("/jd/{jd_id}/", auth=JWTAuth())
 def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
-    trust = request.user.profile.trust
+    trust = get_user_trust(request.user)
     try:
         jd_instance = JD.objects.get(id=jd_id, trust=trust)
     except JD.DoesNotExist:
@@ -52,7 +53,7 @@ def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
 
 @router.get("/jds/", auth=JWTAuth(), response=JDPanel)
 def get_jd_panel(request):
-    all_jds = JD.objects.filter(trust=request.user.profile.trust)
+    all_jds = JD.objects.filter(trust = get_user_trust(request.user))
     jds = []
 
     for jd in all_jds:

@@ -18,7 +18,7 @@
 
 	let buttons = [
 		{ icon: Person, label: 'Profile', path: '/protected/profile' },
-		{ icon: EnvelopeClosed, label: 'Panel', path: '/protected/panel' },
+		{ icon: EnvelopeClosed, label: 'Tasks', path: '/protected/panel' },
 		{ icon: Pencil2, label: 'New JD', path: '/protected/newJD' }
 	];
 
