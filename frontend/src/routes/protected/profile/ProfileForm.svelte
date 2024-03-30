@@ -13,8 +13,9 @@
 	export let user: components['schemas']['UserProfileOut'];
 	export let roles: components['schemas']['RolesOut']['roles'];
 	export let trusts: components['schemas']['TrustsOut']['trusts'];
+	export let specialities: components['schemas']['SpecialitiesOut']['specialities'];
 
-	console.log(roles)
+	console.log(specialities);
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema),
@@ -60,7 +61,29 @@
 	function trustPlaceholder(user) {
 		return user.trust && user.trust.name ? user.trust.name : 'Select your trust';
 	}
-	
+
+	let oncologySpecialities = [];
+	let radiologySpecialities = [];
+
+	const splitSpecialities = () => {
+		oncologySpecialities = specialities.filter((c) => c.consultant_type.name === 'ONCOLOGY');
+		radiologySpecialities = specialities.filter((c) => c.consultant_type.name === 'RADIOLOGY');
+	};
+
+	splitSpecialities();
+
+	$: selectedConsultantType = $formData.consultant_type
+		? {
+				label: $formData.consultant_type,
+				value: $formData.consultant_type
+			}
+		: undefined;
+
+	$: selectedSpecialities =
+		$formData.specialities?.map((specialityId) => ({
+			label: specialities.find((speciality) => speciality.id === specialityId)?.name,
+			value: specialityId
+		})) || [];
 </script>
 
 <Card.Root class="neu mb-6 w-11/12 sm:w-[500px]">
@@ -127,29 +150,6 @@
 				</div>
 			{/if}
 
-			<Form.Field {form} name="trust">
-				<Form.Control let:attrs>
-					<Form.Label>Trust</Form.Label>
-					<Select.Root
-						selected={selectedTrust ? selectedTrust : undefined}
-						onSelectedChange={(v) => {
-							v && ($formData.trust = v.value);
-						}}
-					>
-						<input hidden value={selectedTrust} name={attrs.name} />
-						<Select.Trigger {...attrs}>
-							<Select.Value placeholder={trustPlaceholder(user)} />
-						</Select.Trigger>
-						<Select.Content>
-							{#each trusts as trust}
-								<Select.Item value={trust.id} label={trust.name} />
-							{/each}
-						</Select.Content>
-					</Select.Root>
-				</Form.Control>
-				<Form.FieldErrors />
-			</Form.Field>
-
 			<Form.Field {form} name="roles">
 				<Form.Control let:attrs>
 					<Form.Label>Roles</Form.Label>
@@ -157,7 +157,7 @@
 						multiple
 						selected={selectedRoles}
 						onSelectedChange={(v) => {
-								$formData.roles = v.map((role) => role.value);
+							$formData.roles = v.map((role) => role.value);
 						}}
 					>
 						<input name={attrs.name} hidden value={selectedRoles} />
@@ -173,6 +173,109 @@
 				</Form.Control>
 				<Form.FieldErrors />
 				<Form.Description>You may select multiple roles</Form.Description>
+			</Form.Field>
+
+			<Form.Field {form} name="trust">
+				<Form.Control let:attrs>
+					<Form.Label>Trust</Form.Label>
+					<Select.Root
+						selected={selectedTrust ? selectedTrust : undefined}
+						onSelectedChange={(v) => {
+							v && ($formData.trust = v.value);
+						}}
+					>
+						<input hidden value={selectedTrust} name={attrs.name} />
+						{#if selectedRoles.some((role) => role.label !== 'RCR Employee') || (user.roles && user.roles.some((role) => role.name !== 'RCR Employee'))}
+							<Select.Trigger {...attrs}>
+								<Select.Value placeholder={trustPlaceholder(user)} />
+							</Select.Trigger>
+						{:else}
+							<Select.Trigger disabled {...attrs}>
+								<Select.Value placeholder={trustPlaceholder(user)} />
+							</Select.Trigger>
+						{/if}
+						<Select.Content>
+							{#each trusts as trust}
+								<Select.Item value={trust.id} label={trust.name} />
+							{/each}
+						</Select.Content>
+					</Select.Root>
+				</Form.Control>
+				<Form.Description>You must select a role before you can chose a trust</Form.Description>
+				<Form.FieldErrors />
+			</Form.Field>
+
+			<Form.Field {form} name="consultant_type">
+				<Form.Control let:attrs>
+					<Form.Label>Consultant Type</Form.Label>
+					<Select.Root
+						selected={selectedConsultantType}
+						onSelectedChange={(v) => {
+							v && ($formData.consultant_type = v.value);
+						}}
+					>
+						{#if selectedRoles.some((role) => role.label === 'Reviewer' || role.label === 'Representative') || (user.roles && user.roles.some((role) => role.name === 'Reviewer' || role.name === 'Representative'))}
+							<Select.Trigger {...attrs}>
+								<Select.Value placeholder={'Select a Consultant Type'} />
+							</Select.Trigger>
+						{:else}
+							<Select.Trigger disabled {...attrs}>
+								<Select.Value placeholder={'Select a Consultant Type'} />
+							</Select.Trigger>
+						{/if}
+						<Select.Content>
+							<Select.Item value="Radiology" label="Radiology" />
+							<Select.Item value="Oncology" label="Oncology" />
+						</Select.Content>
+					</Select.Root>
+					<input hidden {...attrs} bind:value={$formData.consultant_type} />
+				</Form.Control>
+				<Form.Description>This option is for Reviewers and Representatives only</Form.Description>
+				<Form.FieldErrors />
+			</Form.Field>
+
+			<Form.Field {form} name="specialities">
+				<Form.Control let:attrs>
+					<Form.Label>Specialities</Form.Label>
+					<Select.Root
+						multiple
+						selected={selectedSpecialities}
+						onSelectedChange={(v) => {
+							$formData.specialities = v.map((speciality) => speciality.value);
+						}}
+					>
+						{#each $formData.specialities || [] as speciality}
+							<input name={attrs.name} hidden value={speciality} />
+						{/each}
+
+						{#if selectedRoles.some((role) => role.label === 'Representative') || (user.roles && user.roles.some((role) => role.name === 'Representative'))}
+							<Select.Trigger {...attrs}>
+								<Select.Value placeholder={'Select a speciality'} />
+							</Select.Trigger>
+						{:else}
+							<Select.Trigger disabled {...attrs}>
+								<Select.Value placeholder={'Select a speciality'} />
+							</Select.Trigger>
+						{/if}
+						<Select.Content>
+							{#if $formData.consultant_type === 'Radiology'}
+								{#each radiologySpecialities as { id, name }}
+									<Select.Item value={id} label={name} />
+								{/each}
+							{:else if $formData.consultant_type === 'Oncology'}
+								{#each oncologySpecialities as { id, name }}
+									<Select.Item value={id} label={name} />
+								{/each}
+							{:else}
+								<Select.Item value="0" label="Select a Consultant Type First" />
+							{/if}
+						</Select.Content>
+					</Select.Root>
+				</Form.Control>
+				<Form.Description
+					>You may select multiple specialities<br />This option is for Representatives only</Form.Description
+				>
+				<Form.FieldErrors />
 			</Form.Field>
 
 			<Form.Button>Update</Form.Button>

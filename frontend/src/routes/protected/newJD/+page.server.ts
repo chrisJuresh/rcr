@@ -27,8 +27,6 @@ export const actions: Actions = {
 
 		console.log(form);
 
-
-
 		const jdData = JSON.stringify({
 			consultant_type: 'RADIOLOGY',
 			primary_specialities: [1],

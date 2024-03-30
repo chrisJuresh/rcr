@@ -19,6 +19,12 @@ export const load: PageServerLoad = async (event) => {
 		);
 		return response.data.trusts;
 	};
+	const fetchSpecialities = async () => {
+		const response = await axios.get<components['schemas']['SpecialitiesOut']>(
+			'http://localhost:8000/api/specialities/specialities'
+		);
+		return response.data.specialities;
+	};
 	const fetchUser = async () => {
 		const response = await axios.get<components['schemas']['UserProfileOut']>(
 			'http://localhost:8000/api/users/profile',
@@ -32,6 +38,7 @@ export const load: PageServerLoad = async (event) => {
 		roles: await fetchRoles(),
 		user: await fetchUser(),
 		trusts: await fetchTrusts(),
+		specialities: await fetchSpecialities(),
 		form: await superValidate(zod(formSchema))
 	};
 };
@@ -44,16 +51,11 @@ export const actions: Actions = {
 				form
 			});
 		}
-		console.log(form)
+		console.log(form);
 		try {
-			await axios.put(
-				'http://localhost:8000/api/users/profile/',
-					form.data
-				,
-				{
-					headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
-				}
-			);
+			await axios.put('http://localhost:8000/api/users/profile/', form.data, {
+				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
+			});
 			return { form };
 		} catch (e) {
 			return setError(form, '', e);

@@ -6,22 +6,22 @@
 	import { type SuperValidated, type Infer, superForm, fileProxy } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import * as Select from '$lib/components/ui/select';
-	import type {components } from '$lib/types.d.ts';
+	import type { components } from '$lib/types.d.ts';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let specialities: components['schemas']['SpecialitiesOut']['specialities'];
-  
-		console.log(data)
+
+	console.log(data);
 
 	let oncologySpecialities = [];
 	let radiologySpecialities = [];
 
-  const splitSpecialities = () => {
-    oncologySpecialities = specialities.filter(c => c.consultant_type.name === 'ONCOLOGY');
-    radiologySpecialities = specialities.filter(c => c.consultant_type.name === 'RADIOLOGY');
-  };
+	const splitSpecialities = () => {
+		oncologySpecialities = specialities.filter((c) => c.consultant_type.name === 'ONCOLOGY');
+		radiologySpecialities = specialities.filter((c) => c.consultant_type.name === 'RADIOLOGY');
+	};
 
-  splitSpecialities();
+	splitSpecialities();
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema)
@@ -35,19 +35,18 @@
 				value: $formData.consultant_type
 			}
 		: undefined;
-	
-	$: selectedPrimarySpecialities = 
-	$formData.primary_specialities?.map((specialityId) => ({ 
-		label: specialities.find((speciality) => speciality.id === specialityId)?.name, 
-		value: specialityId 
-	})) || [];
 
-	$: selectedSubSpecialities = 
-	$formData.sub_specialities?.map((specialityId) => ({ 
-		label: specialities.find((speciality) => speciality.id === specialityId)?.name, 
-		value: specialityId 
-	})) || [];
+	$: selectedPrimarySpecialities =
+		$formData.primary_specialities?.map((specialityId) => ({
+			label: specialities.find((speciality) => speciality.id === specialityId)?.name,
+			value: specialityId
+		})) || [];
 
+	$: selectedSubSpecialities =
+		$formData.sub_specialities?.map((specialityId) => ({
+			label: specialities.find((speciality) => speciality.id === specialityId)?.name,
+			value: specialityId
+		})) || [];
 </script>
 
 <Card.Root class="neu">
@@ -69,52 +68,52 @@
 				<Form.FieldErrors />
 			</Form.Field>
 
-				<Form.Field {form} name="consultant_type">
-					<Form.Control let:attrs>
-						<Form.Label>Consultant Type</Form.Label>
-						<Select.Root
-							selected={selectedConsultantType}
-							onSelectedChange={(v) => {
-								v && ($formData.consultant_type = v.value);
-							}}
-						>
-							<Select.Trigger {...attrs}>
-								<Select.Value placeholder={'Select a Consultant Type'} />
-							</Select.Trigger>
-							<Select.Content>
-								<Select.Item value="Radiology" label="Radiology" />
-								<Select.Item value="Oncology" label="Oncology" />
-							</Select.Content>
-						</Select.Root>
-						<input hidden {...attrs} bind:value={$formData.consultant_type}/>
-					</Form.Control>
-					<Form.FieldErrors />
-				</Form.Field>
-			
+			<Form.Field {form} name="consultant_type">
+				<Form.Control let:attrs>
+					<Form.Label>Consultant Type</Form.Label>
+					<Select.Root
+						selected={selectedConsultantType}
+						onSelectedChange={(v) => {
+							v && ($formData.consultant_type = v.value);
+						}}
+					>
+						<Select.Trigger {...attrs}>
+							<Select.Value placeholder={'Select a Consultant Type'} />
+						</Select.Trigger>
+						<Select.Content>
+							<Select.Item value="Radiology" label="Radiology" />
+							<Select.Item value="Oncology" label="Oncology" />
+						</Select.Content>
+					</Select.Root>
+					<input hidden {...attrs} bind:value={$formData.consultant_type} />
+				</Form.Control>
+				<Form.FieldErrors />
+			</Form.Field>
+
 			<Form.Field {form} name="primary_specialities">
 				<Form.Control let:attrs>
-					<Form.Label>Roles</Form.Label>
+					<Form.Label>Primary Specialities</Form.Label>
 					<Select.Root
 						multiple
 						selected={selectedPrimarySpecialities}
 						onSelectedChange={(v) => {
-								$formData.primary_specialities = v.map((speciality) => speciality.value);
+							$formData.primary_specialities = v.map((speciality) => speciality.value);
 						}}
 					>
-				{#each $formData.primary_specialities as speciality}
-						<input name={attrs.name} hidden value={speciality} />
-				{/each}
+						{#each $formData.primary_specialities as speciality}
+							<input name={attrs.name} hidden value={speciality} />
+						{/each}
 						<Select.Trigger {...attrs}>
-							<Select.Value placeholder={"Select a speciality"} />
+							<Select.Value placeholder={'Select a speciality'} />
 						</Select.Trigger>
 						<Select.Content>
 							{#if $formData.consultant_type === 'Radiology'}
 								{#each radiologySpecialities as { id, name }}
-								<Select.Item value={id} label={name} />
-							{/each}
+									<Select.Item value={id} label={name} />
+								{/each}
 							{:else if $formData.consultant_type === 'Oncology'}
 								{#each oncologySpecialities as { id, name }}
-								<Select.Item value={id} label={name} />
+									<Select.Item value={id} label={name} />
 								{/each}
 							{:else}
 								<Select.Item value="0" label="Select a Consultant Type First" />
@@ -128,28 +127,28 @@
 
 			<Form.Field {form} name="sub_specialities">
 				<Form.Control let:attrs>
-					<Form.Label>Roles</Form.Label>
+					<Form.Label>Sub Specialities</Form.Label>
 					<Select.Root
 						multiple
 						selected={selectedSubSpecialities}
 						onSelectedChange={(v) => {
-								$formData.sub_specialities = v.map((speciality) => speciality.value);
+							$formData.sub_specialities = v.map((speciality) => speciality.value);
 						}}
 					>
-				{#each $formData.sub_specialities as speciality}
-						<input name={attrs.name} hidden value={speciality} />
-				{/each}
+						{#each $formData.sub_specialities as speciality}
+							<input name={attrs.name} hidden value={speciality} />
+						{/each}
 						<Select.Trigger {...attrs}>
-							<Select.Value placeholder={"Select a speciality"} />
+							<Select.Value placeholder={'Select a speciality'} />
 						</Select.Trigger>
 						<Select.Content>
 							{#if $formData.consultant_type === 'Radiology'}
 								{#each radiologySpecialities as { id, name }}
-								<Select.Item value={id} label={name} />
-							{/each}
+									<Select.Item value={id} label={name} />
+								{/each}
 							{:else if $formData.consultant_type === 'Oncology'}
-								{#each oncologySpecialities as { id, name }}								
-								<Select.Item value={id} label={name} />
+								{#each oncologySpecialities as { id, name }}
+									<Select.Item value={id} label={name} />
 								{/each}
 							{:else}
 								<Select.Item value="0" label="Select a Consultant Type First" />
@@ -161,7 +160,6 @@
 				<Form.FieldErrors />
 			</Form.Field>
 
-			
 			<Form.Button>Submit</Form.Button>
 		</form>
 	</Card.Content>

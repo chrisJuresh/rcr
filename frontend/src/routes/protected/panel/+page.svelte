@@ -7,7 +7,7 @@
 
 <Card.Root class="neu w-11/12 xl:w-[1080px]">
 	<Card.Header>
-		<h2 class="text-2xl  font-bold tracking-tight">Welcome back!</h2>
+		<h2 class="text-2xl font-bold tracking-tight">Welcome back!</h2>
 	</Card.Header>
 	<Card.Content>
 		<DataTable jds={data.jds} />

@@ -9,6 +9,12 @@
 	<div class="ml-6 mr-6 w-60">
 		<Approved user={data.user}></Approved>
 	</div>
-	<ProfileForm data={data.form} user={data.user} roles={data.roles} trusts={data.trusts} />
+	<ProfileForm
+		data={data.form}
+		user={data.user}
+		roles={data.roles}
+		trusts={data.trusts}
+		specialities={data.specialities}
+	/>
 	<div class="ml-6 mr-6 w-60"></div>
 </div>
