@@ -5,11 +5,18 @@ from django.dispatch import receiver
 from roles.models import Role
 from specialities.models import ConsultantType, Speciality
 
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+from django.contrib.auth.models import Permission
+import logging
+
+class UnauthenticatedUser(models.Model):
+    email = models.EmailField()
+    password = models.CharField(max_length=128)
+    token = models.CharField(max_length=255)       
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
-        """
-        Create and return a regular user with an email and password.
-        """
         if not email:
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
@@ -19,9 +26,6 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
-        """
-        Create and return a superuser with an email and password.
-        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -31,7 +35,6 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self.create_user(email, password, **extra_fields)
-
 
 class User(AbstractUser):
     username = None
@@ -66,7 +69,6 @@ class User(AbstractUser):
         verbose_name='Trust Approved'
     )
     
-
 class UserRole(models.Model):
     user = models.ForeignKey(
         User,
@@ -127,8 +129,33 @@ class Representative(models.Model):
     def __str__(self):
         return f"{self.user_role.user.email}'s representative info"
 
+logger = logging.getLogger(__name__)
 
-class UnauthenticatedUser(models.Model):
-    email = models.EmailField()
-    password = models.CharField(max_length=128)
-    token = models.CharField(max_length=255)       
+ROLE_PERMISSION_MAPPING = {
+    Role.RoleChoices.RCR_EMPLOYEE: 'can_rcr_review_jdprocess',
+    Role.RoleChoices.REVIEWER: 'can_rsa_review_jdprocess',
+    Role.RoleChoices.TRUST_EMPLOYEE: 'add_jdprocess'
+}
+
+def manage_user_permission(user, codename, add_permission=True):
+    try:
+        permission = Permission.objects.get(content_type__app_label='jds', codename=codename)
+        if add_permission:
+            user.user_permissions.add(permission)
+        else:
+            user.user_permissions.remove(permission)
+        user.save()
+    except Permission.DoesNotExist:
+        logger.error(f"Permission '{codename}' not found. Ensure you have the correct codename and app label.")
+
+@receiver(post_save, sender=UserRole)
+def update_permissions(sender, instance, **kwargs):
+    codename = ROLE_PERMISSION_MAPPING.get(instance.role.name)
+    if codename:
+        manage_user_permission(instance.user, codename, add_permission=instance.approved)
+
+@receiver(post_delete, sender=UserRole)
+def cleanup_permissions(sender, instance, **kwargs):
+    codename = ROLE_PERMISSION_MAPPING.get(instance.role.name)
+    if codename:
+        manage_user_permission(instance.user, codename, add_permission=False)
