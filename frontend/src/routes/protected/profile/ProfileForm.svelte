@@ -26,6 +26,7 @@
 	});
 
 	const { form: formData, enhance } = form;
+
 	$: selectedTitle = $formData.title
 		? {
 				label: $formData.title,
@@ -35,16 +36,30 @@
 
 	$: selectedTrust = $formData.trust
 		? {
-        		label: trusts.find(trust => trust.id === $formData.trust)?.name,
+				label: trusts.find((trust) => trust.id === $formData.trust)?.name,
 				value: $formData.trust
 			}
 		: null;
 
-	$: selectedRoles = $formData.roles?.map((role) => ({ label: role.name, value: role.value }));
+	$: selectedRoles =
+		$formData.roles?.map((roleId) => ({
+			label: roles.find((role) => role.id === roleId)?.name,
+			value: roleId
+		})) || [];
 
-	function getUserRolesAsString(user) {
-		return user.roles.map((role) => role.name).join(', ');
+	function rolesPlaceholder(user) {
+		const str =
+			user.roles && user.roles.length > 0
+				? user.roles.map((role) => role.name).join(', ')
+				: 'Select your roles';
+
+		return str;
 	}
+
+	function trustPlaceholder(user) {
+		return user.trust && user.trust.name ? user.trust.name : 'Select your trust';
+	}
+	
 </script>
 
 <Card.Root class="neu mb-6 w-11/12 sm:w-[500px]">
@@ -114,15 +129,15 @@
 			<Form.Field {form} name="trust">
 				<Form.Control let:attrs>
 					<Form.Label>Trust</Form.Label>
-						<Select.Root
-   							selected={selectedTrust ? selectedTrust : undefined}
-							onSelectedChange={(v) => {
-								v && ($formData.trust = v.value);
-							}}
-						>
+					<Select.Root
+						selected={selectedTrust ? selectedTrust : undefined}
+						onSelectedChange={(v) => {
+							v && ($formData.trust = v.value);
+						}}
+					>
 						<input hidden value={selectedTrust} name={attrs.name} />
 						<Select.Trigger {...attrs}>
-<Select.Value placeholder={user.trust && user.trust.name ? user.trust.name : 'Select your trust'} />
+							<Select.Value placeholder={trustPlaceholder(user)} />
 						</Select.Trigger>
 						<Select.Content>
 							{#each trusts as trust}
@@ -140,25 +155,13 @@
 					<Select.Root
 						multiple
 						selected={selectedRoles}
-						onSelectedChange={(s) => {
-							if (s) {
-								$formData.roles = s.map((selected) => {
-									const role = roles.find((role) => role.id === selected.value);
-									return {
-										value: selected.value,
-										name: role ? role.name : ''
-									};
-								});
-							}
+						onSelectedChange={(v) => {
+								$formData.roles = v.map((role) => role.value);
 						}}
 					>
 						<input name={attrs.name} hidden value={selectedRoles} />
 						<Select.Trigger {...attrs}>
-							<Select.Value
-								placeholder={getUserRolesAsString(user)
-									? getUserRolesAsString(user)
-									: 'Select your roles'}
-							/>
+							<Select.Value placeholder={rolesPlaceholder(user)} />
 						</Select.Trigger>
 						<Select.Content>
 							{#each roles as { id, name }}

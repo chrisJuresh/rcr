@@ -13,9 +13,8 @@
 	});
 
 	const { form: formData, enhance } = form;
-	
-  	const file = fileProxy(form, 'file')
-	
+
+	const file = fileProxy(form, 'file');
 </script>
 
 <Card.Root class="neu">
@@ -26,9 +25,7 @@
 		>
 	</Card.Header>
 	<Card.Content>
-		<form method="POST" use:enhance 
-		enctype="multipart/form-data"
-		>
+		<form method="POST" use:enhance enctype="multipart/form-data">
 			<Form.Field {form} name="file">
 				<Form.Control let:attrs>
 					<div class="grid w-full max-w-sm items-center gap-1.5">
@@ -39,7 +36,7 @@
 				<Form.FieldErrors />
 			</Form.Field>
 
-	<!--		<Form.Field {form} name="primary_speciality">
+				<Form.Field {form} name="primary_speciality">
 				<Form.Control let:attrs>
 					<Form.Label>Primary Speciality</Form.Label>
 					<Input {...attrs} bind:value={$formData.primary_speciality} />
@@ -47,7 +44,6 @@
 				<Form.FieldErrors />
 			</Form.Field>
 
-	--->
 			<Form.Button>Submit</Form.Button>
 		</form>
 	</Card.Content>

@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["7130cddb_controller_obtain_token"];
+        post: operations["5d649b05_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["50dfec55_controller_refresh_token"];
+        post: operations["79002609_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["e8e98a16_controller_verify_token"];
+        post: operations["d21c0955_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -133,6 +133,23 @@ export interface paths {
         };
         /** Get Trusts */
         get: operations["trusts_api_get_trusts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/specialities/specialities/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Specialities */
+        get: operations["specialities_api_get_specialities"];
         put?: never;
         post?: never;
         delete?: never;
@@ -281,15 +298,15 @@ export interface components {
         /** UserProfileIn */
         UserProfileIn: {
             /** Title */
-            title: string | null;
+            title?: string | null;
             /** First Name */
-            first_name: string | null;
+            first_name?: string | null;
             /** Last Name */
-            last_name: string | null;
+            last_name?: string | null;
             /** Trust */
-            trust: number | null;
+            trust?: number | null;
             /** Roles */
-            roles: number[] | null;
+            roles?: number[] | null;
         };
         /** RoleOut */
         RoleOut: {
@@ -320,6 +337,24 @@ export interface components {
         TrustsOut: {
             /** Trusts */
             trusts: components["schemas"]["TrustOut"][];
+        };
+        /** ConsultantTypeOut */
+        ConsultantTypeOut: {
+            /** Name */
+            name: string;
+        };
+        /** SpecialitiesOut */
+        SpecialitiesOut: {
+            /** Specialities */
+            specialities: components["schemas"]["SpecialityOut"][];
+        };
+        /** SpecialityOut */
+        SpecialityOut: {
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            consultant_type: components["schemas"]["ConsultantTypeOut"];
         };
         /** JDIn */
         JDIn: {
@@ -357,7 +392,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "7130cddb_controller_obtain_token": {
+    "5d649b05_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -381,7 +416,7 @@ export interface operations {
             };
         };
     };
-    "50dfec55_controller_refresh_token": {
+    "79002609_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -405,7 +440,7 @@ export interface operations {
             };
         };
     };
-    e8e98a16_controller_verify_token: {
+    d21c0955_controller_verify_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -553,6 +588,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TrustsOut"];
+                };
+            };
+        };
+    };
+    specialities_api_get_specialities: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SpecialitiesOut"];
                 };
             };
         };

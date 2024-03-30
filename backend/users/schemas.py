@@ -27,11 +27,11 @@ class UserApprovedRolesOut(Schema):
     name: str
 
 class UserProfileIn(Schema):
-    title: Optional[str]
-    first_name: Optional[str]
-    last_name: Optional[str]
-    trust: Optional[int]
-    roles: Optional[List[int]]
+    title: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    trust: Optional[int] = None
+    roles: Optional[List[int]] = None
 
 class UserProfileOut(Schema):
     email: str

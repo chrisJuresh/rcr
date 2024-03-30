@@ -41,9 +41,7 @@
 			<Input type="password" {...attrs} bind:value={$formData.confirm_password} />
 			<Form.FieldErrors />
 		</Form.Control>
-		<Form.Description >
-			You will receive an email to verify your account
-		</Form.Description>
+		<Form.Description>You will receive an email to verify your account</Form.Description>
 	</Form.Field>
 	<Form.Button>Sign Up</Form.Button>
 </form>

@@ -4,9 +4,17 @@ import { superValidate, message, setError } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
 import axios from 'axios';
+import type { components } from '$lib/types.d.ts';
 
 export const load: PageServerLoad = async () => {
+	const fetchSpecialities = async () => {
+		const response = await axios.get<components['schemas']['SpecialitiesOut']>(
+			'http://localhost:8000/api/specialities/specialities',
+		);
+		return response.data;
+	};
 	return {
+		specialities: await fetchSpecialities(),
 		form: await superValidate(zod(formSchema))
 	};
 };
@@ -27,15 +35,11 @@ export const actions: Actions = {
 		formData.append('file', form.data.file);
 
 		try {
-			await axios.post(
-				'http://localhost:8000/api/jds/jd/',
-				formData,
-				{
-					headers: {
-						Authorization: `Bearer ${event.cookies.get('token')}`
-					}
+			await axios.post('http://localhost:8000/api/jds/jd/', formData, {
+				headers: {
+					Authorization: `Bearer ${event.cookies.get('token')}`
 				}
-			);
+			});
 			return message(form, 'Form posted');
 		} catch (e) {
 			return setError(form, '', e.response?.data || e);

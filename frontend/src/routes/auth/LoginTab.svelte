@@ -32,7 +32,7 @@
 			{#if $errors._errors !== undefined}
 				<h1 class="">{$errors._errors}</h1>
 			{:else}
-				<h1 class=invisible>Placeholder</h1>
+				<h1 class="invisible">Placeholder</h1>
 			{/if}
 		</Form.Description>
 	</Form.Field>

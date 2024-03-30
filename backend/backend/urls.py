@@ -19,6 +19,7 @@ from django.urls import path
 from users.api import router as users_router
 from roles.api import router as roles_router
 from trusts.api import router as trusts_router
+from specialities.api import router as specialities_router
 from jds.api import router as jds_router
 from .api import api
 
@@ -38,6 +39,7 @@ site = Site(
 api.add_router("/users/", users_router, tags=["users"]),
 api.add_router("/roles/", roles_router, tags=["roles"]),
 api.add_router("/trusts/", trusts_router, tags=["trusts"]),
+api.add_router("/specialities/", specialities_router, tags=["specialities"]),
 api.add_router("/jds/", jds_router, tags=["jds"]),
 
 urlpatterns = [
