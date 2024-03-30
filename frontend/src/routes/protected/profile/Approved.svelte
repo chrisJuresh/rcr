@@ -13,7 +13,7 @@
 
 <Card.Root>
 	<Card.Header>
-		<Card.Title>Approved</Card.Title>
+		<Card.Title class="text-2xl font-bold">Approved</Card.Title>
 		<Card.Description>You have been approved for the following by the RCR</Card.Description>
 	</Card.Header>
 	<Card.Content>

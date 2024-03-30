@@ -8,12 +8,13 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';
 	import type { components } from '$lib/types.d.ts';
-	let rolesOut: components['schemas']['RolesOut'];
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let user: components['schemas']['UserProfileOut'];
 	export let roles: components['schemas']['RolesOut']['roles'];
 	export let trusts: components['schemas']['TrustsOut']['trusts'];
+
+	console.log(roles)
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema),
@@ -64,7 +65,7 @@
 
 <Card.Root class="neu mb-6 w-11/12 sm:w-[500px]">
 	<Card.Header>
-		<Card.Title>Edit Profile</Card.Title>
+		<Card.Title class="text-2xl font-bold">Edit Profile</Card.Title>
 		<Card.Description>{user.email}</Card.Description>
 	</Card.Header>
 	<Card.Content>
@@ -170,8 +171,8 @@
 						</Select.Content>
 					</Select.Root>
 				</Form.Control>
-				<Form.Description>You may select multiple roles</Form.Description>
 				<Form.FieldErrors />
+				<Form.Description>You may select multiple roles</Form.Description>
 			</Form.Field>
 
 			<Form.Button>Update</Form.Button>

@@ -9,9 +9,9 @@ import type { components } from '$lib/types.d.ts';
 export const load: PageServerLoad = async () => {
 	const fetchSpecialities = async () => {
 		const response = await axios.get<components['schemas']['SpecialitiesOut']>(
-			'http://localhost:8000/api/specialities/specialities',
+			'http://localhost:8000/api/specialities/specialities'
 		);
-		return response.data;
+		return response.data.specialities;
 	};
 	return {
 		specialities: await fetchSpecialities(),
@@ -22,7 +22,12 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(formSchema));
+
 		if (!form.valid) return fail(400, { form });
+
+		console.log(form);
+
+
 
 		const jdData = JSON.stringify({
 			consultant_type: 'RADIOLOGY',
@@ -42,7 +47,7 @@ export const actions: Actions = {
 			});
 			return message(form, 'Form posted');
 		} catch (e) {
-			return setError(form, '', e.response?.data || e);
+			return setError(form, 'file', e);
 		}
 	}
 };
