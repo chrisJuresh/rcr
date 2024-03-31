@@ -15,7 +15,9 @@
 <Card.Root>
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Approvals</Card.Title>
-		<Card.Description>Please contact us at a@r.uk once you have filled out this form to gain approval.</Card.Description>
+		<Card.Description
+			>Please contact us at a@r.uk once you have filled out this form to gain approval.</Card.Description
+		>
 	</Card.Header>
 	<Card.Content>
 		Roles
@@ -36,7 +38,7 @@
 		{#each user.approved_trusts || [] as approved_trusts}
 			<div class="flex items-center">
 				<Dash class="mr-1 h-3 w-3 fill-purple-400 text-purple-400" />
-				<small>{approved_trusts.name}<br /></small>
+				<small>{approved_trusts}<br /></small>
 			</div>
 		{:else}
 			<div class="flex items-center">

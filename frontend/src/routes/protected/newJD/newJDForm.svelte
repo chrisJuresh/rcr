@@ -17,8 +17,8 @@
 	let radiologySpecialities = [];
 
 	const splitSpecialities = () => {
-		oncologySpecialities = specialities.filter((c) => c.consultant_type.name === 'ONCOLOGY');
-		radiologySpecialities = specialities.filter((c) => c.consultant_type.name === 'RADIOLOGY');
+		oncologySpecialities = specialities.filter((c) => c.consultant_type === 'ONCOLOGY');
+		radiologySpecialities = specialities.filter((c) => c.consultant_type === 'RADIOLOGY');
 	};
 
 	splitSpecialities();

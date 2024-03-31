@@ -25,17 +25,18 @@ export const actions: Actions = {
 
 		if (!form.valid) return fail(400, { form });
 
-		console.log(form);
-
 		const jdData = JSON.stringify({
-			consultant_type: 'RADIOLOGY',
-			primary_specialities: [1],
-			sub_specialities: [1]
+			consultant_type: form.data.consultant_type.toUpperCase(),
+			primary_specialities: form.data.primary_specialities,
+			sub_specialities: form.data.sub_specialities
 		});
 
 		const formData = new FormData();
+
 		formData.append('jd', jdData);
 		formData.append('file', form.data.file);
+
+		console.log(formData);
 
 		try {
 			await axios.post('http://localhost:8000/api/jds/jd/', formData, {

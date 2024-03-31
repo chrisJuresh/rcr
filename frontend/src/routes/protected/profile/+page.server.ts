@@ -32,7 +32,7 @@ export const load: PageServerLoad = async (event) => {
 				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 			}
 		);
-		console.log(response.data)
+		console.log(response.data);
 		return response.data;
 	};
 	return {

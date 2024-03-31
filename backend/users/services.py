@@ -4,6 +4,7 @@ from ninja_jwt.tokens import RefreshToken
 from django.db import transaction
 from roles.services import get_user_roles, update_user_roles
 from trusts.services import update_user_trust, get_user_trusts
+from specialities.services import update_user_specialities, update_user_consultant_type, get_user_specialities, get_user_consultant_type
 
 def user_exists(email):
     return User.objects.filter(email=email).exists()
@@ -42,16 +43,25 @@ def get_user_profile(user):
         "trust": get_user_trusts(user, 'requested'),
         "approved_trusts": get_user_trusts(user, 'approved'),
         "roles": get_user_roles(user, 'requested'),
-        "approved_roles": get_user_roles(user, 'approved')
+        "approved_roles": get_user_roles(user, 'approved'),
+        "consultant_type": get_user_consultant_type(user),
+        "specialities": get_user_specialities(user)
     }
 
 def update_user_attributes(user, attr, value):
     if value is None:
         return
-    if attr == 'roles':
-        update_user_roles(user, value)
-    elif attr == 'trust':
-        update_user_trust(user, value)
+
+    attr_handlers = {
+        'roles': update_user_roles,
+        'trust': update_user_trust,
+        'specialities': update_user_specialities,
+        'consultant_type': update_user_consultant_type,
+    }
+
+    handler = attr_handlers.get(attr)
+    if handler:
+        handler(user, value)
     else:
         setattr(user, attr, value)
 

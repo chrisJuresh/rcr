@@ -2,8 +2,8 @@ from django.db import models
 
 class ConsultantType(models.Model):
     class ConsultantChoices(models.TextChoices):
-        RADIOLOGY = 'RADIOLOGY', 'Radiologist'
-        ONCOLOGY = 'ONCOLOGY', 'Oncologist'
+        RADIOLOGY = 'RADIOLOGY', 'Radiology'
+        ONCOLOGY = 'ONCOLOGY', 'Oncology'
 
     name = models.CharField(
         max_length=20,

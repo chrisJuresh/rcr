@@ -82,16 +82,11 @@ class UserSpecialities(models.Model):
         related_name='user_specialities',
     )
 
-    consultant_type = models.ManyToManyField(ConsultantType, blank=True)
+    consultant_type = models.ForeignKey(ConsultantType, blank=True, null=True, on_delete=models.SET_NULL)
     specialities = models.ManyToManyField(Speciality, blank=True)
 
     def __str__(self):
         return f"{self.user.email}'s Specialities"
-
-#   @receiver(post_save, sender=User)
-#   def create_user_profile(sender, instance, created, **kwargs):
-#       if created:
-#           UserProfile.objects.create(user=instance)
 
 class UserRole(models.Model):
     user = models.ForeignKey(

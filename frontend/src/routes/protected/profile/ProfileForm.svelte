@@ -29,6 +29,14 @@
 
 	const { form: formData, enhance } = form;
 
+	$: hasRole = (roleNames) => {
+		const roleArray = [].concat(roleNames);
+		if (selectedRoles.length) {
+			return selectedRoles.some((role) => roleArray.includes(role.label));
+		}
+		return user.roles?.some((role) => roleArray.includes(role)) || false;
+	};
+
 	$: selectedTitle = $formData.title
 		? {
 				label: $formData.title,
@@ -49,25 +57,51 @@
 			value: roleId
 		})) || [];
 
-	function rolesPlaceholder(user) {
-		const str =
-			user.roles && user.roles.length > 0
-				? user.roles.map((role) => role.name).join(', ')
-				: 'Select your roles';
-
-		return str;
+	function rolesPlaceholder() {
+		return user.roles && user.roles.length ? user.roles.join(', ') : 'Select your Roles';
 	}
 
-	function trustPlaceholder(user) {
-		return user.trust && user.trust ? user.trust : 'Select your trust';
-	}
+	$: consultantTypePlaceholder = () => {
+		if (hasRole(['Reviewer', 'Representative'])) {
+			return user.consultant_type || 'Select a Consultant Type';
+		} else if (hasRole(['RCR Employee', 'Trust Employee'])) {
+			return 'Reviewers and Representatives only';
+		} else {
+			return 'Select a Role first';
+		}
+	};
+
+	$: specialitiesPlaceholder = () => {
+		if (hasRole(['Representative'])) {
+			if (consultantTypeEdited) {
+				return 'Reselect your Specialities';
+			}
+			return user.specialities && user.specialities.length
+				? user.specialities.map((speciality) => speciality.name).join(', ')
+				: 'Select your Specialities';
+		} else if (hasRole(['RCR Employee', 'Trust Employee', 'Reviewer'])) {
+			return 'Representatives only';
+		} else {
+			return 'Select a Role first';
+		}
+	};
+
+	$: trustPlaceholder = () => {
+		if (hasRole(['Reviewer', 'Representative', 'Trust Employee'])) {
+			return user.trust || 'Select your trust';
+		} else if (hasRole('RCR Employee')) {
+			return 'RCR Employees do not have trusts';
+		} else {
+			return 'Select a Role first';
+		}
+	};
 
 	let oncologySpecialities = [];
 	let radiologySpecialities = [];
 
 	const splitSpecialities = () => {
-		oncologySpecialities = specialities.filter((c) => c.consultant_type.name === 'ONCOLOGY');
-		radiologySpecialities = specialities.filter((c) => c.consultant_type.name === 'RADIOLOGY');
+		oncologySpecialities = specialities.filter((c) => c.consultant_type === 'ONCOLOGY');
+		radiologySpecialities = specialities.filter((c) => c.consultant_type === 'RADIOLOGY');
 	};
 
 	splitSpecialities();
@@ -85,13 +119,7 @@
 			value: specialityId
 		})) || [];
 
-	$: hasRole = (roleNames) => {
-	  const roleArray = [].concat(roleNames);
-	  if (selectedRoles.length) {
-		return selectedRoles.some(role => roleArray.includes(role.label));
-	  }
-	  return user.roles?.some(role => roleArray.includes(role.name)) || false;
-	};
+	$: consultantTypeEdited = false;
 </script>
 
 <Card.Root class="neu mb-6 w-11/12 sm:w-[500px]">
@@ -206,7 +234,6 @@
 						</Select.Content>
 					</Select.Root>
 				</Form.Control>
-				<Form.Description>You must select a role before you can chose a trust</Form.Description>
 				<Form.FieldErrors />
 			</Form.Field>
 
@@ -217,10 +244,12 @@
 						selected={selectedConsultantType}
 						onSelectedChange={(v) => {
 							v && ($formData.consultant_type = v.value);
+							$formData.specialities = [];
+							consultantTypeEdited = true;
 						}}
 					>
 						<Select.Trigger disabled={!hasRole(['Reviewer', 'Representative'])} {...attrs}>
-							<Select.Value placeholder={'Select a Consultant Type'} />
+							<Select.Value placeholder={consultantTypePlaceholder(user)} />
 						</Select.Trigger>
 						<Select.Content>
 							<Select.Item value="Radiology" label="Radiology" />
@@ -229,7 +258,6 @@
 					</Select.Root>
 					<input hidden {...attrs} bind:value={$formData.consultant_type} />
 				</Form.Control>
-				<Form.Description>This option is for Reviewers and Representatives only</Form.Description>
 				<Form.FieldErrors />
 			</Form.Field>
 
@@ -248,14 +276,14 @@
 						{/each}
 
 						<Select.Trigger disabled={!hasRole('Representative')} {...attrs}>
-							<Select.Value placeholder={'Select your specialities'} />
+							<Select.Value placeholder={specialitiesPlaceholder(user)} />
 						</Select.Trigger>
 						<Select.Content>
-							{#if $formData.consultant_type === 'Radiology'}
+							{#if ($formData.consultant_type ? $formData.consultant_type : user.consultant_type) === 'Radiology'}
 								{#each radiologySpecialities as { id, name }}
 									<Select.Item value={id} label={name} />
 								{/each}
-							{:else if $formData.consultant_type === 'Oncology'}
+							{:else if ($formData.consultant_type ? $formData.consultant_type : user.consultant_type) === 'Oncology'}
 								{#each oncologySpecialities as { id, name }}
 									<Select.Item value={id} label={name} />
 								{/each}
@@ -265,12 +293,9 @@
 						</Select.Content>
 					</Select.Root>
 				</Form.Control>
-				<Form.Description
-					>You may select multiple specialities<br />This option is for Representatives only</Form.Description
-				>
+				<Form.Description>You may select multiple specialities</Form.Description>
 				<Form.FieldErrors />
 			</Form.Field>
-
 			<Form.Button>Update</Form.Button>
 		</form>
 	</Card.Content>

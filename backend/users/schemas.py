@@ -13,10 +13,8 @@ class UnauthenticatedUserIn(Schema):
     password: str = Field(..., min_length=8)
     token: str
 
-class UserRoleOut(Schema):
-    name: str
-
-class UserTrustOut(Schema):
+class SpecialitiesOut(Schema):
+    id: int
     name: str
 
 class UserProfileIn(Schema):
@@ -25,6 +23,8 @@ class UserProfileIn(Schema):
     last_name: Optional[str] = None
     trust: Optional[int] = None
     roles: Optional[List[int]] = None
+    consultant_type: Optional[str] = None
+    specialities: Optional[List[int]] = None
 
 class UserProfileOut(Schema):
     email: str
@@ -32,7 +32,9 @@ class UserProfileOut(Schema):
     first_name: Optional[str]
     last_name: Optional[str]
     trust: Optional[str]
-    approved_trusts: Optional[List[UserTrustOut]]
-    roles: Optional[List[UserRoleOut]]
-    approved_roles: Optional[List[UserRoleOut]]
+    approved_trusts: Optional[List[str]]
+    roles: Optional[List[str]]
+    approved_roles: Optional[List[str]]
+    consultant_type: Optional[str]
+    specialities: Optional[List[SpecialitiesOut]]
 

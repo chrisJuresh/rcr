@@ -7,9 +7,7 @@
 
 <Card.Root class="neu w-11/12 xl:w-[1080px]">
 	<Card.Header>
-	<Card.Title class="text-2xl font-bold">
-		Your Tasks
-	</Card.Title>	
+		<Card.Title class="text-2xl font-bold">Your Tasks</Card.Title>
 	</Card.Header>
 	<Card.Content>
 		<DataTable jds={data.jds} />

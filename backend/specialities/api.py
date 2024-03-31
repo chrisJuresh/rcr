@@ -4,13 +4,10 @@ from .models import Speciality
 
 router = Router()
 
-class ConsultantTypeOut(Schema):
-    name: str
-
 class SpecialityOut(Schema):
     id: int
     name: str
-    consultant_type: ConsultantTypeOut
+    consultant_type: str
 
 class SpecialitiesOut(Schema):
     specialities: List[SpecialityOut]
@@ -21,7 +18,7 @@ def get_specialities(request):
         {
             'id': speciality.id, 
             'name': speciality.name, 
-            'consultant_type': {'name': speciality.consultant_type.name}
+            'consultant_type': speciality.consultant_type.name
         } 
         for speciality in Speciality.objects.all()
     ]

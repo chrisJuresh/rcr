@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["624ab399_controller_obtain_token"];
+        post: operations["2cddaeef_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["b4934e11_controller_refresh_token"];
+        post: operations["f4967e00_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["2e52b312_controller_verify_token"];
+        post: operations["d5cd1ca0_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -262,6 +262,11 @@ export interface components {
             /** Token */
             token: string;
         };
+        /** SpecialitiesOut */
+        SpecialitiesOut: {
+            /** Specialities */
+            specialities: components["schemas"]["SpecialityOut"][];
+        };
         /** UserProfileOut */
         UserProfileOut: {
             /** Email */
@@ -272,23 +277,18 @@ export interface components {
             first_name: string | null;
             /** Last Name */
             last_name: string | null;
-            trust: components["schemas"]["UserTrustOut"] | null;
+            /** Trust */
+            trust: string | null;
             /** Approved Trusts */
-            approved_trusts: components["schemas"]["UserTrustOut"][] | null;
+            approved_trusts: string[] | null;
             /** Roles */
-            roles: components["schemas"]["UserRoleOut"][] | null;
+            roles: string[] | null;
             /** Approved Roles */
-            approved_roles: components["schemas"]["UserRoleOut"][] | null;
-        };
-        /** UserRoleOut */
-        UserRoleOut: {
-            /** Name */
-            name: string;
-        };
-        /** UserTrustOut */
-        UserTrustOut: {
-            /** Name */
-            name: string;
+            approved_roles: string[] | null;
+            /** Consultant Type */
+            consultant_type: string | null;
+            /** Specialities */
+            specialities: components["schemas"]["SpecialitiesOut"][] | null;
         };
         /** UserProfileIn */
         UserProfileIn: {
@@ -302,6 +302,10 @@ export interface components {
             trust?: number | null;
             /** Roles */
             roles?: number[] | null;
+            /** Consultant Type */
+            consultant_type?: string | null;
+            /** Specialities */
+            specialities?: number[] | null;
         };
         /** RoleOut */
         RoleOut: {
@@ -333,23 +337,14 @@ export interface components {
             /** Trusts */
             trusts: components["schemas"]["TrustOut"][];
         };
-        /** ConsultantTypeOut */
-        ConsultantTypeOut: {
-            /** Name */
-            name: string;
-        };
-        /** SpecialitiesOut */
-        SpecialitiesOut: {
-            /** Specialities */
-            specialities: components["schemas"]["SpecialityOut"][];
-        };
         /** SpecialityOut */
         SpecialityOut: {
             /** Id */
             id: number;
             /** Name */
             name: string;
-            consultant_type: components["schemas"]["ConsultantTypeOut"];
+            /** Consultant Type */
+            consultant_type: string;
         };
         /** JDIn */
         JDIn: {
@@ -387,7 +382,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "624ab399_controller_obtain_token": {
+    "2cddaeef_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -411,7 +406,7 @@ export interface operations {
             };
         };
     };
-    b4934e11_controller_refresh_token: {
+    f4967e00_controller_refresh_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -435,7 +430,7 @@ export interface operations {
             };
         };
     };
-    "2e52b312_controller_verify_token": {
+    d5cd1ca0_controller_verify_token: {
         parameters: {
             query?: never;
             header?: never;
