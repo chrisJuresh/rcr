@@ -57,7 +57,7 @@
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Create JD</Card.Title>
 		<Card.Description
-			>Please fill in the information below and submit your Job Description</Card.Description
+			>Submit your Job Description</Card.Description
 		>
 	</Card.Header>
 	<Card.Content>
@@ -107,8 +107,8 @@
 						{#each $formData.primary_specialities as speciality}
 							<input name={attrs.name} hidden value={speciality} />
 						{/each}
-						<Select.Trigger {...attrs}>
-							<Select.Value placeholder={'Select a speciality'} />
+						<Select.Trigger disabled={$formData.consultant_type ? false : true} {...attrs}>
+							<Select.Value placeholder={$formData.consultant_type ? 'Select your Specialities' : 'Select a Consultant Type first'} />
 						</Select.Trigger>
 						<Select.Content>
 							{#if $formData.consultant_type === 'Radiology'}
@@ -119,8 +119,6 @@
 								{#each oncologySpecialities as { id, name }}
 									<Select.Item value={id} label={name} />
 								{/each}
-							{:else}
-								<Select.Item value="0" label="Select a Consultant Type First" />
 							{/if}
 						</Select.Content>
 					</Select.Root>
@@ -142,8 +140,18 @@
 						{#each $formData.sub_specialities as speciality}
 							<input name={attrs.name} hidden value={speciality} />
 						{/each}
-						<Select.Trigger {...attrs}>
-							<Select.Value placeholder={'Select a speciality'} />
+<Select.Trigger 
+disabled={!$formData.consultant_type || $formData.primary_specialities.length === 0}
+  {...attrs}>
+    <Select.Value 
+      placeholder={
+        !$formData.consultant_type 
+          ? 'Select a Consultant Type first' 
+          : $formData.primary_specialities.length === 0
+            ? 'Select a Primary Speciality first' 
+            : 'Select your Specialities'
+      } 
+    />
 						</Select.Trigger>
 						<Select.Content>
 							{#if $formData.consultant_type === 'Radiology'}
@@ -154,8 +162,6 @@
 								{#each oncologySpecialities as { id, name }}
 									<Select.Item value={id} label={name} />
 								{/each}
-							{:else}
-								<Select.Item value="0" label="Select a Consultant Type First" />
 							{/if}
 						</Select.Content>
 					</Select.Root>
@@ -168,5 +174,3 @@
 		</form>
 	</Card.Content>
 </Card.Root>
-
-<SuperDebug data={$formData} />

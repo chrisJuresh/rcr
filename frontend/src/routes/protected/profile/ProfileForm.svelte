@@ -72,19 +72,27 @@
 	};
 
 	$: specialitiesPlaceholder = () => {
-		if (hasRole(['Representative'])) {
-			if (consultantTypeEdited) {
-				return 'Reselect your Specialities';
-			}
-			return user.specialities && user.specialities.length
-				? user.specialities.map((speciality) => speciality.name).join(', ')
-				: 'Select your Specialities';
-		} else if (hasRole(['RCR Employee', 'Trust Employee', 'Reviewer'])) {
-			return 'Representatives only';
-		} else {
-			return 'Select a Role first';
-		}
-	};
+  if (!hasRole(['Representative'])) {
+    return hasRole(['RCR Employee', 'Trust Employee', 'Reviewer'])
+      ? 'Representatives only'
+      : 'Select a Role first';
+  }
+
+  // For Representatives without a selected consultant type
+  if (!$formData.consultant_type && !user.consultant_type) {
+    return 'Select a Consultant Type first';
+  }
+
+  // When the consultant type is edited
+  if (consultantTypeEdited) {
+    return 'Select your Specialities';
+  }
+
+  // Return the user's specialities or prompt for selection if none are present
+  return user.specialities && user.specialities.length > 0
+    ? user.specialities.map(speciality => speciality.name).join(', ')
+    : 'Select your Specialities';
+};
 
 	$: trustPlaceholder = () => {
 		if (hasRole(['Reviewer', 'Representative', 'Trust Employee'])) {
@@ -280,7 +288,7 @@
 							<input name={attrs.name} hidden value={speciality} />
 						{/each}
 
-						<Select.Trigger disabled={!hasRole('Representative')} {...attrs}>
+						<Select.Trigger disabled={!hasRole('Representative') || (!$formData.consultant_type && !user.consultant_type)} {...attrs}>
 							<Select.Value placeholder={specialitiesPlaceholder(user)} />
 						</Select.Trigger>
 						<Select.Content>
@@ -292,8 +300,6 @@
 								{#each oncologySpecialities as { id, name }}
 									<Select.Item value={id} label={name} />
 								{/each}
-							{:else}
-								<Select.Item value="0" label="Select a Consultant Type First" />
 							{/if}
 						</Select.Content>
 					</Select.Root>
