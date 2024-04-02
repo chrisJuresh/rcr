@@ -1,6 +1,6 @@
 import type { PageServerLoad, Actions } from './$types.js';
 import { fail } from '@sveltejs/kit';
-import { superValidate, message, setError } from 'sveltekit-superforms';
+import { superValidate, message, setError, withFiles } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
 import axios from 'axios';
@@ -22,7 +22,7 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(formSchema));
-
+			console.log(form)
 		if (!form.valid) return fail(400, { form });
 
 		const jdData = JSON.stringify({
@@ -44,9 +44,10 @@ export const actions: Actions = {
 					Authorization: `Bearer ${event.cookies.get('token')}`
 				}
 			});
-			return message(form, 'Form posted');
+      		return {form: withFiles(form)}; // this parses the superform object to a serializable object
 		} catch (e) {
 			return setError(form, 'file', e);
 		}
+		
 	}
 };

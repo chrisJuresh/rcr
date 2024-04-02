@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["2cddaeef_controller_obtain_token"];
+        post: operations["2fa3d7b8_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["f4967e00_controller_refresh_token"];
+        post: operations["6068c57d_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["d5cd1ca0_controller_verify_token"];
+        post: operations["24349d8e_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -382,7 +382,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "2cddaeef_controller_obtain_token": {
+    "2fa3d7b8_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -406,7 +406,7 @@ export interface operations {
             };
         };
     };
-    f4967e00_controller_refresh_token: {
+    "6068c57d_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -430,7 +430,7 @@ export interface operations {
             };
         };
     };
-    d5cd1ca0_controller_verify_token: {
+    "24349d8e_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;

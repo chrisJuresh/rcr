@@ -1,9 +1,9 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
+	import * as Input from '$lib/components/ui/input';
 	import { formSchema, type FormSchema } from './schema';
-	import { type SuperValidated, type Infer, superForm, fileProxy } from 'sveltekit-superforms';
+	import SuperDebug, { type SuperValidated, type Infer, superForm, fileProxy } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import * as Select from '$lib/components/ui/select';
 	import type { components } from '$lib/types.d.ts';
@@ -47,6 +47,10 @@
 			label: specialities.find((speciality) => speciality.id === specialityId)?.name,
 			value: specialityId
 		})) || [];
+
+		
+    const file = fileProxy(formData, 'file');
+
 </script>
 
 <Card.Root class="neu">
@@ -62,7 +66,7 @@
 				<Form.Control let:attrs>
 					<div class="grid w-full max-w-sm items-center gap-1.5">
 						<Form.Label>Job Description File</Form.Label>
-						<Input type="file" {...attrs} bind:value={$formData.file} />
+						<Input.File type="file" {...attrs}  bind:files={$file} />
 					</div>
 				</Form.Control>
 				<Form.FieldErrors />
@@ -164,3 +168,5 @@
 		</form>
 	</Card.Content>
 </Card.Root>
+
+<SuperDebug data={$formData} />
