@@ -186,7 +186,12 @@
 				</div>
 			{/if}
 
-			<Form.Field {form} name="roles">
+	<Card.Header class="px-0">
+		<Card.Title class="text-2xl font-bold">Permissions</Card.Title>
+		<Card.Description>These fields will be used to assign JDs and AACs<br>Role and Trust have no effect untill they are approved </Card.Description>
+	</Card.Header>
+	
+	<Form.Field {form} name="roles">
 				<Form.Control let:attrs>
 					<Form.Label>Roles</Form.Label>
 					<Select.Root
