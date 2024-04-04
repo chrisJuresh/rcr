@@ -9,7 +9,7 @@ def update_user_trust(user, trust_id):
 def get_user_trusts(user, status):
     user_trusts = user.user_trusts.filter(**{status: True})
     if status == 'requested':
-        return user_trusts.first().trust.name if user_trusts else None
+        return user_trusts.first().trust if user_trusts else None
     elif status == 'approved':
         return [user_trust.trust.name for user_trust in user_trusts]
 

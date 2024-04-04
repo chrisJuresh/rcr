@@ -15,7 +15,8 @@
 	export let trusts: components['schemas']['TrustsOut']['trusts'];
 	export let specialities: components['schemas']['SpecialitiesOut']['specialities'];
 
-	console.log(specialities);
+	let oncologySpecialities: components['schemas']['SpecialitiesOut']['specialities'];
+	let radiologySpecialities: components['schemas']['SpecialitiesOut']['specialities'];
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema),
@@ -29,6 +30,13 @@
 
 	const { form: formData, enhance } = form;
 
+	const splitSpecialities = () => {
+		oncologySpecialities = specialities.filter((c) => c.consultant_type === 'ONCOLOGY');
+		radiologySpecialities = specialities.filter((c) => c.consultant_type === 'RADIOLOGY');
+	};
+	
+	splitSpecialities();
+	
 	$: hasRole = (roleNames) => {
 		const roleArray = [].concat(roleNames);
 		if (selectedRoles.length) {
@@ -57,63 +65,6 @@
 			value: roleId
 		})) || [];
 
-	function rolesPlaceholder() {
-		return user.roles && user.roles.length ? user.roles.join(', ') : 'Select your Roles';
-	}
-
-	$: consultantTypePlaceholder = () => {
-		if (hasRole(['Reviewer', 'Representative'])) {
-			return user.consultant_type || 'Select a Consultant Type';
-		} else if (hasRole(['RCR Employee', 'Trust Employee'])) {
-			return 'Reviewers and Representatives only';
-		} else {
-			return 'Select a Role first';
-		}
-	};
-
-	$: specialitiesPlaceholder = () => {
-  if (!hasRole(['Representative'])) {
-    return hasRole(['RCR Employee', 'Trust Employee', 'Reviewer'])
-      ? 'Representatives only'
-      : 'Select a Role first';
-  }
-
-  // For Representatives without a selected consultant type
-  if (!$formData.consultant_type && !user.consultant_type) {
-    return 'Select a Consultant Type first';
-  }
-
-  // When the consultant type is edited
-  if (consultantTypeEdited) {
-    return 'Select your Specialities';
-  }
-
-  // Return the user's specialities or prompt for selection if none are present
-  return user.specialities && user.specialities.length > 0
-    ? user.specialities.map(speciality => speciality.name).join(', ')
-    : 'Select your Specialities';
-};
-
-	$: trustPlaceholder = () => {
-		if (hasRole(['Reviewer', 'Representative', 'Trust Employee'])) {
-			return user.trust || 'Select your trust';
-		} else if (hasRole('RCR Employee')) {
-			return 'RCR Employees do not have trusts';
-		} else {
-			return 'Select a Role first';
-		}
-	};
-
-	let oncologySpecialities = [];
-	let radiologySpecialities = [];
-
-	const splitSpecialities = () => {
-		oncologySpecialities = specialities.filter((c) => c.consultant_type === 'ONCOLOGY');
-		radiologySpecialities = specialities.filter((c) => c.consultant_type === 'RADIOLOGY');
-	};
-
-	splitSpecialities();
-
 	$: selectedConsultantType = $formData.consultant_type
 		? {
 				label: $formData.consultant_type,
@@ -127,10 +78,56 @@
 			value: specialityId
 		})) || [];
 
-	$: consultantTypeEdited = false;
+	
+	function rolesPlaceholder() {
+		return user.roles && user.roles.length ? user.roles.join(', ') : 'Select your Roles';
+	}
+	
+	$: consultantTypePlaceholder = () => {
+		if (hasRole(['Reviewer', 'Representative'])) {
+			return user.consultant_type || 'Select a Consultant Type';
+		} else if (hasRole(['RCR Employee', 'Trust Employee'])) {
+			return 'Reviewers and Representatives only';
+		} else {
+			return 'Select a Role first';
+		}
+	};
+
+	$: consultantTypeMismatch = false;
+
+	$: specialitiesPlaceholder = () => {
+		if (!hasRole(['Representative'])) {
+			return hasRole(['RCR Employee', 'Trust Employee', 'Reviewer'])
+				? 'Representatives only'
+				: 'Select a Role first';
+		}
+
+		if (!$formData.consultant_type && !user.consultant_type) {
+			return 'Select a Consultant Type first';
+		}
+
+		if (consultantTypeMismatch) {
+			return 'Select your Specialities';
+		}
+
+		return user.specialities && user.specialities.length > 0
+			? user.specialities.map((speciality) => speciality.name).join(', ')
+			: 'Select your Specialities';
+	};
+
+	$: trustPlaceholder = () => {
+		if (hasRole(['Reviewer', 'Representative', 'Trust Employee'])) {
+			return user.trust.name || 'Select your trust';
+		} else if (hasRole('RCR Employee')) {
+			return 'RCR Employees do not have trusts';
+		} else {
+			return 'Select a Role first';
+		}
+	};
+
 </script>
 
-<Card.Root class="neu mb-6 w-11/12 sm:w-[500px]">
+<Card.Root class="neu w-11/12 sm:w-[500px]">
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Edit Profile</Card.Title>
 		<Card.Description>{user.email}</Card.Description>
@@ -194,12 +191,15 @@
 				</div>
 			{/if}
 
-	<Card.Header class="px-0">
-		<Card.Title class="text-2xl font-bold">Permissions</Card.Title>
-		<Card.Description>These fields will be used to assign JDs and AACs<br>Role and Trust have no effect untill they are approved </Card.Description>
-	</Card.Header>
-	
-	<Form.Field {form} name="roles">
+			<Card.Header class="px-0">
+				<Card.Title class="text-2xl font-bold">Permissions</Card.Title>
+				<Card.Description
+					>These fields will be used to assign JDs and AACs<br />Role and Trust have no effect
+					untill they are approved
+				</Card.Description>
+			</Card.Header>
+
+			<Form.Field {form} name="roles">
 				<Form.Control let:attrs>
 					<Form.Label>Roles</Form.Label>
 					<Select.Root
@@ -221,7 +221,7 @@
 					</Select.Root>
 				</Form.Control>
 				<Form.FieldErrors />
-				<Form.Description>You may select multiple roles</Form.Description>
+				<Form.Description>You may select multiple</Form.Description>
 			</Form.Field>
 
 			<Form.Field {form} name="trust">
@@ -256,9 +256,11 @@
 					<Select.Root
 						selected={selectedConsultantType}
 						onSelectedChange={(v) => {
-							v && ($formData.consultant_type = v.value);
-							$formData.specialities = [];
-							consultantTypeEdited = true;
+							if (v && $formData.consultant_type !== v.value) {
+								$formData.consultant_type = v.value;
+								$formData.specialities = []; 
+								consultantTypeMismatch = true;
+							}
 						}}
 					>
 						<Select.Trigger disabled={!hasRole(['Reviewer', 'Representative'])} {...attrs}>
@@ -281,14 +283,19 @@
 						multiple
 						selected={selectedSpecialities}
 						onSelectedChange={(v) => {
-							$formData.specialities = v.map((speciality) => speciality.value);
+							($formData.specialities = v.map((speciality) => speciality.value));
+							consultantTypeMismatch = false;
 						}}
 					>
 						{#each $formData.specialities || [] as speciality}
 							<input name={attrs.name} hidden value={speciality} />
 						{/each}
 
-						<Select.Trigger disabled={!hasRole('Representative') || (!$formData.consultant_type && !user.consultant_type)} {...attrs}>
+						<Select.Trigger
+							disabled={!hasRole('Representative') ||
+								(!$formData.consultant_type && !user.consultant_type)}
+							{...attrs}
+						>
 							<Select.Value placeholder={specialitiesPlaceholder(user)} />
 						</Select.Trigger>
 						<Select.Content>
@@ -304,10 +311,10 @@
 						</Select.Content>
 					</Select.Root>
 				</Form.Control>
-				<Form.Description>You may select multiple specialities</Form.Description>
+				<Form.Description>You may select multiple</Form.Description>
 				<Form.FieldErrors />
 			</Form.Field>
-			<Form.Button>Update</Form.Button>
+			<Form.Button class="w-full">Update</Form.Button>
 		</form>
 	</Card.Content>
 </Card.Root>

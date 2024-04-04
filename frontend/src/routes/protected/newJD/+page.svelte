@@ -1,9 +1,18 @@
 <script lang="ts">
 	import type { PageData } from './$types.js';
-	import NewJdForm from './newJDForm.svelte';
+	import NewJDForm from './new-jd-form.svelte';
+	import JDQuestions from './jd-questions.svelte';
 	export let data: PageData;
 </script>
 
-<div class="">
-	<NewJdForm data={data.form} specialities={data.specialities} />
+<div class="flex flex-wrap justify-center space-x-6">
+	<div class="w-96 mb-6">
+	<NewJDForm data={data.form} user={data.user} specialities={data.specialities} />
+</div>
+	
+<div class=mx-auto>
+<JDQuestions/>
+</div>
+
+	<div class="w-96 "></div>
 </div>

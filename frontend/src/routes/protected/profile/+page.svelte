@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import ProfileForm from './ProfileForm.svelte';
-	import Approved from './Approved.svelte';
+	import ProfileForm from './profile-form.svelte';
+	import Approved from './approved.svelte';
 	export let data: PageData;
 </script>
 
-<div class="flex flex-wrap-reverse justify-center">
-	<div class="ml-6 mr-6 w-60">
+<div class="flex flex-wrap-reverse justify-center space-x-6">
+	<div class="w-60 mt-6">
 		<Approved user={data.user}></Approved>
 	</div>
 	<ProfileForm
@@ -16,5 +16,5 @@
 		trusts={data.trusts}
 		specialities={data.specialities}
 	/>
-	<div class="ml-6 mr-6 w-60"></div>
+	<div class="w-60"></div>
 </div>

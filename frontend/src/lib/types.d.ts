@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["2fa3d7b8_controller_obtain_token"];
+        post: operations["864d1457_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["6068c57d_controller_refresh_token"];
+        post: operations["b8084cc3_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["24349d8e_controller_verify_token"];
+        post: operations["a086f90a_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -267,6 +267,14 @@ export interface components {
             /** Specialities */
             specialities: components["schemas"]["SpecialityOut"][];
         };
+        /** TrustOut */
+        TrustOut: {
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            region: components["schemas"]["RegionOut"];
+        };
         /** UserProfileOut */
         UserProfileOut: {
             /** Email */
@@ -277,8 +285,7 @@ export interface components {
             first_name: string | null;
             /** Last Name */
             last_name: string | null;
-            /** Trust */
-            trust: string | null;
+            trust: components["schemas"]["TrustOut"] | null;
             /** Approved Trusts */
             approved_trusts: string[] | null;
             /** Roles */
@@ -323,14 +330,6 @@ export interface components {
         RegionOut: {
             /** Name */
             name: string;
-        };
-        /** TrustOut */
-        TrustOut: {
-            /** Id */
-            id: number;
-            /** Name */
-            name: string;
-            region: components["schemas"]["RegionOut"];
         };
         /** TrustsOut */
         TrustsOut: {
@@ -382,7 +381,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "2fa3d7b8_controller_obtain_token": {
+    "864d1457_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -406,7 +405,7 @@ export interface operations {
             };
         };
     };
-    "6068c57d_controller_refresh_token": {
+    b8084cc3_controller_refresh_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -430,7 +429,7 @@ export interface operations {
             };
         };
     };
-    "24349d8e_controller_verify_token": {
+    a086f90a_controller_verify_token: {
         parameters: {
             query?: never;
             header?: never;

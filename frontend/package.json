@@ -4,8 +4,8 @@
 	"private": true,
 	"scripts": {
 		"generate-api-types": "openapi-typescript http://localhost:8000/api/openapi.json --output src/lib/types.d.ts",
-		"dev": "npm run generate-api-types && vite dev",
-		"build": "npm run generate-api-types && vite build",
+		"dev": "npm run generate-api-types; vite dev",
+		"build": "npm run generate-api-types; vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

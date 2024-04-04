@@ -1,6 +1,6 @@
 <script lang="ts">
-	import LoginTab from './LoginTab.svelte';
-	import RegisterTab from './RegisterTab.svelte';
+	import LoginTab from './login.svelte';
+	import RegisterTab from './register.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import type { PageData } from './$types';

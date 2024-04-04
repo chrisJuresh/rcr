@@ -34,8 +34,8 @@ export const load: PageServerLoad = async (event) => {
 const sendVerificationEmail = async (email, token) => {
 	const verificationUrl = `http://localhost:5173/auth/verify?token=${token}`;
 	console.log(verificationUrl);
-	//const client = new postmark.ServerClient('cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5');
-	//
+	const client = new postmark.ServerClient('cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5');
+
 	//try {
 	//	await client.sendEmail({
 	//		From: 'verify@chrisj.uk',

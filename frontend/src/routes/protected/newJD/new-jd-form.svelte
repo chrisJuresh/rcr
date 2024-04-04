@@ -1,20 +1,26 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import * as Form from '$lib/components/ui/form';
-	import * as Input from '$lib/components/ui/input';
+	import {Input, InputFile} from '$lib/components/ui/input';
 	import { formSchema, type FormSchema } from './schema';
-	import SuperDebug, { type SuperValidated, type Infer, superForm, fileProxy } from 'sveltekit-superforms';
+	import SuperDebug, {
+		type SuperValidated,
+		type Infer,
+		superForm,
+		fileProxy
+	} from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import * as Select from '$lib/components/ui/select';
 	import type { components } from '$lib/types.d.ts';
+	import { toast } from 'svelte-sonner';
+	import LockClosed from 'svelte-radix/LockClosed.svelte';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
+	export let user: components['schemas']['UserProfileOut'];
 	export let specialities: components['schemas']['SpecialitiesOut']['specialities'];
 
-	console.log(data);
-
-	let oncologySpecialities = [];
-	let radiologySpecialities = [];
+	let oncologySpecialities: components['schemas']['SpecialitiesOut']['specialities'];
+	let radiologySpecialities: components['schemas']['SpecialitiesOut']['specialities'];
 
 	const splitSpecialities = () => {
 		oncologySpecialities = specialities.filter((c) => c.consultant_type === 'ONCOLOGY');
@@ -24,7 +30,12 @@
 	splitSpecialities();
 
 	const form = superForm(data, {
-		validators: zodClient(formSchema)
+		validators: zodClient(formSchema),
+		onUpdated: ({ form }) => {
+			if (form.valid) {
+				toast.success('Job Description Saved');
+			}
+		}
 	});
 
 	const { form: formData, enhance } = form;
@@ -48,37 +59,48 @@
 			value: specialityId
 		})) || [];
 
-		
-    const file = fileProxy(formData, 'file');
-
+	const file = fileProxy(formData, 'file');
 </script>
 
 <Card.Root class="neu">
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Create JD</Card.Title>
-		<Card.Description
-			>Submit your Job Description</Card.Description
-		>
+		<Card.Description>Submit your Job Description</Card.Description>
 	</Card.Header>
 	<Card.Content>
 		<form method="POST" use:enhance enctype="multipart/form-data">
 			<Form.Field {form} name="file">
 				<Form.Control let:attrs>
-					<div class="grid w-full max-w-sm items-center gap-1.5">
 						<Form.Label>Job Description File</Form.Label>
-						<Input.File type="file" {...attrs}  bind:files={$file} />
-					</div>
+						<InputFile type="file" {...attrs} bind:files={$file} />
 				</Form.Control>
 				<Form.FieldErrors />
 			</Form.Field>
 
+			<Form.Field {form} name="trust">
+				<Form.Control let:attrs>
+					<Form.Label>Trust</Form.Label>
+					<div class="flex items-center space-x-2">
+					<Input disabled placeholder={user.trust.name}/>
+					<LockClosed class="text-gray-300" />
+					</div>
+					<input name={attrs.name} hidden value={user.trust.id} />
+				</Form.Control>
+				<Form.FieldErrors />
+				<Form.Description>Please edit in the profile page if incorrect</Form.Description>
+			</Form.Field>
+			
 			<Form.Field {form} name="consultant_type">
 				<Form.Control let:attrs>
 					<Form.Label>Consultant Type</Form.Label>
 					<Select.Root
 						selected={selectedConsultantType}
 						onSelectedChange={(v) => {
-							v && ($formData.consultant_type = v.value);
+							if (v && $formData.consultant_type !== v.value) {
+								$formData.consultant_type = v.value;
+								$formData.primary_specialities = []; 								
+								$formData.sub_specialities = []; 	
+							}
 						}}
 					>
 						<Select.Trigger {...attrs}>
@@ -108,7 +130,11 @@
 							<input name={attrs.name} hidden value={speciality} />
 						{/each}
 						<Select.Trigger disabled={$formData.consultant_type ? false : true} {...attrs}>
-							<Select.Value placeholder={$formData.consultant_type ? 'Select your Specialities' : 'Select a Consultant Type first'} />
+							<Select.Value
+								placeholder={$formData.consultant_type
+									? 'Select your Specialities'
+									: 'Select a Consultant Type first'}
+							/>
 						</Select.Trigger>
 						<Select.Content>
 							{#if $formData.consultant_type === 'Radiology'}
@@ -124,7 +150,7 @@
 					</Select.Root>
 				</Form.Control>
 				<Form.FieldErrors />
-				<Form.Description>You may select multiple primary specialities</Form.Description>
+				<Form.Description>You may select multiple</Form.Description>
 			</Form.Field>
 
 			<Form.Field {form} name="sub_specialities">
@@ -140,18 +166,17 @@
 						{#each $formData.sub_specialities as speciality}
 							<input name={attrs.name} hidden value={speciality} />
 						{/each}
-<Select.Trigger 
-disabled={!$formData.consultant_type || $formData.primary_specialities.length === 0}
-  {...attrs}>
-    <Select.Value 
-      placeholder={
-        !$formData.consultant_type 
-          ? 'Select a Consultant Type first' 
-          : $formData.primary_specialities.length === 0
-            ? 'Select a Primary Speciality first' 
-            : 'Select your Specialities'
-      } 
-    />
+						<Select.Trigger
+							disabled={!$formData.consultant_type || $formData.primary_specialities.length === 0}
+							{...attrs}
+						>
+							<Select.Value
+								placeholder={!$formData.consultant_type
+									? 'Select a Consultant Type first'
+									: $formData.primary_specialities.length === 0
+										? 'Select a Primary Speciality first'
+										: 'Select your Specialities'}
+							/>
 						</Select.Trigger>
 						<Select.Content>
 							{#if $formData.consultant_type === 'Radiology'}
@@ -166,11 +191,11 @@ disabled={!$formData.consultant_type || $formData.primary_specialities.length ==
 						</Select.Content>
 					</Select.Root>
 				</Form.Control>
-				<Form.Description>You may select multiple sub specialities</Form.Description>
+				<Form.Description>You may select multiple</Form.Description>
 				<Form.FieldErrors />
 			</Form.Field>
 
-			<Form.Button>Submit</Form.Button>
+			<Form.Button class="w-full">Save</Form.Button>
 		</form>
 	</Card.Content>
 </Card.Root>

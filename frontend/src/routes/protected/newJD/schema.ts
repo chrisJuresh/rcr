@@ -2,8 +2,9 @@ import { z } from 'zod';
 
 export const formSchema = z.object({
 	file: z
-	.instanceof(File, { message: 'Please upload a file.'})
-    .refine((f) => f.size < 100_000, 'Max 100 kB upload size.'),
+		.instanceof(File, { message: 'Please upload a file.' })
+		.refine((f) => f.size < 100_000, 'Max 100 kB upload size.'),
+  	trust: z.any(),
 	consultant_type: z.string().min(1, {
 		message: 'You must select a consultant type.'
 	}),

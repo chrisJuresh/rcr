@@ -17,6 +17,10 @@ class SpecialitiesOut(Schema):
     id: int
     name: str
 
+class TrustOut(Schema):
+    id: int
+    name: str
+
 class UserProfileIn(Schema):
     title: Optional[str] = None
     first_name: Optional[str] = None
@@ -31,7 +35,7 @@ class UserProfileOut(Schema):
     title: Optional[str]
     first_name: Optional[str]
     last_name: Optional[str]
-    trust: Optional[str]
+    trust: Optional[TrustOut]
     approved_trusts: Optional[List[str]]
     roles: Optional[List[str]]
     approved_roles: Optional[List[str]]

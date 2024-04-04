@@ -5,11 +5,6 @@
 
 	export let user: components['schemas']['UserProfileOut'];
 
-	const colorClasses = ['fill-purple-400 text-purple-400'];
-
-	function getRandomColorClass() {
-		return colorClasses[Math.floor(Math.random() * colorClasses.length)];
-	}
 </script>
 
 <Card.Root>
@@ -24,7 +19,7 @@
 		{#each user.approved_roles || [] as approved_roles}
 			<div class="flex items-center">
 				<Dash class="mr-1 h-3 w-3 fill-purple-400 text-purple-400" />
-				<small>{approved_roles.name}<br /></small>
+				<small>{approved_roles}<br /></small>
 			</div>
 		{:else}
 			<div class="flex items-center">

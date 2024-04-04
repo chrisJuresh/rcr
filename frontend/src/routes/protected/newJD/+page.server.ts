@@ -6,14 +6,24 @@ import { zod } from 'sveltekit-superforms/adapters';
 import axios from 'axios';
 import type { components } from '$lib/types.d.ts';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async (event) => {
 	const fetchSpecialities = async () => {
 		const response = await axios.get<components['schemas']['SpecialitiesOut']>(
 			'http://localhost:8000/api/specialities/specialities'
 		);
 		return response.data.specialities;
 	};
+	const fetchUser = async () => {
+		const response = await axios.get<components['schemas']['UserProfileOut']>(
+			'http://localhost:8000/api/users/profile',
+			{
+				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
+			}
+		);
+		return response.data;
+	};
 	return {
+		user: await fetchUser(),
 		specialities: await fetchSpecialities(),
 		form: await superValidate(zod(formSchema))
 	};
@@ -22,7 +32,7 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(formSchema));
-			console.log(form)
+		console.log(form);
 		if (!form.valid) return fail(400, { form });
 
 		const jdData = JSON.stringify({
@@ -44,10 +54,9 @@ export const actions: Actions = {
 					Authorization: `Bearer ${event.cookies.get('token')}`
 				}
 			});
-      		return {form: withFiles(form)}; // this parses the superform object to a serializable object
+			return { form: withFiles(form) }; // this parses the superform object to a serializable object
 		} catch (e) {
 			return setError(form, 'file', e);
 		}
-		
 	}
 };
