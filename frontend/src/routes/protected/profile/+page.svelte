@@ -6,9 +6,10 @@
 </script>
 
 <div class="flex flex-wrap-reverse justify-center space-x-6">
-	<div class="w-60 mt-6">
+	<div class="w-60">
 		<Approved user={data.user}></Approved>
 	</div>
+	<div class="mb-6">
 	<ProfileForm
 		data={data.form}
 		user={data.user}
@@ -16,5 +17,6 @@
 		trusts={data.trusts}
 		specialities={data.specialities}
 	/>
+	</div>
 	<div class="w-60"></div>
 </div>

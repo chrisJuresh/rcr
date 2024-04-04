@@ -10,6 +10,7 @@
 	import Exit from 'svelte-radix/Exit.svelte';
 	import Person from 'svelte-radix/Person.svelte';
 	import EnvelopeClosed from 'svelte-radix/EnvelopeClosed.svelte';
+	import Pencil1 from 'svelte-radix/Pencil1.svelte';
 	import Pencil2 from 'svelte-radix/Pencil2.svelte';
 
 	function handleLogout() {
@@ -19,7 +20,8 @@
 	let buttons = [
 		{ icon: Person, label: 'Profile', path: '/protected/profile' },
 		{ icon: EnvelopeClosed, label: 'Tasks', path: '/protected/panel' },
-		{ icon: Pencil2, label: 'New JD', path: '/protected/newJD' }
+		{ icon: Pencil2, label: 'New JD', path: '/protected/newJD' },
+		{ icon: Pencil1, label: 'Edit JD', path: '/protected/editJD' },
 	];
 
 	function navigateTo(path) {

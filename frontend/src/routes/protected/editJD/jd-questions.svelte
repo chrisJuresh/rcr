@@ -23,5 +23,8 @@
 		<Card.Description>Please fill in the fields below to continue</Card.Description>
 	</Card.Header>
 	<Card.Content>
+		<div class="flex items-center space-x-2">
+		<Input placeholder="JD Reference Number"/>
+		</div>
 	</Card.Content>
 </Card.Root>
