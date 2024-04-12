@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import * as Form from '$lib/components/ui/form';
-	import {Input, InputFile} from '$lib/components/ui/input';
+	import { Input, InputFile } from '$lib/components/ui/input';
 	import { formSchema, type FormSchema } from './schema';
 	import SuperDebug, {
 		type SuperValidated,
@@ -71,8 +71,8 @@
 		<form method="POST" use:enhance enctype="multipart/form-data">
 			<Form.Field {form} name="file">
 				<Form.Control let:attrs>
-						<Form.Label>Job Description File</Form.Label>
-						<InputFile type="file" {...attrs} bind:files={$file} />
+					<Form.Label>Job Description File</Form.Label>
+					<InputFile type="file" {...attrs} bind:files={$file} />
 				</Form.Control>
 				<Form.FieldErrors />
 			</Form.Field>
@@ -81,15 +81,15 @@
 				<Form.Control let:attrs>
 					<Form.Label>Trust</Form.Label>
 					<div class="flex items-center space-x-2">
-					<Input disabled placeholder={user.trust.name}/>
-					<LockClosed class="text-gray-300" />
+						<Input disabled placeholder={user.trust.name} />
+						<LockClosed class="text-gray-300" />
 					</div>
 					<input name={attrs.name} hidden value={user.trust.id} />
 				</Form.Control>
 				<Form.FieldErrors />
 				<Form.Description>Please edit in the profile page if incorrect</Form.Description>
 			</Form.Field>
-			
+
 			<Form.Field {form} name="consultant_type">
 				<Form.Control let:attrs>
 					<Form.Label>Consultant Type</Form.Label>
@@ -98,8 +98,8 @@
 						onSelectedChange={(v) => {
 							if (v && $formData.consultant_type !== v.value) {
 								$formData.consultant_type = v.value;
-								$formData.primary_specialities = []; 								
-								$formData.sub_specialities = []; 	
+								$formData.primary_specialities = [];
+								$formData.sub_specialities = [];
 							}
 						}}
 					>

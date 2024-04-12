@@ -34,9 +34,9 @@
 		oncologySpecialities = specialities.filter((c) => c.consultant_type === 'ONCOLOGY');
 		radiologySpecialities = specialities.filter((c) => c.consultant_type === 'RADIOLOGY');
 	};
-	
+
 	splitSpecialities();
-	
+
 	$: hasRole = (roleNames) => {
 		const roleArray = [].concat(roleNames);
 		if (selectedRoles.length) {
@@ -78,11 +78,10 @@
 			value: specialityId
 		})) || [];
 
-	
 	function rolesPlaceholder() {
 		return user.roles && user.roles.length ? user.roles.join(', ') : 'Select your Roles';
 	}
-	
+
 	$: consultantTypePlaceholder = () => {
 		if (hasRole(['Reviewer', 'Representative'])) {
 			return user.consultant_type || 'Select a Consultant Type';
@@ -124,7 +123,6 @@
 			return 'Select a Role first';
 		}
 	};
-
 </script>
 
 <Card.Root class="neu w-11/12 sm:w-[500px]">
@@ -258,7 +256,7 @@
 						onSelectedChange={(v) => {
 							if (v && $formData.consultant_type !== v.value) {
 								$formData.consultant_type = v.value;
-								$formData.specialities = []; 
+								$formData.specialities = [];
 								consultantTypeMismatch = true;
 							}
 						}}
@@ -283,7 +281,7 @@
 						multiple
 						selected={selectedSpecialities}
 						onSelectedChange={(v) => {
-							($formData.specialities = v.map((speciality) => speciality.value));
+							$formData.specialities = v.map((speciality) => speciality.value);
 							consultantTypeMismatch = false;
 						}}
 					>

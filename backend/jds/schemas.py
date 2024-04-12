@@ -7,6 +7,16 @@ class JDIn(Schema):
     primary_specialities: List[int]
     sub_specialities: Optional[List[int]]
 
+class JDIDsOut(Schema):
+    ids: List[int]
+
+class JDOut(Schema):
+    id: int
+    trust: str
+    consultant_type: str
+    primary_specialities: List[str]
+    sub_specialities: Optional[List[str]]
+
 class PanelJD(Schema):
     id: int
     consultant_type: str

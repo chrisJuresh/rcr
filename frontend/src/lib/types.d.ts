@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["ca713c40_controller_obtain_token"];
+        post: operations["b526d615_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["592cd569_controller_refresh_token"];
+        post: operations["6c862eed_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["c79a92a2_controller_verify_token"];
+        post: operations["612c367e_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -182,7 +182,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** Get Jd */
+        get: operations["jds_api_get_jd"];
         /** Update Jd */
         put: operations["jds_api_update_jd"];
         post?: never;
@@ -192,7 +193,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/jds/jds/": {
+    "/api/jds/jd-panel/": {
         parameters: {
             query?: never;
             header?: never;
@@ -201,6 +202,23 @@ export interface paths {
         };
         /** Get Jd Panel */
         get: operations["jds_api_get_jd_panel"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/jds/jd-ids/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Jd Ids */
+        get: operations["jds_api_get_jd_ids"];
         put?: never;
         post?: never;
         delete?: never;
@@ -354,6 +372,19 @@ export interface components {
             /** Sub Specialities */
             sub_specialities: number[] | null;
         };
+        /** JDOut */
+        JDOut: {
+            /** Id */
+            id: number;
+            /** Trust */
+            trust: string;
+            /** Consultant Type */
+            consultant_type: string;
+            /** Primary Specialities */
+            primary_specialities: string[];
+            /** Sub Specialities */
+            sub_specialities: string[] | null;
+        };
         /** JDPanel */
         JDPanel: {
             /** Jds */
@@ -372,6 +403,11 @@ export interface components {
             /** Date */
             date: string;
         };
+        /** JDIDsOut */
+        JDIDsOut: {
+            /** Ids */
+            ids: number[];
+        };
     };
     responses: never;
     parameters: never;
@@ -381,7 +417,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    ca713c40_controller_obtain_token: {
+    b526d615_controller_obtain_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -405,7 +441,7 @@ export interface operations {
             };
         };
     };
-    "592cd569_controller_refresh_token": {
+    "6c862eed_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -429,7 +465,7 @@ export interface operations {
             };
         };
     };
-    c79a92a2_controller_verify_token: {
+    "612c367e_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -630,6 +666,28 @@ export interface operations {
             };
         };
     };
+    jds_api_get_jd: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jd_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JDOut"];
+                };
+            };
+        };
+    };
     jds_api_update_jd: {
         parameters: {
             query?: never;
@@ -677,6 +735,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JDPanel"];
+                };
+            };
+        };
+    };
+    jds_api_get_jd_ids: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JDIDsOut"];
                 };
             };
         };

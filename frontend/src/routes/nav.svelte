@@ -21,7 +21,7 @@
 		{ icon: Person, label: 'Profile', path: '/protected/profile' },
 		{ icon: EnvelopeClosed, label: 'Tasks', path: '/protected/panel' },
 		{ icon: Pencil2, label: 'New JD', path: '/protected/newJD' },
-		{ icon: Pencil1, label: 'Edit JD', path: '/protected/editJD' },
+		{ icon: Pencil1, label: 'Edit JD', path: '/protected/editJD' }
 	];
 
 	function navigateTo(path) {

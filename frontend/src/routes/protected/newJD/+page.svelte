@@ -4,6 +4,6 @@
 	export let data: PageData;
 </script>
 
-<div >
+<div>
 	<NewJDForm data={data.form} user={data.user} specialities={data.specialities} />
 </div>
