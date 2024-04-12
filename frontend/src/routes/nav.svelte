@@ -32,7 +32,7 @@
 	function updateButtonStyles(activePath) {
 		buttons = buttons.map((button) => ({
 			...button,
-			variant: button.path === activePath ? 'default' : 'outline'
+			variant: activePath.startsWith(button.path) ? 'default' : 'outline'
 		}));
 	}
 
