@@ -27,7 +27,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
         'localhost',
         '0.0.0.0',
-'82.11.126.85'
+'82.11.126.85',
+'chrisj.uk'
         ]
 
 AUTH_USER_MODEL = 'users.User'

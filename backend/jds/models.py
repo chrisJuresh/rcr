@@ -32,21 +32,29 @@ class JDProcess(Process):
     ammended = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
-class JDChecklist(models.Model):
-    jd = models.OneToOneField(JD, related_name='checklist', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.jd.id + ' Checklist')
-
-class ChecklistItem(models.Model):
-    checklist = models.ForeignKey(JDChecklist, related_name='items', on_delete=models.CASCADE)
-
-    consultant_type = models.ManyToManyField(ConsultantType)
+class Question(models.Model):
     question = models.TextField()
-    required = models.BooleanField(default=False)
-    present = models.BooleanField(default=False)
-    page_numbers = models.CharField(max_length=100, blank=True)
-    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.question
+
+class ChecklistQuestion(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    consultant_type = models.ForeignKey(ConsultantType, on_delete=models.CASCADE, related_name='checklists')
+    
+    required = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.consultant_type.name}: {self.question.question}"
+    
+
+class ChecklistAnswer(models.Model):
+    jd = models.ForeignKey(JD, on_delete=models.CASCADE, related_name='answers')
+    checklist_question = models.ForeignKey(ChecklistQuestion, on_delete=models.CASCADE, related_name='answers')
+
+    present = models.BooleanField(default=False)
+    page_numbers = models.CharField(max_length=20, blank=True)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"Answer to {self.checklist_question.question} for JD {self.jd.id}"
