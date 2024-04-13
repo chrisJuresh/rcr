@@ -1,5 +1,6 @@
 from ninja import Schema, Field
 from typing import List, Optional
+from trusts.schemas import TrustOut
 
 class UserIn(Schema):
     email: str = Field(..., pattern=r'^\S+@\S+\.\S+$')
@@ -17,9 +18,9 @@ class SpecialitiesOut(Schema):
     id: int
     name: str
 
-class TrustOut(Schema):
-    id: int
-    name: str
+class UserRolesOut(Schema):
+    roles: List[str]
+    requested_roles: List[str]
 
 class UserProfileIn(Schema):
     title: Optional[str] = None

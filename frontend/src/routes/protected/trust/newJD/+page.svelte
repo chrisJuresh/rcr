@@ -5,5 +5,5 @@
 </script>
 
 <div>
-	<NewJDForm data={data.form} user={data.user} specialities={data.specialities} />
+	<NewJDForm data={data.form} user_trust={data.user_trust} specialities={data.specialities} />
 </div>

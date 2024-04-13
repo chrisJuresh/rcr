@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["b526d615_controller_obtain_token"];
+        post: operations["d481aa66_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["6c862eed_controller_refresh_token"];
+        post: operations["56f72524_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["612c367e_controller_verify_token"];
+        post: operations["01198c2c_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -100,6 +100,40 @@ export interface paths {
         get: operations["users_api_get_profile"];
         /** Update Profile */
         put: operations["users_api_update_profile"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/users/roles/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Roles */
+        get: operations["users_api_get_roles"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/users/trust": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Trust */
+        get: operations["users_api_get_trust"];
+        put?: never;
         post?: never;
         delete?: never;
         options?: never;
@@ -175,7 +209,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/jds/jd/{jd_id}/": {
+    "/api/jds/{jd_id}/": {
         parameters: {
             query?: never;
             header?: never;
@@ -193,7 +227,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/jds/jd-panel/": {
+    "/api/jds/panel": {
         parameters: {
             query?: never;
             header?: never;
@@ -210,7 +244,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/jds/jd-ids/": {
+    "/api/jds/ids": {
         parameters: {
             query?: never;
             header?: never;
@@ -219,6 +253,23 @@ export interface paths {
         };
         /** Get Jd Ids */
         get: operations["jds_api_get_jd_ids"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/jds/{jd_id}/checklist/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Jd Checklist */
+        get: operations["jds_api_get_jd_checklist"];
         put?: never;
         post?: never;
         delete?: never;
@@ -280,6 +331,11 @@ export interface components {
             /** Token */
             token: string;
         };
+        /** RegionOut */
+        RegionOut: {
+            /** Name */
+            name: string;
+        };
         /** SpecialitiesOut */
         SpecialitiesOut: {
             /** Specialities */
@@ -332,6 +388,13 @@ export interface components {
             /** Specialities */
             specialities?: number[] | null;
         };
+        /** UserRolesOut */
+        UserRolesOut: {
+            /** Roles */
+            roles: string[];
+            /** Requested Roles */
+            requested_roles: string[];
+        };
         /** RoleOut */
         RoleOut: {
             /** Id */
@@ -343,11 +406,6 @@ export interface components {
         RolesOut: {
             /** Roles */
             roles: components["schemas"]["RoleOut"][];
-        };
-        /** RegionOut */
-        RegionOut: {
-            /** Name */
-            name: string;
         };
         /** TrustsOut */
         TrustsOut: {
@@ -362,6 +420,11 @@ export interface components {
             name: string;
             /** Consultant Type */
             consultant_type: string;
+        };
+        /** JDID */
+        JDID: {
+            /** Id */
+            id: number;
         };
         /** JDIn */
         JDIn: {
@@ -408,6 +471,36 @@ export interface components {
             /** Ids */
             ids: number[];
         };
+        /** AnswerOut */
+        AnswerOut: {
+            /** Id */
+            id: number;
+            /** Present */
+            present: boolean;
+            /** Page Numbers */
+            page_numbers: string | null;
+            /** Description */
+            description: string | null;
+        };
+        /** ChecklistItemOut */
+        ChecklistItemOut: {
+            question: components["schemas"]["QuestionOut"];
+            answer: components["schemas"]["AnswerOut"];
+        };
+        /** JDChecklistOut */
+        JDChecklistOut: {
+            /** Jd Id */
+            jd_id: number;
+            /** Checklist */
+            checklist: components["schemas"]["ChecklistItemOut"][];
+        };
+        /** QuestionOut */
+        QuestionOut: {
+            /** Text */
+            text: string;
+            /** Required */
+            required: boolean;
+        };
     };
     responses: never;
     parameters: never;
@@ -417,7 +510,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    b526d615_controller_obtain_token: {
+    d481aa66_controller_obtain_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -441,7 +534,7 @@ export interface operations {
             };
         };
     };
-    "6c862eed_controller_refresh_token": {
+    "56f72524_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -465,7 +558,7 @@ export interface operations {
             };
         };
     };
-    "612c367e_controller_verify_token": {
+    "01198c2c_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -577,6 +670,46 @@ export interface operations {
             };
         };
     };
+    users_api_get_roles: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserRolesOut"];
+                };
+            };
+        };
+    };
+    users_api_get_trust: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TrustOut"];
+                };
+            };
+        };
+    };
     roles_api_get_roles: {
         parameters: {
             query?: never;
@@ -662,7 +795,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["JDID"];
+                };
             };
         };
     };
@@ -755,6 +890,28 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JDIDsOut"];
+                };
+            };
+        };
+    };
+    jds_api_get_jd_checklist: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jd_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JDChecklistOut"];
                 };
             };
         };

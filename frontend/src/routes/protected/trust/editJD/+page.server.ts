@@ -3,17 +3,18 @@ import axios from 'axios';
 import type { components } from '$lib/types.d.ts';
 
 export const load: PageServerLoad = async (event) => {
-	const fetchJDIDs = async () => {
-		const response = await axios.get<components['schemas']['JDIDsOut']>(
-			'http://localhost:8000/api/jds/jd-ids',
+	const fetchJDs = async () => {
+		const response = await axios.get<components['schemas']['JDPanel']>(
+			'http://localhost:8000/api/jds/panel',
 			{
 				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 			}
 		);
-		return response.data.ids;
+		console.log(response.data);
+		return response.data.jds;
 	};
 	return {
-		jd_ids: await fetchJDIDs()
+		jds: await fetchJDs()
 	};
 };
 

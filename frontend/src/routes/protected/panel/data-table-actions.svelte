@@ -16,13 +16,13 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
-			<DropdownMenu.Label>Actions (Incompl)</DropdownMenu.Label>
+			<DropdownMenu.Label>Actions</DropdownMenu.Label>
 			<DropdownMenu.Item on:click={() => navigator.clipboard.writeText(id)}>
 				Copy ID
 			</DropdownMenu.Item>
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
-		<DropdownMenu.Item on:click={() => goto(`editJD/${id}`)}>View JD</DropdownMenu.Item>
-		<DropdownMenu.Item on:click={() => goto(`editJD/${id}`)}>Edit JD</DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => goto(`trust/editJD/${id}`)}>View JD</DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => goto(`trust/editJD/${id}`)}>Edit JD</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

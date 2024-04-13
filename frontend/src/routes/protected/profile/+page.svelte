@@ -9,7 +9,7 @@
 	<div class="w-72">
 		<Approved user={data.user}></Approved>
 	</div>
-	<div class="mb-6">
+	<div class="hy-auto mb-6">
 		<ProfileForm
 			data={data.form}
 			user={data.user}
@@ -18,5 +18,5 @@
 			specialities={data.specialities}
 		/>
 	</div>
-	<div class="w-60"></div>
+	<div class="xl:w-72"></div>
 </div>

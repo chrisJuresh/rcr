@@ -16,7 +16,7 @@
 	import LockClosed from 'svelte-radix/LockClosed.svelte';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
-	export let user: components['schemas']['UserProfileOut'];
+	export let user_trust: components['schemas']['TrustOut'];
 	export let specialities: components['schemas']['SpecialitiesOut']['specialities'];
 
 	let oncologySpecialities: components['schemas']['SpecialitiesOut']['specialities'];
@@ -81,10 +81,10 @@
 				<Form.Control let:attrs>
 					<Form.Label>Trust</Form.Label>
 					<div class="flex items-center space-x-2">
-						<Input disabled placeholder={user.trust.name} />
+						<Input disabled placeholder={user_trust.name} />
 						<LockClosed class="text-gray-300" />
 					</div>
-					<input name={attrs.name} hidden value={user.trust.id} />
+					<input name={attrs.name} hidden value={user_trust.id} />
 				</Form.Control>
 				<Form.FieldErrors />
 				<Form.Description>Please edit in the profile page if incorrect</Form.Description>

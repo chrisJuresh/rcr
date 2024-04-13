@@ -16,6 +16,7 @@
 	import LockClosed from 'svelte-radix/LockClosed.svelte';
 	import { Label } from '$lib/components/ui/label';
 	import Dash from 'svelte-radix/Dash.svelte';
+	import { goto } from '$app/navigation';
 
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
@@ -27,21 +28,13 @@
 	export let jd: components['schemas']['JDOut'];
 	export let jd_ids: components['schemas']['JDIDsOut']['ids'];
 
+	$: currentIndex = jd_ids.indexOf(jd.id);
 
-	const currentIndex = jd_ids.indexOf(jd.id);
+	$: previousJDid = currentIndex > 0 ? jd_ids[currentIndex - 1] : undefined;
 
-	const previousJDid = currentIndex > 0 ? jd_ids[currentIndex - 1] : undefined;
-
-	const nextJDid = currentIndex < jd_ids.length - 1 ? jd_ids[currentIndex + 1] : undefined;
+	$: nextJDid = currentIndex < jd_ids.length - 1 ? jd_ids[currentIndex + 1] : undefined;
 
 	console.log(nextJDid, previousJDid);
-
-	
-  function goto(jdId) {
-    const url = `${jdId}`;
-    window.location.href = url;
-  }
-	
 </script>
 
 <Card.Root class="overflow-hidden">
@@ -108,27 +101,37 @@
 		<div class="text-xs text-muted-foreground">
 			Last Updated <time dateTime="2023-11-23">ADD DATE</time>
 		</div>
-{#if ((previousJDid !== undefined) || (nextJDid !== undefined))}
-		<Pagination.Root count={10} class="ml-auto mr-0 w-auto">
-			<Pagination.Content>
-				{#if previousJDid !== undefined}
-				<Pagination.Item>
-					<Button on:click={() => goto(`${previousJDid}`)} size="icon" variant="outline" class="h-6 w-6">
-						<ChevronLeft class="h-3.5 w-3.5" />
-						<span class="sr-only">Previous JD</span>
-					</Button>
-				</Pagination.Item>
-				{/if}
-				{#if nextJDid !== undefined}
-				<Pagination.Item>
-					<Button on:click={() => goto(`${nextJDid}`)} size="icon" variant="outline" class="h-6 w-6">
-						<ChevronRight class="h-3.5 w-3.5" />
-						<span class="sr-only">Next JD</span>
-					</Button>
-				</Pagination.Item>
-				{/if}
-			</Pagination.Content>
-		</Pagination.Root>
+		{#if previousJDid !== undefined || nextJDid !== undefined}
+			<Pagination.Root count={10} class="ml-auto mr-0 w-auto">
+				<Pagination.Content>
+					{#if previousJDid !== undefined}
+						<Pagination.Item>
+							<Button
+								on:click={() => goto(`${previousJDid}`)}
+								size="icon"
+								variant="outline"
+								class="h-6 w-6"
+							>
+								<ChevronLeft class="h-3.5 w-3.5" />
+								<span class="sr-only">Previous JD</span>
+							</Button>
+						</Pagination.Item>
+					{/if}
+					{#if nextJDid !== undefined}
+						<Pagination.Item>
+							<Button
+								on:click={() => goto(`${nextJDid}`)}
+								size="icon"
+								variant="outline"
+								class="h-6 w-6"
+							>
+								<ChevronRight class="h-3.5 w-3.5" />
+								<span class="sr-only">Next JD</span>
+							</Button>
+						</Pagination.Item>
+					{/if}
+				</Pagination.Content>
+			</Pagination.Root>
 		{/if}
 	</Card.Footer>
 </Card.Root>

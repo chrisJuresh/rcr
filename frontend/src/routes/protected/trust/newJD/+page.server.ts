@@ -1,7 +1,7 @@
 import type { PageServerLoad, Actions } from './$types.js';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { superValidate, message, setError, withFiles } from 'sveltekit-superforms';
-import { formSchema } from './schema';
+import { formSchema } from './schema.js';
 import { zod } from 'sveltekit-superforms/adapters';
 import axios from 'axios';
 import type { components } from '$lib/types.d.ts';
@@ -13,9 +13,9 @@ export const load: PageServerLoad = async (event) => {
 		);
 		return response.data.specialities;
 	};
-	const fetchUser = async () => {
-		const response = await axios.get<components['schemas']['UserProfileOut']>(
-			'http://localhost:8000/api/users/profile',
+	const fetchUserTrust = async () => {
+		const response = await axios.get<components['schemas']['TrustOut']>(
+			'http://localhost:8000/api/users/trust',
 			{
 				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
 			}
@@ -23,7 +23,7 @@ export const load: PageServerLoad = async (event) => {
 		return response.data;
 	};
 	return {
-		user: await fetchUser(),
+		user_trust: await fetchUserTrust(),
 		specialities: await fetchSpecialities(),
 		form: await superValidate(zod(formSchema))
 	};
@@ -48,15 +48,26 @@ export const actions: Actions = {
 
 		console.log(formData);
 
+		let success = false;
+		let response;
+
 		try {
-			await axios.post('http://localhost:8000/api/jds/jd/', formData, {
-				headers: {
-					Authorization: `Bearer ${event.cookies.get('token')}`
+			response = await axios.post<components['schemas']['JDID']>(
+				'http://localhost:8000/api/jds/jd/',
+				formData,
+				{
+					headers: {
+						Authorization: `Bearer ${event.cookies.get('token')}`
+					}
 				}
-			});
-			return { form: withFiles(form) }; // this parses the superform object to a serializable object
+			);
+			success = true;
 		} catch (e) {
 			return setError(form, 'file', e);
+		}
+
+		if (success) {
+			redirect(302, `/protected/trust/editJD/${response.data.id}`);
 		}
 	}
 };

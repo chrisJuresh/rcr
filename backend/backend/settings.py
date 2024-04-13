@@ -79,7 +79,6 @@ MIDDLEWARE = [
 
 ]
 
-
 ROOT_URLCONF = 'backend.urls'
 
 

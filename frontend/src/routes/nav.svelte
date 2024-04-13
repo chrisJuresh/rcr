@@ -1,9 +1,11 @@
-<script>
+<script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { setMode, resetMode } from 'mode-watcher';
+	import type { components } from '$lib/types';
+	import { rolesStore } from '$lib/store.js';
 
 	import Sun from 'svelte-radix/Sun.svelte';
 	import Moon from 'svelte-radix/Moon.svelte';
@@ -13,28 +15,53 @@
 	import Pencil1 from 'svelte-radix/Pencil1.svelte';
 	import Pencil2 from 'svelte-radix/Pencil2.svelte';
 
+let stateValue = [];
+rolesStore.subscribe(items => {
+    stateValue = items.map(item => item.label);
+    console.log("stateValue: ", stateValue); 
+});
+
+	export let user_roles: components['schemas']['UserRolesOut'];
+	console.log("user_roles: ", user_roles);
+
 	function handleLogout() {
 		goto('/logout');
 	}
 
-	let buttons = [
-		{ icon: Person, label: 'Profile', path: '/protected/profile' },
-		{ icon: EnvelopeClosed, label: 'Tasks', path: '/protected/panel' },
-		{ icon: Pencil2, label: 'New JD', path: '/protected/newJD' },
-		{ icon: Pencil1, label: 'Edit JD', path: '/protected/editJD' }
-	];
-
 	function navigateTo(path) {
+		rolesStore.set([]);
 		goto(path);
 		updateButtonStyles(path);
 	}
+    
+    let baseButtons = [
+        { icon: Person, label: 'Profile', path: '/protected/profile', variant: 'outline', disabled: false },
+        { icon: EnvelopeClosed, label: 'Tasks', path: '/protected/panel', variant: 'outline', disabled: false },
+    ];
 
-	function updateButtonStyles(activePath) {
-		buttons = buttons.map((button) => ({
-			...button,
-			variant: activePath.startsWith(button.path) ? 'default' : 'outline'
-		}));
-	}
+    let buttons = [];
+
+    $: {
+        let isTrustEmployee = user_roles.roles?.includes('Trust Employee');
+        let additionalButtons = isTrustEmployee ? [
+            { icon: Pencil2, label: 'New JD', path: '/protected/trust/newJD', variant: 'outline', disabled: false },
+            { icon: Pencil1, label: 'Edit JD', path: '/protected/trust/editJD', variant: 'outline', disabled: false }
+        ] : ((!isTrustEmployee && stateValue.includes('Trust Employee'), (!isTrustEmployee && user_roles.requested_roles?.includes('Trust Employee'))) ? [
+            { icon: Pencil2, label: 'New JD', path: '/protected/trust/newJD', variant: 'secondary', disabled: true },
+            { icon: Pencil1, label: 'Edit JD', path: '/protected/trust/editJD', variant: 'secondary', disabled: true }
+        ] : []);
+
+        buttons = [...baseButtons, ...additionalButtons];
+
+        updateButtonStyles($page.url.pathname);
+    }
+
+    function updateButtonStyles(activePath) {
+        buttons = buttons.map(button => ({
+            ...button,
+            variant: button.variant === 'secondary' ? 'secondary' : (activePath.startsWith(button.path) ? 'default' : 'outline'),
+        }));
+    }
 
 	$: updateButtonStyles($page.url.pathname);
 </script>
@@ -63,8 +90,8 @@
 		</li>
 		{#if $page.url.pathname !== '/auth'}
 			<li class="col-span-3 m-6 place-self-center">
-				{#each buttons as { icon, label, path, variant }}
-					<Button on:click={() => navigateTo(path)} {variant} class="mx-2">
+				{#each buttons as { icon, label, path, variant, disabled }}
+    <Button on:click={disabled ? null : () => navigateTo(path)} {variant} disabled={disabled} class="mx-2">
 						<svelte:component this={icon} class="mr-2 h-4 w-4" />
 						{label}</Button
 					>

@@ -14,5 +14,5 @@ def get_user_trusts(user, status):
         return [user_trust.trust.name for user_trust in user_trusts]
 
 def get_user_trust(user):
-    user_trust = UserTrust.objects.filter(user=user, requested=True, approved=True).first()
-    return user_trust.trust if user_trust else None
+    user_trust = user.user_trusts.filter(requested=True, approved=True)
+    return user_trust.first().trust if user_trust else None

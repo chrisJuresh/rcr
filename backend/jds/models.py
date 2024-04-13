@@ -33,24 +33,25 @@ class JDProcess(Process):
     approved = models.BooleanField(default=False)
 
 class Question(models.Model):
-    question = models.TextField()
+    text = models.TextField()
 
     def __str__(self):
-        return self.question
+        return self.text
 
 class ChecklistQuestion(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    consultant_type = models.ForeignKey(ConsultantType, on_delete=models.CASCADE, related_name='checklists')
+    consultant_type = models.ForeignKey(ConsultantType, on_delete=models.CASCADE, related_name='checklist_questions')
     
     required = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.consultant_type.name}: {self.question.question}"
+        return f"{self.consultant_type.name}: {self.question.text}"
     
 
 class ChecklistAnswer(models.Model):
-    jd = models.ForeignKey(JD, on_delete=models.CASCADE, related_name='answers')
-    checklist_question = models.ForeignKey(ChecklistQuestion, on_delete=models.CASCADE, related_name='answers')
+    jd = models.ForeignKey(JD, on_delete=models.CASCADE, related_name='checklist_answers')
+    checklist_question = models.ForeignKey(ChecklistQuestion, on_delete=models.CASCADE, related_name='checklist_answers')
 
     present = models.BooleanField(default=False)
     page_numbers = models.CharField(max_length=20, blank=True)

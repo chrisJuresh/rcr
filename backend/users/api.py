@@ -12,7 +12,11 @@ from .services import (
     user_exists,
     get_tokens_for_user
 )
+from trusts.services import get_user_trust, get_user_trusts
+from roles.services import get_user_roles
 from .models import UnauthenticatedUser
+from .schemas import UserRolesOut
+from trusts.schemas import TrustOut
 
 router = Router()
 
@@ -43,3 +47,18 @@ def update_profile(request, payload: UserProfileIn):
     update_user_profile(request.auth, payload)
     profile = get_user_profile(request.user)
     return profile
+
+@router.get("/roles/", auth=JWTAuth(), response=UserRolesOut)
+def get_roles(request):
+    return {
+        "roles": get_user_roles(request.auth, ['approved', 'requested']),
+        "requested_roles": get_user_roles(request.auth, ['requested'])
+    }
+
+@router.get("trust", auth=JWTAuth(), response=TrustOut)
+def get_trust(request):
+    return {
+        "id": get_user_trust(request.auth).id,
+        "name": get_user_trust(request.auth).name,
+        "region": {"name": get_user_trust(request.auth).region.name}
+    }

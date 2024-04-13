@@ -1,6 +1,8 @@
 from ninja import Schema
 from typing import List, Optional
 
+class JDID(Schema):
+    id: int
 
 class JDIn(Schema):
     consultant_type: str

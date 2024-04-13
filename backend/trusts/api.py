@@ -1,19 +1,8 @@
-from typing import List
-from ninja import Router, Schema
 from .models import Trust
+from .schemas import TrustsOut
+from ninja import Router
 
 router = Router()
-
-class RegionOut(Schema):
-    name: str
-
-class TrustOut(Schema):
-    id: int
-    name: str
-    region: RegionOut
-
-class TrustsOut(Schema):
-    trusts: List[TrustOut]
 
 @router.get("/trusts/", response=TrustsOut)
 def get_trusts(request):

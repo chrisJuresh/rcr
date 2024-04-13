@@ -5,6 +5,8 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import Nav from './nav.svelte';
 	import Logo from '$lib/icons/logo.svelte';
+	import type { PageData } from './$types';
+	export let data: PageData;
 
 	let size = 4;
 </script>
@@ -12,12 +14,14 @@
 <div class="flex min-h-screen flex-col">
 	<svlete:head>
 		<header class="fixed w-full" class:bar-head={$page.url.pathname !== '/auth'}>
-			<Nav />
+			<Nav user_roles={data.user_roles} />
 		</header>
 	</svlete:head>
 
-	<div class="mt-24 flex flex-grow items-center justify-center">
-		<slot />
+	<div class="mt-24 flex flex-grow justify-center">
+		<div class="my-auto">
+			<slot />
+		</div>
 	</div>
 
 	<footer class="w-full">

@@ -4,8 +4,6 @@
 	export let data: PageData;
 </script>
 
-<div class="flex flex-wrap justify-center space-x-6">
-	<div class="w-64">
-		<SelectJD jd_ids={data.jd_ids} />
-	</div>
+<div class="w-11/12 justify-center lg:w-[1080px]">
+	<SelectJD jds={data.jds} />
 </div>

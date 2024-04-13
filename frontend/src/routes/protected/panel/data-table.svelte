@@ -8,6 +8,7 @@
 		addHiddenColumns
 	} from 'svelte-headless-table/plugins';
 	import DataTableActions from './data-table-actions.svelte';
+	import EditJDAction from './edit-jd-action.svelte';
 	import { readable } from 'svelte/store';
 	import ArrowUpDown from 'lucide-svelte/icons/arrow-up-down';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
@@ -15,6 +16,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { page } from '$app/stores';
 
 	export let jds: components['schemas']['JDPanel']['jds'];
 
@@ -66,9 +68,13 @@
 		}),
 		table.column({
 			accessor: ({ id }) => id,
-			header: '',
+			header: 'Edit',
 			cell: ({ value }) => {
-				return createRender(DataTableActions, { id: value });
+				if ($page.url.pathname === '/protected/panel') {
+					return createRender(DataTableActions, { id: value });
+				} else if ($page.url.pathname === '/protected/trust/editJD') {
+					return createRender(EditJDAction, { id: value });
+				}
 			}
 		})
 	]);
