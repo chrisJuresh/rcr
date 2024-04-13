@@ -15,10 +15,9 @@
 	import Pencil1 from 'svelte-radix/Pencil1.svelte';
 	import Pencil2 from 'svelte-radix/Pencil2.svelte';
 
-let stateValue = [];
+	let stateValue: string[] = [];
 rolesStore.subscribe(items => {
-    stateValue = items.map(item => item.label);
-    console.log("stateValue: ", stateValue); 
+    stateValue = Array.isArray(items) ? items.map(item => item.label) : [];
 });
 
 	export let user_roles: components['schemas']['UserRolesOut'];
@@ -28,7 +27,7 @@ rolesStore.subscribe(items => {
 		goto('/logout');
 	}
 
-	function navigateTo(path) {
+	function navigateTo(path: string) {
 		rolesStore.set([]);
 		goto(path);
 		updateButtonStyles(path);
@@ -39,14 +38,22 @@ rolesStore.subscribe(items => {
         { icon: EnvelopeClosed, label: 'Tasks', path: '/protected/panel', variant: 'outline', disabled: false },
     ];
 
-    let buttons = [];
+type ButtonType = {
+    icon: any,
+    label: string,
+    path: string,
+    variant: string,
+    disabled: boolean
+};
+
+let buttons: ButtonType[] = [];
 
     $: {
         let isTrustEmployee = user_roles.roles?.includes('Trust Employee');
         let additionalButtons = isTrustEmployee ? [
             { icon: Pencil2, label: 'New JD', path: '/protected/trust/newJD', variant: 'outline', disabled: false },
             { icon: Pencil1, label: 'Edit JD', path: '/protected/trust/editJD', variant: 'outline', disabled: false }
-        ] : ((!isTrustEmployee && stateValue.includes('Trust Employee'), (!isTrustEmployee && user_roles.requested_roles?.includes('Trust Employee'))) ? [
+        ] : ((!isTrustEmployee && stateValue.includes('Trust Employee') || (!isTrustEmployee && user_roles.requested_roles?.includes('Trust Employee'))) ? [
             { icon: Pencil2, label: 'New JD', path: '/protected/trust/newJD', variant: 'secondary', disabled: true },
             { icon: Pencil1, label: 'Edit JD', path: '/protected/trust/editJD', variant: 'secondary', disabled: true }
         ] : []);
@@ -56,7 +63,7 @@ rolesStore.subscribe(items => {
         updateButtonStyles($page.url.pathname);
     }
 
-    function updateButtonStyles(activePath) {
+    function updateButtonStyles(activePath: string) {
         buttons = buttons.map(button => ({
             ...button,
             variant: button.variant === 'secondary' ? 'secondary' : (activePath.startsWith(button.path) ? 'default' : 'outline'),

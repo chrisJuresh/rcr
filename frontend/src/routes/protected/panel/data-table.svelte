@@ -67,13 +67,15 @@
 			header: 'Date'
 		}),
 		table.column({
-			accessor: ({ id }) => id,
+			accessor: ({ id }) => id.toString(),
 			header: 'Edit',
 			cell: ({ value }) => {
 				if ($page.url.pathname === '/protected/panel') {
 					return createRender(DataTableActions, { id: value });
 				} else if ($page.url.pathname === '/protected/trust/editJD') {
 					return createRender(EditJDAction, { id: value });
+				} else {
+					return createRender(DataTableActions, { id: value })
 				}
 			}
 		})
