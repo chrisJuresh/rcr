@@ -18,5 +18,5 @@
 			specialities={data.specialities}
 		/>
 	</div>
-	<div class="xl:w-72"></div>
+	<div class="2xl:w-72"></div>
 </div>

@@ -1,17 +1,34 @@
 import { z } from 'zod';
 
 export const formSchema = z.object({
-	file: z
-		.instanceof(File, { message: 'Please upload a file.' })
-		.refine((f) => f.size < 100_000, 'Max 100 kB upload size.'),
-	trust: z.any(),
-	consultant_type: z.string().min(1, {
-		message: 'You must select a consultant type.'
-	}),
-	primary_specialities: z.array(z.number()).min(1, {
-		message: 'At least one primary speciality must be selected.'
-	}),
-	sub_specialities: z.array(z.number())
+	jd_id: z.number(),
+	checklist: z.array(
+		z
+			.object({
+				question: z.object({
+					text: z.string(),
+					required: z.boolean()
+				}),
+				answer: z.object({
+					id: z.number(),
+					present: z.boolean().nullable(),
+					page_numbers: z.string().nullable(),
+					description: z.string().nullable()
+				})
+			})
+			.refine(
+				(item) => {
+					if (item.question.required) {
+						return item.answer.page_numbers != '';
+					}
+					return true;
+				},
+				{
+					message: 'required',
+					path: ['answer', 'page_numbers']
+				}
+			)
+	)
 });
 
 export type FormSchema = typeof formSchema;

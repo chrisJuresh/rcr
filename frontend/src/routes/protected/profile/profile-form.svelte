@@ -128,7 +128,7 @@
 	};
 </script>
 
-<Card.Root class="neu w-11/12 sm:w-[500px]">
+<Card.Root class="neu w-11/12">
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Edit Profile</Card.Title>
 		<Card.Description>{user.email}</Card.Description>

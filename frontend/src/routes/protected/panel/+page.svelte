@@ -5,9 +5,10 @@
 	export let data: PageData;
 </script>
 
-<Card.Root class="neu w-11/12 lg:w-[1080px]">
+<Card.Root class="neu w-11/12 2xl:w-6/12">
 	<Card.Header>
-		<Card.Title class="text-2xl font-bold">Your Tasks</Card.Title>
+		<Card.Title class="text-2xl font-bold">Panel</Card.Title>
+		<Card.Description>Here are your tasks</Card.Description>
 	</Card.Header>
 	<Card.Content>
 		<DataTable jds={data.jds} />

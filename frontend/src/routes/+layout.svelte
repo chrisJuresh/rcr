@@ -19,7 +19,7 @@
 	</svlete:head>
 
 	<div class="mt-24 flex flex-grow justify-center">
-		<div class="my-auto">
+		<div class="my-auto flex w-full items-center justify-center">
 			<slot />
 		</div>
 	</div>
