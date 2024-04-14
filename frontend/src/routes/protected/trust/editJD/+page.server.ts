@@ -1,25 +1,9 @@
-import type { PageServerLoad, Actions } from './$types.js';
-import axios from 'axios';
-import type { components } from '$lib/types.d.ts';
+import type { PageServerLoad } from './$types';
+import { getJDPanel } from '$lib/api';
 
-export const load: PageServerLoad = async (event) => {
-	const fetchJDs = async () => {
-		const response = await axios.get<components['schemas']['JDPanel']>(
-			'http://localhost:8000/api/jds/panel',
-			{
-				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
-			}
-		);
-		console.log(response.data);
-		return response.data.jds;
-	};
+export const load: PageServerLoad = async ({ cookies }) => {
+	const token = cookies.get('token');
 	return {
-		jds: await fetchJDs()
+		jds: await getJDPanel(token)
 	};
-};
-
-export const actions: Actions = {
-	default: async (event) => {
-		return;
-	}
 };

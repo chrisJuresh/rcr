@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import axios from 'axios';
+import { registerAuthenticateUser } from '$lib/api';
 
 const setTokenCookie = (event, value: string): void => {
 	event.cookies.set('token', value, {
@@ -15,10 +15,10 @@ export const load: PageServerLoad = async (event) => {
 	const urlToken = event.url.searchParams.get('token');
 	if (urlToken) {
 		try {
-			const response = await axios.post('http://localhost:8000/api/users/register-authenticate', {
+			const response = await registerAuthenticateUser({
 				token: urlToken
 			});
-			setTokenCookie(event, response.data.access);
+			setTokenCookie(event, response.access);
 		} catch {
 			// Do nothing
 		}

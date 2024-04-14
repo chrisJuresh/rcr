@@ -1,12 +1,12 @@
 import { redirect, type Handle } from '@sveltejs/kit';
-import axios from 'axios';
+import { verifyUser } from '$lib/api';
 
 export const handle: Handle = async ({ event, resolve }) => {
+	
+	const token = event.cookies.get('token');
 	if (event.url.pathname.startsWith('/protected')) {
 		try {
-			await axios.post('http://localhost:8000/api/token/verify', {
-				token: event.cookies.get('token')
-			});
+			await verifyUser(token);
 		} catch {
 			redirect(303, '/auth');
 		}

@@ -1,12 +1,11 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import axios from 'axios';
+import { verifyUser } from '$lib/api';
 
-export const load: PageServerLoad = async (event) => {
+export const load: PageServerLoad = async ({ cookies }) => {
+	const token = cookies.get('token');
 	try {
-		await axios.post('http://localhost:8000/api/token/verify', {
-			token: event.cookies.get('token')
-		});
+		await verifyUser(token);
 	} catch {
 		redirect(303, '/auth');
 	}

@@ -75,7 +75,7 @@
 				} else if ($page.url.pathname === '/protected/trust/editJD') {
 					return createRender(EditJDAction, { id: value });
 				} else {
-					return createRender(DataTableActions, { id: value })
+					return createRender(DataTableActions, { id: value });
 				}
 			}
 		})

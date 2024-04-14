@@ -4,17 +4,15 @@ import { superValidate, setError } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { loginFormSchema, registerFormSchema } from './schema';
 import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
 import postmark from 'postmark';
+import { verifyUser, loginUser, registerUnauthenticatedUser } from '$lib/api';
 
-export const load: PageServerLoad = async (event) => {
-	const token = event.cookies.get('token');
+export const load: PageServerLoad = async ({ cookies }) => {
+	const token = cookies.get('token');
 	let success = false;
 	if (token) {
 		try {
-			await axios.post('http://localhost:8000/api/token/verify', {
-				token: token
-			});
+			await verifyUser(token);
 			success = true;
 		} catch {
 			// Stay on auth page
@@ -70,11 +68,8 @@ export const actions: Actions = {
 
 		let success = false;
 		try {
-			const response = await axios.post('http://localhost:8000/api/token/pair', {
-				email: form.data.email,
-				password: form.data.password
-			});
-			setTokenCookie(event, response.data.access);
+			const response = await loginUser(form.data);
+			setTokenCookie(event, response.access);
 			success = true;
 		} catch (e) {
 			return setError(form, '', e.response.data.detail);
@@ -93,7 +88,7 @@ export const actions: Actions = {
 
 		const verificationToken = uuidv4();
 		try {
-			await axios.post('http://localhost:8000/api/users/register-unauthenticated', {
+			await registerUnauthenticatedUser({
 				email: form.data.email,
 				password: form.data.password,
 				token: verificationToken

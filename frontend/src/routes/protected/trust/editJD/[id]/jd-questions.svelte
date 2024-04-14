@@ -47,11 +47,10 @@
 				{/each}
 			</Table.Body>
 			<Table.Caption>
-				<div class="flex justify-end mb-2 mr-2">
-		<Button>Submit</Button>
-		</div>
-	</Table.Caption>
+				<div class="mb-2 mr-2 flex justify-end">
+					<Button>Submit</Button>
+				</div>
+			</Table.Caption>
 		</Table.Root>
-
 	</Card.Content>
 </Card.Root>

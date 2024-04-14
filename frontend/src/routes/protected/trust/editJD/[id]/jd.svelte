@@ -26,13 +26,13 @@
 	import { Separator } from '$lib/components/ui/separator';
 
 	export let jd: components['schemas']['JDOut'];
-	export let jd_ids: components['schemas']['JDIDsOut']['ids'];
+	export let jd_ids: components['schemas']['JDIDsOut'];
 
-	$: currentIndex = jd_ids.indexOf(jd.id);
+	$: currentIndex = jd_ids.ids.indexOf(jd.id);
 
-	$: previousJDid = currentIndex > 0 ? jd_ids[currentIndex - 1] : undefined;
+	$: previousJDid = currentIndex > 0 ? jd_ids.ids[currentIndex - 1] : undefined;
 
-	$: nextJDid = currentIndex < jd_ids.length - 1 ? jd_ids[currentIndex + 1] : undefined;
+	$: nextJDid = currentIndex < jd_ids.ids.length - 1 ? jd_ids.ids[currentIndex + 1] : undefined;
 
 	console.log(nextJDid, previousJDid);
 </script>

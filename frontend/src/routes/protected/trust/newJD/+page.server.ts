@@ -1,30 +1,15 @@
 import type { PageServerLoad, Actions } from './$types.js';
 import { fail, redirect } from '@sveltejs/kit';
-import { superValidate, message, setError, withFiles } from 'sveltekit-superforms';
+import { superValidate, setError } from 'sveltekit-superforms';
 import { formSchema } from './schema.js';
 import { zod } from 'sveltekit-superforms/adapters';
-import axios from 'axios';
-import type { components } from '$lib/types.d.ts';
+import { getUserTrust, getSpecialities, postJD } from '$lib/api.js';
 
-export const load: PageServerLoad = async (event) => {
-	const fetchSpecialities = async () => {
-		const response = await axios.get<components['schemas']['SpecialitiesOut']>(
-			'http://localhost:8000/api/specialities/specialities'
-		);
-		return response.data.specialities;
-	};
-	const fetchUserTrust = async () => {
-		const response = await axios.get<components['schemas']['TrustOut']>(
-			'http://localhost:8000/api/users/trust',
-			{
-				headers: { Authorization: `Bearer ${event.cookies.get('token')}` }
-			}
-		);
-		return response.data;
-	};
+export const load: PageServerLoad = async ({ cookies }) => {
+	const token = cookies.get('token');
 	return {
-		user_trust: await fetchUserTrust(),
-		specialities: await fetchSpecialities(),
+		user_trust: await getUserTrust(token),
+		specialities: await getSpecialities(),
 		form: await superValidate(zod(formSchema))
 	};
 };
@@ -51,23 +36,16 @@ export const actions: Actions = {
 		let success = false;
 		let response;
 
+		const token = event.cookies.get('token');
 		try {
-			response = await axios.post<components['schemas']['JDID']>(
-				'http://localhost:8000/api/jds/jd/',
-				formData,
-				{
-					headers: {
-						Authorization: `Bearer ${event.cookies.get('token')}`
-					}
-				}
-			);
+			response = await postJD(formData, token);
 			success = true;
 		} catch (e) {
 			return setError(form, 'file', e);
 		}
 
 		if (success) {
-			redirect(302, `/protected/trust/editJD/${response.data.id}`);
+			redirect(302, `/protected/trust/editJD/${response.id}`);
 		}
 	}
 };
