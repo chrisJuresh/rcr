@@ -119,7 +119,7 @@
 
 	$: trustPlaceholder = () => {
 		if (hasRole(['Reviewer', 'Representative', 'Trust Employee'])) {
-			return user.trust.name || 'Select your trust';
+			return user.trust?.name || 'Select your trust';
 		} else if (hasRole('RCR Employee')) {
 			return 'RCR Employees do not have trusts';
 		} else {
@@ -128,7 +128,7 @@
 	};
 </script>
 
-<Card.Root class="neu w-11/12">
+<Card.Root class="neu">
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Edit Profile</Card.Title>
 		<Card.Description>{user.email}</Card.Description>

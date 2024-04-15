@@ -5,11 +5,11 @@
 	export let data: PageData;
 </script>
 
-<div class="flex flex-wrap-reverse justify-center space-x-6">
-	<div class="w-72">
+<div class="flex flex-wrap-reverse justify-center w-11/12">
+	<div class="md:max-w-80 md:min-w-80 min-w-96 max-w-96">
 		<Approved user={data.user}></Approved>
 	</div>
-	<div class="hy-auto mb-6">
+	<div class="min-w-96 w-11/12 md:w-9/12 lg:w-5/12 xl:w-5/12 2xl:w-4/12 max-w-xl mb-6 mx-6">
 		<ProfileForm
 			data={data.form}
 			user={data.user}
@@ -18,5 +18,5 @@
 			specialities={data.specialities}
 		/>
 	</div>
-	<div class="2xl:w-72"></div>
+	<div class="2xl:w-80 2xl:block hidden"></div>
 </div>

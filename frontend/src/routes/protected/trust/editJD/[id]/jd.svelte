@@ -37,7 +37,7 @@
 	console.log(nextJDid, previousJDid);
 </script>
 
-<Card.Root class="overflow-hidden">
+<Card.Root>
 	<Card.Header class="flex flex-row items-start bg-muted/50">
 		<div class="grid gap-0.5">
 			<Card.Title class="group flex items-center gap-2 text-lg">
@@ -57,8 +57,8 @@
 			<LockClosed class="text-muted-foreground" />
 		</div>
 	</Card.Header>
-	<Card.Content class="p-6 text-sm">
-		<div class="grid gap-3">
+	<Card.Content class="flex-1 p-6 text-sm">
+		<div class="grid gap-3 h-full">
 			<div class="font-semibold">Job Description</div>
 			<ul class="grid gap-3">
 				<li class="flex items-center justify-between">

@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import { setMode, resetMode } from 'mode-watcher';
 	import type { components } from '$lib/types';
-	import { rolesStore } from '$lib/store.ts';
+	import { rolesStore } from '$lib/store';
 
 	import Sun from 'svelte-radix/Sun.svelte';
 	import Moon from 'svelte-radix/Moon.svelte';
@@ -142,15 +142,15 @@
 			</DropdownMenu.Root>
 		</li>
 		{#if $page.url.pathname !== '/auth'}
-			<li class="col-span-3 m-6 place-self-center">
+			<li class="col-span-3 m-4 flex flex-wrap justify-center">
 				{#each buttons as { icon, label, path, variant, disabled }}
 					<Button
 						on:click={disabled ? null : () => navigateTo(path)}
 						{variant}
 						{disabled}
-						class="mx-2"
+						class="m-2 w-28"
 					>
-						<svelte:component this={icon} class="mr-2 h-4 w-4" />
+						<svelte:component this={icon} class="mr-2 h-4 w-4 " />
 						{label}</Button
 					>
 				{/each}

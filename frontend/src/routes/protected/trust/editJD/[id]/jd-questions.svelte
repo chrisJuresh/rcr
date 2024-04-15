@@ -27,7 +27,7 @@
 
 	const isSubmitted = writable(false);
 
-	function handleSubmit(event) {
+	function handleSubmit() {
 		isSubmitted.set(true);
 	}
 </script>
@@ -38,7 +38,7 @@
 		<Card.Description>Please fill in the form to continue</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<form use:enhance={handleSubmit} method="POST" on:submit|preventDefault={handleSubmit}>
+		<form use:enhance method="POST" on:submit|preventDefault={handleSubmit}>
 			<Table.Root>
 				<Form.Fieldset {form} name="checklist">
 					<Table.Header>
@@ -56,6 +56,9 @@
 									<Form.ElementField {form} name="checklist[{i}].question.text">
 										<Form.Control let:attrs>
 											<Form.Label>{$formData.checklist[i].question.text}</Form.Label>
+											{#if $formData.checklist[i].question.required}
+												<Label class="text-red-500">*</Label>
+											{/if}
 											{#if $isSubmitted}
 												<Form.FieldErrors />
 											{/if}

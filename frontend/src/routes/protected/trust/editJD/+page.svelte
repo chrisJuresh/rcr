@@ -5,7 +5,7 @@
 	export let data: PageData;
 </script>
 
-<Card.Root class="neu w-11/12 2xl:w-6/12">
+<Card.Root class="h-min neu w-11/12 2xl:w-6/12">
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Find JD</Card.Title>
 		<Card.Description>Please select the JD that you would like to edit</Card.Description>

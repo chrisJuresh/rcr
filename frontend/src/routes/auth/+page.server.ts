@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import postmark from 'postmark';
 import { verifyUser, loginUser, registerUnauthenticatedUser } from '$lib/api';
 
-export const load: PageServerLoad = async ({ cookies }) => {
+export const load: PageServerLoad = async ({ cookies, url }) => {
 	const token = cookies.get('token');
 	let success = false;
 	if (token) {
@@ -29,24 +29,23 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	};
 };
 
-const sendVerificationEmail = async (email, token) => {
-	const verificationUrl = `http://localhost:5173/auth/verify?token=${token}`;
-	console.log(verificationUrl);
+const sendVerificationEmail = async (email, token, url) => {
+	const verificationUrl = `${url.origin}/auth/verify?token=${token}`;
 	const client = new postmark.ServerClient('cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5');
 
-	//try {
-	//	await client.sendEmail({
-	//		From: 'verify@chrisj.uk',
-	//		To: email,
-	//		Subject: 'Verify your email',
-	//		HtmlBody: `<strong>Please verify your email</strong> by clicking <a href="${verificationUrl}">here</a>.`,
-	//		TextBody: `Please verify your email by visiting this link: ${verificationUrl}`,
-	//		MessageStream: 'outbound'
-	//	});
-	//} catch (error) {
-	//	console.error('Failed to send verification email:', error);
-	//	throw error;
-	//}
+	try {
+		await client.sendEmail({
+			From: 'verify@chrisj.uk',
+			To: email,
+			Subject: 'Verify your email',
+			HtmlBody: `<strong>Please verify your email</strong> by clicking <a href="${verificationUrl}">here</a>.`,
+			TextBody: `Please verify your email by visiting this link: ${verificationUrl}`,
+			MessageStream: 'outbound'
+		});
+	} catch (error) {
+		console.error('Failed to send verification email:', error);
+		throw error;
+	}
 };
 
 const setTokenCookie = (event, value) => {
@@ -93,7 +92,7 @@ export const actions: Actions = {
 				password: form.data.password,
 				token: verificationToken
 			});
-			sendVerificationEmail(form.data.email, verificationToken);
+			sendVerificationEmail(form.data.email, verificationToken, event.url);
 			return { form };
 		} catch (e) {
 			return setError(form, 'email', e.response.data.detail);
