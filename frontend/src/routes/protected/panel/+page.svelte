@@ -5,7 +5,7 @@
 	export let data: PageData;
 </script>
 
-<Card.Root class="neu w-11/12 2xl:w-6/12 h-min">
+<Card.Root class="neu h-min w-11/12 2xl:w-6/12">
 	<Card.Header>
 		<Card.Title class="text-2xl font-bold">Panel</Card.Title>
 		<Card.Description>Here are your tasks</Card.Description>

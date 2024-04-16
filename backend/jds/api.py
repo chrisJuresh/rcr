@@ -14,6 +14,8 @@ router = Router()
 @router.post("/jd/", auth=JWTAuth(), response=JDID)
 def create_jd(request, jd: JDIn, file: File[UploadedFile]):
     jd_obj = save_jd(request, jd, file)
+    jd_obj.create()
+    jd_obj.get_graph().draw('state_diagram.png', prog='dot')
     return {"id": jd_obj.id}
 
 @router.put("{jd_id}/", auth=JWTAuth())
@@ -27,11 +29,15 @@ def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
     return {"id": jd_obj.id}
 
 @router.get("/panel", auth=JWTAuth(), response=JDPanel)
-def get_jd_panel(request):
+def get_jd_panel(request, status: Optional[str] = None):
     all_jds = JD.objects.filter(trust=get_user_trust(request.user))
     
+    if status:
+        all_jds = all_jds.filter(status=status)
+
     jds = [{
         'id': jd.id,
+        'status': jd.status,
         'consultant_type': jd.consultant_type.get_name_display(),
         'primary_specialties': [ps.name for ps in jd.primary_specialities.all()],
         'sub_specialties': [ss.name for ss in jd.sub_specialities.all()],
@@ -76,6 +82,7 @@ from .models import ChecklistAnswer, ChecklistQuestion
 
 # Define Schemas
 class QuestionOut(Schema):
+    id: int
     text: str
     required: bool
 
@@ -91,6 +98,7 @@ class ChecklistItemOut(Schema):
 
 class JDChecklistOut(Schema):
     jd_id: int
+    requirements_met: bool
     checklist: List[ChecklistItemOut]
 
 @router.get("{jd_id}/checklist/", auth=JWTAuth(), response=JDChecklistOut)
@@ -112,9 +120,11 @@ def get_jd_checklist(request, jd_id: int):
     
     result = {
         "jd_id": jd.id,
+        "requirements_met": jd.requirements_met,
         "checklist": [
             {
                 "question":{
+                    "id": a.checklist_question.id,
                     "text": a.checklist_question.question.text,
                     "required": a.checklist_question.required,
                 },
@@ -129,3 +139,98 @@ def get_jd_checklist(request, jd_id: int):
         ]
     }
     return result
+
+
+from django.db import transaction
+
+class QuestionIn(Schema):
+    id: int
+    text: str
+    required: bool
+
+class AnswerIn(Schema):
+    id: int
+    present: bool
+    page_numbers: Optional[str]
+    description: Optional[str]
+
+class ChecklistItemIn(Schema):
+    question: QuestionIn
+    answer: AnswerIn
+
+class JDChecklistIn(Schema):
+    jd_id: int
+    requirements_met: bool
+    checklist: List[ChecklistItemIn]
+
+@router.put("{jd_id}/checklist/", auth=JWTAuth(), response=JDChecklistOut)
+def update_jd_checklist(request, jd_id: int, jd_checklist: JDChecklistIn):
+    jd = get_object_or_404(JD, id=jd_id)
+
+    with transaction.atomic():
+        all_required_met = True  # Assume all required answers are met initially
+
+        for item in jd_checklist.checklist:
+            question = get_object_or_404(ChecklistQuestion, id=item.question.id)
+
+            # Find or create the answer linked to the JD and the question
+            answer, created = ChecklistAnswer.objects.get_or_create(
+                jd=jd,
+                checklist_question=question,
+                defaults={
+                    'present': item.answer.present,
+                    'page_numbers': item.answer.page_numbers or '',
+                    'description': item.answer.description or ''
+                }
+            )
+            
+            # If not created, update the answer with provided data
+            if not created:
+                answer.present = item.answer.present
+                answer.page_numbers = item.answer.page_numbers
+                answer.description = item.answer.description
+                answer.save()
+
+            # Check if the question is required and the answer is not adequately filled
+            # Now it checks both 'present' and 'page_numbers'
+            if question.required and (not answer.present or not answer.page_numbers):
+                all_required_met = False
+
+        # Update the JD requirements_met attribute based on the answers' completeness
+        jd.requirements_met = all_required_met
+        jd.save()  # Save the JD status update
+    
+    # After updating, fetch updated answers to return them
+    answers = ChecklistAnswer.objects.filter(jd=jd)
+    
+    result = {
+        "jd_id": jd.id,
+        "requirements_met": jd.requirements_met,
+        "checklist": [
+            {
+                "question": {
+                    "id": a.checklist_question.id,
+                    "text": a.checklist_question.question.text,
+                    "required": a.checklist_question.required,
+                },
+                "answer": {
+                    "id": a.id,
+                    "present": a.present,
+                    "page_numbers": a.page_numbers,
+                    "description": a.description,
+                }
+            } for a in answers
+        ]
+    }
+    return result
+
+from django.shortcuts import get_object_or_404
+from transitions.extensions import GraphMachine
+from .models import JDStateMachine
+
+@router.put("{jd_id}/submit/", auth=JWTAuth()) 
+def submit_jd(request, jd_id: int):
+    jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
+
+    jd.submit()
+    

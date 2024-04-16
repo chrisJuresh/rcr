@@ -1,23 +1,9 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import * as Form from '$lib/components/ui/form';
-	import { Input, InputFile } from '$lib/components/ui/input';
-	import { formSchema, type FormSchema } from './schema';
-	import SuperDebug, {
-		type SuperValidated,
-		type Infer,
-		superForm,
-		fileProxy
-	} from 'sveltekit-superforms';
-	import { zodClient } from 'sveltekit-superforms/adapters';
-	import * as Select from '$lib/components/ui/select';
 	import type { components } from '$lib/types.d.ts';
-	import { toast } from 'svelte-sonner';
 	import LockClosed from 'svelte-radix/LockClosed.svelte';
-	import { Label } from '$lib/components/ui/label';
 	import Dash from 'svelte-radix/Dash.svelte';
 	import { goto } from '$app/navigation';
-
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 	import Copy from 'lucide-svelte/icons/copy';
@@ -58,7 +44,7 @@
 		</div>
 	</Card.Header>
 	<Card.Content class="flex-1 p-6 text-sm">
-		<div class="grid gap-3 h-full">
+		<div class="grid h-full gap-3">
 			<div class="font-semibold">Job Description</div>
 			<ul class="grid gap-3">
 				<li class="flex items-center justify-between">

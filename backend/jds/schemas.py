@@ -21,6 +21,7 @@ class JDOut(Schema):
 
 class PanelJD(Schema):
     id: int
+    status: str
     consultant_type: str
     primary_specialties: List[str]
     sub_specialties: Optional[List[str]]

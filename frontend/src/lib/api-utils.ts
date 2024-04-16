@@ -4,46 +4,49 @@ import type { AxiosRequestConfig, Method } from 'axios';
 const baseUrl = 'http://localhost:8000/api';
 
 type ApiConfig = {
-    token?: string;
-    headers?: Record<string, string>;
+	token?: string;
+	headers?: Record<string, string>;
+    params?: Record<string, any>;
 };
 
 function buildAxiosConfig(config: ApiConfig): AxiosRequestConfig {
-    return {
-        headers: {
-            Authorization: `Bearer ${config.token}`,
-            ...config.headers
-        }
-    };
+	return {
+		headers: {
+			Authorization: `Bearer ${config.token}`,
+			...config.headers
+		},
+        params: config.params
+	};
 }
 
-async function makeRequest<T>(method: Method, endpoint: string, data: any = {}, config: ApiConfig = {}): Promise<T> {
-    const fullUrl = `${baseUrl}${endpoint}`;
-    const axiosConfig = buildAxiosConfig(config);
+async function makeRequest<T>(
+	method: Method,
+	endpoint: string,
+	data: any = {},
+	config: ApiConfig = {},
+): Promise<T> {
+	const fullUrl = `${baseUrl}${endpoint}`;
+	const axiosConfig = buildAxiosConfig(config);
 
-    try {
-        const response = await axios.request<T>({
-            url: fullUrl,
-            method: method,
-            data: method !== 'GET' ? data : undefined,
-            ...axiosConfig
-        });
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+	const response = await axios.request<T>({
+		url: fullUrl,
+		method: method,
+		data: method !== 'GET' ? data : undefined,
+		...axiosConfig
+	});
+	return response.data;
 }
 
 async function getData<T = any>(endpoint: string, config: ApiConfig = {}): Promise<T> {
-    return makeRequest<T>('GET', endpoint, {}, config);
+	return makeRequest<T>('GET', endpoint, {}, config);
 }
 
 async function postData<T = any>(endpoint: string, data: any, config: ApiConfig = {}): Promise<T> {
-    return makeRequest<T>('POST', endpoint, data, config);
+	return makeRequest<T>('POST', endpoint, data, config);
 }
 
 async function putData<T = any>(endpoint: string, data: any, config: ApiConfig = {}): Promise<T> {
-    return makeRequest<T>('PUT', endpoint, data, config);
+	return makeRequest<T>('PUT', endpoint, data, config);
 }
 
-export { getData, postData, putData};
+export { getData, postData, putData };

@@ -42,6 +42,8 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 INSTALLED_APPS = [
+ 
+ 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,15 +56,13 @@ INSTALLED_APPS = [
     'ninja_extra',
     'ninja_jwt',
     'simple_history',
-         'viewflow',
-        'viewflow.workflow',
- 
-        'users',
+    
+    'users',
     'trusts',
     'roles',
     'specialities',
     'jds',
-    'aacs'
+    'aacs',
 ]
 
 MIDDLEWARE = [

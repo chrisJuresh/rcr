@@ -63,6 +63,15 @@
 			}
 		}),
 		table.column({
+			accessor: 'status',
+			header: 'Status',
+			plugins: {
+				sort: {
+					disable: true
+				}
+			}
+		}),
+		table.column({
 			accessor: 'date',
 			header: 'Date'
 		}),
@@ -95,7 +104,7 @@
 		.filter(([, hide]) => !hide)
 		.map(([id]) => id);
 
-	const hidableCols = ['consultant_type', 'primary_specialties', 'sub_specialties', 'date'];
+	const hidableCols = ['consultant_type', 'primary_specialties', 'sub_specialties',  'status', 'date'];
 </script>
 
 <div>
@@ -128,7 +137,7 @@
 							{#each headerRow.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
 									<Table.Head {...attrs}>
-										{#if cell.id === 'id' || cell.id === 'date'}
+										{#if cell.id === 'id' || cell.id === 'date' || cell.id === 'status'}
 											<Button variant="ghost" class="-ml-4" on:click={props.sort.toggle}>
 												<Render of={cell.render()} />
 												<ArrowUpDown class={'ml-2 h-4 w-4'} />

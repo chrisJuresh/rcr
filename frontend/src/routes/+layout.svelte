@@ -18,10 +18,10 @@
 		</header>
 	</svlete:head>
 
-	<div class="lg:mt-24 mt-36 flex flex-grow justify-center">
-		<div class="flex w-full justify-center items-center">
-			<div class="lg:h-[70vh] h-full w-full flex justify-center">
-			<slot />
+	<div class="mt-36 flex flex-grow justify-center lg:mt-24">
+		<div class="flex w-full items-center justify-center">
+			<div class="flex h-full w-full justify-center lg:h-[70vh]">
+				<slot />
 			</div>
 		</div>
 	</div>

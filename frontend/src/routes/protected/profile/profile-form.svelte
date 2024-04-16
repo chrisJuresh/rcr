@@ -8,7 +8,7 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';
 	import type { components } from '$lib/types.d.ts';
-	import { rolesStore } from '$lib/store.ts';
+	import { rolesStore } from '$lib/store';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let user: components['schemas']['UserProfileOut'];

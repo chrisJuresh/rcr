@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["7d4535f2_controller_obtain_token"];
+        post: operations["f8dfbf83_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["7de30f9f_controller_refresh_token"];
+        post: operations["d909762a_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["24a959e2_controller_verify_token"];
+        post: operations["eb6bf6ad_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -270,7 +270,25 @@ export interface paths {
         };
         /** Get Jd Checklist */
         get: operations["jds_api_get_jd_checklist"];
-        put?: never;
+        /** Update Jd Checklist */
+        put: operations["jds_api_update_jd_checklist"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/jds/{jd_id}/submit/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Submit Jd */
+        put: operations["jds_api_submit_jd"];
         post?: never;
         delete?: never;
         options?: never;
@@ -457,6 +475,8 @@ export interface components {
         PanelJD: {
             /** Id */
             id: number;
+            /** State */
+            state: string;
             /** Consultant Type */
             consultant_type: string;
             /** Primary Specialties */
@@ -491,11 +511,49 @@ export interface components {
         JDChecklistOut: {
             /** Jd Id */
             jd_id: number;
+            /** Requirements Met */
+            requirements_met: boolean;
             /** Checklist */
             checklist: components["schemas"]["ChecklistItemOut"][];
         };
         /** QuestionOut */
         QuestionOut: {
+            /** Id */
+            id: number;
+            /** Text */
+            text: string;
+            /** Required */
+            required: boolean;
+        };
+        /** AnswerIn */
+        AnswerIn: {
+            /** Id */
+            id: number;
+            /** Present */
+            present: boolean;
+            /** Page Numbers */
+            page_numbers: string | null;
+            /** Description */
+            description: string | null;
+        };
+        /** ChecklistItemIn */
+        ChecklistItemIn: {
+            question: components["schemas"]["QuestionIn"];
+            answer: components["schemas"]["AnswerIn"];
+        };
+        /** JDChecklistIn */
+        JDChecklistIn: {
+            /** Jd Id */
+            jd_id: number;
+            /** Requirements Met */
+            requirements_met: boolean;
+            /** Checklist */
+            checklist: components["schemas"]["ChecklistItemIn"][];
+        };
+        /** QuestionIn */
+        QuestionIn: {
+            /** Id */
+            id: number;
             /** Text */
             text: string;
             /** Required */
@@ -510,7 +568,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "7d4535f2_controller_obtain_token": {
+    f8dfbf83_controller_obtain_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -534,7 +592,7 @@ export interface operations {
             };
         };
     };
-    "7de30f9f_controller_refresh_token": {
+    d909762a_controller_refresh_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -558,7 +616,7 @@ export interface operations {
             };
         };
     };
-    "24a959e2_controller_verify_token": {
+    eb6bf6ad_controller_verify_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -913,6 +971,52 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["JDChecklistOut"];
                 };
+            };
+        };
+    };
+    jds_api_update_jd_checklist: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jd_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JDChecklistIn"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JDChecklistOut"];
+                };
+            };
+        };
+    };
+    jds_api_submit_jd: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jd_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

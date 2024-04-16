@@ -8,6 +8,11 @@ class JDFlow(flow.Flow):
 
     start = (
         flow.Start(views.CreateProcessView.as_view(fields=["jd"]))
+        .Next(this.submitted)
+    )
+
+    submit = (
+        flow.View(views.UpdateProcessView.as_view(fields=["submitted"]))
         .Next(this.rcr_review)
     )
 
@@ -44,3 +49,8 @@ class JDFlow(flow.Flow):
     )
 
     end = flow.End()
+
+    def start_process(self, activation, jd):
+        activation.process.jd = jd
+        activation.process.save()  # Ensuring the process instance is saved
+        return activation.process

@@ -1,8 +1,8 @@
 import { getData, postData, putData } from './api-utils'; 
 import type { components } from './types.d.ts';
 
-export const getJDPanel = async (token: string) => {
-    return getData<components['schemas']['JDPanel']>('/jds/panel', { token }).then(data => data.jds);
+export const getJDPanel = async (token: string, params?: Record<string, any>) => {
+    return getData<components['schemas']['JDPanel']>('/jds/panel', { token, params }).then(data => data.jds);
 }
 
 export const getJD = async (jd_id: string, token: string) => {
@@ -63,4 +63,12 @@ export const putUserProfile = async (data: any, token: string,) => {
 
 export const postJD = async (data: any, token: string,) => {
     return postData<components['schemas']['JDID']>('/jds/jd/', data, { token });
+}
+
+export const putJDChecklist = async (jd_id: string, data: any, token: string,) => {
+    return putData(`/jds/${jd_id}/checklist/`, data, { token });
+}
+
+export const submitJD = async (jd_id: string, token: string) => {
+    return putData(`/jds/${jd_id}/submit/`, {}, { token });
 }

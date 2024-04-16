@@ -9,27 +9,28 @@
 	import { formSchema, type FormSchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-
-	//export let jd_checklist: components['schemas']['JDChecklistOut'];
-
+	import { toast } from 'svelte-sonner';
+	import { invalidateAll } from '$app/navigation';
+	
 	export let data: SuperValidated<Infer<FormSchema>>;
 
+
 	const form = superForm(data, {
+		resetForm: false,
 		dataType: 'json',
-		validators: zodClient(formSchema)
+		validators: zodClient(formSchema),
+		onUpdated: ({ form }) => {
+			if (form.valid) {
+				toast.success('Form Saved Successfully');
+				invalidateAll();
+			}
+		},
 	});
 
 	const { form: formData, enhance } = form;
 
-	console.log($formData.checklist);
+	$: $formData = $formData
 
-	import { writable } from 'svelte/store';
-
-	const isSubmitted = writable(false);
-
-	function handleSubmit() {
-		isSubmitted.set(true);
-	}
 </script>
 
 <Card.Root class="neu w-full">
@@ -38,15 +39,15 @@
 		<Card.Description>Please fill in the form to continue</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<form use:enhance method="POST" on:submit|preventDefault={handleSubmit}>
+		<form use:enhance method="POST" action="?/save">
 			<Table.Root>
 				<Form.Fieldset {form} name="checklist">
 					<Table.Header>
 						<Table.Row>
 							<Table.Head class="w-4/12">Question</Table.Head>
-							<Table.Head class="w-1/12 text-center">Present</Table.Head>
-							<Table.Head class="w-1/12">Page</Table.Head>
-							<Table.Head>Comments</Table.Head>
+							<Table.Head class=" w-1/12 text-center">Present</Table.Head>
+							<Table.Head class="min-w-20">Page</Table.Head>
+							<Table.Head class="w-full">Comments</Table.Head>
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
@@ -59,14 +60,20 @@
 											{#if $formData.checklist[i].question.required}
 												<Label class="text-red-500">*</Label>
 											{/if}
-											{#if $isSubmitted}
 												<Form.FieldErrors />
-											{/if}
 										</Form.Control>
 									</Form.ElementField>
 								</Table.Cell>
 								<Table.Cell class="p-1 text-center">
-									<Checkbox />
+									<Form.ElementField {form} name="checklist[{i}].answer.present">
+										<Form.Control let:attrs>
+											<Checkbox
+												{...attrs}
+												bind:checked={$formData.checklist[i].answer.present}
+											/>
+										</Form.Control>
+										<Form.FieldErrors />
+									</Form.ElementField>
 								</Table.Cell>
 								<Table.Cell>
 									<Form.ElementField {form} name="checklist[{i}].answer.page_numbers">
@@ -77,29 +84,38 @@
 												type="number"
 											/>
 										</Form.Control>
-										{#if $isSubmitted}
 											<Form.FieldErrors />
-										{/if}
 									</Form.ElementField>
 								</Table.Cell>
 								<Table.Cell>
 									<Form.ElementField {form} name="checklist[{i}].answer.description">
-										<Textarea class="min-h-1" />
+										<Form.Control let:attrs>
+										<Textarea class="min-h-1" 
+												{...attrs}
+												bind:value={$formData.checklist[i].answer.description}
+										/>
+										</Form.Control>
+										<Form.FieldErrors />
 									</Form.ElementField>
 								</Table.Cell>
 							</Table.Row>
 						{/each}
 					</Table.Body>
 					<Table.Caption>
-						{#if $isSubmitted}
 							<Form.FieldErrors />
-						{/if}
 						<div class="mb-2 mr-2 flex justify-end">
-							<Form.Button>Submit</Form.Button>
+							<Form.Button>Save</Form.Button>
 						</div>
 					</Table.Caption>
 				</Form.Fieldset>
 			</Table.Root>
 		</form>
+		
+						<div class="mb-2 mr-2 flex justify-end">
+		<form method="POST" action="?/submit">
+							<Form.Button disabled={!$formData.requirements_met}>Submit For Review</Form.Button>
+		</form>
+		</div>
+		
 	</Card.Content>
 </Card.Root>
