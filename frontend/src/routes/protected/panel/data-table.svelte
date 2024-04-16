@@ -77,7 +77,7 @@
 		}),
 		table.column({
 			accessor: ({ id }) => id.toString(),
-			header: 'Edit',
+			header: '',
 			cell: ({ value }) => {
 				if ($page.url.pathname === '/protected/panel') {
 					return createRender(DataTableActions, { id: value });
@@ -104,7 +104,13 @@
 		.filter(([, hide]) => !hide)
 		.map(([id]) => id);
 
-	const hidableCols = ['consultant_type', 'primary_specialties', 'sub_specialties',  'status', 'date'];
+	const hidableCols = [
+		'consultant_type',
+		'primary_specialties',
+		'sub_specialties',
+		'status',
+		'date'
+	];
 </script>
 
 <div>

@@ -23,6 +23,5 @@
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item on:click={() => goto(`trust/editJD/${id}`)}>View JD</DropdownMenu.Item>
-		<DropdownMenu.Item on:click={() => goto(`trust/editJD/${id}`)}>Edit JD</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

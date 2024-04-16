@@ -85,7 +85,7 @@
 	</Card.Content>
 	<Card.Footer class="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
 		<div class="text-xs text-muted-foreground">
-			Last Updated <time dateTime="2023-11-23">ADD DATE</time>
+			Last Updated <time dateTime={jd.date}>{jd.date}</time>
 		</div>
 		{#if previousJDid !== undefined || nextJDid !== undefined}
 			<Pagination.Root count={10} class="ml-auto mr-0 w-auto">

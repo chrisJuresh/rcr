@@ -6,7 +6,7 @@ export const getJDPanel = async (token: string, params?: Record<string, any>) =>
 }
 
 export const getJD = async (jd_id: string, token: string) => {
-	return getData<components['schemas']['JDOut']>(`/jds/${jd_id}`, { token });
+	return getData<components['schemas']['JDOut']>(`/jds/${jd_id}/`, { token });
 };
 
 export const getJDIds = async (token: string) => {
@@ -14,27 +14,27 @@ export const getJDIds = async (token: string) => {
 };
 
 export const getJDChecklist = async (jd_id: string, token: string) => {
-	return getData<components['schemas']['JDChecklistOut']>(`/jds/${jd_id}/checklist`, { token });
+	return getData<components['schemas']['JDChecklistOut']>(`/jds/${jd_id}/checklist/`, { token });
 };
 
 export const getUserRoles = async (token: string) => {
-    return getData<components['schemas']['RolesOut']>('/users/roles', { token });
+    return getData<components['schemas']['RolesOut']>('/users/roles/', { token });
 }
 
 export const getRoles = async () => {
-    return getData<components['schemas']['RolesOut']>('/roles/roles').then(data => data.roles);
+    return getData<components['schemas']['RolesOut']>('/roles/roles/').then(data => data.roles);
 }
 
 export const getTrusts = async () => {
-    return getData<components['schemas']['TrustsOut']>('/trusts/trusts').then(data => data.trusts);
+    return getData<components['schemas']['TrustsOut']>('/trusts/trusts/').then(data => data.trusts);
 }
 
 export const getSpecialities = async () => {
-    return getData<components['schemas']['SpecialitiesOut']>('/specialities/specialities').then(data => data.specialities);
+    return getData<components['schemas']['SpecialitiesOut']>('/specialities/specialities/').then(data => data.specialities);
 }
 
 export const getUserProfile = async (token: string) => {
-    return getData<components['schemas']['UserProfileOut']>('/users/profile', { token });
+    return getData<components['schemas']['UserProfileOut']>('/users/profile/', { token });
 }
 
 export const getUserTrust = async (token: string) => {
@@ -50,11 +50,11 @@ export const loginUser = async (data: any)  => {
 }
 
 export const registerUnauthenticatedUser = async (data: any) => {
-    return postData('/users/register-unauthenticated', data);
+    return postData('/users/register-unauthenticated/', data);
 }
 
 export const registerAuthenticateUser = async (data: any) => {
-    return postData('/users/register-authenticate', data);
+    return postData('/users/register-authenticate/', data);
 }
 
 export const putUserProfile = async (data: any, token: string,) => {

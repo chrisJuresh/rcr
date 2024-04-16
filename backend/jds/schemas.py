@@ -15,17 +15,20 @@ class JDIDsOut(Schema):
 class JDOut(Schema):
     id: int
     trust: str
+    status: str
+    date: str
     consultant_type: str
     primary_specialities: List[str]
     sub_specialities: Optional[List[str]]
+    state_diagram: Optional[str]
 
 class PanelJD(Schema):
     id: int
     status: str
+    date: str
     consultant_type: str
     primary_specialties: List[str]
     sub_specialties: Optional[List[str]]
-    date: str
 
 class JDPanel(Schema):
     jds: List[PanelJD]

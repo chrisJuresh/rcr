@@ -14,6 +14,7 @@
 	import EnvelopeClosed from 'svelte-radix/EnvelopeClosed.svelte';
 	import Pencil1 from 'svelte-radix/Pencil1.svelte';
 	import Pencil2 from 'svelte-radix/Pencil2.svelte';
+	import Reader from 'svelte-radix/Reader.svelte';
 
 	let stateValue: string[] = [];
 	rolesStore.subscribe((items) => {
@@ -62,42 +63,69 @@
 
 	$: {
 		let isTrustEmployee = user_roles.roles?.includes('Trust Employee');
-		let additionalButtons = isTrustEmployee
-			? [
-					{
-						icon: Pencil2,
-						label: 'New JD',
-						path: '/protected/trust/newJD',
-						variant: 'outline',
-						disabled: false
-					},
-					{
-						icon: Pencil1,
-						label: 'Edit JD',
-						path: '/protected/trust/editJD',
-						variant: 'outline',
-						disabled: false
-					}
-				]
-			: (!isTrustEmployee && stateValue.includes('Trust Employee')) ||
-				  (!isTrustEmployee && user_roles.requested_roles?.includes('Trust Employee'))
-				? [
-						{
-							icon: Pencil2,
-							label: 'New JD',
-							path: '/protected/trust/newJD',
-							variant: 'secondary',
-							disabled: true
-						},
-						{
-							icon: Pencil1,
-							label: 'Edit JD',
-							path: '/protected/trust/editJD',
-							variant: 'secondary',
-							disabled: true
-						}
-					]
-				: [];
+		let isReviewer = user_roles.roles?.includes('Reviewer');
+		let additionalButtons = [];
+
+		if (isTrustEmployee) {
+			additionalButtons.push(
+				{
+					icon: Pencil2,
+					label: 'New JD',
+					path: '/protected/trust/newJD',
+					variant: 'outline',
+					disabled: false
+				},
+				{
+					icon: Pencil1,
+					label: 'Edit JD',
+					path: '/protected/trust/editJD',
+					variant: 'outline',
+					disabled: false
+				}
+			);
+		} else if (
+			!isTrustEmployee &&
+			(stateValue.includes('Trust Employee') ||
+				user_roles.requested_roles?.includes('Trust Employee'))
+		) {
+			additionalButtons.push(
+				{
+					icon: Pencil2,
+					label: 'New JD',
+					path: '/protected/trust/newJD',
+					variant: 'secondary',
+					disabled: true
+				},
+				{
+					icon: Pencil1,
+					label: 'Edit JD',
+					path: '/protected/trust/editJD',
+					variant: 'secondary',
+					disabled: true
+				}
+			);
+		}
+
+		if (isReviewer) {
+			additionalButtons.push({
+				icon: Reader,
+				label: 'Review JD',
+				path: '/protected/reviewer/',
+				variant: 'outline',
+				disabled: false
+			});
+		} else if (
+			(!isReviewer && stateValue.includes('Reviewer')) ||
+			user_roles.requested_roles?.includes('Reviewer')
+		) {
+			additionalButtons.push({
+				icon: Reader,
+				label: 'Review JD',
+				path: '/protected/reviewer/',
+				variant: 'secondary',
+				disabled: true
+			});
+		}
 
 		buttons = [...baseButtons, ...additionalButtons];
 
@@ -150,7 +178,7 @@
 						{disabled}
 						class="m-2 w-28"
 					>
-						<svelte:component this={icon} class="mr-2 h-4 w-4 " />
+						<svelte:component this={icon} class="mr-2 max-h-4 min-h-4 min-w-4 max-w-4" />
 						{label}</Button
 					>
 				{/each}

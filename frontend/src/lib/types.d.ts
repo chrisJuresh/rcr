@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["f8dfbf83_controller_obtain_token"];
+        post: operations["1199e728_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["d909762a_controller_refresh_token"];
+        post: operations["ca1d0055_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["eb6bf6ad_controller_verify_token"];
+        post: operations["03b84612_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -459,12 +459,18 @@ export interface components {
             id: number;
             /** Trust */
             trust: string;
+            /** Status */
+            status: string;
+            /** Date */
+            date: string;
             /** Consultant Type */
             consultant_type: string;
             /** Primary Specialities */
             primary_specialities: string[];
             /** Sub Specialities */
             sub_specialities: string[] | null;
+            /** State Diagram */
+            state_diagram: string | null;
         };
         /** JDPanel */
         JDPanel: {
@@ -475,16 +481,16 @@ export interface components {
         PanelJD: {
             /** Id */
             id: number;
-            /** State */
-            state: string;
+            /** Status */
+            status: string;
+            /** Date */
+            date: string;
             /** Consultant Type */
             consultant_type: string;
             /** Primary Specialties */
             primary_specialties: string[];
             /** Sub Specialties */
             sub_specialties: string[] | null;
-            /** Date */
-            date: string;
         };
         /** JDIDsOut */
         JDIDsOut: {
@@ -568,7 +574,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    f8dfbf83_controller_obtain_token: {
+    "1199e728_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -592,7 +598,7 @@ export interface operations {
             };
         };
     };
-    d909762a_controller_refresh_token: {
+    ca1d0055_controller_refresh_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -616,7 +622,7 @@ export interface operations {
             };
         };
     };
-    eb6bf6ad_controller_verify_token: {
+    "03b84612_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -914,7 +920,9 @@ export interface operations {
     };
     jds_api_get_jd_panel: {
         parameters: {
-            query?: never;
+            query?: {
+                status?: string | null;
+            };
             header?: never;
             path?: never;
             cookie?: never;

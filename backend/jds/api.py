@@ -15,7 +15,6 @@ router = Router()
 def create_jd(request, jd: JDIn, file: File[UploadedFile]):
     jd_obj = save_jd(request, jd, file)
     jd_obj.create()
-    jd_obj.get_graph().draw('state_diagram.png', prog='dot')
     return {"id": jd_obj.id}
 
 @router.put("{jd_id}/", auth=JWTAuth())
@@ -38,10 +37,10 @@ def get_jd_panel(request, status: Optional[str] = None):
     jds = [{
         'id': jd.id,
         'status': jd.status,
+        'date': jd.status_date.strftime('%y-%m-%d %H:%M') if jd.status_date else None,
         'consultant_type': jd.consultant_type.get_name_display(),
         'primary_specialties': [ps.name for ps in jd.primary_specialities.all()],
         'sub_specialties': [ss.name for ss in jd.sub_specialities.all()],
-        'date': '2024-03-24 to add'
     } for jd in all_jds]
 
     return {'jds': jds}
@@ -60,10 +59,13 @@ def get_jd(request, jd_id: int):
 
     return {
         'id': jd.id,
+        'status': jd.status,
+        'date': jd.status_date.strftime('%y-%m-%d %H:%M') if jd.status_date else None,
         'trust': jd.trust.name,
         'consultant_type': jd.consultant_type.get_name_display(),
         'primary_specialities': [ps.name for ps in jd.primary_specialities.all()],
-        'sub_specialities': [ss.name for ss in jd.sub_specialities.all()]
+        'sub_specialities': [ss.name for ss in jd.sub_specialities.all()],
+        'state_diagram': jd.diagram if jd.diagram else '',
     }
 
     try:

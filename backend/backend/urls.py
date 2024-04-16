@@ -22,6 +22,8 @@ from trusts.api import router as trusts_router
 from specialities.api import router as specialities_router
 from jds.api import router as jds_router
 from .api import api
+from django.conf import settings
+from django.conf.urls.static import static
 
 api.add_router("/users/", users_router, tags=["users"]),
 api.add_router("/roles/", roles_router, tags=["roles"]),
@@ -32,4 +34,4 @@ api.add_router("/jds/", jds_router, tags=["jds"]),
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

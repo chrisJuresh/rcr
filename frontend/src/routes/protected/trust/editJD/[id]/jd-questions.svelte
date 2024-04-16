@@ -11,9 +11,8 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';
 	import { invalidateAll } from '$app/navigation';
-	
-	export let data: SuperValidated<Infer<FormSchema>>;
 
+	export let data: SuperValidated<Infer<FormSchema>>;
 
 	const form = superForm(data, {
 		resetForm: false,
@@ -24,13 +23,12 @@
 				toast.success('Form Saved Successfully');
 				invalidateAll();
 			}
-		},
+		}
 	});
 
 	const { form: formData, enhance } = form;
 
-	$: $formData = $formData
-
+	$: $formData = $formData;
 </script>
 
 <Card.Root class="neu w-full">
@@ -60,17 +58,14 @@
 											{#if $formData.checklist[i].question.required}
 												<Label class="text-red-500">*</Label>
 											{/if}
-												<Form.FieldErrors />
+											<Form.FieldErrors />
 										</Form.Control>
 									</Form.ElementField>
 								</Table.Cell>
 								<Table.Cell class="p-1 text-center">
 									<Form.ElementField {form} name="checklist[{i}].answer.present">
 										<Form.Control let:attrs>
-											<Checkbox
-												{...attrs}
-												bind:checked={$formData.checklist[i].answer.present}
-											/>
+											<Checkbox {...attrs} bind:checked={$formData.checklist[i].answer.present} />
 										</Form.Control>
 										<Form.FieldErrors />
 									</Form.ElementField>
@@ -84,16 +79,17 @@
 												type="number"
 											/>
 										</Form.Control>
-											<Form.FieldErrors />
+										<Form.FieldErrors />
 									</Form.ElementField>
 								</Table.Cell>
 								<Table.Cell>
 									<Form.ElementField {form} name="checklist[{i}].answer.description">
 										<Form.Control let:attrs>
-										<Textarea class="min-h-1" 
+											<Textarea
+												class="min-h-1"
 												{...attrs}
 												bind:value={$formData.checklist[i].answer.description}
-										/>
+											/>
 										</Form.Control>
 										<Form.FieldErrors />
 									</Form.ElementField>
@@ -102,7 +98,7 @@
 						{/each}
 					</Table.Body>
 					<Table.Caption>
-							<Form.FieldErrors />
+						<Form.FieldErrors />
 						<div class="mb-2 mr-2 flex justify-end">
 							<Form.Button>Save</Form.Button>
 						</div>
@@ -110,12 +106,11 @@
 				</Form.Fieldset>
 			</Table.Root>
 		</form>
-		
-						<div class="mb-2 mr-2 flex justify-end">
-		<form method="POST" action="?/submit">
-							<Form.Button disabled={!$formData.requirements_met}>Submit For Review</Form.Button>
-		</form>
+
+		<div class="mb-2 mr-2 flex justify-end">
+			<form method="POST" action="?/submit">
+				<Form.Button disabled={!$formData.requirements_met}>Submit For Review</Form.Button>
+			</form>
 		</div>
-		
 	</Card.Content>
 </Card.Root>

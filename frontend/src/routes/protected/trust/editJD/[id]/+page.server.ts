@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ cookies, params: { id } }) => {
 	return {
 		jd_ids: await getJDIds(token),
 		jd: await getJD(id, token),
-		form: await superValidate( await getJDChecklist(id, token), zod(formSchema), {errors: false})
+		form: await superValidate(await getJDChecklist(id, token), zod(formSchema), { errors: false })
 	};
 };
 
@@ -23,19 +23,19 @@ export const actions: Actions = {
 				form
 			});
 		}
-		console.log(form.data)
+		console.log(form.data);
 		const token = event.cookies.get('token');
-		try{
-			await putJDChecklist(event.params.id, form.data, token)
-			return { form }
+		try {
+			await putJDChecklist(event.params.id, form.data, token);
+			return { form };
 		} catch {
 			//
 		}
 	},
 	submit: async (event) => {
 		const token = event.cookies.get('token');
-		try{
-			await submitJD(event.params.id, token)
+		try {
+			await submitJD(event.params.id, token);
 		} catch {
 			//
 		}

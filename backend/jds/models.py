@@ -4,6 +4,7 @@ from specialities.models import ConsultantType, Speciality
 from users.models import User
 from simple_history.models import HistoricalRecords 
 from transitions.extensions import GraphMachine as Machine
+from django.core.files import File 
 
 
 class JD(models.Model):
@@ -23,6 +24,8 @@ class JD(models.Model):
     history = HistoricalRecords() 
 
     status = models.CharField(max_length=50, default='Init')
+    status_date = models.DateTimeField(auto_now=True, blank=True, null=True)
+    diagram = models.ImageField(upload_to='JDs/', blank=True, null=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,10 +33,16 @@ class JD(models.Model):
 
     def update_state(self, event):
         self.status = event.state.name
+        image_path = f'JDs/{self.id}.png'
+        self.get_graph().draw(image_path, prog='dot')
+
+        with open(image_path, 'rb') as img_file:
+            self.diagram.save(f'state_{self.id}.png', File(img_file), save=True)
+
         self.save()
 
-    def __str__(self):
-        return str(self.id)
+        def __str__(self):
+            return str(self.id)
 
 class JDStateMachine:
     def __init__(self, jd):
