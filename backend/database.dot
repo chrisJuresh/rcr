@@ -1,0 +1,329 @@
+digraph model_graph {
+  // Dotfile by Django-Extensions graph_models
+  // Created: 2024-04-18 22:07
+  // Cli Options: -X LogEntry,Group,Permission,ContentType,AbstractUser,Session,AbstractBaseSession,HistoricalJDProcess,Task,Process,AbstractTask,AbstractProcess,HistoricalJD,JDProcess --color-code-deletions --arrow vee -a --rankdir LR --disable-fields -g -o database.dot
+
+  fontname = "Roboto"
+  fontsize = 8
+  splines  = true
+  rankdir = "LR"
+	graph [ranksep=0.1];
+	graph [nodesep=0.1];
+
+  node [
+    fontname = "Roboto"
+    fontsize = 8
+    shape = "plaintext"
+  ]
+
+  edge [
+    fontname = "Roboto"
+    fontsize = 8
+  ]
+
+  // Labels
+  subgraph cluster_users {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>users</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    users_models_UnauthenticatedUser [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      UnauthenticatedUser
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    users_models_User [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      User<BR/>&lt;<FONT FACE="Roboto"><I>AbstractUser</I></FONT>&gt;
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    users_models_UserTrust [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      UserTrust
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    users_models_UserSpecialities [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      UserSpecialities
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    users_models_UserRole [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      UserRole
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_trusts {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>trusts</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    trusts_models_Region [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Region
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    trusts_models_Trust [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Trust
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_roles {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>roles</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    roles_models_Role [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Role
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_specialities {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>specialities</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    specialities_models_ConsultantType [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      ConsultantType
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    specialities_models_Speciality [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Speciality
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_jds {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>jds</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    jds_models_JD [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      JD
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    jds_models_Question [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Question
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    jds_models_ChecklistQuestion [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      ChecklistQuestion
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+  
+    jds_models_ChecklistAnswer [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      ChecklistAnswer
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_aacs {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>aacs</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    aacs_models_AAC [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      AAC
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+
+  }
+
+
+  // Relations
+
+  users_models_UserTrust -> users_models_User
+  [label=" user (user_trusts)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  users_models_UserTrust -> trusts_models_Trust
+  [label=" trust (usertrust)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  users_models_UserSpecialities -> users_models_User
+  [label=" user (user_specialities)"] [arrowhead=none, arrowtail=none, dir=both, color=red];
+
+  users_models_UserSpecialities -> specialities_models_ConsultantType
+  [label=" consultant_type (userspecialities)"] [arrowhead=none, arrowtail=vee, dir=both, color=orange];
+
+  users_models_UserSpecialities -> specialities_models_Speciality
+  [label=" specialities (userspecialities)"] [arrowhead=vee arrowtail=vee, dir=both];
+
+  users_models_UserRole -> users_models_User
+  [label=" user (user_roles)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  users_models_UserRole -> roles_models_Role
+  [label=" role (userrole)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+
+  trusts_models_Trust -> trusts_models_Region
+  [label=" region (trust)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+
+
+  specialities_models_Speciality -> specialities_models_ConsultantType
+  [label=" consultant_type (speciality)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+
+  jds_models_JD -> trusts_models_Trust
+  [label=" trust (jd)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  jds_models_JD -> specialities_models_ConsultantType
+  [label=" consultant_type (jd)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  jds_models_JD -> users_models_User
+  [label=" creator (created_jds)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  jds_models_JD -> users_models_User
+  [label=" reviewer (reviewed_jds)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  jds_models_JD -> specialities_models_Speciality
+  [label=" primary_specialities (primary_specialities)"] [arrowhead=vee arrowtail=vee, dir=both];
+
+  jds_models_JD -> specialities_models_Speciality
+  [label=" sub_specialities (sub_specialities)"] [arrowhead=vee arrowtail=vee, dir=both];
+
+  jds_models_ChecklistQuestion -> jds_models_Question
+  [label=" question (checklistquestion)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  jds_models_ChecklistQuestion -> specialities_models_ConsultantType
+  [label=" consultant_type (checklist_questions)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  jds_models_ChecklistAnswer -> jds_models_JD
+  [label=" jd (checklist_answers)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+  jds_models_ChecklistAnswer -> jds_models_ChecklistQuestion
+  [label=" checklist_question (checklist_answers)"] [arrowhead=none, arrowtail=vee, dir=both, color=red];
+
+
+  aacs_models_AAC -> jds_models_JD
+  [label=" jd (aac)"] [arrowhead=vee arrowtail=vee, dir=both];
+
+
+}

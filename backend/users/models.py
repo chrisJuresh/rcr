@@ -112,29 +112,3 @@ class UserRole(models.Model):
 
     def __str__(self):
         return f"{self.user.email}'s role as {self.role}"
-
-ROLE_PERMISSION_MAPPING = {
-    Role.RoleChoices.RCR_EMPLOYEE: 'can_rcr_review_jdprocess',
-    Role.RoleChoices.REVIEWER: 'can_rsa_review_jdprocess',
-    Role.RoleChoices.TRUST_EMPLOYEE: 'add_jdprocess'
-}
-
-def manage_user_permission(user, codename, add_permission=True):
-    permission = Permission.objects.get(content_type__app_label='jds', codename=codename)
-    if add_permission:
-        user.user_permissions.add(permission)
-    else:
-        user.user_permissions.remove(permission)
-    user.save()
-
-@receiver(post_save, sender=UserRole)
-def update_permissions(sender, instance, **kwargs):
-    codename = ROLE_PERMISSION_MAPPING.get(instance.role.name)
-    if codename:
-        manage_user_permission(instance.user, codename, add_permission=instance.approved)
-
-@receiver(post_delete, sender=UserRole)
-def cleanup_permissions(sender, instance, **kwargs):
-    codename = ROLE_PERMISSION_MAPPING.get(instance.role.name)
-    if codename:
-        manage_user_permission(instance.user, codename, add_permission=False)

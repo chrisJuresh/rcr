@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["1199e728_controller_obtain_token"];
+        post: operations["e26fec3a_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["ca1d0055_controller_refresh_token"];
+        post: operations["ad19d866_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["03b84612_controller_verify_token"];
+        post: operations["372bb2d9_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -574,7 +574,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "1199e728_controller_obtain_token": {
+    e26fec3a_controller_obtain_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -598,7 +598,7 @@ export interface operations {
             };
         };
     };
-    ca1d0055_controller_refresh_token: {
+    ad19d866_controller_refresh_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -622,7 +622,7 @@ export interface operations {
             };
         };
     };
-    "03b84612_controller_verify_token": {
+    "372bb2d9_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -921,7 +921,7 @@ export interface operations {
     jds_api_get_jd_panel: {
         parameters: {
             query?: {
-                status?: string | null;
+                panel?: string | null;
             };
             header?: never;
             path?: never;

@@ -1,26 +1,17 @@
 \documentclass[12pt, a4paper]{article}
 
-\usepackage[margin=0.5in, bmargin=0.7in, footskip=0.2in]{geometry}
+\usepackage[margin=1in, footskip=0.2in]{geometry}
 \usepackage{multicol}
 \usepackage{graphicx} 
 \usepackage{subfiles}
 \usepackage{wrapfig}
 \usepackage{minted}
 \usepackage{listings}
-
-\newcommand\wordcount{
-\immediate\write18{texcount -1 -sum -merge chapters/implementation/* \jobname.tex 2>&1 | grep '^[0-9][0-9]*' > \jobname-words.sum}
-  \input{\jobname-words.sum}
-}
+\usepackage{multicol}
 
 \begin{document}
 
-\newgeometry{margin=4cm}
 \subfile{chapters/title}
-
-\newpage
-\subsection{Draft Notice}
-This document is a \textit{very} rough draft for Dr Fabrizio Smeraldi to check for major omissions or errors. It is to undergo major changes.
 
 \newpage
 \subfile{chapters/acknowledgements}
@@ -30,15 +21,12 @@ This document is a \textit{very} rough draft for Dr Fabrizio Smeraldi to check f
 \newpage
 \tableofcontents
 
-\restoregeometry
 
 \newpage
 \subfile{chapters/introduction}
 
-\newpage
 \subfile{chapters/literature}
 
-\newpage
 \subfile{chapters/design}
 
 \newpage

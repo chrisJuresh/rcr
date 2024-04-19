@@ -7,7 +7,7 @@ from typing import Optional
 from .schemas import JDIn, JDPanel, JDOut, JDIDsOut, JDID
 from .models import JD
 from trusts.services import get_user_trust
-from .services import save_jd
+from .services import save_jd, user_jds
 
 router = Router()
 
@@ -28,11 +28,12 @@ def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
     return {"id": jd_obj.id}
 
 @router.get("/panel", auth=JWTAuth(), response=JDPanel)
-def get_jd_panel(request, status: Optional[str] = None):
-    all_jds = JD.objects.filter(trust=get_user_trust(request.user))
+def get_jd_panel(request, panel: Optional[str] = None):
+    all_jds = user_jds(request.user, panel)
+    #all_jds = JD.objects.filter(trust=get_user_trust(request.user))
     
-    if status:
-        all_jds = all_jds.filter(status=status)
+    #if status:
+    #    all_jds = all_jds.filter(status=status)
 
     jds = [{
         'id': jd.id,

@@ -110,7 +110,7 @@
 			additionalButtons.push({
 				icon: Reader,
 				label: 'Review JD',
-				path: '/protected/reviewer/',
+				path: '/protected/review',
 				variant: 'outline',
 				disabled: false
 			});
@@ -121,7 +121,7 @@
 			additionalButtons.push({
 				icon: Reader,
 				label: 'Review JD',
-				path: '/protected/reviewer/',
+				path: '/protected/review',
 				variant: 'secondary',
 				disabled: true
 			});
