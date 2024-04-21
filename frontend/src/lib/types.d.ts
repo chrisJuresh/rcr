@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["e26fec3a_controller_obtain_token"];
+        post: operations["46092576_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["ad19d866_controller_refresh_token"];
+        post: operations["c2a21b1a_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["372bb2d9_controller_verify_token"];
+        post: operations["284618b5_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -279,7 +279,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/jds/{jd_id}/submit/": {
+    "/api/jds/{jd_id}/{state}/": {
         parameters: {
             query?: never;
             header?: never;
@@ -287,8 +287,8 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** Submit Jd */
-        put: operations["jds_api_submit_jd"];
+        /** Update Jd State */
+        put: operations["jds_api_update_jd_state"];
         post?: never;
         delete?: never;
         options?: never;
@@ -457,6 +457,8 @@ export interface components {
         JDOut: {
             /** Id */
             id: number;
+            /** File */
+            file: string;
             /** Trust */
             trust: string;
             /** Status */
@@ -507,6 +509,10 @@ export interface components {
             page_numbers: string | null;
             /** Description */
             description: string | null;
+            /** Rcr Comments */
+            rcr_comments: string | null;
+            /** Rsa Comments */
+            rsa_comments: string | null;
         };
         /** ChecklistItemOut */
         ChecklistItemOut: {
@@ -541,6 +547,10 @@ export interface components {
             page_numbers: string | null;
             /** Description */
             description: string | null;
+            /** Rcr Comments */
+            rcr_comments?: string | null;
+            /** Rsa Comments */
+            rsa_comments?: string | null;
         };
         /** ChecklistItemIn */
         ChecklistItemIn: {
@@ -574,7 +584,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    e26fec3a_controller_obtain_token: {
+    "46092576_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -598,7 +608,7 @@ export interface operations {
             };
         };
     };
-    ad19d866_controller_refresh_token: {
+    c2a21b1a_controller_refresh_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -622,7 +632,7 @@ export interface operations {
             };
         };
     };
-    "372bb2d9_controller_verify_token": {
+    "284618b5_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -984,7 +994,9 @@ export interface operations {
     };
     jds_api_update_jd_checklist: {
         parameters: {
-            query?: never;
+            query?: {
+                panel?: string | null;
+            };
             header?: never;
             path: {
                 jd_id: number;
@@ -1008,12 +1020,13 @@ export interface operations {
             };
         };
     };
-    jds_api_submit_jd: {
+    jds_api_update_jd_state: {
         parameters: {
             query?: never;
             header?: never;
             path: {
                 jd_id: number;
+                state: string;
             };
             cookie?: never;
         };

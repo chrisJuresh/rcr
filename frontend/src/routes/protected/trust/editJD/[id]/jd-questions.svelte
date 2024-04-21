@@ -11,8 +11,12 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';
 	import { invalidateAll } from '$app/navigation';
+	import JDSubmit from './jd-submit.svelte';
+	import type { components } from '$lib/types.d.ts';
+	import LockClosed from 'svelte-radix/LockClosed.svelte';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
+	export let jd: components['schemas']['JDOut'];
 
 	const form = superForm(data, {
 		resetForm: false,
@@ -26,15 +30,37 @@
 		}
 	});
 
-	const { form: formData, enhance } = form;
+	const { form: formData, enhance, isTainted } = form;
 
 	$: $formData = $formData;
+
+	$: disabled = jd.status === 'Trust Submitted';
+
+	$: valid = $formData.requirements_met && !isTainted() && !disabled;
+
 </script>
 
 <Card.Root class="neu w-full">
 	<Card.Header>
+		<div class="flex justify-between">
+		<div>
 		<Card.Title class="text-2xl font-bold">JD Review Form</Card.Title>
-		<Card.Description>Please fill in the form to continue</Card.Description>
+
+		{#if disabled}
+			<Card.Description
+				>This form has already been submitted<br />Please wait for approval</Card.Description
+			>
+		{:else}
+			<Card.Description>Please fill in the form to continue</Card.Description>
+		{/if}
+		</div>
+		{#if jd.status === 'Trust Submitted'}
+		<div class="flex gap-4 self-center mr-6">
+			<h1 class="font-bold text-xl text-muted-foreground">Submitted</h1>
+			<LockClosed class="text-muted-foreground" />
+		</div>
+		{/if}
+		</div>
 	</Card.Header>
 	<Card.Content>
 		<form use:enhance method="POST" action="?/save">
@@ -65,7 +91,11 @@
 								<Table.Cell class="p-1 text-center">
 									<Form.ElementField {form} name="checklist[{i}].answer.present">
 										<Form.Control let:attrs>
-											<Checkbox {...attrs} bind:checked={$formData.checklist[i].answer.present} />
+											<Checkbox
+												{...attrs}
+												bind:checked={$formData.checklist[i].answer.present}
+												{disabled}
+											/>
 										</Form.Control>
 										<Form.FieldErrors />
 									</Form.ElementField>
@@ -77,6 +107,8 @@
 												{...attrs}
 												bind:value={$formData.checklist[i].answer.page_numbers}
 												type="number"
+												min="0"
+												{disabled}
 											/>
 										</Form.Control>
 										<Form.FieldErrors />
@@ -89,6 +121,7 @@
 												class="min-h-1"
 												{...attrs}
 												bind:value={$formData.checklist[i].answer.description}
+												{disabled}
 											/>
 										</Form.Control>
 										<Form.FieldErrors />
@@ -99,18 +132,13 @@
 					</Table.Body>
 					<Table.Caption>
 						<Form.FieldErrors />
-						<div class="mb-2 mr-2 flex justify-end">
-							<Form.Button>Save</Form.Button>
+						<div class="mb-2 mr-2 flex justify-end gap-2">
+							<Form.Button {disabled}>Save</Form.Button>
+								<JDSubmit valid={valid} />
 						</div>
 					</Table.Caption>
 				</Form.Fieldset>
 			</Table.Root>
 		</form>
-
-		<div class="mb-2 mr-2 flex justify-end">
-			<form method="POST" action="?/submit">
-				<Form.Button disabled={!$formData.requirements_met}>Submit For Review</Form.Button>
-			</form>
-		</div>
 	</Card.Content>
 </Card.Root>

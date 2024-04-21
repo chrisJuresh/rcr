@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  18 APR 2024 23:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  19 APR 2024 20:50
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -419,37 +419,54 @@ File: images/aac.png Graphic file (type png)
 <use images/aac.png>
 Package pdftex.def Info: images/aac.png  used on input line 9.
 (pdftex.def)             Requested size: 452.9679pt x 113.69563pt.
- [6 <./images/jd.png> <./images/aac.png>] [7]) (./chapters/design.tex [8]) [9] (./chapters/implementation.tex (./chapters/implementation/database.tex
-<images/database.png, id=42, 1513.655pt x 916.42375pt>
+ [6 <./images/jd.png> <./images/aac.png>] [7]) (./chapters/design.tex
+<images/design.png, id=36, 2252.415pt x 446.66875pt>
+File: images/design.png Graphic file (type png)
+<use images/design.png>
+Package pdftex.def Info: images/design.png  used on input line 2.
+(pdftex.def)             Requested size: 452.9679pt x 89.82288pt.
+ [8 <./images/design.png>] [9]
+<images/jd-state-machine.png, id=44, 1413.28pt x 188.705pt>
+File: images/jd-state-machine.png Graphic file (type png)
+<use images/jd-state-machine.png>
+Package pdftex.def Info: images/jd-state-machine.png  used on input line 52.
+(pdftex.def)             Requested size: 452.9679pt x 60.48184pt.
+<images/perms.png, id=45, 606.265pt x 405.515pt>
+File: images/perms.png Graphic file (type png)
+<use images/perms.png>
+Package pdftex.def Info: images/perms.png  used on input line 55.
+(pdftex.def)             Requested size: 226.48395pt x 151.4923pt.
+) [10 <./images/jd-state-machine.png> <./images/perms.png>] (./chapters/implementation.tex (./chapters/implementation/database.tex
+<images/database.png, id=50, 1513.655pt x 916.42375pt>
 File: images/database.png Graphic file (type png)
 <use images/database.png>
 Package pdftex.def Info: images/database.png  used on input line 2.
 (pdftex.def)             Requested size: 452.9679pt x 274.24405pt.
-) (./chapters/implementation/design.tex) (./chapters/implementation/auth.tex [10 <./images/database.png>]
-<images/auth.png, id=46, 2180.145pt x 1007.765pt>
+) (./chapters/implementation/design.tex) [11 <./images/database.png>] (./chapters/implementation/auth.tex
+<images/auth.png, id=54, 2180.145pt x 1007.765pt>
 File: images/auth.png Graphic file (type png)
 <use images/auth.png>
-Package pdftex.def Info: images/auth.png  used on input line 7.
+Package pdftex.def Info: images/auth.png  used on input line 9.
 (pdftex.def)             Requested size: 452.9679pt x 209.37643pt.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 6--18
+Underfull \hbox (badness 10000) in paragraph at lines 8--18
 
  []
 
-(./chapters/implementation/profile.tex) (./chapters/implementation/panel.tex)) [11 <./images/auth.png>] (./chapters/discussion.tex) (./chapters/further.tex)
+(./chapters/implementation/profile.tex) (./chapters/implementation/panel.tex)) [12 <./images/auth.png>] (./chapters/discussion.tex) (./chapters/further.tex)
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 55.
  (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 55.
- [12{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] (./chapters/appendices.tex
-<images/full-database.png, id=57, 1726.45pt x 1798.72pt>
+ [13{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] (./chapters/appendices.tex
+<images/full-database.png, id=65, 1726.45pt x 1798.72pt>
 File: images/full-database.png Graphic file (type png)
 <use images/full-database.png>
 Package pdftex.def Info: images/full-database.png  used on input line 4.
 (pdftex.def)             Requested size: 452.9679pt x 471.91034pt.
-<images/endpoints.png, id=58, 1917.1625pt x 2109.8825pt>
+<images/endpoints.png, id=66, 1917.1625pt x 2109.8825pt>
 File: images/endpoints.png Graphic file (type png)
 <use images/endpoints.png>
 Package pdftex.def Info: images/endpoints.png  used on input line 7.
@@ -459,25 +476,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--62
 
  []
 
-[13 <./images/full-database.png>] [14 <./images/endpoints.png>] (./report.aux)
+[14 <./images/full-database.png>] [15 <./images/endpoints.png>] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 8249 strings out of 476076
- 147175 string characters out of 5793775
+ 8272 strings out of 476076
+ 147760 string characters out of 5793775
  2255187 words of memory out of 5000000
- 30196 multiletter control sequences out of 15000+600000
+ 30217 multiletter control sequences out of 15000+600000
  562660 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  77i,7n,79p,1132b,1564s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on report.pdf (15 pages, 1477077 bytes).
+Output written on report.pdf (16 pages, 1655312 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 94 PDF objects out of 1000 (max. 8388607)
+ 51 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

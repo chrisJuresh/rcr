@@ -23,7 +23,7 @@ class JD(models.Model):
 
     history = HistoricalRecords() 
 
-    status = models.CharField(max_length=50, default='Init')
+    status = models.CharField(max_length=50, default='Created')
     status_date = models.DateTimeField(auto_now=True, blank=True, null=True)
     diagram = models.ImageField(upload_to='JDs/', blank=True, null=True)
 
@@ -41,24 +41,26 @@ class JD(models.Model):
 
         self.save()
 
-        def __str__(self):
-            return str(self.id)
+    def __str__(self):
+        return str(self.id)
 
 class JDStateMachine:
     def __init__(self, jd):
         self.jd = jd
-        states = ['Init', 'Draft', 'Trust Submitted', 'RCR approved', 'RSA approved', 'RCR rejected', 'RSA rejected']
+        states = ['Created', 'Draft', 'Trust Submitted', 'RCR approved', 'RSA approved', 'Trust Amended', 'RSA rejected']
         transitions = [
-            ['create', 'Init', 'Draft'],
+            ['create', 'Created', 'Draft'],
             ['submit', 'Draft', 'Trust Submitted'],
 
-            ['reject', 'Trust Submitted', 'RCR rejected'],
-            ['ammend', 'RCR rejected', 'Trust Submitted'],
-            ['approve', 'Trust Submitted', 'RCR approved'],
+            ['rcr_reject', 'Trust Submitted', 'Draft'],
+            ['rcr_approve', 'Trust Submitted', 'RCR approved'],
 
-            ['reject', 'RCR approved', 'RSA rejected'],       
-            ['ammend', 'RSA rejected', 'RCR approved'],     
-            ['approve', 'RCR approved', 'RSA approved'],
+            ['rsa_reject', 'RCR approved', 'RSA rejected'],       
+            ['amend', 'RSA rejected', 'Trust Amended'],     
+            ['rsa_approve', 'RCR approved', 'RSA approved'],
+ 
+            ['rsa_reject', 'Trust Amended', 'RSA rejected'],
+            ['rsa_approve', 'Trust Amended', 'RSA approved'],
  
         ]
         
@@ -88,6 +90,9 @@ class ChecklistAnswer(models.Model):
     present = models.BooleanField(default=False)
     page_numbers = models.CharField(max_length=20, blank=True)
     description = models.TextField(blank=True)
+
+    rcr_comments = models.TextField(blank=True)
+    rsa_comments = models.TextField(blank=True)
 
     def __str__(self):
         return f"Answer to {self.checklist_question.question} for JD {self.jd.id}"

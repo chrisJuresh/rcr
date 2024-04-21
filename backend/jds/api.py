@@ -4,10 +4,16 @@ from ninja.files import UploadedFile
 from ninja_jwt.authentication import JWTAuth
 from django.utils.dateformat import format
 from typing import Optional
-from .schemas import JDIn, JDPanel, JDOut, JDIDsOut, JDID
-from .models import JD
+from .schemas import JDIn, JDPanel, JDOut, JDIDsOut, JDID, JDChecklistOut, JDChecklistIn
+from .models import JD, ChecklistAnswer, ChecklistQuestion
 from trusts.services import get_user_trust
+from roles.services import get_user_roles
 from .services import save_jd, user_jds
+from django.db import transaction
+from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
+from transitions.extensions import GraphMachine
+from .models import JDStateMachine
 
 router = Router()
 
@@ -30,11 +36,7 @@ def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
 @router.get("/panel", auth=JWTAuth(), response=JDPanel)
 def get_jd_panel(request, panel: Optional[str] = None):
     all_jds = user_jds(request.user, panel)
-    #all_jds = JD.objects.filter(trust=get_user_trust(request.user))
     
-    #if status:
-    #    all_jds = all_jds.filter(status=status)
-
     jds = [{
         'id': jd.id,
         'status': jd.status,
@@ -48,18 +50,21 @@ def get_jd_panel(request, panel: Optional[str] = None):
 
 @router.get("/ids", auth=JWTAuth(), response=JDIDsOut)
 def get_jd_ids(request):
-    all_jds = JD.objects.filter(trust=get_user_trust(request.user))
-    return {"ids": [jd.id for jd in all_jds]}
+    jds = user_jds(request.user)
+    return {"ids": [jd.id for jd in jds]}
 
 @router.get("{jd_id}/", auth=JWTAuth(), response=JDOut)
 def get_jd(request, jd_id: int):
     try:
-        jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
+        jds = user_jds(request.user)
+        print(jds.query)
+        jd = jds.get(id=jd_id)
     except JD.DoesNotExist:
         raise HttpError(404, "JD not found")
 
     return {
         'id': jd.id,
+        'file': jd.file,
         'status': jd.status,
         'date': jd.status_date.strftime('%y-%m-%d %H:%M') if jd.status_date else None,
         'trust': jd.trust.name,
@@ -68,41 +73,6 @@ def get_jd(request, jd_id: int):
         'sub_specialities': [ss.name for ss in jd.sub_specialities.all()],
         'state_diagram': jd.diagram if jd.diagram else '',
     }
-
-    try:
-        jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
-    except JD.DoesNotExist:
-        raise HttpError(404, "JD not found")
-
-    return {"checklist": jd.checklist} 
-
-
-
-from ninja import Schema
-from typing import List, Optional
-from django.shortcuts import get_object_or_404
-from .models import ChecklistAnswer, ChecklistQuestion
-
-# Define Schemas
-class QuestionOut(Schema):
-    id: int
-    text: str
-    required: bool
-
-class AnswerOut(Schema):
-    id: int
-    present: bool
-    page_numbers: Optional[str]
-    description: Optional[str]
-
-class ChecklistItemOut(Schema):
-    question: QuestionOut
-    answer: AnswerOut
-
-class JDChecklistOut(Schema):
-    jd_id: int
-    requirements_met: bool
-    checklist: List[ChecklistItemOut]
 
 @router.get("{jd_id}/checklist/", auth=JWTAuth(), response=JDChecklistOut)
 def get_jd_checklist(request, jd_id: int):
@@ -136,6 +106,8 @@ def get_jd_checklist(request, jd_id: int):
                     "present": a.present,
                     "page_numbers": a.page_numbers,
                     "description": a.description,
+                    "rcr_comments": a.rcr_comments,
+                    "rsa_comments": a.rsa_comments,
                 }
             }
             for a in answers
@@ -143,67 +115,47 @@ def get_jd_checklist(request, jd_id: int):
     }
     return result
 
-
-from django.db import transaction
-
-class QuestionIn(Schema):
-    id: int
-    text: str
-    required: bool
-
-class AnswerIn(Schema):
-    id: int
-    present: bool
-    page_numbers: Optional[str]
-    description: Optional[str]
-
-class ChecklistItemIn(Schema):
-    question: QuestionIn
-    answer: AnswerIn
-
-class JDChecklistIn(Schema):
-    jd_id: int
-    requirements_met: bool
-    checklist: List[ChecklistItemIn]
-
 @router.put("{jd_id}/checklist/", auth=JWTAuth(), response=JDChecklistOut)
-def update_jd_checklist(request, jd_id: int, jd_checklist: JDChecklistIn):
+def update_jd_checklist(request, jd_id: int, jd_checklist: JDChecklistIn, panel: Optional[str] = None):
     jd = get_object_or_404(JD, id=jd_id)
 
-    with transaction.atomic():
-        all_required_met = True  # Assume all required answers are met initially
-
-        for item in jd_checklist.checklist:
-            question = get_object_or_404(ChecklistQuestion, id=item.question.id)
-
-            # Find or create the answer linked to the JD and the question
-            answer, created = ChecklistAnswer.objects.get_or_create(
-                jd=jd,
-                checklist_question=question,
-                defaults={
-                    'present': item.answer.present,
-                    'page_numbers': item.answer.page_numbers or '',
-                    'description': item.answer.description or ''
-                }
-            )
-            
-            # If not created, update the answer with provided data
-            if not created:
-                answer.present = item.answer.present
-                answer.page_numbers = item.answer.page_numbers
-                answer.description = item.answer.description
+    if (panel == "Edit") and (jd.trust == get_user_trust(request.user)) and ('Trust Employee' in get_user_roles(request.user, 'approved')):
+            with transaction.atomic():
+                all_required_met = True 
+          
+                for item in jd_checklist.checklist:
+                    question = get_object_or_404(ChecklistQuestion, id=item.question.id)
+          
+                    answer, created = ChecklistAnswer.objects.get_or_create(
+                        jd=jd,
+                        checklist_question=question,
+                        defaults={
+                            'present': item.answer.present,
+                            'page_numbers': item.answer.page_numbers or '',
+                            'description': item.answer.description or ''
+                        }
+                    )
+                    
+                    if not created:
+                        answer.present = item.answer.present
+                        answer.page_numbers = item.answer.page_numbers
+                        answer.description = item.answer.description
+                        answer.save()
+          
+                    if question.required and (not answer.present or not answer.page_numbers):
+                        all_required_met = False
+          
+                jd.requirements_met = all_required_met
+                jd.save() 
+    
+    elif ((panel=="Review") and ('RCR Employee' in get_user_roles(request.user, 'approved'))):
+        with transaction.atomic():
+            for item in jd_checklist.checklist:
+                answer = get_object_or_404(ChecklistAnswer, id=item.answer.id)
+                
+                answer.rcr_comments = item.answer.rcr_comments or ''
                 answer.save()
 
-            # Check if the question is required and the answer is not adequately filled
-            # Now it checks both 'present' and 'page_numbers'
-            if question.required and (not answer.present or not answer.page_numbers):
-                all_required_met = False
-
-        # Update the JD requirements_met attribute based on the answers' completeness
-        jd.requirements_met = all_required_met
-        jd.save()  # Save the JD status update
-    
-    # After updating, fetch updated answers to return them
     answers = ChecklistAnswer.objects.filter(jd=jd)
     
     result = {
@@ -221,19 +173,23 @@ def update_jd_checklist(request, jd_id: int, jd_checklist: JDChecklistIn):
                     "present": a.present,
                     "page_numbers": a.page_numbers,
                     "description": a.description,
+                    "rcr_comments": a.rcr_comments,
+                    "rsa_comments": a.rsa_comments,
                 }
             } for a in answers
         ]
     }
     return result
 
-from django.shortcuts import get_object_or_404
-from transitions.extensions import GraphMachine
-from .models import JDStateMachine
+@router.put("{jd_id}/{state}/", auth=JWTAuth()) 
+def update_jd_state(request, jd_id: int, state: str):
 
-@router.put("{jd_id}/submit/", auth=JWTAuth()) 
-def submit_jd(request, jd_id: int):
-    jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
-
-    jd.submit()
-    
+    if state == 'submit' and 'Trust Employee' in get_user_roles(request.user, 'approved'):
+        jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
+        jd.submit()
+    elif state == 'approve' and 'RCR Employee' in get_user_roles(request.user, 'approved'):
+        jd = JD.objects.get(id=jd_id)
+        jd.rcr_approve()
+    elif state == 'reject' and 'RCR Employee' in get_user_roles(request.user, 'approved'):
+        jd = JD.objects.get(id=jd_id)
+        jd.rcr_reject()

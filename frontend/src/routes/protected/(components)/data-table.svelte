@@ -8,7 +8,6 @@
 		addHiddenColumns
 	} from 'svelte-headless-table/plugins';
 	import DataTableActions from './data-table-actions.svelte';
-	import EditJDAction from './edit-jd-action.svelte';
 	import { readable } from 'svelte/store';
 	import ArrowUpDown from 'lucide-svelte/icons/arrow-up-down';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
@@ -16,7 +15,6 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { page } from '$app/stores';
 
 	export let jds: components['schemas']['JDPanel']['jds'];
 
@@ -79,13 +77,7 @@
 			accessor: ({ id }) => id.toString(),
 			header: '',
 			cell: ({ value }) => {
-				if ($page.url.pathname === '/protected/panel') {
-					return createRender(DataTableActions, { id: value });
-				} else if ($page.url.pathname === '/protected/trust/editJD') {
-					return createRender(EditJDAction, { id: value });
-				} else {
-					return createRender(DataTableActions, { id: value });
-				}
+				return createRender(DataTableActions, { id: value });
 			}
 		})
 	]);
@@ -174,6 +166,11 @@
 				{/each}
 			</Table.Body>
 		</Table.Root>
+		{#if jds.length === 0}
+			<div class="m-4 mx-auto flex justify-center">
+				<h1>No JDs</h1>
+			</div>
+		{/if}
 	</div>
 	<div class="flex items-center justify-end space-x-4 py-4">
 		<Button

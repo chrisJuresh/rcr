@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DataTable from './data-table.svelte';
+	import DataTable from '../(components)/data-table.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import type { PageData } from './$types';
 	export let data: PageData;

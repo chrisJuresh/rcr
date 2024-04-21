@@ -1,4 +1,5 @@
 \section{Design}
+\frame{\includegraphics[width=\linewidth]{images/design.png}}
 The following paragraphs will be edited to explain their advantages specifically for this project - rather than just being a general description.
 
 Good design follows C.R.A.P principles. It is Consistent, it is Readable, it is Accessible, and it is Predictable. (SOURCE) This is a idea by a german ... for example in our design...
@@ -45,8 +46,10 @@ Postmark is an email delivery service that provides fast and reliable transactio
 The project is depoloyed on an ubuntu server with nginx, gunicorn, and node (Elaborate on the reasons) sveltekit has adaptors to ... (sources)
 
 \subsection{Requirements}
-\subsubsection{Functional Requirements}
-Here will be a flowchart for each type of user (rep, rsa, trust, rcr) showing the UI process of the job plan and/or aac. 
+This is the state machine diagram for the system to use for JDs. It is used in the UI to show the user what stage the JD is at, and updates automatically on button press when an update is made.
 
-\subsubsection{Non-Functional Requirements}
-Here will be a list of requirements such as security, performance, and usability, (source) and explainations of how they will be met.
+\noindent
+\frame{\includegraphics[width=\linewidth]{images/jd-state-machine.png}}
+
+\noindent
+\frame{\includegraphics[width=0.5\linewidth]{images/perms.png}}

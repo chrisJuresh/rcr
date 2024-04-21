@@ -57,8 +57,12 @@ def get_roles(request):
 
 @router.get("trust", auth=JWTAuth(), response=TrustOut)
 def get_trust(request):
-    return {
-        "id": get_user_trust(request.auth).id,
-        "name": get_user_trust(request.auth).name,
-        "region": {"name": get_user_trust(request.auth).region.name}
-    }
+    try:
+        return {
+            "id": get_user_trust(request.auth).id,
+            "name": get_user_trust(request.auth).name,
+            "region": {"name": get_user_trust(request.auth).region.name}
+        }
+    except:
+        raise HttpError(400, "Your selected Trust does not match any Approved Trusts.")
+    

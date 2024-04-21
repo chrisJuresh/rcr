@@ -65,10 +65,10 @@ export const postJD = async (data: any, token: string,) => {
     return postData<components['schemas']['JDID']>('/jds/jd/', data, { token });
 }
 
-export const putJDChecklist = async (jd_id: string, data: any, token: string,) => {
-    return putData(`/jds/${jd_id}/checklist/`, data, { token });
+export const putJDChecklist = async (jd_id: string, data: any, token: string, params?: Record<string, any>) => {
+    return putData(`/jds/${jd_id}/checklist/`, data, { token, params });
 }
 
-export const submitJD = async (jd_id: string, token: string) => {
-    return putData(`/jds/${jd_id}/submit/`, {}, { token });
+export const putJDState = async (jd_id: string, state: string, token: string) => {
+    return putData(`/jds/${jd_id}/${state}/`, {}, { token });
 }

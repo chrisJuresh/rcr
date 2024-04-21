@@ -1,4 +1,4 @@
-import { getJD, getJDIds, getJDChecklist, putJDChecklist, submitJD } from '$lib/api';
+import { getJD, getJDIds, getJDChecklist, putJDChecklist, putJDState } from '$lib/api';
 import type { PageServerLoad, Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
@@ -7,7 +7,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 
 export const load: PageServerLoad = async ({ cookies, params: { id } }) => {
 	const token = cookies.get('token');
-
+	console.log(await getJD(id, token));
 	return {
 		jd_ids: await getJDIds(token),
 		jd: await getJD(id, token),
@@ -26,7 +26,7 @@ export const actions: Actions = {
 		console.log(form.data);
 		const token = event.cookies.get('token');
 		try {
-			await putJDChecklist(event.params.id, form.data, token);
+			await putJDChecklist(event.params.id, form.data, token, { panel: 'Edit'});
 			return { form };
 		} catch {
 			//
@@ -35,7 +35,7 @@ export const actions: Actions = {
 	submit: async (event) => {
 		const token = event.cookies.get('token');
 		try {
-			await submitJD(event.params.id, token);
+			await putJDState(event.params.id, 'submit', token);
 		} catch {
 			//
 		}

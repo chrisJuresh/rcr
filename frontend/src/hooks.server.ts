@@ -2,7 +2,6 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { verifyUser } from '$lib/api';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	
 	const token = event.cookies.get('token');
 	if (event.url.pathname.startsWith('/protected')) {
 		try {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import JDTable from '../../panel/data-table.svelte';
+	import JDTable from '../../(components)/data-table.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>

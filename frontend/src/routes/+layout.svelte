@@ -11,19 +11,19 @@
 	let size = 4;
 </script>
 
-<div class="flex flex-col h-lvh">
+<div class="flex h-lvh flex-col">
 	<svlete:head>
-		<header class="fixed w-full" class:bar-head={$page.url.pathname !== '/auth'}>
+		<header class="fixed z-50 w-full" class:bar-head={$page.url.pathname !== '/auth'}>
 			<Nav user_roles={data.user_roles} />
 		</header>
 	</svlete:head>
-	
-<div class="mt-52 md:mt-36 xl:mt-32 2xl:mt-44"></div>
-<div class="flex-grow flex justify-center">
-	<slot />
-</div>
 
-	<footer class="w-full mt-auto">
+	<div class="mt-52 md:mt-36 xl:mt-32 2xl:mt-44"></div>
+	<div class="flex flex-grow justify-center">
+		<slot />
+	</div>
+
+	<footer class="mt-auto w-full">
 		<div class="mr-6 flex justify-end">
 			<Logo {size} />
 		</div>

@@ -1,10 +1,12 @@
 from .schemas import JDIn
 from .models import JD
-from trusts.services import get_user_trusts
+from trusts.services import get_user_trust, get_user_trusts
 from roles.services import get_user_roles
 from specialities.models import ConsultantType
 from ninja.files import UploadedFile
 from django.db import transaction
+from django.db.models import Q
+
 
 def save_jd(request, jd: JDIn, file: UploadedFile, jd_obj=None):
     with transaction.atomic():
@@ -20,12 +22,40 @@ def save_jd(request, jd: JDIn, file: UploadedFile, jd_obj=None):
             jd_obj.sub_specialities.set(jd.sub_specialities)
     return jd_obj
 
-def user_jds(user, panel):
-    roles = get_user_roles(user, 'approved')
-    for role in roles:
-        if role == 'Reviewer' and panel == 'Review':
-            jds = JD.objects.exclude(trust__in=get_user_trusts(user, 'approved'))
-            return jds
-        else:
-            jds = JD.objects.filter(trust__in=get_user_trusts(user, 'approved'))
-            return jds
+def user_jds(user, panel=None):
+    approved_roles = get_user_roles(user, 'approved')
+    roles = get_user_roles(user, ['approved', 'requested'])
+    trust = get_user_trust(user)
+    approved_trusts = get_user_trusts(user, 'approved')
+    jds = JD.objects.none()
+
+   
+    if 'Trust Employee' in roles and panel=='Edit':
+        jds = JD.objects.filter(trust=trust, status='Draft')
+        return jds
+
+    elif 'RCR Employee' in roles and panel=='Review':
+        jds = JD.objects.filter(status='Trust Submitted')
+        return jds
+
+    elif 'Reviewer' in roles and panel=='Review':
+        print(user.user_specialities.consultant_type)
+        jds = JD.objects.filter(
+            ~Q(trust__in=approved_trusts) &
+            Q(consultant_type=user.user_specialities.consultant_type) &
+            Q(status='RCR approved')
+        )
+        return jds
+
+    if 'Trust Employee' in roles:
+        jds |= JD.objects.filter(trust=trust)
+    elif 'RCR Employee' in roles:
+        jds |= JD.objects.filter()
+    elif 'Reviewer' in roles:
+        print(user.user_specialities.consultant_type)
+        jds |= JD.objects.filter(
+            ~Q(trust__in=approved_trusts) &
+            Q(consultant_type=user.user_specialities.consultant_type) &
+            Q(status='RCR approved')
+        )
+    return jds

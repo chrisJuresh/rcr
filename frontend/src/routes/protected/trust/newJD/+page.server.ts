@@ -7,8 +7,14 @@ import { getUserTrust, getSpecialities, postJD } from '$lib/api.js';
 
 export const load: PageServerLoad = async ({ cookies }) => {
 	const token = cookies.get('token');
+	let user_trust;
+	try {
+		user_trust = await getUserTrust(token);
+	} catch {
+		//
+	}
 	return {
-		user_trust: await getUserTrust(token),
+		user_trust: user_trust,
 		specialities: await getSpecialities(),
 		form: await superValidate(zod(formSchema))
 	};

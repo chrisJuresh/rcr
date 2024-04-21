@@ -64,6 +64,7 @@
 	$: {
 		let isTrustEmployee = user_roles.roles?.includes('Trust Employee');
 		let isReviewer = user_roles.roles?.includes('Reviewer');
+		let isRCREmployee = user_roles.roles?.includes('RCR Employee'); // Add RCR Employee check
 		let additionalButtons = [];
 
 		if (isTrustEmployee) {
@@ -106,7 +107,7 @@
 			);
 		}
 
-		if (isReviewer) {
+		if (isReviewer || isRCREmployee) {
 			additionalButtons.push({
 				icon: Reader,
 				label: 'Review JD',
@@ -115,7 +116,7 @@
 				disabled: false
 			});
 		} else if (
-			(!isReviewer && stateValue.includes('Reviewer')) ||
+			(!isReviewer && !isRCREmployee && stateValue.includes('Reviewer')) ||
 			user_roles.requested_roles?.includes('Reviewer')
 		) {
 			additionalButtons.push({

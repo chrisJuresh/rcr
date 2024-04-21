@@ -21,6 +21,10 @@
 	$: nextJDid = currentIndex < jd_ids.ids.length - 1 ? jd_ids.ids[currentIndex + 1] : undefined;
 
 	console.log(nextJDid, previousJDid);
+
+	function getFilename(url) {
+    return url.substring(url.lastIndexOf('/') + 1);
+  }
 </script>
 
 <Card.Root>
@@ -49,7 +53,11 @@
 			<ul class="grid gap-3">
 				<li class="flex items-center justify-between">
 					<span class="text-muted-foreground"> File </span>
-					<span>Add download link</span>
+					<span>
+					<a href="http://localhost:8000{jd.file}">
+						<p class="underline text-cyan-800">{getFilename(jd.file)}</p>
+					</a>
+					</span>
 				</li>
 				<li class="flex items-center justify-between">
 					<span class="text-muted-foreground"> Consultant Type </span>

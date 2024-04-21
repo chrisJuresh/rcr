@@ -14,6 +14,7 @@ class JDIDsOut(Schema):
 
 class JDOut(Schema):
     id: int
+    file: str
     trust: str
     status: str
     date: str
@@ -32,3 +33,49 @@ class PanelJD(Schema):
 
 class JDPanel(Schema):
     jds: List[PanelJD]
+
+# Checklist Out 
+class QuestionOut(Schema):
+    id: int
+    text: str
+    required: bool
+
+class AnswerOut(Schema):
+    id: int
+    present: bool
+    page_numbers: Optional[str]
+    description: Optional[str]
+    rcr_comments: Optional[str]
+    rsa_comments: Optional[str]
+
+class ChecklistItemOut(Schema):
+    question: QuestionOut
+    answer: AnswerOut
+
+class JDChecklistOut(Schema):
+    jd_id: int
+    requirements_met: bool
+    checklist: List[ChecklistItemOut]
+
+# Checklist In
+class QuestionIn(Schema):
+    id: int
+    text: str
+    required: bool
+
+class AnswerIn(Schema):
+    id: int
+    present: bool
+    page_numbers: Optional[str]
+    description: Optional[str]
+    rcr_comments: Optional[str] = None
+    rsa_comments: Optional[str] = None
+
+class ChecklistItemIn(Schema):
+    question: QuestionIn
+    answer: AnswerIn
+
+class JDChecklistIn(Schema):
+    jd_id: int
+    requirements_met: bool
+    checklist: List[ChecklistItemIn]
