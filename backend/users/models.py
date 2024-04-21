@@ -47,6 +47,8 @@ class User(AbstractUser):
         blank=True,
     )
 
+    updated = models.DateTimeField(auto_now=True, blank=True, null=True)
+
 class UserTrust(models.Model):
     user = models.ForeignKey(
         User,

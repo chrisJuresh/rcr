@@ -2,12 +2,6 @@
 	import * as Card from '$lib/components/ui/card';
 	import Dash from 'svelte-radix/Dash.svelte';
 	import type { components } from '$lib/types.d.ts';
-	import { Label } from '$lib/components/ui/label';
-	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
-	import Copy from 'lucide-svelte/icons/copy';
-	import { Button } from '$lib/components/ui/button';
-	import * as Pagination from '$lib/components/ui/pagination';
 	import { Separator } from '$lib/components/ui/separator';
 
 	export let user: components['schemas']['UserProfileOut'];
@@ -58,7 +52,7 @@
 	</Card.Content>
 	<Card.Footer class="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
 		<div class="text-xs text-muted-foreground">
-			Last Updated <time dateTime="2023-11-23">ADD DATE</time>
+			Last Updated <time dateTime="2023-11-23">{user.updated}</time>
 		</div>
 	</Card.Footer>
 </Card.Root>

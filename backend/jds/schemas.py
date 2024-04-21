@@ -17,6 +17,7 @@ class JDOut(Schema):
     file: str
     trust: str
     status: str
+    reviewer: Optional[str]
     date: str
     consultant_type: str
     primary_specialities: List[str]

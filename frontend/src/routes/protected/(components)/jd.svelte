@@ -63,6 +63,14 @@
 					<span class="text-muted-foreground"> Consultant Type </span>
 					<span>{jd.consultant_type}</span>
 				</li>
+				<li class="flex items-center justify-between">
+					<span class="text-muted-foreground"> Reviewer </span>
+					{#if jd.reviewer === null}
+					<span><p class="text-muted-foreground">None</p></span>
+					{:else}
+					<span>{jd.reviewer}</span>
+					{/if}
+				</li>
 			</ul>
 			<Separator class="my-2" />
 			<div class="font-semibold">Primary Specialities</div>

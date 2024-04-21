@@ -5,14 +5,14 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import * as Form from '$lib/components/ui/form';
-	import { formSchema, type FormSchema } from './schema';
+	import { formSchema, type FormSchema } from '../schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';
 	import { invalidateAll } from '$app/navigation';
 	import type { components } from '$lib/types.d.ts';
-	import JDApprove from './jd-approve.svelte';
-	import JDReject from './jd-reject.svelte';
+	import JDApprove from './jd-approve-reviewer.svelte';
+	import JDReject from '../jd-reject.svelte';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let jd: components['schemas']['JDOut'];
@@ -33,7 +33,8 @@
 
 	$: $formData = $formData;
 
-	$: disabled = jd.status !== ('Trust Submitted');
+	$: disabled = jd.status !== ('RCR Approved' || 'Trust Amended'
+	);
 
 	$: valid = !disabled && !isTainted($tainted);
 </script>
@@ -101,7 +102,7 @@
 						<Form.FieldErrors />
 						<div class="mb-2 mr-2 flex justify-end gap-2">
 							<Form.Button class="text-current" variant=outline {disabled}>Save</Form.Button>
-							<JDApprove valid={valid} />
+							<JDApprove valid={valid}/>
 							<JDReject valid={valid} />
 						</div>
 					</Table.Caption>

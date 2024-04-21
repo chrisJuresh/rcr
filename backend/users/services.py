@@ -5,6 +5,7 @@ from django.db import transaction
 from roles.services import get_user_roles, update_user_roles
 from trusts.services import update_user_trust, get_user_trusts
 from specialities.services import update_user_specialities, update_user_consultant_type, get_user_specialities, get_user_consultant_type
+from django.db.models import Q
 
 def user_exists(email):
     return User.objects.filter(email=email).exists()
@@ -45,7 +46,8 @@ def get_user_profile(user):
         "roles": get_user_roles(user, 'requested'),
         "approved_roles": get_user_roles(user, 'approved'),
         "consultant_type": get_user_consultant_type(user),
-        "specialities": get_user_specialities(user)
+        "specialities": get_user_specialities(user),
+        "updated": user.updated.strftime('%y-%m-%d %H:%M') if user.updated else ""
     }
 
 def update_user_attributes(user, attr, value):
@@ -70,5 +72,17 @@ def update_user_profile(user, payload):
         update_user_attributes(user, attr, value)
     user.save()
 
+def get_jd_reviewers(jd):
+    valid_reviewers = []
 
+    reviewers = User.objects.all()
+    
+    for reviewer in reviewers:
+        trusts = get_user_trusts(reviewer, 'approved')
+        roles = get_user_roles(reviewer, 'approved')
+        consultant_type = reviewer.user_specialities.consultant_type
+        if jd.trust not in trusts and 'Reviewer' in roles and consultant_type == jd.consultant_type:
+            valid_reviewers.append(reviewer)
+    
+    return valid_reviewers
     

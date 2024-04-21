@@ -38,7 +38,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-    # Add any other domains you want to allow
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',
 ]
 
 INSTALLED_APPS = [

@@ -23,13 +23,11 @@ def save_jd(request, jd: JDIn, file: UploadedFile, jd_obj=None):
     return jd_obj
 
 def user_jds(user, panel=None):
-    approved_roles = get_user_roles(user, 'approved')
     roles = get_user_roles(user, ['approved', 'requested'])
     trust = get_user_trust(user)
     approved_trusts = get_user_trusts(user, 'approved')
     jds = JD.objects.none()
 
-   
     if 'Trust Employee' in roles and panel=='Edit':
         jds = JD.objects.filter(trust=trust, status='Draft')
         return jds
@@ -38,24 +36,26 @@ def user_jds(user, panel=None):
         jds = JD.objects.filter(status='Trust Submitted')
         return jds
 
-    elif 'Reviewer' in roles and panel=='Review':
-        print(user.user_specialities.consultant_type)
+    elif 'Reviewer' in roles and (panel=='Review' or panel=='Panel'):
         jds = JD.objects.filter(
             ~Q(trust__in=approved_trusts) &
-            Q(consultant_type=user.user_specialities.consultant_type) &
-            Q(status='RCR approved')
+            Q(consultant_type=user.user_specialities.consultant_type) & (
+            Q(status='RCR Approved') |
+            Q(status='Trust Amended') )
         )
         return jds
 
     if 'Trust Employee' in roles:
         jds |= JD.objects.filter(trust=trust)
     elif 'RCR Employee' in roles:
-        jds |= JD.objects.filter()
+        jds |= JD.objects.all()
     elif 'Reviewer' in roles:
-        print(user.user_specialities.consultant_type)
         jds |= JD.objects.filter(
             ~Q(trust__in=approved_trusts) &
-            Q(consultant_type=user.user_specialities.consultant_type) &
-            Q(status='RCR approved')
+            Q(consultant_type=user.user_specialities.consultant_type) & (
+            Q(status='RCR Approved') |
+            Q(status='Trust Amended') |
+            Q(status='RSA Rejected') |
+            Q(status='RSA Approved') )
         )
     return jds

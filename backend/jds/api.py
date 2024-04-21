@@ -6,7 +6,7 @@ from django.utils.dateformat import format
 from typing import Optional
 from .schemas import JDIn, JDPanel, JDOut, JDIDsOut, JDID, JDChecklistOut, JDChecklistIn
 from .models import JD, ChecklistAnswer, ChecklistQuestion
-from trusts.services import get_user_trust
+from trusts.services import get_user_trust, get_user_trusts
 from roles.services import get_user_roles
 from .services import save_jd, user_jds
 from django.db import transaction
@@ -14,6 +14,8 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import get_object_or_404
 from transitions.extensions import GraphMachine
 from .models import JDStateMachine
+from users.services import get_jd_reviewers
+from users.schemas import ReviewersOut
 
 router = Router()
 
@@ -57,7 +59,6 @@ def get_jd_ids(request):
 def get_jd(request, jd_id: int):
     try:
         jds = user_jds(request.user)
-        print(jds.query)
         jd = jds.get(id=jd_id)
     except JD.DoesNotExist:
         raise HttpError(404, "JD not found")
@@ -66,6 +67,7 @@ def get_jd(request, jd_id: int):
         'id': jd.id,
         'file': jd.file,
         'status': jd.status,
+        'reviewer': jd.reviewer.get_full_name() if jd.reviewer else None,
         'date': jd.status_date.strftime('%y-%m-%d %H:%M') if jd.status_date else None,
         'trust': jd.trust.name,
         'consultant_type': jd.consultant_type.get_name_display(),
@@ -181,15 +183,44 @@ def update_jd_checklist(request, jd_id: int, jd_checklist: JDChecklistIn, panel:
     }
     return result
 
-@router.put("{jd_id}/{state}/", auth=JWTAuth()) 
-def update_jd_state(request, jd_id: int, state: str):
+from users.models import User
 
+@router.put("{jd_id}/{state}/", auth=JWTAuth()) 
+def update_jd_state(request, jd_id: int, state: str, reviewer: Optional[str]=None):
     if state == 'submit' and 'Trust Employee' in get_user_roles(request.user, 'approved'):
         jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
         jd.submit()
-    elif state == 'approve' and 'RCR Employee' in get_user_roles(request.user, 'approved'):
+    elif state == 'approve' and 'RCR Employee' or 'Reviewer' in get_user_roles(request.user, 'approved'):
         jd = JD.objects.get(id=jd_id)
-        jd.rcr_approve()
-    elif state == 'reject' and 'RCR Employee' in get_user_roles(request.user, 'approved'):
+        if 'RCR Employee' in get_user_roles(request.user, 'approved'):
+            jd.reviewer = User.objects.get(id=reviewer)
+        jd.approve()
+    elif state == 'reject' and 'RCR Employee' or 'Reviewer' in get_user_roles(request.user, 'approved'):
         jd = JD.objects.get(id=jd_id)
-        jd.rcr_reject()
+        jd.reject()
+
+@router.get("/reviewers/{jd_id}", auth=JWTAuth(), response=ReviewersOut)
+def get_reviewers(request, jd_id: int):
+    if 'RCR Employee' in get_user_roles(request.user, 'approved'):
+        jd = JD.objects.get(id=jd_id)
+        all_reviewers = get_jd_reviewers(jd)
+        reviewers = [
+            {
+                'id': reviewer.id,
+                'name': reviewer.get_full_name(),
+                'same_region': "Same Region" if reviewer.user_trusts.filter(trust__region=jd.trust.region, approved=True).exists() else "Other Regions",
+                'trusts': [
+                    {
+                        'id': trust.id, 
+                        'name': trust.name, 
+                        'region': {'name': trust.region.name}
+                    } for trust in get_user_trusts(reviewer, 'approved')
+                ]
+            } for reviewer in all_reviewers
+        ]
+        return {
+            "reviewers": reviewers
+        }
+    
+    else:
+        return {"reviewers": []}

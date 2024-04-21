@@ -47,20 +47,20 @@ class JD(models.Model):
 class JDStateMachine:
     def __init__(self, jd):
         self.jd = jd
-        states = ['Created', 'Draft', 'Trust Submitted', 'RCR approved', 'RSA approved', 'Trust Amended', 'RSA rejected']
+        states = ['Created', 'Draft', 'Trust Submitted', 'RCR Approved', 'RSA Approved', 'Trust Amended', 'RSA Rejected']
         transitions = [
             ['create', 'Created', 'Draft'],
             ['submit', 'Draft', 'Trust Submitted'],
 
-            ['rcr_reject', 'Trust Submitted', 'Draft'],
-            ['rcr_approve', 'Trust Submitted', 'RCR approved'],
+            ['reject', 'Trust Submitted', 'Draft'],
+            ['approve', 'Trust Submitted', 'RCR Approved'],
 
-            ['rsa_reject', 'RCR approved', 'RSA rejected'],       
-            ['amend', 'RSA rejected', 'Trust Amended'],     
-            ['rsa_approve', 'RCR approved', 'RSA approved'],
+            ['reject', 'RCR Approved', 'RSA Rejected'],       
+            ['amend', 'RSA Rejected', 'Trust Amended'],     
+            ['approve', 'RCR Approved', 'RSA Approved'],
  
-            ['rsa_reject', 'Trust Amended', 'RSA rejected'],
-            ['rsa_approve', 'Trust Amended', 'RSA approved'],
+            ['reject', 'Trust Amended', 'RSA Rejected'],
+            ['approve', 'Trust Amended', 'RSA Approved'],
  
         ]
         

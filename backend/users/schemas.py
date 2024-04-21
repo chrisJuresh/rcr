@@ -1,6 +1,6 @@
 from ninja import Schema, Field
 from typing import List, Optional
-from trusts.schemas import TrustOut
+from trusts.schemas import TrustOut, TrustsOut
 
 class UserIn(Schema):
     email: str = Field(..., pattern=r'^\S+@\S+\.\S+$')
@@ -42,4 +42,13 @@ class UserProfileOut(Schema):
     approved_roles: Optional[List[str]]
     consultant_type: Optional[str]
     specialities: Optional[List[SpecialitiesOut]]
+    updated: Optional[str]
 
+class ReviewerOut(Schema):
+    id: int
+    name: str
+    same_region: str
+    trusts: List[TrustOut]
+
+class ReviewersOut(Schema):
+    reviewers: List[ReviewerOut]

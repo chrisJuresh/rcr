@@ -18,7 +18,7 @@ export const getJDChecklist = async (jd_id: string, token: string) => {
 };
 
 export const getUserRoles = async (token: string) => {
-    return getData<components['schemas']['RolesOut']>('/users/roles/', { token });
+    return getData<components['schemas']['UserRolesOut']>('/users/roles/', { token });
 }
 
 export const getRoles = async () => {
@@ -50,11 +50,11 @@ export const loginUser = async (data: any)  => {
 }
 
 export const registerUnauthenticatedUser = async (data: any) => {
-    return postData('/users/register-unauthenticated/', data);
+    return postData('/users/register-unauthenticated', data);
 }
 
 export const registerAuthenticateUser = async (data: any) => {
-    return postData('/users/register-authenticate/', data);
+    return postData('/users/register-authenticate', data);
 }
 
 export const putUserProfile = async (data: any, token: string,) => {
@@ -69,6 +69,10 @@ export const putJDChecklist = async (jd_id: string, data: any, token: string, pa
     return putData(`/jds/${jd_id}/checklist/`, data, { token, params });
 }
 
-export const putJDState = async (jd_id: string, state: string, token: string) => {
-    return putData(`/jds/${jd_id}/${state}/`, {}, { token });
+export const putJDState = async (jd_id: string, state: string, token: string, params?: Record<string, any>) => {
+    return putData(`/jds/${jd_id}/${state}/`, {}, { token, params});
+}
+
+export const getReviewers = async (jd_id:string, token: string) => {
+    return getData<components['schemas']['ReviewersOut']>(`/jds/reviewers/${jd_id}`, { token }).then(data => data.reviewers);
 }

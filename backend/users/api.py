@@ -2,7 +2,6 @@ from ninja import Router
 from ninja.errors import HttpError
 from ninja_jwt.authentication import JWTAuth
 from django.shortcuts import get_object_or_404
-
 from .schemas import UnauthenticatedUserIn, TokenIn, UserProfileIn, UserProfileOut
 from .services import (
     create_unauthenticated_user,
@@ -15,7 +14,7 @@ from .services import (
 from trusts.services import get_user_trust, get_user_trusts
 from roles.services import get_user_roles
 from .models import UnauthenticatedUser
-from .schemas import UserRolesOut
+from .schemas import UserRolesOut, ReviewersOut
 from trusts.schemas import TrustOut
 
 router = Router()
@@ -55,7 +54,7 @@ def get_roles(request):
         "requested_roles": get_user_roles(request.auth, ['requested'])
     }
 
-@router.get("trust", auth=JWTAuth(), response=TrustOut)
+@router.get("/trust", auth=JWTAuth(), response=TrustOut)
 def get_trust(request):
     try:
         return {
@@ -65,4 +64,3 @@ def get_trust(request):
         }
     except:
         raise HttpError(400, "Your selected Trust does not match any Approved Trusts.")
-    

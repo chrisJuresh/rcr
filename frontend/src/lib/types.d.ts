@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["46092576_controller_obtain_token"];
+        post: operations["51843a06_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["c2a21b1a_controller_refresh_token"];
+        post: operations["687427db_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["284618b5_controller_verify_token"];
+        post: operations["b6779f32_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -296,6 +296,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/jds/reviewers/{jd_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Reviewers */
+        get: operations["jds_api_get_reviewers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -388,6 +405,8 @@ export interface components {
             consultant_type: string | null;
             /** Specialities */
             specialities: components["schemas"]["SpecialitiesOut"][] | null;
+            /** Updated */
+            updated: string | null;
         };
         /** UserProfileIn */
         UserProfileIn: {
@@ -463,6 +482,8 @@ export interface components {
             trust: string;
             /** Status */
             status: string;
+            /** Reviewer */
+            reviewer: string | null;
             /** Date */
             date: string;
             /** Consultant Type */
@@ -575,6 +596,22 @@ export interface components {
             /** Required */
             required: boolean;
         };
+        /** ReviewerOut */
+        ReviewerOut: {
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            /** Same Region */
+            same_region: string;
+            /** Trusts */
+            trusts: components["schemas"]["TrustOut"][];
+        };
+        /** ReviewersOut */
+        ReviewersOut: {
+            /** Reviewers */
+            reviewers: components["schemas"]["ReviewerOut"][];
+        };
     };
     responses: never;
     parameters: never;
@@ -584,7 +621,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "46092576_controller_obtain_token": {
+    "51843a06_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -608,7 +645,7 @@ export interface operations {
             };
         };
     };
-    c2a21b1a_controller_refresh_token: {
+    "687427db_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -632,7 +669,7 @@ export interface operations {
             };
         };
     };
-    "284618b5_controller_verify_token": {
+    b6779f32_controller_verify_token: {
         parameters: {
             query?: never;
             header?: never;
@@ -1022,7 +1059,9 @@ export interface operations {
     };
     jds_api_update_jd_state: {
         parameters: {
-            query?: never;
+            query?: {
+                reviewer?: string | null;
+            };
             header?: never;
             path: {
                 jd_id: number;
@@ -1038,6 +1077,28 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    jds_api_get_reviewers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jd_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewersOut"];
+                };
             };
         };
     };

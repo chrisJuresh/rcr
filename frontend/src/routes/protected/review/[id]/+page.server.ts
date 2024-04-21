@@ -1,4 +1,4 @@
-import { getJD, getJDIds, getJDChecklist, putJDChecklist, putJDState } from '$lib/api';
+import { getJD, getJDIds, getJDChecklist, putJDChecklist, putJDState, getReviewers, getUserRoles } from '$lib/api';
 import type { PageServerLoad, Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
@@ -8,6 +8,8 @@ import { zod } from 'sveltekit-superforms/adapters';
 export const load: PageServerLoad = async ({ cookies, params: { id } }) => {
 	const token = cookies.get('token');
 	return {
+		roles: await getUserRoles(token),
+		reviewers: await getReviewers(id, token),
 		jd_ids: await getJDIds(token),
 		jd: await getJD(id, token),
 		form: await superValidate(await getJDChecklist(id, token), zod(formSchema), { errors: false })
@@ -32,9 +34,12 @@ export const actions: Actions = {
 		}
 	},
 	approve: async (event) => {
+		const formData = await event.request.formData();
+		const reviewer = formData.get('reviewer');
 		const token = event.cookies.get('token');
+		console.log(reviewer)
 		try {
-			await putJDState(event.params.id, 'approve', token);
+			await putJDState(event.params.id, 'approve', token, {reviewer: reviewer});
 		} catch {
 			//
 		}
