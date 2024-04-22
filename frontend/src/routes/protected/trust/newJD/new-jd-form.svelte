@@ -70,6 +70,7 @@
 		</Card.Header>
 		<Card.Content>
 			<form method="POST" use:enhance enctype="multipart/form-data">
+				<div class="flex flex-col gap-2">
 				<Form.Field {form} name="file">
 					<Form.Control let:attrs>
 						<Form.Label>Job Description File</Form.Label>
@@ -197,6 +198,7 @@
 				</Form.Field>
 
 				<Form.Button class="w-full">Save</Form.Button>
+			</div>
 			</form>
 		</Card.Content>
 	</Card.Root>

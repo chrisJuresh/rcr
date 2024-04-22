@@ -16,9 +16,29 @@
 
 	import JDTable from '../../(components)/data-table.svelte';
 
+	import CalendarIcon from "svelte-radix/Calendar.svelte";
+  import {
+    CalendarDate,
+    DateFormatter,
+    type DateValue,
+    getLocalTimeZone,
+    parseDate,
+    today
+  } from "@internationalized/date";
+  import { browser } from "$app/environment";
+  import { page } from "$app/stores";
+  import { cn } from "$lib/utils.js";
+  import {
+    Button,
+    buttonVariants
+  } from "$lib/components/ui/button/index.js";
+  import { Calendar } from "$lib/components/ui/calendar/index.js";
+  import * as Popover from "$lib/components/ui/popover/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
+
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let user_trust: components['schemas']['TrustOut'];
-	export let jds: components['schemas']['JDsO'][];
+	export let jds: components['schemas']['JDPanel'];
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema),
@@ -38,6 +58,15 @@
 			}
 		: undefined;
 
+  const df = new DateFormatter("en-US", {
+    dateStyle: "long"
+  });
+ 
+  let value: DateValue | undefined;
+ 
+  $: value = $formData.date ? parseDate($formData.date) : undefined;
+ 
+  let placeholder: DateValue = today(getLocalTimeZone());
 </script>
 
 {#if user_trust}
@@ -49,6 +78,7 @@
 		<Card.Content>
 			<form method="POST" use:enhance enctype="multipart/form-data">
 
+				<div class="flex flex-col gap-2">
 				<Form.Field {form} name="trust">
 					<Form.Control let:attrs>
 						<Form.Label>Trust</Form.Label>
@@ -86,16 +116,62 @@
 					<Form.FieldErrors />
 				</Form.Field>
 
-				<Form.Field {form} name="JDs">
+				<Label>JDs</Label>
+				<Card.Root class="mb-4 mt-2">
+					<Card.Content>
+				<Form.Field class="mt-4 -mb-6" {form} name="JDs">
 					<Form.Control let:attrs>
-						<Form.Label>JDs</Form.Label>
 							<JDTable jds={jds}/>
 						<input hidden {...attrs} bind:value={$formData.JDs} />
 					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>
-				
+				</Card.Content>
+				</Card.Root>
+
+	 <Form.Field {form} name="date" class="flex flex-col">
+    <Form.Control let:attrs>
+      <Form.Label>Date of birth</Form.Label>
+      <Popover.Root>
+        <Popover.Trigger
+          {...attrs}
+          class={cn(
+            buttonVariants({ variant: "outline" }),
+            "w-[280px] justify-start pl-4 text-left font-normal",
+            !value && "text-muted-foreground"
+          )}
+        >
+          {value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date"}
+          <CalendarIcon class="ml-auto h-4 w-4 opacity-50" />
+        </Popover.Trigger>
+        <Popover.Content class="w-auto p-0" side="top">
+          <Calendar
+            {value}
+            bind:placeholder
+            minValue={new CalendarDate(1900, 1, 1)}
+            maxValue={today(getLocalTimeZone())}
+            calendarLabel="Date of birth"
+            initialFocus
+            onValueChange={(v) => {
+              if (v) {
+                $formData.date = v.toString();
+              } else {
+                $formData.date = "";
+              }
+            }}
+          />
+        </Popover.Content>
+      </Popover.Root>
+      <Form.Description
+        >Your date of birth is used to calculator your age</Form.Description
+      >
+      <Form.FieldErrors />
+      <input hidden value={$formData.date} name={attrs.name} />
+    </Form.Control>
+  </Form.Field>
 				<Form.Button class="w-full">Save</Form.Button>
+				
+				</div>
 			</form>
 		</Card.Content>
 	</Card.Root>

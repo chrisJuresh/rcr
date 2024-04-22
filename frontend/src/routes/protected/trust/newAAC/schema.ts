@@ -6,6 +6,7 @@ export const formSchema = z.object({
 		message: 'You must select a consultant type.'
 	}),
 	JDs: z.number().array().min(1),
+	date: z.string().refine((v) => v, { message: "A Date is required." }),
 });
 
 export type FormSchema = typeof formSchema;

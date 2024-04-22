@@ -76,13 +76,15 @@ def get_jd_reviewers(jd):
     valid_reviewers = []
 
     reviewers = User.objects.all()
-    
+
     for reviewer in reviewers:
-        trusts = get_user_trusts(reviewer, 'approved')
-        roles = get_user_roles(reviewer, 'approved')
-        consultant_type = reviewer.user_specialities.consultant_type
-        if jd.trust not in trusts and 'Reviewer' in roles and consultant_type == jd.consultant_type:
-            valid_reviewers.append(reviewer)
-    
+        try:
+            trusts = get_user_trusts(reviewer, 'approved')
+            roles = get_user_roles(reviewer, 'approved')
+            consultant_type = reviewer.user_specialities.consultant_type
+            if jd.trust not in trusts and 'Reviewer' in roles and consultant_type == jd.consultant_type:
+                valid_reviewers.append(reviewer)
+        except:
+            pass
     return valid_reviewers
     

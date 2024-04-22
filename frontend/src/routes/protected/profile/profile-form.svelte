@@ -135,6 +135,7 @@
 	</Card.Header>
 	<Card.Content>
 		<form method="POST" use:enhance>
+			<div class="flex flex-col gap-1">
 			<div class="grid grid-cols-2 gap-6">
 				<Form.Field {form} name="title">
 					<Form.Control let:attrs>
@@ -316,6 +317,7 @@
 				<Form.FieldErrors />
 			</Form.Field>
 			<Form.Button class="w-full">Update</Form.Button>
+		</div>
 		</form>
 	</Card.Content>
 </Card.Root>
