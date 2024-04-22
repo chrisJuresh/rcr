@@ -33,8 +33,7 @@
 
 	$: $formData = $formData;
 
-	$: disabled = jd.status !== ('RCR Approved' || 'Trust Amended'
-	);
+	$: disabled = jd.status !== ('RCR Approved' || 'Trust Amended');
 
 	$: valid = !disabled && !isTainted($tainted);
 </script>
@@ -44,9 +43,7 @@
 		<Card.Title class="text-2xl font-bold">JD Review Form</Card.Title>
 
 		{#if disabled}
-			<Card.Description
-				>Please approve or reject this JD</Card.Description
-			>
+			<Card.Description>Please approve or reject this JD</Card.Description>
 		{:else}
 			<Card.Description>Please fill in the form to continue</Card.Description>
 		{/if}
@@ -79,10 +76,10 @@
 								<Table.Cell>
 									<p class="text-center font-bold">
 										{$formData.checklist[i].answer.page_numbers}
-										</p>
+									</p>
 								</Table.Cell>
 								<Table.Cell>
-										{$formData.checklist[i].answer.description}
+									{$formData.checklist[i].answer.description}
 								</Table.Cell>
 								<Table.Cell>
 									<Form.ElementField {form} name="checklist[{i}].answer.rcr_comments">
@@ -101,9 +98,9 @@
 					<Table.Caption>
 						<Form.FieldErrors />
 						<div class="mb-2 mr-2 flex justify-end gap-2">
-							<Form.Button class="text-current" variant=outline {disabled}>Save</Form.Button>
-							<JDApprove valid={valid}/>
-							<JDReject valid={valid} />
+							<Form.Button class="text-current" variant="outline" {disabled}>Save</Form.Button>
+							<JDApprove {valid} />
+							<JDReject {valid} />
 						</div>
 					</Table.Caption>
 				</Form.Fieldset>

@@ -23,8 +23,8 @@
 	console.log(nextJDid, previousJDid);
 
 	function getFilename(url) {
-    return url.substring(url.lastIndexOf('/') + 1);
-  }
+		return url.substring(url.lastIndexOf('/') + 1);
+	}
 </script>
 
 <Card.Root>
@@ -54,9 +54,9 @@
 				<li class="flex items-center justify-between">
 					<span class="text-muted-foreground"> File </span>
 					<span>
-					<a href="http://localhost:8000{jd.file}">
-						<p class="underline text-cyan-800">{getFilename(jd.file)}</p>
-					</a>
+						<a href="http://localhost:8000{jd.file}">
+							<p class="text-cyan-800 underline">{getFilename(jd.file)}</p>
+						</a>
 					</span>
 				</li>
 				<li class="flex items-center justify-between">
@@ -66,9 +66,9 @@
 				<li class="flex items-center justify-between">
 					<span class="text-muted-foreground"> Reviewer </span>
 					{#if jd.reviewer === null}
-					<span><p class="text-muted-foreground">None</p></span>
+						<span><p class="text-muted-foreground">None</p></span>
 					{:else}
-					<span>{jd.reviewer}</span>
+						<span>{jd.reviewer}</span>
 					{/if}
 				</li>
 			</ul>

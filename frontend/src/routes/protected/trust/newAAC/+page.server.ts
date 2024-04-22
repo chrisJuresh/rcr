@@ -3,13 +3,13 @@ import { fail, redirect } from '@sveltejs/kit';
 import { superValidate, setError } from 'sveltekit-superforms';
 import { formSchema } from './schema.js';
 import { zod } from 'sveltekit-superforms/adapters';
-import { getUserTrust, getSpecialities, postJD } from '$lib/api.js';
+import { getUserTrust, getJDPanel, postJD } from '$lib/api.js';
 
 export const load: PageServerLoad = async ({ cookies }) => {
 	const token = cookies.get('token');
 	return {
+		jds: await getJDPanel(token, { panel: 'AAC' }),
 		user_trust: await getUserTrust(token),
-		specialities: await getSpecialities(),
 		form: await superValidate(zod(formSchema))
 	};
 };

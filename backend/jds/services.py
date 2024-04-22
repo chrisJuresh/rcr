@@ -29,14 +29,18 @@ def user_jds(user, panel=None):
     jds = JD.objects.none()
 
     if 'Trust Employee' in roles and panel=='Edit':
-        jds = JD.objects.filter(trust=trust, status='Draft')
+        jds = JD.objects.filter(trust=trust, status__in=['Draft', 'RSA Rejected'])
         return jds
 
-    elif 'RCR Employee' in roles and panel=='Review':
+    if 'Trust Employee' in roles and panel=='AAC':
+        jds = JD.objects.filter(trust=trust, status='RSA Approved')
+        return jds
+    
+    if 'RCR Employee' in roles and panel=='Review':
         jds = JD.objects.filter(status='Trust Submitted')
         return jds
 
-    elif 'Reviewer' in roles and (panel=='Review' or panel=='Panel'):
+    if 'Reviewer' in roles and panel=='Review':
         jds = JD.objects.filter(
             ~Q(trust__in=approved_trusts) &
             Q(consultant_type=user.user_specialities.consultant_type) & (
@@ -47,9 +51,9 @@ def user_jds(user, panel=None):
 
     if 'Trust Employee' in roles:
         jds |= JD.objects.filter(trust=trust)
-    elif 'RCR Employee' in roles:
+    if 'RCR Employee' in roles:
         jds |= JD.objects.all()
-    elif 'Reviewer' in roles:
+    if 'Reviewer' in roles:
         jds |= JD.objects.filter(
             ~Q(trust__in=approved_trusts) &
             Q(consultant_type=user.user_specialities.consultant_type) & (

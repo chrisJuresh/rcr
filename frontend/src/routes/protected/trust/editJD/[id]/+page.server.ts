@@ -26,7 +26,7 @@ export const actions: Actions = {
 		console.log(form.data);
 		const token = event.cookies.get('token');
 		try {
-			await putJDChecklist(event.params.id, form.data, token, { panel: 'Edit'});
+			await putJDChecklist(event.params.id, form.data, token, { panel: 'Edit' });
 			return { form };
 		} catch {
 			//

@@ -15,6 +15,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { page } from '$app/stores';
 
 	export let jds: components['schemas']['JDPanel']['jds'];
 
@@ -103,10 +104,18 @@
 		'status',
 		'date'
 	];
+
+    ids.forEach((id) => {
+      if ($page.url.pathname.startsWith("/protected/trust/newAAC") && (id === 'status' || id === 'date')) {
+        hideForId[id] = false; 
+      } else {
+        hideForId[id] = true; 
+      }
+    });
 </script>
 
 <div>
-	<div class="flex items-center py-4">
+	<div class="flex items-center pb-4">
 		<Input class="max-w-sm" placeholder="Filter ..." type="text" bind:value={$filterValue} />
 
 		<DropdownMenu.Root>
@@ -135,7 +144,7 @@
 							{#each headerRow.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
 									<Table.Head {...attrs}>
-										{#if cell.id === 'id' || cell.id === 'date' || cell.id === 'status'}
+										{#if cell.id === 'id' || cell.id === 'date'}
 											<Button variant="ghost" class="-ml-4" on:click={props.sort.toggle}>
 												<Render of={cell.render()} />
 												<ArrowUpDown class={'ml-2 h-4 w-4'} />

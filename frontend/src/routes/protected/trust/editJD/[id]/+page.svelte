@@ -10,7 +10,7 @@
 </script>
 
 <div class="flex w-11/12 flex-wrap justify-center">
-	<div class=w-full>
+	<div class="w-full">
 		<div class="mx-auto mb-6 h-44 w-8/12">
 			<Card.Root class="h-full">
 				<Card.Content class="flex h-full justify-center">

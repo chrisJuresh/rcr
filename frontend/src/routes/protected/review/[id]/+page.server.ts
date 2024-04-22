@@ -1,4 +1,12 @@
-import { getJD, getJDIds, getJDChecklist, putJDChecklist, putJDState, getReviewers, getUserRoles } from '$lib/api';
+import {
+	getJD,
+	getJDIds,
+	getJDChecklist,
+	putJDChecklist,
+	putJDState,
+	getReviewers,
+	getUserRoles
+} from '$lib/api';
 import type { PageServerLoad, Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
@@ -27,7 +35,7 @@ export const actions: Actions = {
 		console.log(form.data);
 		const token = event.cookies.get('token');
 		try {
-			await putJDChecklist(event.params.id, form.data, token, { panel: 'Review'});
+			await putJDChecklist(event.params.id, form.data, token, { panel: 'Review' });
 			return { form };
 		} catch {
 			//
@@ -37,9 +45,9 @@ export const actions: Actions = {
 		const formData = await event.request.formData();
 		const reviewer = formData.get('reviewer');
 		const token = event.cookies.get('token');
-		console.log(reviewer)
+		console.log(reviewer);
 		try {
-			await putJDState(event.params.id, 'approve', token, {reviewer: reviewer});
+			await putJDState(event.params.id, 'approve', token, { reviewer: reviewer });
 		} catch {
 			//
 		}

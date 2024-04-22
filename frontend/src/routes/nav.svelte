@@ -15,6 +15,8 @@
 	import Pencil1 from 'svelte-radix/Pencil1.svelte';
 	import Pencil2 from 'svelte-radix/Pencil2.svelte';
 	import Reader from 'svelte-radix/Reader.svelte';
+	import CardStackPlus from 'svelte-radix/CardStackPlus.svelte';
+	import ChatBubble from 'svelte-radix/ChatBubble.svelte';
 
 	let stateValue: string[] = [];
 	rolesStore.subscribe((items) => {
@@ -64,7 +66,8 @@
 	$: {
 		let isTrustEmployee = user_roles.roles?.includes('Trust Employee');
 		let isReviewer = user_roles.roles?.includes('Reviewer');
-		let isRCREmployee = user_roles.roles?.includes('RCR Employee'); // Add RCR Employee check
+		let isRCREmployee = user_roles.roles?.includes('RCR Employee');
+		let isRepresentative = user_roles.roles?.includes('Representative');
 		let additionalButtons = [];
 
 		if (isTrustEmployee) {
@@ -117,7 +120,9 @@
 			});
 		} else if (
 			(!isReviewer && !isRCREmployee && stateValue.includes('Reviewer')) ||
-			user_roles.requested_roles?.includes('Reviewer')
+			stateValue.includes('RCR Employee') ||
+			user_roles.requested_roles?.includes('Reviewer') ||
+			user_roles.requested_roles?.includes('RCR Employee')
 		) {
 			additionalButtons.push({
 				icon: Reader,
@@ -128,6 +133,46 @@
 			});
 		}
 
+		if (isTrustEmployee || isRepresentative) {
+			additionalButtons.push(
+				{
+					icon: CardStackPlus,
+					label: 'New AAC',
+					path: '/protected/trust/newAAC',
+					variant: 'outline',
+					disabled: false
+				},
+				{
+					icon: ChatBubble,
+					label: 'Edit AAC',
+					path: '/protected/trust/newAAC',
+					variant: 'outline',
+					disabled: false
+				},
+			);
+		} else if (
+			!isTrustEmployee &&
+			(stateValue.includes('Trust Employee') ||
+				user_roles.requested_roles?.includes('Trust Employee'))
+		) {
+			additionalButtons.push(
+				{
+					icon: CardStackPlus,
+					label: 'New AAC',
+					path: '/protected/trust/newAAC',
+					variant: 'secondary',
+					disabled: true
+				},
+				{
+					icon: ChatBubble,
+					label: 'Edit AAC',
+					path: '/protected/trust/newAAC',
+					variant: 'secondary',
+					disabled: true
+				},
+			);
+		}
+		
 		buttons = [...baseButtons, ...additionalButtons];
 
 		updateButtonStyles($page.url.pathname);
@@ -177,7 +222,7 @@
 						on:click={disabled ? null : () => navigateTo(path)}
 						{variant}
 						{disabled}
-						class="m-2 w-28"
+						class="2xl:m-2 m-1 w-28"
 					>
 						<svelte:component this={icon} class="mr-2 max-h-4 min-h-4 min-w-4 max-w-4" />
 						{label}</Button

@@ -37,29 +37,28 @@
 	$: disabled = jd.status === 'Trust Submitted';
 
 	$: valid = $formData.requirements_met && !isTainted() && !disabled;
-
 </script>
 
 <Card.Root class="neu w-full">
 	<Card.Header>
 		<div class="flex justify-between">
-		<div>
-		<Card.Title class="text-2xl font-bold">JD Review Form</Card.Title>
+			<div>
+				<Card.Title class="text-2xl font-bold">JD Review Form</Card.Title>
 
-		{#if disabled}
-			<Card.Description
-				>This form has already been submitted<br />Please wait for approval</Card.Description
-			>
-		{:else}
-			<Card.Description>Please fill in the form to continue</Card.Description>
-		{/if}
-		</div>
-		{#if jd.status === 'Trust Submitted'}
-		<div class="flex gap-4 self-center mr-6">
-			<h1 class="font-bold text-xl text-muted-foreground">Submitted</h1>
-			<LockClosed class="text-muted-foreground" />
-		</div>
-		{/if}
+				{#if disabled}
+					<Card.Description
+						>This form has already been submitted<br />Please wait for approval</Card.Description
+					>
+				{:else}
+					<Card.Description>Please fill in the form to continue</Card.Description>
+				{/if}
+			</div>
+			{#if jd.status === 'Trust Submitted'}
+				<div class="mr-6 flex gap-4 self-center">
+					<h1 class="text-xl font-bold text-muted-foreground">Submitted</h1>
+					<LockClosed class="text-muted-foreground" />
+				</div>
+			{/if}
 		</div>
 	</Card.Header>
 	<Card.Content>
@@ -134,7 +133,7 @@
 						<Form.FieldErrors />
 						<div class="mb-2 mr-2 flex justify-end gap-2">
 							<Form.Button {disabled}>Save</Form.Button>
-								<JDSubmit valid={valid} />
+							<JDSubmit {valid} />
 						</div>
 					</Table.Caption>
 				</Form.Fieldset>
