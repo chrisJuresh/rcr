@@ -1,54 +1,8 @@
-\documentclass[12pt, a4paper]{report}
-
-\usepackage[margin=1.2in]{geometry}
-\usepackage{multicol}
-\usepackage{graphicx} 
-\usepackage{subfiles}
-\usepackage{wrapfig}
-\usepackage{minted}
-\usepackage{listings}
-\usepackage{multicol}
-\usepackage[style=authoryear, sorting=nyt]{biblatex}
-\usepackage{appendix}
-\usepackage{tocloft,calc}
-\usepackage{titlesec}
-\usepackage{fancyhdr}
-\usepackage{hyperref}
-\usepackage{epigraph}
-
-\hypersetup{
-    linktoc=all,     %set to all if you want both sections and subsections linked
-}
-
-\renewcommand{\cfttoctitlefont}{\Huge\bfseries} % Change \Large to any other size as needed
-\renewcommand{\cftchappresnum}{\chaptername\space}
-\renewcommand{\cftchapaftersnum}{:} % Add this line to insert a colon after the chapter number
-\setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~999~}}}
-\setlength{\cftbeforetoctitleskip}{0pt} % Reduce space above the contents title
-\setlength{\cftaftertoctitleskip}{10pt} % Adjust space below the contents title to suit your needs
-\setlength{\cftbeforechapskip}{10pt} % You can adjust the 10pt to whatever suits your needs
-\setlength{\cftbeforesecskip}{5pt} % You can adjust the 10pt to whatever suits your needs
-\setlength{\cftbeforesubsecskip}{2.5pt} % You can adjust the 10pt to whatever suits your needs
-\makeatletter
-\g@addto@macro\appendix{%
-  \addtocontents{toc}{%
-    \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
-  }%
-}
-
-\makeatother
-
-\titleformat{\chapter}[hang] 
-{\normalfont\LARGE\bfseries}{\chaptertitlename\ \thechapter:}{1em}{} 
-\titlespacing*{\chapter}{0pt}{-20pt}{10pt}
-
-\addbibresource{references.bib}
-
+\input{lib/preamble}
 \begin{document}
 
 \subfile{chapters/title}
 
-\newpage
 \subfile{chapters/acknowledgements}
 \thispagestyle{empty}
 
@@ -57,26 +11,22 @@
 \thispagestyle{empty}
 
 \newpage
-% Temporarily redefine the 'plain' page style to be completely empty, including the header line
 \fancypagestyle{plain}{
-    \fancyhf{} % clear all header and footer fields
-    \renewcommand{\headrulewidth}{0pt} % no header line
-    \renewcommand{\footrulewidth}{0pt} % no footer line
+    \fancyhf{} 
+    \renewcommand{\headrulewidth}{0pt} 
+    \renewcommand{\footrulewidth}{0pt} 
 }
-\pagestyle{empty} % apply the empty style to subsequent pages
+\pagestyle{empty} 
 \tableofcontents
 \clearpage 
 
-% Restore the original 'plain' page style definitions
 \fancypagestyle{plain}{
-    \fancyhf{} % Clear all header and footer fields
-    \fancyhead[L]{\footnotesize{Automating the RCR's JD Reviews \& AACs}} % Left header
-    \fancyhead[R]{\footnotesize{Christian Juresh}} % Right header
-    \fancyfoot[C]{\thepage} % Center footer with page number
+    \fancyhf{} 
+    \fancyhead[L]{\footnotesize{Automating the RCR's JD \& AAC Processes}} 
+    \fancyhead[R]{\footnotesize{Christian Juresh \wordcount}} 
+    \fancyfoot[C]{\thepage} 
 }
-
-\newpage
-\pagestyle{plain} % Set the page style for subsequent pages
+\pagestyle{plain} 
 \subfile{chapters/introduction}
 
 \subfile{chapters/literature}
@@ -86,17 +36,17 @@
 \newpage
 \subfile{chapters/implementation}
 
-\section{Testing}
-
-django tests.py
-
-UAT
-
-\newpage
-\subfile{chapters/discussion}
-
-\subfile{chapters/further}
-The project is essentially fully functional and could theoretically be used in a production environment. However, it is very important for it to undergo extensive UAT by multiple people first. There are also a large number of features that would enchance overall user experience tremendously. 
+% \section{Testing}
+%
+% django tests.py
+%
+% UAT
+%
+% \newpage
+% \subfile{chapters/discussion}
+%
+% \subfile{chapters/further}
+%  The project is essentially fully functional and could theoretically be used in a production environment. However, it is very important for it to undergo extensive UAT by multiple people first. There are also a large number of features that would enhance overall user experience tremendously. 
 
 \newpage
 \nocite{*}

@@ -1,0 +1,60 @@
+\documentclass[12pt, a4paper]{report}
+
+\usepackage[margin=1.2in]{geometry}
+\usepackage{multicol}
+\usepackage{graphicx} 
+\usepackage{subfiles}
+\usepackage{wrapfig}
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage[style=authoryear, sorting=nyt]{biblatex}
+\usepackage{appendix}
+\usepackage{tocloft,calc}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{epigraph}
+\usepackage[skip=12pt]{parskip}
+\usepackage[font=footnotesize]{caption}
+
+\widowpenalties=3 10000 10000 150
+\clubpenalties=3 10000 10000 150
+\displaywidowpenalty = 10000
+
+\newcommand\wordcount{
+\immediate\write18{texcount -1 -sum -merge chapters/implementation/* \jobname.tex 2>&1 | grep '^[0-9][0-9]*' > \jobname-words.sum}
+  \input{\jobname-words.sum}
+}
+
+\hypersetup{
+    linktoc=all,     
+}
+
+\renewcommand{\cfttoctitlefont}{\Huge\bfseries} 
+\renewcommand{\cftchappresnum}{\chaptername\space}
+\renewcommand{\cftchapaftersnum}{:} 
+\setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~999~}}}
+\setlength{\cftbeforetoctitleskip}{0pt} 
+\setlength{\cftaftertoctitleskip}{10pt} 
+\setlength{\cftbeforechapskip}{10pt} 
+\setlength{\cftbeforesecskip}{5pt} 
+\setlength{\cftbeforesubsecskip}{2.5pt} 
+\makeatletter
+\g@addto@macro\appendix{
+  \addtocontents{toc}{
+    \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
+  }
+}
+
+\makeatother
+
+\titleformat{\chapter}[hang] 
+{\normalfont\LARGE\bfseries}{\chaptertitlename\ \thechapter:}{1em}{} 
+\titlespacing*{\chapter}{0pt}{-30pt}{-6pt}
+\titlespacing*{\section}{0pt}{18pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+
+\addbibresource{references.bib}
