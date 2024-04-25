@@ -20,8 +20,6 @@
 
 	$: nextJDid = currentIndex < jd_ids.ids.length - 1 ? jd_ids.ids[currentIndex + 1] : undefined;
 
-	console.log(nextJDid, previousJDid);
-
 	function getFilename(url) {
 		return url.substring(url.lastIndexOf('/') + 1);
 	}

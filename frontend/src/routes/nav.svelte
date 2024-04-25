@@ -24,7 +24,6 @@
 	});
 
 	export let user_roles: components['schemas']['UserRolesOut'];
-	console.log('user_roles: ', user_roles);
 
 	function handleLogout() {
 		goto('/logout');
@@ -144,11 +143,11 @@
 				},
 				{
 					icon: ChatBubble,
-					label: 'Edit AAC',
-					path: '/protected/trust/newAAC',
+					label: 'View AAC',
+					path: '/protected/trust/viewAAC',
 					variant: 'outline',
 					disabled: false
-				},
+				}
 			);
 		} else if (
 			!isTrustEmployee &&
@@ -165,14 +164,14 @@
 				},
 				{
 					icon: ChatBubble,
-					label: 'Edit AAC',
-					path: '/protected/trust/newAAC',
+					label: 'View AAC',
+					path: '/protected/trust/viewAAC',
 					variant: 'secondary',
 					disabled: true
-				},
+				}
 			);
 		}
-		
+
 		buttons = [...baseButtons, ...additionalButtons];
 
 		updateButtonStyles($page.url.pathname);
@@ -222,7 +221,7 @@
 						on:click={disabled ? null : () => navigateTo(path)}
 						{variant}
 						{disabled}
-						class="2xl:m-2 m-1 w-28"
+						class="m-1 w-28 2xl:m-2"
 					>
 						<svelte:component this={icon} class="mr-2 max-h-4 min-h-4 min-w-4 max-w-4" />
 						{label}</Button

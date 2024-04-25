@@ -21,6 +21,7 @@ from roles.api import router as roles_router
 from trusts.api import router as trusts_router
 from specialities.api import router as specialities_router
 from jds.api import router as jds_router
+from aacs.api import router as aacs_router
 from .api import api
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,6 +31,7 @@ api.add_router("/roles/", roles_router, tags=["roles"]),
 api.add_router("/trusts/", trusts_router, tags=["trusts"]),
 api.add_router("/specialities/", specialities_router, tags=["specialities"]),
 api.add_router("/jds/", jds_router, tags=["jds"]),
+api.add_router("/aacs/", aacs_router, tags=["aacs"]),
 
 urlpatterns = [
     path('admin/', admin.site.urls),

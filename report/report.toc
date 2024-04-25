@@ -1,36 +1,37 @@
-\contentsline {section}{\numberline {1}Introduction}{4}{}%
-\contentsline {subsection}{\numberline {1.1}Background}{4}{}%
-\contentsline {subsection}{\numberline {1.2}Problem Statement}{5}{}%
-\contentsline {subsection}{\numberline {1.3}Aim}{5}{}%
-\contentsline {section}{\numberline {2}Literature Review}{6}{}%
-\contentsline {subsection}{\numberline {2.1}Recruitment Process}{6}{}%
-\contentsline {subsubsection}{\numberline {2.1.1}Job Descriptions}{6}{}%
-\contentsline {subsubsection}{\numberline {2.1.2}Advisory Appointment Committees}{6}{}%
-\contentsline {subsection}{\numberline {2.2}Related Works}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}Existing Storage System}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Healthcare Recruitment Tools}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.3}Other Royal Colleges}{7}{}%
-\contentsline {section}{\numberline {3}Design}{8}{}%
-\contentsline {subsection}{\numberline {3.1}Backend}{8}{}%
-\contentsline {subsection}{\numberline {3.2}Frontend}{9}{}%
-\contentsline {subsection}{\numberline {3.3}Deployment}{9}{}%
-\contentsline {subsection}{\numberline {3.4}Requirements}{10}{}%
-\contentsline {section}{\numberline {4}Implementation}{11}{}%
-\contentsline {subsection}{\numberline {4.1}Django}{11}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}Database}{11}{}%
-\contentsline {subsubsection}{\numberline {4.1.2}Schemas}{11}{}%
-\contentsline {subsubsection}{\numberline {4.1.3}Services}{11}{}%
-\contentsline {subsubsection}{\numberline {4.1.4}API Endpoints}{11}{}%
-\contentsline {subsection}{\numberline {4.2}SvelteKit}{11}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}Design}{11}{}%
-\contentsline {subsubsection}{\numberline {4.2.2}API Consumption}{12}{}%
-\contentsline {subsubsection}{\numberline {4.2.3}Authentication}{12}{}%
-\contentsline {subsubsection}{\numberline {4.2.4}Profile}{12}{}%
-\contentsline {subsubsection}{\numberline {4.2.5}Panel}{12}{}%
-\contentsline {section}{\numberline {5}Testing}{12}{}%
-\contentsline {section}{\numberline {6}Discussion}{13}{}%
-\contentsline {section}{\numberline {7}Further Work}{13}{}%
-\contentsline {section}{\numberline {8}Bibliography}{13}{}%
-\contentsline {section}{\numberline {9}Appendices}{14}{}%
-\contentsline {subsection}{\numberline {9.1}Database}{14}{}%
-\contentsline {subsection}{\numberline {9.2}API Endpoints}{15}{}%
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Background}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{6}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Aim}{7}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Literature Review}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Recruitment Process}{8}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Job Descriptions}{8}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Advisory Appointment Committees}{8}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Related Works}{9}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Existing Storage System}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Healthcare Recruitment Tools}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Other Royal Colleges}{9}{subsection.2.2.3}%
+\contentsline {chapter}{\numberline {3}Design}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Backend}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Frontend}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Deployment}{12}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Requirements}{13}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Implementation}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Django}{14}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Database}{14}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Schemas}{14}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Services}{14}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}API Endpoints}{14}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}SvelteKit}{15}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Design}{15}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}API Consumption}{15}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Authentication}{15}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Profile}{15}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Panel}{15}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Testing}{16}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Discussion}{17}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Further Work}{18}{chapter.6}%
+\contentsline {chapter}{References}{19}{chapter*.3}%
+\renewcommand {\cftchappresnum }{Appendix }
+\contentsline {chapter}{\numberline {A}Database}{20}{appendix.a.A}%
+\contentsline {chapter}{\numberline {B}API Endpoints}{21}{appendix.a.B}%
+\contentsline {chapter}{\numberline {C}JD Checklist Endpoint}{22}{appendix.a.C}%

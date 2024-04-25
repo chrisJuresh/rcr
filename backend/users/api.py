@@ -9,13 +9,16 @@ from .services import (
     get_user_profile, 
     update_user_profile,
     user_exists,
-    get_tokens_for_user
+    get_tokens_for_user,
+    get_valid_users
 )
 from trusts.services import get_user_trust, get_user_trusts
 from roles.services import get_user_roles
 from .models import UnauthenticatedUser
-from .schemas import UserRolesOut, ReviewersOut
+from .schemas import UserRolesOut, ReviewersOut, RepsOut
 from trusts.schemas import TrustOut
+from jds.models import JD
+from aacs.models import AAC
 
 router = Router()
 
@@ -64,3 +67,46 @@ def get_trust(request):
         }
     except:
         raise HttpError(400, "Your selected Trust does not match any Approved Trusts.")
+
+@router.get("/reps/{aac_id}/", auth=JWTAuth(), response=RepsOut)
+def get_reps(request, aac_id: int):
+    aac = AAC.objects.get(id=aac_id)
+    all_reps = get_valid_users(task=aac, role="Representative")
+    reps = [
+    {
+        'id': rep.id,
+        'consultant_type': rep.user_specialities.consultant_type.get_name_display(),
+        'primary_specialties': [ps.name for ps in rep.user_specialities.specialities.all()],
+        'status': rep.email,
+        'date': rep.date_joined.strftime("%A"),
+        'selected': aac.representative == rep
+    } for rep in all_reps
+    ]
+    return {"reps": reps}
+
+
+@router.get("/reviewers/{jd_id}", auth=JWTAuth(), response=ReviewersOut)
+def get_reviewers(request, jd_id: int):
+    if 'RCR Employee' in get_user_roles(request.user, 'approved'):
+        jd = JD.objects.get(id=jd_id)
+        all_reviewers = get_valid_users(task=jd, role='Reviewer')
+        reviewers = [
+            {
+                'id': reviewer.id,
+                'name': reviewer.get_full_name(),
+                'same_region': "Same Region" if reviewer.user_trusts.filter(trust__region=jd.trust.region, approved=True).exists() else "Other Regions",
+                'trusts': [
+                    {
+                        'id': trust.id, 
+                        'name': trust.name, 
+                        'region': {'name': trust.region.name}
+                    } for trust in get_user_trusts(reviewer, 'approved')
+                ]
+            } for reviewer in all_reviewers
+        ]
+        return {
+            "reviewers": reviewers
+        }
+    
+    else:
+        return {"reviewers": []}

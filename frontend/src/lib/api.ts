@@ -74,5 +74,29 @@ export const putJDState = async (jd_id: string, state: string, token: string, pa
 }
 
 export const getReviewers = async (jd_id:string, token: string) => {
-    return getData<components['schemas']['ReviewersOut']>(`/jds/reviewers/${jd_id}`, { token }).then(data => data.reviewers);
+    return getData<components['schemas']['ReviewersOut']>(`/users/reviewers/${jd_id}`, { token }).then(data => data.reviewers);
+}
+
+export const postAAC = async (data: any, token: string) => {
+    return postData('/aacs/aac/', data, { token });
+}
+
+export const getAACPanel = async (token: string) => {
+    return getData<components['schemas']['AACPanel']>(`/aacs/panel/`, { token }).then(data => data.aacs);
+}
+
+export const getAAC = async (aac_id: string, token: string) => {
+    return getData<components['schemas']['AACOut']>(`/aacs/${aac_id}/`, { token });
+}
+
+export const getAACIds = async (token: string) => {
+    return getData<components['schemas']['AACIDsOut']>('/aacs/ids/', { token });
+}
+
+export const getReps = async (aac_id: string, token: string) => {
+    return getData<components['schemas']['RepsOut']>(`/users/reps/${aac_id}/`, { token }).then(data => data.reps);
+}
+
+export const putAACRep = async (aac_id: string, rep_id: any, token: string) => {
+    return putData(`/aacs/${aac_id}/${rep_id}/`, {}, { token });
 }

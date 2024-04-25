@@ -1,4 +1,4 @@
-\section{Design}
+\chapter{Design}
 \frame{\includegraphics[width=\linewidth]{images/design.png}}
 The following paragraphs will be edited to explain their advantages specifically for this project - rather than just being a general description.
 
@@ -15,7 +15,7 @@ Shadcn-Svelte, a library for SvelteKit (see 3.2), created by Huntabyte, makes de
 Shadows give a ...
 
 The purple color is chosen because the RCR... Red for the logout button (source)
-\subsection{Backend}
+\section{Backend}
 Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. It takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It follows the "battery-included" philosophy and provides a robust set of features to build web applications. It emphasises reusability and "pluggability" of components, less code, low coupling, rapid development, and the principle of don't repeat yourself (DRY). (SOURCE)
 
 It is preferred over XYZ because…
@@ -28,7 +28,7 @@ Django-Ninja-JWT is an extension for Django-Ninja, through Django-Ninja-Extra, t
 
 CSRF token handling within django is not required, as the Django backend will not be connected to the internet at all, and SvelteKit handles anti CSRF protection by default. (SOURCE)
 
-\subsection{Frontend}
+\section{Frontend}
 SvelteKit is a framework for building web applications using Svelte, a modern JavaScript compiler that produces highly efficient code. SvelteKit provides a seamless development experience by offering server-side rendering, static site generation, and single-page application modes out of the box. It is designed to be flexible and modular, allowing developers to structure their applications as they see fit, while providing a rich set of tools and features to enhance productivity and performance. (Source)
 
 It is preferred over React and Vue3 because…
@@ -42,10 +42,10 @@ openAPI-typescript allows us to import the django-ninja openAPI schema into the 
 
 Postmark is an email delivery service that provides fast and reliable transactional email sending. Its simple yet robust API will allow easy email verification and notifications directly from SvelteKit. It is preferred over self-hosted emailing as those are usually blocked as spam by all major email services. (source)
 
-\subsection{Deployment}
+\section{Deployment}
 The project is depoloyed on an ubuntu server with nginx, gunicorn, and node (Elaborate on the reasons) sveltekit has adaptors to ... (sources)
 
-\subsection{Requirements}
+\section{Requirements}
 This is the state machine diagram for the system to use for JDs. It is used in the UI to show the user what stage the JD is at, and updates automatically on button press when an update is made.
 
 \noindent

@@ -1,0 +1,356 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{limb_shortages_2022}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=685c21c104bd6e832bbc1eebd88dc2c7}{%
+           family={Limb},
+           familyi={L\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{685c21c104bd6e832bbc1eebd88dc2c7}
+      \strng{fullhash}{685c21c104bd6e832bbc1eebd88dc2c7}
+      \strng{bibnamehash}{685c21c104bd6e832bbc1eebd88dc2c7}
+      \strng{authorbibnamehash}{685c21c104bd6e832bbc1eebd88dc2c7}
+      \strng{authornamehash}{685c21c104bd6e832bbc1eebd88dc2c7}
+      \strng{authorfullhash}{685c21c104bd6e832bbc1eebd88dc2c7}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{10}
+      \field{issn}{1756-1833}
+      \field{journaltitle}{{BMJ}}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{shortjournal}{{BMJ}}
+      \field{title}{Shortages of radiology and oncology staff putting cancer patients at risk, college warns}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{o1430}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1136/bmj.o1430
+      \endverb
+      \verb{urlraw}
+      \verb https://www.bmj.com/lookup/doi/10.1136/bmj.o1430
+      \endverb
+      \verb{url}
+      \verb https://www.bmj.com/lookup/doi/10.1136/bmj.o1430
+      \endverb
+    \endentry
+    \entry{royal_college_of_surgeons_of_england_advisory_2024}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c57ed43ca9dabd187022b9fda45c28c8}{%
+           family={{Royal College of Surgeons of England}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{c57ed43ca9dabd187022b9fda45c28c8}
+      \strng{fullhash}{c57ed43ca9dabd187022b9fda45c28c8}
+      \strng{bibnamehash}{c57ed43ca9dabd187022b9fda45c28c8}
+      \strng{authorbibnamehash}{c57ed43ca9dabd187022b9fda45c28c8}
+      \strng{authornamehash}{c57ed43ca9dabd187022b9fda45c28c8}
+      \strng{authorfullhash}{c57ed43ca9dabd187022b9fda45c28c8}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{An Advisory Appointments Committee ({AAC}) is a legally constituted interview panel established by an employing body when appointing consultants.}
+      \field{langid}{english}
+      \field{title}{Advisory Appointment Committees ({AACs})}
+      \field{titleaddon}{Royal College of Surgeons}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.rcseng.ac.uk/standards-and-research/support-for-surgeons-and-services/aacs/
+      \endverb
+      \verb{url}
+      \verb https://www.rcseng.ac.uk/standards-and-research/support-for-surgeons-and-services/aacs/
+      \endverb
+    \endentry
+    \entry{the_national_health_service_consultant_2017}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f80e7088cbdff5db9a56f24927ac2893}{%
+           family={{The National Health Service}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{fullhash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{bibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{authorbibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{authornamehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{authorfullhash}{f80e7088cbdff5db9a56f24927ac2893}
+      \field{extraname}{1}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Consultant job planning: a best practice guide.}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
+      \endverb
+      \verb{url}
+      \verb https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
+      \endverb
+    \endentry
+    \entry{the_national_health_service_strategic_2018}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f80e7088cbdff5db9a56f24927ac2893}{%
+           family={{The National Health Service}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{fullhash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{bibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{authorbibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{authornamehash}{f80e7088cbdff5db9a56f24927ac2893}
+      \strng{authorfullhash}{f80e7088cbdff5db9a56f24927ac2893}
+      \field{extraname}{2}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Strategic Framework for Cancer Workforce 05-07}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf
+      \endverb
+    \endentry
+    \entry{the_national_health_service_appointment_of_consultants_the_national_health_service_appointment_of_consultants_national_2005}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4d256673a6ff617232cfc26e7df5c605}{%
+           family={{The National Health Service (Appointment of Consultants) The National Health Service (Appointment of Consultants)}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d256673a6ff617232cfc26e7df5c605}
+      \strng{fullhash}{4d256673a6ff617232cfc26e7df5c605}
+      \strng{bibnamehash}{4d256673a6ff617232cfc26e7df5c605}
+      \strng{authorbibnamehash}{4d256673a6ff617232cfc26e7df5c605}
+      \strng{authornamehash}{4d256673a6ff617232cfc26e7df5c605}
+      \strng{authorfullhash}{4d256673a6ff617232cfc26e7df5c605}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The National Health Service (Appointment of Consultants) Regulations Good Practice Guidance}
+      \field{year}{2005}
+      \field{dateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
+      \endverb
+    \endentry
+    \entry{the_royal_college_of_physicians_of_london_rcp_2017}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=920c7dc542f05ad09f03a2305526d55d}{%
+           family={{The Royal College of Physicians of London}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{920c7dc542f05ad09f03a2305526d55d}
+      \strng{fullhash}{920c7dc542f05ad09f03a2305526d55d}
+      \strng{bibnamehash}{920c7dc542f05ad09f03a2305526d55d}
+      \strng{authorbibnamehash}{920c7dc542f05ad09f03a2305526d55d}
+      \strng{authornamehash}{920c7dc542f05ad09f03a2305526d55d}
+      \strng{authorfullhash}{920c7dc542f05ad09f03a2305526d55d}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{RCP} London Advisory Appointments Committees ({AAC})}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text=
+      \endverb
+      \verb{url}
+      \verb https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text=
+      \endverb
+    \endentry
+    \entry{the_royal_college_of_radiologists_clinical_2022}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=684a88ca4c1ab090f2bc865441f38800}{%
+           family={{The Royal College of Radiologists}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{fullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{bibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorbibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authornamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorfullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \field{extraname}{1}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Clinical radiology job planning guidance for consultant and {SAS} doctors 2022.}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.rcr.ac.uk/media/gzxjd252/rcr-publications_clinical-radiology-job-planning-guidance-for-consultant-and-sas-doctors_october-2022.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.rcr.ac.uk/media/gzxjd252/rcr-publications_clinical-radiology-job-planning-guidance-for-consultant-and-sas-doctors_october-2022.pdf
+      \endverb
+    \endentry
+    \entry{the_royal_college_of_radiologists_rcr_2023}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=684a88ca4c1ab090f2bc865441f38800}{%
+           family={{The Royal College of Radiologists}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{fullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{bibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorbibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authornamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorfullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \field{extraname}{2}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{RCR} statement on industrial action {|} The Royal College of Radiologists}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017
+      \endverb
+      \verb{url}
+      \verb https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017
+      \endverb
+    \endentry
+    \entry{the_royal_college_of_radiologists_advisory_2024-1}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=684a88ca4c1ab090f2bc865441f38800}{%
+           family={{The Royal College of Radiologists}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{fullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{bibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorbibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authornamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorfullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \field{extraname}{3}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Advisory Appointment Committee ({AAC}) {|} The Royal College of Radiologists}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/
+      \endverb
+      \verb{url}
+      \verb https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/
+      \endverb
+    \endentry
+    \entry{the_royal_college_of_radiologists_advisory_2024}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=684a88ca4c1ab090f2bc865441f38800}{%
+           family={{The Royal College of Radiologists}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{fullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{bibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorbibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authornamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorfullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \field{extraname}{4}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This page answers questions you may have about the job description review and {AAC} panel processes.}
+      \field{title}{Advisory Appointment Committee {FAQs}}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/advisory-appointment-committee-faqs/
+      \endverb
+      \verb{url}
+      \verb https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/advisory-appointment-committee-faqs/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["3a52d838_controller_obtain_token"];
+        post: operations["9aaa8be2_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["cbc31912_controller_refresh_token"];
+        post: operations["71e773eb_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["e373c1f9_controller_verify_token"];
+        post: operations["2d9108a6_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -133,6 +133,40 @@ export interface paths {
         };
         /** Get Trust */
         get: operations["users_api_get_trust"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/users/reps/{aac_id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Reps */
+        get: operations["users_api_get_reps"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/users/reviewers/{jd_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Reviewers */
+        get: operations["users_api_get_reviewers"];
         put?: never;
         post?: never;
         delete?: never;
@@ -296,16 +330,84 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/jds/reviewers/{jd_id}": {
+    "/api/aacs/aac/": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Get Reviewers */
-        get: operations["jds_api_get_reviewers"];
+        get?: never;
         put?: never;
+        /** Create Aac */
+        post: operations["aacs_api_create_aac"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/aacs/panel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Aac Panel */
+        get: operations["aacs_api_get_aac_panel"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/aacs/ids/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Aac Ids */
+        get: operations["aacs_api_get_aac_ids"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/aacs/{aac_id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Aac */
+        get: operations["aacs_api_get_aac"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/aacs/{aac_id}/{rep_id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Update Aac Rep */
+        put: operations["aacs_api_update_aac_rep"];
         post?: never;
         delete?: never;
         options?: never;
@@ -431,6 +533,42 @@ export interface components {
             roles: string[];
             /** Requested Roles */
             requested_roles: string[];
+        };
+        /** RepOut */
+        RepOut: {
+            /** Id */
+            id: number;
+            /** Consultant Type */
+            consultant_type: string;
+            /** Primary Specialties */
+            primary_specialties: string[];
+            /** Status */
+            status: string;
+            /** Date */
+            date: string;
+            /** Selected */
+            selected: boolean;
+        };
+        /** RepsOut */
+        RepsOut: {
+            /** Reps */
+            reps?: components["schemas"]["RepOut"][] | null;
+        };
+        /** ReviewerOut */
+        ReviewerOut: {
+            /** Id */
+            id: number;
+            /** Name */
+            name: string;
+            /** Same Region */
+            same_region: string;
+            /** Trusts */
+            trusts: components["schemas"]["TrustOut"][];
+        };
+        /** ReviewersOut */
+        ReviewersOut: {
+            /** Reviewers */
+            reviewers?: components["schemas"]["ReviewerOut"][] | null;
         };
         /** RoleOut */
         RoleOut: {
@@ -596,21 +734,67 @@ export interface components {
             /** Required */
             required: boolean;
         };
-        /** ReviewerOut */
-        ReviewerOut: {
+        /** AACIn */
+        AACIn: {
+            /** Trust */
+            trust: number;
+            /** Consultant Type */
+            consultant_type: string;
+            /** Jds */
+            JDs: string;
+            /** Date */
+            date: string;
+        };
+        /** AACPanel */
+        AACPanel: {
+            /** Aacs */
+            aacs: components["schemas"]["PanelAAC"][];
+        };
+        /** PanelAAC */
+        PanelAAC: {
             /** Id */
             id: number;
-            /** Name */
-            name: string;
-            /** Same Region */
-            same_region: string;
-            /** Trusts */
-            trusts: components["schemas"]["TrustOut"][];
+            /** Status */
+            status: string;
+            /** Date */
+            date: string;
+            /** Consultant Type */
+            consultant_type: string;
+            /** Primary Specialties */
+            primary_specialties: string[];
+            /** Sub Specialties */
+            sub_specialties: string[] | null;
         };
-        /** ReviewersOut */
-        ReviewersOut: {
-            /** Reviewers */
-            reviewers: components["schemas"]["ReviewerOut"][];
+        /** AACIDsOut */
+        AACIDsOut: {
+            /** Ids */
+            ids: number[];
+        };
+        /** AACOut */
+        AACOut: {
+            /** Id */
+            id: number;
+            /** Date */
+            date: string;
+            /** Trust */
+            trust: string;
+            /** Consultant Type */
+            consultant_type: string;
+            /** Status */
+            status: string;
+            /** Jds */
+            jds: components["schemas"]["JDforAAC"][];
+        };
+        /** JDforAAC */
+        JDforAAC: {
+            /** Id */
+            id: number;
+            /** File */
+            file: string;
+            /** Primary Specialities */
+            primary_specialities: string[];
+            /** Sub Specialities */
+            sub_specialities: string[];
         };
     };
     responses: never;
@@ -621,7 +805,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "3a52d838_controller_obtain_token": {
+    "9aaa8be2_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -645,7 +829,7 @@ export interface operations {
             };
         };
     };
-    cbc31912_controller_refresh_token: {
+    "71e773eb_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -669,7 +853,7 @@ export interface operations {
             };
         };
     };
-    e373c1f9_controller_verify_token: {
+    "2d9108a6_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -817,6 +1001,50 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TrustOut"];
+                };
+            };
+        };
+    };
+    users_api_get_reps: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aac_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RepsOut"];
+                };
+            };
+        };
+    };
+    users_api_get_reviewers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jd_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewersOut"];
                 };
             };
         };
@@ -1080,12 +1308,74 @@ export interface operations {
             };
         };
     };
-    jds_api_get_reviewers: {
+    aacs_api_create_aac: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AACIn"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    aacs_api_get_aac_panel: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AACPanel"];
+                };
+            };
+        };
+    };
+    aacs_api_get_aac_ids: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AACIDsOut"];
+                };
+            };
+        };
+    };
+    aacs_api_get_aac: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                jd_id: number;
+                aac_id: number;
             };
             cookie?: never;
         };
@@ -1097,8 +1387,29 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ReviewersOut"];
+                    "application/json": components["schemas"]["AACOut"];
                 };
+            };
+        };
+    };
+    aacs_api_update_aac_rep: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                aac_id: number;
+                rep_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

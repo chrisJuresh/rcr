@@ -11,6 +11,6 @@
 		<Card.Description>Here are your tasks</Card.Description>
 	</Card.Header>
 	<Card.Content>
-		<DataTable jds={data.jds} />
+		<DataTable jds={data.jds} aacs={data.aacs} />
 	</Card.Content>
 </Card.Root>

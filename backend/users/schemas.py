@@ -51,4 +51,15 @@ class ReviewerOut(Schema):
     trusts: List[TrustOut]
 
 class ReviewersOut(Schema):
-    reviewers: List[ReviewerOut]
+    reviewers: Optional[List[ReviewerOut]] = None
+
+class RepOut(Schema):
+    id: int
+    consultant_type: str
+    primary_specialties: List[str]
+    status: str
+    date: str   
+    selected: bool
+
+class RepsOut(Schema):
+    reps: Optional[List[RepOut]] = None

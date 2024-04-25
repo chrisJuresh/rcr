@@ -7,7 +7,6 @@ import { zod } from 'sveltekit-superforms/adapters';
 
 export const load: PageServerLoad = async ({ cookies, params: { id } }) => {
 	const token = cookies.get('token');
-	console.log(await getJD(id, token));
 	return {
 		jd_ids: await getJDIds(token),
 		jd: await getJD(id, token),
@@ -23,7 +22,7 @@ export const actions: Actions = {
 				form
 			});
 		}
-		console.log(form.data);
+
 		const token = event.cookies.get('token');
 		try {
 			await putJDChecklist(event.params.id, form.data, token, { panel: 'Edit' });

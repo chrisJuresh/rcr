@@ -1,14 +1,12 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2024-04-18 22:07
+  // Created: 2024-04-23 03:11
   // Cli Options: -X LogEntry,Group,Permission,ContentType,AbstractUser,Session,AbstractBaseSession,HistoricalJDProcess,Task,Process,AbstractTask,AbstractProcess,HistoricalJD,JDProcess --color-code-deletions --arrow vee -a --rankdir LR --disable-fields -g -o database.dot
 
   fontname = "Roboto"
   fontsize = 8
   splines  = true
   rankdir = "LR"
-	graph [ranksep=0.1];
-	graph [nodesep=0.1];
 
   node [
     fontname = "Roboto"
@@ -323,7 +321,7 @@ digraph model_graph {
 
 
   aacs_models_AAC -> jds_models_JD
-  [label=" jd (aac)"] [arrowhead=vee arrowtail=vee, dir=both];
+  [label=" jds (aac)"] [arrowhead=vee arrowtail=vee, dir=both];
 
 
 }

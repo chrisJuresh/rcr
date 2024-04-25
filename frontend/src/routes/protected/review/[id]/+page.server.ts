@@ -32,7 +32,7 @@ export const actions: Actions = {
 				form
 			});
 		}
-		console.log(form.data);
+
 		const token = event.cookies.get('token');
 		try {
 			await putJDChecklist(event.params.id, form.data, token, { panel: 'Review' });
@@ -45,7 +45,7 @@ export const actions: Actions = {
 		const formData = await event.request.formData();
 		const reviewer = formData.get('reviewer');
 		const token = event.cookies.get('token');
-		console.log(reviewer);
+
 		try {
 			await putJDState(event.params.id, 'approve', token, { reviewer: reviewer });
 		} catch {

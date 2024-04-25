@@ -1,6 +1,6 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt, a4paper]{report}
 
-\usepackage[margin=1in, footskip=0.2in]{geometry}
+\usepackage[margin=1.2in]{geometry}
 \usepackage{multicol}
 \usepackage{graphicx} 
 \usepackage{subfiles}
@@ -8,6 +8,41 @@
 \usepackage{minted}
 \usepackage{listings}
 \usepackage{multicol}
+\usepackage[style=authoryear, sorting=nyt]{biblatex}
+\usepackage{appendix}
+\usepackage{tocloft,calc}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{epigraph}
+
+\hypersetup{
+    linktoc=all,     %set to all if you want both sections and subsections linked
+}
+
+\renewcommand{\cfttoctitlefont}{\Huge\bfseries} % Change \Large to any other size as needed
+\renewcommand{\cftchappresnum}{\chaptername\space}
+\renewcommand{\cftchapaftersnum}{:} % Add this line to insert a colon after the chapter number
+\setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~999~}}}
+\setlength{\cftbeforetoctitleskip}{0pt} % Reduce space above the contents title
+\setlength{\cftaftertoctitleskip}{10pt} % Adjust space below the contents title to suit your needs
+\setlength{\cftbeforechapskip}{10pt} % You can adjust the 10pt to whatever suits your needs
+\setlength{\cftbeforesecskip}{5pt} % You can adjust the 10pt to whatever suits your needs
+\setlength{\cftbeforesubsecskip}{2.5pt} % You can adjust the 10pt to whatever suits your needs
+\makeatletter
+\g@addto@macro\appendix{%
+  \addtocontents{toc}{%
+    \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
+  }%
+}
+
+\makeatother
+
+\titleformat{\chapter}[hang] 
+{\normalfont\LARGE\bfseries}{\chaptertitlename\ \thechapter:}{1em}{} 
+\titlespacing*{\chapter}{0pt}{-20pt}{10pt}
+
+\addbibresource{references.bib}
 
 \begin{document}
 
@@ -15,14 +50,33 @@
 
 \newpage
 \subfile{chapters/acknowledgements}
+\thispagestyle{empty}
+
 \newpage
 \subfile{chapters/abstract}
+\thispagestyle{empty}
 
 \newpage
+% Temporarily redefine the 'plain' page style to be completely empty, including the header line
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \renewcommand{\headrulewidth}{0pt} % no header line
+    \renewcommand{\footrulewidth}{0pt} % no footer line
+}
+\pagestyle{empty} % apply the empty style to subsequent pages
 \tableofcontents
+\clearpage 
 
+% Restore the original 'plain' page style definitions
+\fancypagestyle{plain}{
+    \fancyhf{} % Clear all header and footer fields
+    \fancyhead[L]{\footnotesize{Automating the RCR's JD Reviews \& AACs}} % Left header
+    \fancyhead[R]{\footnotesize{Christian Juresh}} % Right header
+    \fancyfoot[C]{\thepage} % Center footer with page number
+}
 
 \newpage
+\pagestyle{plain} % Set the page style for subsequent pages
 \subfile{chapters/introduction}
 
 \subfile{chapters/literature}
@@ -33,31 +87,22 @@
 \subfile{chapters/implementation}
 
 \section{Testing}
+
 django tests.py
 
 UAT
+
 \newpage
 \subfile{chapters/discussion}
 
 \subfile{chapters/further}
+The project is essentially fully functional and could theoretically be used in a production environment. However, it is very important for it to undergo extensive UAT by multiple people first. There are also a large number of features that would enchance overall user experience tremendously. 
 
-%bib
-\section{Bibliography}
-This bibliography will be drastically overhauled in the future. It is only included to give credit to the sources used in this draft.
+\newpage
+\nocite{*}
+\printbibliography[heading=bibintoc, title={References}]
 
-\begin{lstlisting}[breaklines=true]
-Clinical radiology job planning guidance for consultant and SAS doctors 2022. (2022). Available at: https://www.rcr.ac.uk/media/gzxjd252/rcr-publications_clinical-radiology-job-planning-guidance-for-consultant-and-sas-doctors_october-2022.pdf [Accessed 26 Nov. 2023].
-Consultant job planning: a best practice guide. (2017). Available at: https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
-Limb, M. (2022). Shortages of radiology and oncology staff putting cancer patients at risk, college warns. BMJ, p.o1430. doi:https://doi.org/10.1136/bmj.o1430.
-RCP London. (2017). Advisory Appointments Committees (AAC). [online] Available at: https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text= [Accessed 26 Nov. 2023].
-Strategic Framework for Cancer Workforce 05-07. (2018). Available at: https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf.
-The National Health Service (Appointment of Consultants) Regulations Good Practice Guidance. (2005). Available at: https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf [Accessed 26 Nov. 2023].
-www.rcr.ac.uk. (n.d.). Advisory Appointment Committee (AAC) | The Royal College of Radiologists. [online] Available at: https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/ [Accessed 26 Nov. 2023].
-www.rcr.ac.uk. (n.d.). Advisory Appointment Committee FAQs | The Royal College of Radiologists. [online] Available at: https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/advisory-appointment-committee-faqs/ [Accessed 26 Nov. 2023].
-www.rcr.ac.uk. (n.d.). RCR statement on industrial action | The Royal College of Radiologists. [online] Available at: https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017 [Accessed 26 Nov. 2023].
-www.rcseng.ac.uk (n.d.). Advisory Appointment Committees (AACs). [online] Royal College of Surgeons. Available at: https://www.rcseng.ac.uk/standards-and-research/support-for-surgeons-and-services/aacs/#:~:text=An%20Advisory%20Appointments%20Committee%20(AAC [Accessed 26 Nov. 2023].
-\end{lstlisting}
-
+\newpage
 \subfile{chapters/appendices}
 
 \end{document}

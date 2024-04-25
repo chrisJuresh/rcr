@@ -14,7 +14,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import get_object_or_404
 from transitions.extensions import GraphMachine
 from .models import JDStateMachine
-from users.services import get_jd_reviewers
+from users.services import get_valid_users
 from users.schemas import ReviewersOut
 
 router = Router()
@@ -198,29 +198,3 @@ def update_jd_state(request, jd_id: int, state: str, reviewer: Optional[str]=Non
     elif state == 'reject' and 'RCR Employee' or 'Reviewer' in get_user_roles(request.user, 'approved'):
         jd = JD.objects.get(id=jd_id)
         jd.reject()
-
-@router.get("/reviewers/{jd_id}", auth=JWTAuth(), response=ReviewersOut)
-def get_reviewers(request, jd_id: int):
-    if 'RCR Employee' in get_user_roles(request.user, 'approved'):
-        jd = JD.objects.get(id=jd_id)
-        all_reviewers = get_jd_reviewers(jd)
-        reviewers = [
-            {
-                'id': reviewer.id,
-                'name': reviewer.get_full_name(),
-                'same_region': "Same Region" if reviewer.user_trusts.filter(trust__region=jd.trust.region, approved=True).exists() else "Other Regions",
-                'trusts': [
-                    {
-                        'id': trust.id, 
-                        'name': trust.name, 
-                        'region': {'name': trust.region.name}
-                    } for trust in get_user_trusts(reviewer, 'approved')
-                ]
-            } for reviewer in all_reviewers
-        ]
-        return {
-            "reviewers": reviewers
-        }
-    
-    else:
-        return {"reviewers": []}

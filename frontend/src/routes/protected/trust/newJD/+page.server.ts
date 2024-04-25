@@ -17,7 +17,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(formSchema));
-		console.log(form);
+
 		if (!form.valid) return fail(400, { form });
 
 		const jdData = JSON.stringify({
@@ -30,8 +30,6 @@ export const actions: Actions = {
 
 		formData.append('jd', jdData);
 		formData.append('file', form.data.file);
-
-		console.log(formData);
 
 		let success = false;
 		let response;

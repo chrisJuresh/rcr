@@ -29,10 +29,10 @@
 				<JD jd={data.jd} jd_ids={data.jd_ids} />
 			</div>
 			<div class="w-11/12 min-w-96 lg:w-6/12">
-				{#if data.roles.roles.includes('Reviewer')}
-					<JDQuestionsReviewer data={data.form} jd={data.jd} reviewers={data.reviewers} />
-				{:else if data.roles.roles.includes('RCR Employee')}
+				{#if data.roles.roles.includes('RCR Employee')}
 					<JDQuestionsRCR data={data.form} jd={data.jd} reviewers={data.reviewers} />
+				{:else if data.roles.roles.includes('Reviewer')}
+					<JDQuestionsReviewer data={data.form} jd={data.jd} />
 				{/if}
 			</div>
 		</div>

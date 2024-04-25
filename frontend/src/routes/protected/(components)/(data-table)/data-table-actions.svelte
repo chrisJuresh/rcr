@@ -17,6 +17,10 @@
 	<Button class="pl-0" type="submit" variant="link" on:click={() => goto(`review/${id}`)}>
 		Review <ChevronRight class="h-4 w-4" />
 	</Button>
+{:else if $page.url.pathname === '/protected/trust/viewAAC'}
+	<Button class="pl-0" type="submit" variant="link" on:click={() => goto(`viewAAC/${id}`)}>
+		View <ChevronRight class="h-4 w-4" />
+	</Button>
 {:else}
 	<DropdownMenu.Root>
 		<DropdownMenu.Trigger asChild let:builder>

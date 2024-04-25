@@ -72,19 +72,26 @@ def update_user_profile(user, payload):
         update_user_attributes(user, attr, value)
     user.save()
 
-def get_jd_reviewers(jd):
-    valid_reviewers = []
+def get_valid_users(task, role):
+    valid_users = []
 
-    reviewers = User.objects.all()
-
-    for reviewer in reviewers:
+    users = User.objects.all()
+    for user in users:
         try:
-            trusts = get_user_trusts(reviewer, 'approved')
-            roles = get_user_roles(reviewer, 'approved')
-            consultant_type = reviewer.user_specialities.consultant_type
-            if jd.trust not in trusts and 'Reviewer' in roles and consultant_type == jd.consultant_type:
-                valid_reviewers.append(reviewer)
-        except:
-            pass
-    return valid_reviewers
+            trusts = get_user_trusts(user, 'approved')
+            roles = get_user_roles(user, 'approved')
+            consultant_type = user.user_specialities.consultant_type
+
+            if task.trust in trusts:
+                print(f"User {user} is not valid because their trust does not match.")
+            elif role not in roles:
+                print(f"User {user} is not valid because their role does not match.")
+            elif consultant_type != task.consultant_type:
+                print(f"User {user} is not valid because their consultant type does not match.")
+            else:
+                valid_users.append(user) 
+        except Exception as e:
+            print(f"Failed to process user {user}: {e}")
+
+    return valid_users
     
