@@ -14,7 +14,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Obtain Token */
-        post: operations["9aaa8be2_controller_obtain_token"];
+        post: operations["041f046a_controller_obtain_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -31,7 +31,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh Token */
-        post: operations["71e773eb_controller_refresh_token"];
+        post: operations["7d85f317_controller_refresh_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -48,7 +48,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** Verify Token */
-        post: operations["2d9108a6_controller_verify_token"];
+        post: operations["4388b223_controller_verify_token"];
         delete?: never;
         options?: never;
         head?: never;
@@ -463,6 +463,15 @@ export interface components {
             /** Token */
             token: string;
         };
+        /** TokenOut */
+        TokenOut: {
+            /** Message */
+            message: string;
+            /** Refresh */
+            refresh: string;
+            /** Access */
+            access: string;
+        };
         /** TokenIn */
         TokenIn: {
             /** Token */
@@ -805,7 +814,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "9aaa8be2_controller_obtain_token": {
+    "041f046a_controller_obtain_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -829,7 +838,7 @@ export interface operations {
             };
         };
     };
-    "71e773eb_controller_refresh_token": {
+    "7d85f317_controller_refresh_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -853,7 +862,7 @@ export interface operations {
             };
         };
     };
-    "2d9108a6_controller_verify_token": {
+    "4388b223_controller_verify_token": {
         parameters: {
             query?: never;
             header?: never;
@@ -917,7 +926,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["TokenOut"];
+                };
             };
         };
     };

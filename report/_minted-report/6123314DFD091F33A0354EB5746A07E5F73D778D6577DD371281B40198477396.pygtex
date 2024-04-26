@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nd}{@router}\PYG{o}{.}\PYG{n}{put}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}jd\PYGZus{}id\PYGZcb{}}\PYG{l+s+s2}{/checklist/\PYGZdq{}}\PYG{p}{,} \PYG{n}{auth}\PYG{o}{=}\PYG{n}{JWTAuth}\PYG{p}{(),} \PYG{n}{response}\PYG{o}{=}\PYG{n}{JDChecklistOut}\PYG{p}{)}
+\end{Verbatim}

@@ -193,4 +193,6 @@ INPUT /usr/share/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /usr/share/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texmf-dist/tex/latex/hyphenat/hyphenat.sty
+INPUT /usr/share/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm

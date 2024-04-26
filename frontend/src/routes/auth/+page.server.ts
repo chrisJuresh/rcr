@@ -32,6 +32,7 @@ export const load: PageServerLoad = async ({ cookies, url }) => {
 const sendVerificationEmail = async (email, token, url) => {
 	const verificationUrl = `${url.origin}/auth/verify?token=${token}`;
 	const client = new postmark.ServerClient('cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5');
+	console.log(verificationUrl);
 
 	try {
 		await client.sendEmail({

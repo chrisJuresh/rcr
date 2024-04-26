@@ -63,3 +63,8 @@ class RepOut(Schema):
 
 class RepsOut(Schema):
     reps: Optional[List[RepOut]] = None
+
+class TokenOut(Schema):
+    message: str
+    refresh: str
+    access: str

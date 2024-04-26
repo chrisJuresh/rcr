@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  25 APR 2024 10:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  26 APR 2024 04:10
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -712,6 +712,18 @@ Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
+) (/usr/share/texmf-dist/tex/latex/hyphenat/hyphenat.sty
+Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
+
+
+Package hyphenat Warning: *******************************
+(hyphenat)                * You have used the htt option.
+(hyphenat)                * You are likely to get many Font Warning messages.
+(hyphenat)                * These can usually be ignored.
+(hyphenat)                *******************************.
+
+\langwohyphens=\language6
+LaTeX Info: Redefining \_ on input line 43.
 ))
 ! Emergency stop.
 <*> /home/chris/rcr/report/lib/preamble.tex
@@ -720,10 +732,10 @@ Package caption Info: wrapfig package is loaded.
 
  
 Here is how much of TeX's memory you used:
- 21105 strings out of 476076
- 380480 string characters out of 5793775
+ 21145 strings out of 476076
+ 381123 string characters out of 5793775
  1926187 words of memory out of 5000000
- 43010 multiletter control sequences out of 15000+600000
+ 43046 multiletter control sequences out of 15000+600000
  558674 words of font info for 38 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  77i,1n,81p,567b,265s stack positions out of 10000i,1000n,20000p,200000b,200000s

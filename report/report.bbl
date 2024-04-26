@@ -65,6 +65,122 @@
       \verb https://www.bmj.com/lookup/doi/10.1136/bmj.o1430
       \endverb
     \endentry
+    \entry{national_health_service_consultant_2017}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a63df7be1271f8ab790790b733f8cd18}{%
+           family={{National Health Service}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{fullhash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{bibnamehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{authorbibnamehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{authornamehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{authorfullhash}{a63df7be1271f8ab790790b733f8cd18}
+      \field{extraname}{1}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Consultant job planning: a best practice guide.}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
+      \endverb
+      \verb{url}
+      \verb https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
+      \endverb
+    \endentry
+    \entry{national_health_service_strategic_2018}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a63df7be1271f8ab790790b733f8cd18}{%
+           family={{National Health Service}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{fullhash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{bibnamehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{authorbibnamehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{authornamehash}{a63df7be1271f8ab790790b733f8cd18}
+      \strng{authorfullhash}{a63df7be1271f8ab790790b733f8cd18}
+      \field{extraname}{2}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Strategic Framework for Cancer Workforce 05-07}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf
+      \endverb
+    \endentry
+    \entry{national_health_service_appointment_of_consultants_the_national_health_service_appointment_of_consultants_national_2005}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6f417969f277ddc1bb8647d7e2f249a8}{%
+           family={{National Health Service (Appointment of Consultants) The National Health Service (Appointment of Consultants)}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{6f417969f277ddc1bb8647d7e2f249a8}
+      \strng{fullhash}{6f417969f277ddc1bb8647d7e2f249a8}
+      \strng{bibnamehash}{6f417969f277ddc1bb8647d7e2f249a8}
+      \strng{authorbibnamehash}{6f417969f277ddc1bb8647d7e2f249a8}
+      \strng{authornamehash}{6f417969f277ddc1bb8647d7e2f249a8}
+      \strng{authorfullhash}{6f417969f277ddc1bb8647d7e2f249a8}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{National Health Service (Appointment of Consultants) Regulations Good Practice Guidance}
+      \field{year}{2005}
+      \field{dateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
+      \endverb
+    \endentry
+    \entry{royal_college_of_physicians_of_london_rcp_2017}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1d4fe9434bec3f7197bf9704ccc4b335}{%
+           family={{Royal College of Physicians of London}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{1d4fe9434bec3f7197bf9704ccc4b335}
+      \strng{fullhash}{1d4fe9434bec3f7197bf9704ccc4b335}
+      \strng{bibnamehash}{1d4fe9434bec3f7197bf9704ccc4b335}
+      \strng{authorbibnamehash}{1d4fe9434bec3f7197bf9704ccc4b335}
+      \strng{authornamehash}{1d4fe9434bec3f7197bf9704ccc4b335}
+      \strng{authorfullhash}{1d4fe9434bec3f7197bf9704ccc4b335}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{RCP} London Advisory Appointments Committees ({AAC})}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text=
+      \endverb
+      \verb{url}
+      \verb https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text=
+      \endverb
+    \endentry
     \entry{royal_college_of_surgeons_of_england_advisory_2024}{online}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=c57ed43ca9dabd187022b9fda45c28c8}{%
@@ -101,120 +217,36 @@
       \verb https://www.rcseng.ac.uk/standards-and-research/support-for-surgeons-and-services/aacs/
       \endverb
     \endentry
-    \entry{the_national_health_service_consultant_2017}{misc}{}
+    \entry{the_kernel_development_community_linux_2024}{online}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=f80e7088cbdff5db9a56f24927ac2893}{%
-           family={{The National Health Service}},
+        {{un=0,uniquepart=base,hash=c98dc0a37b3acaaa9bd7a51531b08e16}{%
+           family={{The kernel development community}},
            familyi={T\bibinitperiod}}}%
       }
-      \strng{namehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{fullhash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{bibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{authorbibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{authornamehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{authorfullhash}{f80e7088cbdff5db9a56f24927ac2893}
-      \field{extraname}{1}
+      \strng{namehash}{c98dc0a37b3acaaa9bd7a51531b08e16}
+      \strng{fullhash}{c98dc0a37b3acaaa9bd7a51531b08e16}
+      \strng{bibnamehash}{c98dc0a37b3acaaa9bd7a51531b08e16}
+      \strng{authorbibnamehash}{c98dc0a37b3acaaa9bd7a51531b08e16}
+      \strng{authornamehash}{c98dc0a37b3acaaa9bd7a51531b08e16}
+      \strng{authorfullhash}{c98dc0a37b3acaaa9bd7a51531b08e16}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Consultant job planning: a best practice guide.}
-      \field{year}{2017}
+      \field{title}{Linux kernel coding style — The Linux Kernel documentation}
+      \field{urlday}{26}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2024}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
+      \verb https://www.kernel.org/doc/html/v4.10/process/coding-style.html#:~:text=The%20answer%20to%20that%20is,Heed%20that%20warning.
       \endverb
       \verb{url}
-      \verb https://www.england.nhs.uk/wp-content/uploads/2022/05/consultant-job-planning-best-practice-guidance.pdf.
-      \endverb
-    \endentry
-    \entry{the_national_health_service_strategic_2018}{misc}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=f80e7088cbdff5db9a56f24927ac2893}{%
-           family={{The National Health Service}},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{fullhash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{bibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{authorbibnamehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{authornamehash}{f80e7088cbdff5db9a56f24927ac2893}
-      \strng{authorfullhash}{f80e7088cbdff5db9a56f24927ac2893}
-      \field{extraname}{2}
-      \field{sortinit}{T}
-      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Strategic Framework for Cancer Workforce 05-07}
-      \field{year}{2018}
-      \field{dateera}{ce}
-      \verb{urlraw}
-      \verb https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf
-      \endverb
-    \endentry
-    \entry{the_national_health_service_appointment_of_consultants_the_national_health_service_appointment_of_consultants_national_2005}{misc}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=4d256673a6ff617232cfc26e7df5c605}{%
-           family={{The National Health Service (Appointment of Consultants) The National Health Service (Appointment of Consultants)}},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{4d256673a6ff617232cfc26e7df5c605}
-      \strng{fullhash}{4d256673a6ff617232cfc26e7df5c605}
-      \strng{bibnamehash}{4d256673a6ff617232cfc26e7df5c605}
-      \strng{authorbibnamehash}{4d256673a6ff617232cfc26e7df5c605}
-      \strng{authornamehash}{4d256673a6ff617232cfc26e7df5c605}
-      \strng{authorfullhash}{4d256673a6ff617232cfc26e7df5c605}
-      \field{sortinit}{T}
-      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{The National Health Service (Appointment of Consultants) Regulations Good Practice Guidance}
-      \field{year}{2005}
-      \field{dateera}{ce}
-      \true{nocite}
-      \verb{urlraw}
-      \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
-      \endverb
-    \endentry
-    \entry{the_royal_college_of_physicians_of_london_rcp_2017}{online}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=920c7dc542f05ad09f03a2305526d55d}{%
-           family={{The Royal College of Physicians of London}},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{920c7dc542f05ad09f03a2305526d55d}
-      \strng{fullhash}{920c7dc542f05ad09f03a2305526d55d}
-      \strng{bibnamehash}{920c7dc542f05ad09f03a2305526d55d}
-      \strng{authorbibnamehash}{920c7dc542f05ad09f03a2305526d55d}
-      \strng{authornamehash}{920c7dc542f05ad09f03a2305526d55d}
-      \strng{authorfullhash}{920c7dc542f05ad09f03a2305526d55d}
-      \field{sortinit}{T}
-      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{{RCP} London Advisory Appointments Committees ({AAC})}
-      \field{year}{2017}
-      \field{dateera}{ce}
-      \true{nocite}
-      \verb{urlraw}
-      \verb https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text=
-      \endverb
-      \verb{url}
-      \verb https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text=
+      \verb https://www.kernel.org/doc/html/v4.10/process/coding-style.html#:~:text=The%20answer%20to%20that%20is,Heed%20that%20warning.
       \endverb
     \endentry
     \entry{the_royal_college_of_radiologists_clinical_2022}{misc}{}
@@ -348,6 +380,39 @@
       \endverb
       \verb{url}
       \verb https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/advisory-appointment-committee-faqs/
+      \endverb
+    \endentry
+    \entry{vitaliy_kucheryaviy_django_2024}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d099416a384cfc360d8c98118fb5e8ad}{%
+           family={{Vitaliy Kucheryaviy}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{d099416a384cfc360d8c98118fb5e8ad}
+      \strng{fullhash}{d099416a384cfc360d8c98118fb5e8ad}
+      \strng{bibnamehash}{d099416a384cfc360d8c98118fb5e8ad}
+      \strng{authorbibnamehash}{d099416a384cfc360d8c98118fb5e8ad}
+      \strng{authornamehash}{d099416a384cfc360d8c98118fb5e8ad}
+      \strng{authorfullhash}{d099416a384cfc360d8c98118fb5e8ad}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Django Ninja - Django {REST} framework with high performance, easy to learn, fast to code.}
+      \field{title}{Django Ninja}
+      \field{urlday}{26}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://django-ninja.dev/
+      \endverb
+      \verb{url}
+      \verb https://django-ninja.dev/
       \endverb
     \endentry
   \enddatalist

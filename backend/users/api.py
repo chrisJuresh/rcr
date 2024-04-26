@@ -15,7 +15,7 @@ from .services import (
 from trusts.services import get_user_trust, get_user_trusts
 from roles.services import get_user_roles
 from .models import UnauthenticatedUser
-from .schemas import UserRolesOut, ReviewersOut, RepsOut
+from .schemas import UserRolesOut, ReviewersOut, RepsOut, TokenOut
 from trusts.schemas import TrustOut
 from jds.models import JD
 from aacs.models import AAC
@@ -29,7 +29,7 @@ def register_unauthenticated(request, user: UnauthenticatedUserIn):
     
     create_unauthenticated_user(user)
 
-@router.post("/register-authenticate")
+@router.post("/register-authenticate", response=TokenOut)
 def register_authenticate(request, token: TokenIn):
     unauth_user = get_object_or_404(UnauthenticatedUser, token=token.token)
     if user_exists(unauth_user.email):

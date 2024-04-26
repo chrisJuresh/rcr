@@ -14,29 +14,36 @@
 \contentsline {section}{\numberline {3.1}Visuals}{11}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Frameworks}{11}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Django}{11}{subsection.3.2.1}%
-\contentsline {subsubsection}{PyTransitions}{12}{subsubsection*.3}%
+\contentsline {subsubsection}{Alternative API Framework}{12}{subsubsection*.3}%
+\contentsline {subsubsection}{PyTransitions}{12}{subsubsection*.5}%
 \contentsline {subsection}{\numberline {3.2.2}SvelteKit}{12}{subsection.3.2.2}%
-\contentsline {subsubsection}{Libraries}{12}{subsubsection*.4}%
-\contentsline {section}{\numberline {3.3}Deployment}{13}{section.3.3}%
+\contentsline {subsubsection}{Libraries}{13}{subsubsection*.6}%
+\contentsline {section}{\numberline {3.3}Deployment}{14}{section.3.3}%
 \contentsline {section}{\numberline {3.4}File Structure}{14}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Routes}{15}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Implementation}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Database}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}app.pcss}{18}{section.4.2}%
-\contentsline {section}{\numberline {4.3}REDO THIS}{19}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Django}{19}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Database}{19}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Schemas}{19}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Services}{19}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}API Endpoints}{19}{subsection.4.4.4}%
-\contentsline {section}{\numberline {4.5}SvelteKit}{20}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Design}{20}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}API Consumption}{20}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Authentication}{20}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Profile}{21}{subsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.5.5}Panel}{21}{subsection.4.5.5}%
-\contentsline {chapter}{References}{22}{chapter*.9}%
+\contentsline {section}{\numberline {3.6}Coding Style}{17}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Implementation}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Database}{18}{section.4.1}%
+\contentsline {section}{\numberline {4.2}API}{19}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Endpoints}{19}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Consumption}{20}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Layout}{21}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Authentication}{21}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Registration}{22}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Login}{22}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Profile}{23}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Data Tables}{24}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Job Description Flow}{24}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Advisory Appointment Committees Flow}{24}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Testing}{24}{section.4.9}%
+\contentsline {chapter}{\numberline {5}Discussion}{25}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Further Work}{26}{chapter.6}%
+\contentsline {chapter}{References}{27}{chapter*.16}%
 \renewcommand {\cftchappresnum }{Appendix }
-\contentsline {chapter}{\numberline {A}Database}{23}{appendix.a.A}%
-\contentsline {chapter}{\numberline {B}API Endpoints}{24}{appendix.a.B}%
-\contentsline {chapter}{\numberline {C}JD Checklist Endpoint}{25}{appendix.a.C}%
+\contentsline {chapter}{\numberline {A}Database}{28}{appendix.a.A}%
+\contentsline {chapter}{\numberline {B}API Endpoints}{29}{appendix.a.B}%
+\contentsline {chapter}{\numberline {C}JD Checklist Endpoint}{30}{appendix.a.C}%
+\contentsline {chapter}{\numberline {D}Auth}{31}{appendix.a.D}%
+\contentsline {section}{\numberline {D.1}Login}{31}{section.a.D.1}%
+\contentsline {section}{\numberline {D.2}Register}{31}{section.a.D.2}%
+\contentsline {chapter}{\numberline {E}Profile}{32}{appendix.a.E}%
