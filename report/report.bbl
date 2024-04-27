@@ -19,6 +19,76 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
+    \entry{guido_van_rossum_pep_2013}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d60a4a8755fe55203470fc31172b2ad8}{%
+           family={{Guido van Rossum}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{d60a4a8755fe55203470fc31172b2ad8}
+      \strng{fullhash}{d60a4a8755fe55203470fc31172b2ad8}
+      \strng{bibnamehash}{d60a4a8755fe55203470fc31172b2ad8}
+      \strng{authorbibnamehash}{d60a4a8755fe55203470fc31172b2ad8}
+      \strng{authornamehash}{d60a4a8755fe55203470fc31172b2ad8}
+      \strng{authorfullhash}{d60a4a8755fe55203470fc31172b2ad8}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Python Enhancement Proposals ({PEPs})}
+      \field{day}{1}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{{PEP} 8 – Style Guide for Python Code {|} peps.python.org}
+      \field{titleaddon}{Python Enhancement Proposals ({PEPs})}
+      \field{urlday}{27}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://peps.python.org/pep-0008/
+      \endverb
+      \verb{url}
+      \verb https://peps.python.org/pep-0008/
+      \endverb
+    \endentry
+    \entry{icims_icims_nodate}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f91904a3e83b1b10b8011e5a1a7c1520}{%
+           family={{ICIMS}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{f91904a3e83b1b10b8011e5a1a7c1520}
+      \strng{fullhash}{f91904a3e83b1b10b8011e5a1a7c1520}
+      \strng{bibnamehash}{f91904a3e83b1b10b8011e5a1a7c1520}
+      \strng{authorbibnamehash}{f91904a3e83b1b10b8011e5a1a7c1520}
+      \strng{authornamehash}{f91904a3e83b1b10b8011e5a1a7c1520}
+      \strng{authorfullhash}{f91904a3e83b1b10b8011e5a1a7c1520}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Learn how the {iCIMS} leading enterprise recruiting platform empowers employers to attract, engage, hire, and advance today’s top talent.}
+      \field{langid}{english}
+      \field{title}{{iCIMS} {|} Recruiting Software Platform \& \#1 Applicant Tracking System}
+      \field{titleaddon}{{iCIMS} {|} The Leading Cloud Recruiting Software}
+      \field{urlday}{25}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.icims.com/
+      \endverb
+      \verb{url}
+      \verb https://www.icims.com/
+      \endverb
+    \endentry
     \entry{limb_shortages_2022}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=685c21c104bd6e832bbc1eebd88dc2c7}{%
@@ -47,9 +117,9 @@
       \field{month}{6}
       \field{shortjournal}{{BMJ}}
       \field{title}{Shortages of radiology and oncology staff putting cancer patients at risk, college warns}
-      \field{urlday}{24}
-      \field{urlmonth}{4}
-      \field{urlyear}{2024}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
       \field{year}{2022}
       \field{dateera}{ce}
       \field{urldateera}{ce}
@@ -64,6 +134,78 @@
       \verb{url}
       \verb https://www.bmj.com/lookup/doi/10.1136/bmj.o1430
       \endverb
+    \endentry
+    \entry{martin_agile_2003}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6f41df64eb0dc4855be70172368604c2}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Robert\bibnamedelima C.},
+           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Upper Saddle River, N.J}%
+      }
+      \list{publisher}{1}{%
+        {Prentice Hall}%
+      }
+      \strng{namehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{fullhash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{bibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorbibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{isbn}{9780135974445}
+      \field{pagetotal}{529}
+      \field{series}{Alan Apt series}
+      \field{shorttitle}{Agile software development}
+      \field{title}{Agile software development: principles, patterns, and practices}
+      \field{year}{2003}
+      \field{dateera}{ce}
+      \keyw{Agile software development,{eXtreme} programming}
+    \endentry
+    \entry{muller-brockmann_grid_1981}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b4dcfcf037d1200f381a1a0edfcfdfea}{%
+           family={Müller-Brockmann},
+           familyi={M\bibinithyphendelim B\bibinitperiod},
+           given={Josef},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Niederteufen}%
+      }
+      \list{publisher}{1}{%
+        {Verlag Arthur Niggli ; [New York] : Hastings House Publishers}%
+      }
+      \strng{namehash}{b4dcfcf037d1200f381a1a0edfcfdfea}
+      \strng{fullhash}{b4dcfcf037d1200f381a1a0edfcfdfea}
+      \strng{bibnamehash}{b4dcfcf037d1200f381a1a0edfcfdfea}
+      \strng{authorbibnamehash}{b4dcfcf037d1200f381a1a0edfcfdfea}
+      \strng{authornamehash}{b4dcfcf037d1200f381a1a0edfcfdfea}
+      \strng{authorfullhash}{b4dcfcf037d1200f381a1a0edfcfdfea}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{isbn}{9783721201451}
+      \field{note}{{OCLC}: 7172816}
+      \field{pagetotal}{176}
+      \field{shorttitle}{Grid systems in graphic design}
+      \field{title}{Grid systems in graphic design: a visual communication manual for graphic designers, typographers, and three dimensional designers = Raster Systeme für die visuelle Gestaltung : ein Handbuch für Grafiker, Typografen, und Ausstellungsgestalter}
+      \field{year}{1981}
+      \field{dateera}{ce}
+      \keyw{Dummies (Bookselling),Graphic arts,Graphic design (Typography),Grids (Typographic design),Layout (Printing)}
     \endentry
     \entry{national_health_service_consultant_2017}{misc}{}
       \name{author}{1}{}{%
@@ -123,18 +265,18 @@
       \verb https://www.hee.nhs.uk/sites/default/files/documents/Cancer-Workforce-Document_FINAL%20for%20web.pdf
       \endverb
     \endentry
-    \entry{national_health_service_appointment_of_consultants_the_national_health_service_appointment_of_consultants_national_2005}{misc}{}
+    \entry{national_health_service_appointment_of_consultants_national_2005}{misc}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=6f417969f277ddc1bb8647d7e2f249a8}{%
-           family={{National Health Service (Appointment of Consultants) The National Health Service (Appointment of Consultants)}},
+        {{un=0,uniquepart=base,hash=7e000765c602d57b4d969cd27c7f1410}{%
+           family={{National Health Service (Appointment of Consultants)}},
            familyi={N\bibinitperiod}}}%
       }
-      \strng{namehash}{6f417969f277ddc1bb8647d7e2f249a8}
-      \strng{fullhash}{6f417969f277ddc1bb8647d7e2f249a8}
-      \strng{bibnamehash}{6f417969f277ddc1bb8647d7e2f249a8}
-      \strng{authorbibnamehash}{6f417969f277ddc1bb8647d7e2f249a8}
-      \strng{authornamehash}{6f417969f277ddc1bb8647d7e2f249a8}
-      \strng{authorfullhash}{6f417969f277ddc1bb8647d7e2f249a8}
+      \strng{namehash}{7e000765c602d57b4d969cd27c7f1410}
+      \strng{fullhash}{7e000765c602d57b4d969cd27c7f1410}
+      \strng{bibnamehash}{7e000765c602d57b4d969cd27c7f1410}
+      \strng{authorbibnamehash}{7e000765c602d57b4d969cd27c7f1410}
+      \strng{authornamehash}{7e000765c602d57b4d969cd27c7f1410}
+      \strng{authorfullhash}{7e000765c602d57b4d969cd27c7f1410}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{extradatescope}{labelyear}
@@ -144,13 +286,47 @@
       \field{title}{National Health Service (Appointment of Consultants) Regulations Good Practice Guidance}
       \field{year}{2005}
       \field{dateera}{ce}
-      \true{nocite}
       \verb{urlraw}
       \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
       \endverb
       \verb{url}
       \verb https://www.rcseng.ac.uk/-/media/Files/RCS/Standards-and-research/Support-for-surgeons/NHS_AAC20GoodPractice_Guidance.pdf
       \endverb
+    \endentry
+    \entry{reade_elements_1989}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1f1b73f57734545e7f2ec2b9e179da06}{%
+           family={Reade},
+           familyi={R\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wokingham, England ; Reading, Mass}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{1f1b73f57734545e7f2ec2b9e179da06}
+      \strng{fullhash}{1f1b73f57734545e7f2ec2b9e179da06}
+      \strng{bibnamehash}{1f1b73f57734545e7f2ec2b9e179da06}
+      \strng{authorbibnamehash}{1f1b73f57734545e7f2ec2b9e179da06}
+      \strng{authornamehash}{1f1b73f57734545e7f2ec2b9e179da06}
+      \strng{authorfullhash}{1f1b73f57734545e7f2ec2b9e179da06}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780201129151}
+      \field{pagetotal}{600}
+      \field{series}{International computer science series}
+      \field{title}{Elements of functional programming}
+      \field{year}{1989}
+      \field{dateera}{ce}
+      \keyw{Functional programming (Computer science)}
     \endentry
     \entry{royal_college_of_physicians_of_london_rcp_2017}{online}{}
       \name{author}{1}{}{%
@@ -173,7 +349,6 @@
       \field{title}{{RCP} London Advisory Appointments Committees ({AAC})}
       \field{year}{2017}
       \field{dateera}{ce}
-      \true{nocite}
       \verb{urlraw}
       \verb https://www.rcplondon.ac.uk/education-practice/advice/advisory-appointments-committees-aac#:~:text=
       \endverb
@@ -196,25 +371,112 @@
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
       \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
+      \field{labeldatesource}{url}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{An Advisory Appointments Committee ({AAC}) is a legally constituted interview panel established by an employing body when appointing consultants.}
       \field{langid}{english}
       \field{title}{Advisory Appointment Committees ({AACs})}
       \field{titleaddon}{Royal College of Surgeons}
-      \field{urlday}{24}
-      \field{urlmonth}{4}
-      \field{urlyear}{2024}
-      \field{year}{2024}
-      \field{dateera}{ce}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
       \field{urldateera}{ce}
-      \true{nocite}
       \verb{urlraw}
       \verb https://www.rcseng.ac.uk/standards-and-research/support-for-surgeons-and-services/aacs/
       \endverb
       \verb{url}
       \verb https://www.rcseng.ac.uk/standards-and-research/support-for-surgeons-and-services/aacs/
+      \endverb
+    \endentry
+    \entry{noauthor_stack_nodate}{online}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In May 2023 over 90,000 developers responded to our annual survey about how they learn and level up, which tools they're using, and which ones they want.}
+      \field{langid}{english}
+      \field{title}{Stack Overflow Developer Survey}
+      \field{titleaddon}{Stack Overflow}
+      \field{urlday}{27}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://survey.stackoverflow.co/2023/?utm_source=social-share&utm_medium=social&utm_campaign=dev-survey-2023
+      \endverb
+      \verb{url}
+      \verb https://survey.stackoverflow.co/2023/?utm_source=social-share&utm_medium=social&utm_campaign=dev-survey-2023
+      \endverb
+    \endentry
+    \entry{the_access_group_access_nodate}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4e73060e43f939dbc41e0fdf62d72267}{%
+           family={{The Access Group}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{4e73060e43f939dbc41e0fdf62d72267}
+      \strng{fullhash}{4e73060e43f939dbc41e0fdf62d72267}
+      \strng{bibnamehash}{4e73060e43f939dbc41e0fdf62d72267}
+      \strng{authorbibnamehash}{4e73060e43f939dbc41e0fdf62d72267}
+      \strng{authornamehash}{4e73060e43f939dbc41e0fdf62d72267}
+      \strng{authorfullhash}{4e73060e43f939dbc41e0fdf62d72267}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Access helps more than 60,000 customers transform the way their business software is used, giving every employee the freedom to do more of what’s important.}
+      \field{langid}{english}
+      \field{title}{The Access Group {|} Business software}
+      \field{urlday}{25}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.theaccessgroup.com/en-gb/
+      \endverb
+      \verb{url}
+      \verb https://www.theaccessgroup.com/en-gb/
+      \endverb
+    \endentry
+    \entry{cipd2023flexible}{report}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4e5f70f7fc8875d1fae7f7642b72584a}{%
+           family={{The Chartered Institute of Personnel and Development}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {The Chartered Institute of Personnel}%
+        {Development}%
+      }
+      \strng{namehash}{4e5f70f7fc8875d1fae7f7642b72584a}
+      \strng{fullhash}{4e5f70f7fc8875d1fae7f7642b72584a}
+      \strng{bibnamehash}{4e5f70f7fc8875d1fae7f7642b72584a}
+      \strng{authorbibnamehash}{4e5f70f7fc8875d1fae7f7642b72584a}
+      \strng{authornamehash}{4e5f70f7fc8875d1fae7f7642b72584a}
+      \strng{authorfullhash}{4e5f70f7fc8875d1fae7f7642b72584a}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Flexible and Hybrid Working Practices in 2023}
+      \field{urlday}{27}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.cipd.org/globalassets/media/knowledge/knowledge-hub/reports/2023-pdfs/2023-flexible-hybrid-working-practices-report-8392.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.cipd.org/globalassets/media/knowledge/knowledge-hub/reports/2023-pdfs/2023-flexible-hybrid-working-practices-report-8392.pdf
       \endverb
     \endentry
     \entry{the_kernel_development_community_linux_2024}{online}{}
@@ -232,15 +494,13 @@
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
+      \field{labeldatesource}{url}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Linux kernel coding style — The Linux Kernel documentation}
       \field{urlday}{26}
       \field{urlmonth}{4}
       \field{urlyear}{2024}
-      \field{year}{2024}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \verb{urlraw}
       \verb https://www.kernel.org/doc/html/v4.10/process/coding-style.html#:~:text=The%20answer%20to%20that%20is,Heed%20that%20warning.
@@ -278,7 +538,7 @@
       \verb https://www.rcr.ac.uk/media/gzxjd252/rcr-publications_clinical-radiology-job-planning-guidance-for-consultant-and-sas-doctors_october-2022.pdf
       \endverb
     \endentry
-    \entry{the_royal_college_of_radiologists_rcr_2023}{online}{}
+    \entry{the_royal_college_of_radiologists_advisory_2024-1}{online}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=684a88ca4c1ab090f2bc865441f38800}{%
            family={{The Royal College of Radiologists}},
@@ -293,52 +553,16 @@
       \field{extraname}{2}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{{RCR} statement on industrial action {|} The Royal College of Radiologists}
-      \field{urlday}{24}
-      \field{urlmonth}{4}
-      \field{urlyear}{2024}
-      \field{year}{2023}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017
-      \endverb
-      \verb{url}
-      \verb https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017
-      \endverb
-    \endentry
-    \entry{the_royal_college_of_radiologists_advisory_2024-1}{online}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=684a88ca4c1ab090f2bc865441f38800}{%
-           family={{The Royal College of Radiologists}},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{684a88ca4c1ab090f2bc865441f38800}
-      \strng{fullhash}{684a88ca4c1ab090f2bc865441f38800}
-      \strng{bibnamehash}{684a88ca4c1ab090f2bc865441f38800}
-      \strng{authorbibnamehash}{684a88ca4c1ab090f2bc865441f38800}
-      \strng{authornamehash}{684a88ca4c1ab090f2bc865441f38800}
-      \strng{authorfullhash}{684a88ca4c1ab090f2bc865441f38800}
-      \field{extraname}{3}
-      \field{sortinit}{T}
-      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{extradate}{1}
       \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
+      \field{labeldatesource}{url}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Advisory Appointment Committee ({AAC}) {|} The Royal College of Radiologists}
-      \field{urlday}{24}
-      \field{urlmonth}{4}
-      \field{urlyear}{2024}
-      \field{year}{2024}
-      \field{dateera}{ce}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
       \field{urldateera}{ce}
-      \true{nocite}
       \verb{urlraw}
       \verb https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/
       \endverb
@@ -358,21 +582,19 @@
       \strng{authorbibnamehash}{684a88ca4c1ab090f2bc865441f38800}
       \strng{authornamehash}{684a88ca4c1ab090f2bc865441f38800}
       \strng{authorfullhash}{684a88ca4c1ab090f2bc865441f38800}
-      \field{extraname}{4}
+      \field{extraname}{3}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{extradate}{2}
       \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
+      \field{labeldatesource}{url}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This page answers questions you may have about the job description review and {AAC} panel processes.}
       \field{title}{Advisory Appointment Committee {FAQs}}
-      \field{urlday}{24}
-      \field{urlmonth}{4}
-      \field{urlyear}{2024}
-      \field{year}{2024}
-      \field{dateera}{ce}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
       \field{urldateera}{ce}
       \true{nocite}
       \verb{urlraw}
@@ -381,6 +603,79 @@
       \verb{url}
       \verb https://www.rcr.ac.uk/our-services/management-service-delivery/advisory-appointment-committee-aac/advisory-appointment-committee-faqs/
       \endverb
+    \endentry
+    \entry{the_royal_college_of_radiologists_rcr_2023}{online}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=684a88ca4c1ab090f2bc865441f38800}{%
+           family={{The Royal College of Radiologists}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{fullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{bibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorbibnamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authornamehash}{684a88ca4c1ab090f2bc865441f38800}
+      \strng{authorfullhash}{684a88ca4c1ab090f2bc865441f38800}
+      \field{extraname}{4}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradate}{3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{RCR} statement on industrial action {|} The Royal College of Radiologists}
+      \field{urlday}{26}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017
+      \endverb
+      \verb{url}
+      \verb https://www.rcr.ac.uk/news-policy/latest-updates/rcr-statement-on-industrial-action/#:~:text=There%20is%20currently%20a%2017
+      \endverb
+    \endentry
+    \entry{thomas_pragmatic_2019}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b5eb4ac16368112932ff36772cb0b0b5}{%
+           family={Thomas},
+           familyi={T\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=10383d05f32f2a21518b493a3c546e5c}{%
+           family={Hunt},
+           familyi={H\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boston}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{1a035d003670faf04bf5f83e589000b2}
+      \strng{fullhash}{1a035d003670faf04bf5f83e589000b2}
+      \strng{bibnamehash}{1a035d003670faf04bf5f83e589000b2}
+      \strng{authorbibnamehash}{1a035d003670faf04bf5f83e589000b2}
+      \strng{authornamehash}{1a035d003670faf04bf5f83e589000b2}
+      \strng{authorfullhash}{1a035d003670faf04bf5f83e589000b2}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{"Straight from the trenches, The Pragmatic Programmer, 20th Anniversary Edition, cuts through the increasing specialization and technicalities of modern software development to examine the core process: transforming a requirement into working, maintainable code that delights users. Extensively updated with ten new sections and major revisions throughout, this edition covers topics ranging from career development to architectural techniques for keeping code flexible, adaptable, and reusable. The Pragmatic Programmer illustrates today's best practices and major pitfalls of many different aspects of software development. Whether you're a new coder, an experienced programmer, or a manager responsible for software projects, applying this guide's lessons will help you rapidly improve your productivity, quality, and job satisfaction"--}
+      \field{edition}{Second edition}
+      \field{isbn}{9780135957059}
+      \field{shorttitle}{The pragmatic programmer, 20th anniversary edition}
+      \field{title}{The pragmatic programmer, 20th anniversary edition: journey to mastery}
+      \field{year}{2019}
+      \field{dateera}{ce}
     \endentry
     \entry{vitaliy_kucheryaviy_django_2024}{online}{}
       \name{author}{1}{}{%
@@ -413,6 +708,47 @@
       \endverb
       \verb{url}
       \verb https://django-ninja.dev/
+      \endverb
+    \endentry
+    \entry{wathan_refactoring_2018}{online}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=82d399ca2d4eaf122321c8b59c00ec1c}{%
+           family={Wathan},
+           familyi={W\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ffceb4ca3355b0e65a3083892bb88be2}{%
+           family={Schoger},
+           familyi={S\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{53ef42fcc1877a81c53407c9fbdc6391}
+      \strng{fullhash}{53ef42fcc1877a81c53407c9fbdc6391}
+      \strng{bibnamehash}{53ef42fcc1877a81c53407c9fbdc6391}
+      \strng{authorbibnamehash}{53ef42fcc1877a81c53407c9fbdc6391}
+      \strng{authornamehash}{53ef42fcc1877a81c53407c9fbdc6391}
+      \strng{authorfullhash}{53ef42fcc1877a81c53407c9fbdc6391}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Refactoring {UI}}
+      \field{urlday}{27}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.refactoringui.com/
+      \endverb
+      \verb{url}
+      \verb https://www.refactoringui.com/
       \endverb
     \endentry
   \enddatalist

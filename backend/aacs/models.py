@@ -15,4 +15,4 @@ class AAC(models.Model):
     submission_date = models.DateTimeField(auto_now_add=True)
     date = models.DateField()
 
-    representative = models.ForeignKey(User, on_delete=models.CASCADE)
+    representative = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

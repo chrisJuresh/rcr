@@ -4,6 +4,10 @@
 
 \subfile{chapters/title}
 
+\subfile{chapters/disclaimer}
+\thispagestyle{empty}
+
+\newpage
 \subfile{chapters/acknowledgements}
 \thispagestyle{empty}
 
@@ -11,6 +15,8 @@
 \subfile{chapters/abstract}
 \thispagestyle{empty}
 
+\let\LaTeXStandardClearpage\clearpage
+\let\clearpage\relax  %
 \newpage
 \fancypagestyle{plain}{
     \fancyhf{} 
@@ -19,6 +25,12 @@
 }
 \pagestyle{empty} 
 \tableofcontents
+\listoffigures
+\listoftables
+\vspace{4em}
+\listoflistings
+\let\clearpage\LaTeXStandardClearpage % Return to the old definition
+
 \clearpage 
 
 \fancypagestyle{plain}{
@@ -36,15 +48,15 @@
 
 \subfile{chapters/implementation}
 
-\subfile{chapters/testing}
-
-\subfile{chapters/discussion}
-
-\subfile{chapters/further}
+\subfile{chapters/review}
 
 \newpage
 \nocite{*}
+\begingroup
+\setlength\bibnamesep{10pt}
+\setlength\bibitemsep{5pt}
 \printbibliography[heading=bibintoc, title={References}]
+\endgroup
 
 \newpage
 \subfile{chapters/appendices}

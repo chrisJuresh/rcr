@@ -4,7 +4,9 @@
 \centering
 \frame{\includegraphics[width=\linewidth]{images/database.png}}
 \vspace{-20pt}
-\caption{Database schema without fields (backend/*/models.py)}
+\caption{Database schema without fields}
+\vspace{-10pt}
+\caption*{(backend/*/models.py)}
 \label{fig:database}
 \vspace{-5pt}
 \end{figure}
@@ -24,6 +26,7 @@ As always, fields are give intuitive names, and the correct data types and const
 
 Without such a detailed schema, at best the system would be completely static. Policies change often, new Trusts join or are renamed, and specialities are added or removed. Without an extremely flexible database, this website would be unusable within a matter of months.
 
+\usemintedstyle{tango}
 \section{API}
 \subsection{Endpoints}
 \begin{listing}[!ht]
@@ -45,10 +48,11 @@ def register_authenticate(request, token: TokenIn):
     tokens = get_tokens_for_user(user)
     return tokens
 \end{minted}
-\caption{Registration endpoint example (backend/users/api.py)}
+\vspace{-5pt}
+\caption{Registration endpoint example\\(backend/users/api.py)}
 \label{lst:register}
 \end{listing}
-
+\vspace{-5pt}
 The code in Listing \ref{lst:register} shows the general structure and practises of all the API endpoints. You can view the full list of endpoints in Appendix \ref{app:Endpoints}. 
 
 Line 1 defines the endpoint configuration as a POST request to users/register-authenticate, which returns a \texttt{TokenOut} type, as defined in \texttt{schema.py}. The Schema is essential for the OpenAPI documentation, shared types in SvelteKit, and error avoidance thanks to checked types.
@@ -70,7 +74,9 @@ There are a number of advantages to using many small endpoints rather than a few
 \centering
 \frame{\includegraphics[width=\linewidth]{images/api-lib.png}}
 \vspace{-20pt}
-\caption{Custom API Client (frontend/src/lib/api*.ts)}
+\caption{Custom API client}
+\vspace{-10pt}
+\caption*{(frontend/src/lib/api*.ts)}
 \label{fig:api-lib}
 \vspace{-5pt}
 \end{figure}
@@ -84,22 +90,32 @@ As discussed in \ref{SvelteKit}, the API is consumed by the frontend using a cus
 \section{Layout}
 \begin{figure}[h]
 \centering
-\caption{Navigation Bar (frontend/src/routes/*.*/)}
+\caption{Navigation bar}
+\vspace{-10pt}
+\caption*{(frontend/src/routes/*.*/)}
 \vspace{-5pt}
 \frame{\includegraphics[width=\linewidth]{images/nav.png}}
 \label{fig:nav}
 \vspace{-20pt}
 \end{figure}
-As discussed in \ref{File Structure}, the layout is responsible for the header, body, and footer of all children. To present the correct buttons to the user in the nav-bar, a reactive store is used to keep track of the user's roles stored in the backend. If a user is not approved, but has requested a certain role, then they are still shown the button but in a greyed out format. This feedback makes the user aware of which roles they must select to gain access to specific parts of the system. The body of the page is a \texttt{<slot>} enclosed in containers that make the page fully responsive to all devices, aspect ratios, and zoom levels. It is also responsible for importing the global CSS file \texttt{app.pcss}
+As discussed in \ref{File Structure}, the layout is responsible for the header, body, and footer of all children. It is also responsible for importing the global CSS file \texttt{app.pcss}. 
+
+To present the correct buttons to the user in the nav-bar, a reactive store is used to keep track of the user's roles stored in the backend. If a user is not approved, but has requested a certain role, then they are still shown the button but in a greyed out format. This feedback makes the user aware of which roles they must select to gain access to specific parts of the system.
+
+Included in the nav-bar is a Log Out button in red, chosen to stand out and remind users not to stay logged in on shared computers (though the JWT will automatically expire if no requests are made for a while). There is also a dark and light mode toggle button.
+
+The body of the page is a \texttt{<slot>} enclosed in containers that make the page fully responsive to all devices, aspect ratios, and zoom levels. A logo is provided in the footer as a placeholder.
+
+See Appendix \ref{app:Mobile} for screenshots of the responsive layout on mobile devices, along with the dark mode feature.
 
 \section{Authentication}
-Good security is essential in this process, as any bad actors could access sensitive information such as personal details, or delay recruitment by disrupting the system.
-
 \begin{figure}[h]
 \centering
 \frame{\includegraphics[width=\linewidth]{images/auth.png}}
 \vspace{-20pt}
-\caption{Authentication flow (frontend/src/routes/auth/*) \& (backend/users/*)}
+\caption{Authentication flow}
+\vspace{-10pt}
+\caption*{(frontend/src/routes/auth/*) \& (backend/users/*)}
 \label{fig:auth}
 \vspace{-5pt}
 \end{figure}
@@ -120,7 +136,9 @@ Users are automatically logged in as \texttt{hooks.server.ts} check whether cook
 \centering
 \frame{\includegraphics[width=\linewidth]{images/profile-file-flow.png}}
 \vspace{-20pt}
-\caption{Profile file flow (frontend/src/routes/profile/*) \& (backend/*)}
+\caption{Profile page flow}
+\vspace{-10pt}
+\caption*{(frontend/src/routes/profile/*) \& (backend/*)}
 \label{fig:profile-file-flow}
 \vspace{-5pt}
 \end{figure}
@@ -130,7 +148,9 @@ Users are automatically logged in as \texttt{hooks.server.ts} check whether cook
 \centering
 \frame{\includegraphics[width=0.65\linewidth]{images/profile-form.png}}
 \vspace{-5pt}
-\caption{Profile form data flow (frontend/src/routes/profile/profile-form.svelte)}
+\caption{Profile form data flow}
+\vspace{-10pt}
+\caption*{(frontend/src/routes/profile/profile-form.svelte)}
 \label{fig:profile-form}
 \vspace{-5pt}
 \end{figure}
@@ -140,7 +160,74 @@ Figure \ref{fig:profile-file-flow} presents the exact file structure and data fl
 Figure \ref{fig:profile-form} presents the data flow in the form itself. Data is initially loaded from Django, and any existing data is used as the placeholder in the field. Otherwise the user is prompted to select an item. Fields are disabled in the order in the diagram, for example, a user cannot choose a Consultant Type unless they have chosen a Role that includes one. Specialities are far more complex. For example, if a user selects Radiology, they should only be shown Specialities related to Oncology. This field must be cleared any time there is a mismatch, and requires a surprising amount of code to handle all edge cases. And there are many such edge cases, as there are multiple sources of data to be taken into account, that is the data from the page load collected from Django, the current placeholder, and the user's current selection held in \texttt{\$formData}. \texttt{profile-form.svelte} is an especially complex component as there are over 10 different placeholders that are chosen and presented dependent on a variety of factors. Screenshots of the profile page can be found in Appendix \ref{app:Profile}.
 
 \section{Data Tables}
+\begin{figure}[h]
+\centering
+\frame{\includegraphics[width=\linewidth]{images/panel-flow.png}}
+\vspace{-20pt}
+\caption{Data table flow}
+\vspace{-10pt}
+\caption*{(frontend/src/routes/protected/*)}
+\label{fig:data-table-flow}
+\vspace{-5pt}
+\end{figure}
+
+Figure \ref{fig:data-table-flow} presents the flow of data to the data tables. You can find an example in \ref{app:Panel}. These data tables are used to display various information dependent on the users roles, trusts, consultant type, and current page. This is not just limited to the data shown, but the columns are also dynamic - meaning that columns that aren't relevant to the page are automatically hidden. It is also sometimes embedded into forms to allow the user to select items. This is all possible because it is a single reusable component. The user can search and sort the data, as well as chose between pagination or increasing the number of items shown at once. A badge is placed next to the ID to show the user whether the entry is a JD, AAC, or Rep. Some pages have a button at the end of the table instead of a row-actions component. For example, the Edit JD page has an Edit $>$ button at the end of each row to reduce the number of button presses for the user, and to make them aware of the action they are expected to take.
+
+To make these tables so flexible, reactive variables have to be passed between through many layers. This data has to cleaned and placeholders have to be added to fit the format the table expects. Svelte's Logic blocks are used extensively to determine exactly how the table should be displayed.
+
 
 \section{Job Description Flow}
+\subsection{State Machine}
+\begin{figure}[h]
+\centering
+\frame{\includegraphics[width=\linewidth]{images/state.png}}
+\vspace{-20pt}
+\caption{Job description state machine}
+\vspace{-10pt}
+\caption*{(backend/jds/models.py)}
+\label{fig:jd-state}
+\vspace{-5pt}
+\end{figure}
+
+\subsection{Forms}
+
+Figure \ref{fig:jd-state}
+
+\begin{figure}[h]
+\centering
+\frame{\includegraphics[width=0.5\linewidth]{images/jd-q-flow.png}}
+\vspace{-5pt}
+\caption{Job description questions flow}
+\vspace{-10pt}
+\caption*{(frontend/src/routes/protected/*)}
+\label{fig:jd-q-flow}
+\vspace{-5pt}
+\end{figure}
+
+Figure \ref{fig:jd-q-flow}
+
+\subsection{Permissions}
+\begin{figure}[h]
+\centering
+\frame{\includegraphics[width=0.75\linewidth]{images/perms.png}}
+\vspace{-5pt}
+\caption{Job description permissions}
+\vspace{-10pt}
+\caption*{(backend/jds/services.py)}
+\label{fig:jd-perms}
+\vspace{-5pt}
+\end{figure}
+
+Figure \ref{fig:jd-perms}
 
 \section{Advisory Appointment Committees Flow}
+
+\subsection{Form}
+
+\section{Testing}
+
+django tests.py
+
+UAT
+
+going through the workflow

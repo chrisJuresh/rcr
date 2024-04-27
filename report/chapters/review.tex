@@ -1,0 +1,87 @@
+\chapter{Project Review}
+\section{Reflections}
+This project was extremely time-consuming. Beyond the simple use of Django in a Web Technologies module, I had to learn every single framework I chose to use from scratch. While many of the libraries used are established or production ready, they are not as widely adopted or mature as some other mainstream options. I had to report and correct numerous errors in various documentations and create bug reports, one of which now has numerous participants.
+
+On the other hand, this project provided an opportunity to impress the creator of shadcn-svelte, who invited me to write an article about my implementation of a dynamic form within a data table. This feature was completely undocumented, and I plan to complete a write-up after submission, as it has been requested by several individuals.
+
+Altogether, it was a huge challenge, but I am proud of the result. I have a fully working application, more than just a prototype, and have achieved most of the goals I set. I am also confident that the project has no limitations; it has been structured in a way that allows any desired features to be added with minimal rewriting.
+
+That being said, throughout the project, I have identified numerous features that could significantly improve the user experience.
+
+\subsection{Further Work}
+The project is fully functional and could theoretically be used in a production environment. However, the risk of bugs is high as User Acceptance Testing has not been extensive. Furthermore, while the application is functional and generally looks professional, it is likely that upon closer inspection, many aspects will require more polish. Additionally, most of the text used will need to be reviewed and overhauled by a separate communications team to ensure it is professional and consistent with branding and external information.
+
+For the most part, the code is clean; however, during the later stages, it became less sensible to invest time in refactoring and optimisation. This was primarily due to time constraints, but also because the benefits of well-refactored code become less significant as the project nears completion. Nevertheless, since many useful additions can still be made, and the program may require maintenance by myself or other developers in the future, maintaining readable code is still beneficial.
+
+This report concludes with Table \ref{table:1}, a list of additional features that I would like to incorporate into the application.
+
+\def\arraystretch{1.22}
+\begin{table}[h!]
+\small
+\vspace{-20pt}
+\centering
+\begin{tabular}{||m{0.9585\textwidth}||}
+   \hline
+ Implement automatic JWT token refresh instead of relying on an 8-hour timeout\\ 
+\hline
+ Design the admin panel to be more user-friendly, as at the moment models are only registered\\
+\hline
+ Add an opt-in for email notifications for when action is required\\
+\hline
+ Add personalised metrics for users in the form of charts or data cards\\
+\hline
+ Create Django tests.py\\
+\hline
+ Protect routes based on role too\\
+\hline
+ Consider adding an RCR Rejected state\\
+\hline
+ Allow a JD bypass for eligible Trusts that does not require manual changes in the admin panel\\ 
+\hline
+ Restrict data table actions based on role and add AAC versions\\ 
+\hline
+ Add alerts for when a session expires\\ 
+\hline
+ Use combo-boxes instead of long selects.\\ 
+\hline
+  Predefine an order to lists based on how often that speciality is chosen\\ 
+\hline
+ Add a grey mode\\ 
+\hline
+ Add an AAC state machine and diagram\\ 
+\hline
+ Use SvelteKit's pre-rendering feature\\ 
+\hline
+ Refactor code and file base\\ 
+\hline
+  Add a built-in PDF viewer to pages with a download link (PDF-LIB)\\ 
+\hline
+  Implement a way for Trusts to upload an updated file without the RCR Employee having to update it themselves\\ 
+\hline
+ Implement machine learning to try to automatically detect which content is present\\ 
+\hline
+  Add more filtering options to the data table, such as a dropdown with predefined value\\ 
+\hline
+  Add the ability to view the history of a JD for users\\ 
+\hline
+ Add breadcrumbs to the UI\\ 
+\hline
+  Implement a much better algorithm to automatically select Reviewers and Representatives\\ 
+\hline
+  Check whether a job description has already been uploaded with identical specialities and warn the Trust\\ 
+\hline
+  Improve the forms to include fields for certain rows where a single number can be input for easier data collection\\ 
+\hline
+  Parse the data in the submitted outcome form and store it in a database for data analysis\\ 
+\hline
+  Add more error pages for better coverage\\ 
+\hline
+  Add reactivity to the Django backend so that users pages are updated when another person makes a change\\ 
+\hline
+  Add better permission checking in Django to ensure any requests users might try to submit in forms outside what is presented in the UI are rejected\\ [1ex]
+ \hline
+\end{tabular}
+\vspace{-5pt}
+\caption{Table of planned features}
+\label{table:1}
+\end{table}

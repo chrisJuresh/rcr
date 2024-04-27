@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  26 APR 2024 04:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  27 APR 2024 09:15
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -724,7 +724,52 @@ Package hyphenat Warning: *******************************
 
 \langwohyphens=\language6
 LaTeX Info: Redefining \_ on input line 43.
-))
+) (/usr/share/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
+\LTleft=\skip129
+\LTright=\skip130
+\LTpre=\skip131
+\LTpost=\skip132
+\LTchunksize=\count467
+\LTcapwidth=\dimen256
+\LT@head=\box111
+\LT@firsthead=\box112
+\LT@foot=\box113
+\LT@lastfoot=\box114
+\LT@gbox=\box115
+\LT@cols=\count468
+\LT@rows=\count469
+\c@LT@tables=\count470
+\c@LT@chunks=\count471
+\LT@p@ftn=\toks26
+) (/usr/share/texmf-dist/tex/latex/tools/array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen257
+\ar@mcellbox=\box116
+\extrarowheight=\dimen258
+\NC@list=\toks27
+\extratabsurround=\skip133
+\backup@length=\skip134
+\ar@cellbox=\box117
+) (/usr/share/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+) (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
+\csq@reset=\count472
+\csq@gtype=\count473
+\csq@glevel=\count474
+\csq@qlevel=\count475
+\csq@maxlvl=\count476
+\csq@tshold=\count477
+\csq@ltx@everypar=\toks28
+ (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+ (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+)))
 ! Emergency stop.
 <*> /home/chris/rcr/report/lib/preamble.tex
                                            
@@ -732,10 +777,10 @@ LaTeX Info: Redefining \_ on input line 43.
 
  
 Here is how much of TeX's memory you used:
- 21145 strings out of 476076
- 381123 string characters out of 5793775
+ 21905 strings out of 476076
+ 393673 string characters out of 5793775
  1926187 words of memory out of 5000000
- 43046 multiletter control sequences out of 15000+600000
+ 43789 multiletter control sequences out of 15000+600000
  558674 words of font info for 38 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  77i,1n,81p,567b,265s stack positions out of 10000i,1000n,20000p,200000b,200000s

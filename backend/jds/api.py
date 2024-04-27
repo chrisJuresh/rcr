@@ -190,9 +190,9 @@ def update_jd_state(request, jd_id: int, state: str, reviewer: Optional[str]=Non
     if state == 'submit' and 'Trust Employee' in get_user_roles(request.user, 'approved'):
         jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
         jd.submit()
-    elif state == 'approve' and 'RCR Employee' or 'Reviewer' in get_user_roles(request.user, 'approved'):
+    elif state == 'approve' and ('RCR Employee' or 'Reviewer' in get_user_roles(request.user, 'approved')):
         jd = JD.objects.get(id=jd_id)
-        if 'RCR Employee' in get_user_roles(request.user, 'approved'):
+        if 'RCR Employee' in get_user_roles(request.user, ['approved', 'requested']):
             jd.reviewer = User.objects.get(id=reviewer)
         jd.approve()
     elif state == 'reject' and 'RCR Employee' or 'Reviewer' in get_user_roles(request.user, 'approved'):
