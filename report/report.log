@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  27 APR 2024 09:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  28 APR 2024 02:27
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1048,7 +1048,7 @@ LaTeX Font Warning: Font shape `OT1/cmtt/m/In' undefined
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<images/qmul-logo.jpg, id=237, 853.5087pt x 227.4096pt>
+<images/qmul-logo.jpg, id=249, 853.5087pt x 227.4096pt>
 File: images/qmul-logo.jpg Graphic file (type jpg)
 <use images/qmul-logo.jpg>
 Package pdftex.def Info: images/qmul-logo.jpg  used on input line 20.
@@ -1073,7 +1073,7 @@ l.10 \newpage
 \tf@toc=\write7
 \openout7 = `report.toc'.
 
- (./report.lof [5])
+ [5] (./report.lof)
 \tf@lof=\write8
 \openout8 = `report.lof'.
 
@@ -1089,103 +1089,66 @@ l.10 \newpage
 Chapter 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 3.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [7
+[7
 
 
-]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [8]) (./chapters/literature.tex
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [9]
+] [8]) (./chapters/literature.tex [9]
 Chapter 2.
-<images/jd.png, id=479, 2059.695pt x 501.875pt>
+<images/jd.png, id=503, 2059.695pt x 501.875pt>
 File: images/jd.png Graphic file (type png)
 <use images/jd.png>
 Package pdftex.def Info: images/jd.png  used on input line 6.
 (pdftex.def)             Requested size: 424.06033pt x 103.32153pt.
-<images/aac.png, id=482, 1975.38pt x 495.8525pt>
+<images/aac.png, id=506, 1975.38pt x 495.8525pt>
 File: images/aac.png Graphic file (type png)
 <use images/aac.png>
 Package pdftex.def Info: images/aac.png  used on input line 17.
 (pdftex.def)             Requested size: 424.06033pt x 106.43974pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
+[10
 
-(./report-words.sum) [10
-
- <./images/jd.png> <./images/aac.png>]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [11]) (./chapters/design.tex
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [12]
+ <./images/jd.png> <./images/aac.png>] [11]) (./chapters/design.tex [12]
 Chapter 3.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [13
+[13
 
 ]
-<images/Django-Ninja-speed.png, id=516, 1253.68375pt x 500.87125pt>
+<images/Django-Ninja-speed.png, id=540, 1253.68375pt x 500.87125pt>
 File: images/Django-Ninja-speed.png Graphic file (type png)
 <use images/Django-Ninja-speed.png>
-Package pdftex.def Info: images/Django-Ninja-speed.png  used on input line 19.
+Package pdftex.def Info: images/Django-Ninja-speed.png  used on input line 24.
 (pdftex.def)             Requested size: 424.06033pt x 169.4227pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [14 <./images/django-ninja-speed.png (PNG copy)>]
-<images/svelte.png, id=528, 2013.5225pt x 1820.8025pt>
+ [14 <./images/django-ninja-speed.png (PNG copy)>]
+<images/svelte.png, id=552, 2013.5225pt x 1820.8025pt>
 File: images/svelte.png Graphic file (type png)
 <use images/svelte.png>
-Package pdftex.def Info: images/svelte.png  used on input line 39.
-(pdftex.def)             Requested size: 339.24956pt x 306.75401pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [15 <./images/svelte.png>]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [16]
-<images/design.png, id=545, 2252.415pt x 493.845pt>
+Package pdftex.def Info: images/svelte.png  used on input line 44.
+(pdftex.def)             Requested size: 254.43878pt x 230.07245pt.
+ [15 <./images/svelte.png>] [16]
+<images/design.png, id=569, 2252.415pt x 493.845pt>
 File: images/design.png Graphic file (type png)
 <use images/design.png>
-Package pdftex.def Info: images/design.png  used on input line 67.
+Package pdftex.def Info: images/design.png  used on input line 72.
 (pdftex.def)             Requested size: 424.06033pt x 92.97247pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [17 <./images/design.png>]
-<images/ui-all.png, id=558, 927.465pt x 228.855pt>
+ [17 <./images/design.png>]
+<images/ui-all.png, id=583, 927.465pt x 228.855pt>
 File: images/ui-all.png Graphic file (type png)
 <use images/ui-all.png>
-Package pdftex.def Info: images/ui-all.png  used on input line 83.
+Package pdftex.def Info: images/ui-all.png  used on input line 88.
 (pdftex.def)             Requested size: 212.03017pt x 52.31776pt.
-<images/ui-role.png, id=560, 1252.68pt x 252.945pt>
+<images/ui-role.png, id=585, 1252.68pt x 252.945pt>
 File: images/ui-role.png Graphic file (type png)
 <use images/ui-role.png>
-Package pdftex.def Info: images/ui-role.png  used on input line 97.
+Package pdftex.def Info: images/ui-role.png  used on input line 102.
 (pdftex.def)             Requested size: 318.04524pt x 64.22029pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [18 <./images/ui-all.png>]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [19 <./images/ui-role.png>]) (./chapters/implementation.tex
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [20
+ [18 <./images/ui-all.png>] [19 <./images/ui-role.png>]) (./chapters/implementation.tex [20
 
 ]
 Chapter 4.
-<images/database.png, id=584, 1561.835pt x 1103.12125pt>
+<images/database.png, id=608, 1561.835pt x 1103.12125pt>
 File: images/database.png Graphic file (type png)
 <use images/database.png>
 Package pdftex.def Info: images/database.png  used on input line 5.
 (pdftex.def)             Requested size: 424.06033pt x 299.5131pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [21
+[21
 
  <./images/database.png>]
 \openout3 = `report.pyg'.
@@ -1197,13 +1160,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 6.
 )
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on input line 52.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [22]
+ [22]
 \openout4 = `report.pyg'.
 
  (./_minted-report/6123314DFD091F33A0354EB5746A07E5F73D778D6577DD371281B40198477396.pygtex)
-<images/api-lib.png, id=604, 1963.335pt x 1120.185pt>
+<images/api-lib.png, id=628, 1963.335pt x 1120.185pt>
 File: images/api-lib.png Graphic file (type png)
 <use images/api-lib.png>
 Package pdftex.def Info: images/api-lib.png  used on input line 75.
@@ -1212,228 +1173,181 @@ Package pdftex.def Info: images/api-lib.png  used on input line 75.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/nav.png, id=608, 2198.2125pt x 285.065pt>
+<images/nav.png, id=632, 2198.2125pt x 285.065pt>
 File: images/nav.png Graphic file (type png)
 <use images/nav.png>
 Package pdftex.def Info: images/nav.png  used on input line 97.
 (pdftex.def)             Requested size: 424.06033pt x 54.98935pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [23]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [24 <./images/api-lib.png> <./images/nav.png>]
-<images/auth.png, id=622, 2180.145pt x 1108.14pt>
+[23] [24 <./images/api-lib.png> <./images/nav.png>]
+<images/auth.png, id=646, 2180.145pt x 1108.14pt>
 File: images/auth.png Graphic file (type png)
 <use images/auth.png>
 Package pdftex.def Info: images/auth.png  used on input line 114.
 (pdftex.def)             Requested size: 424.06033pt x 215.5369pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [25 <./images/auth.png>]
-<images/profile-file-flow.png, id=631, 1746.525pt x 341.275pt>
+ [25 <./images/auth.png>]
+<images/profile-file-flow.png, id=655, 1746.525pt x 341.275pt>
 File: images/profile-file-flow.png Graphic file (type png)
 <use images/profile-file-flow.png>
 Package pdftex.def Info: images/profile-file-flow.png  used on input line 137.
 (pdftex.def)             Requested size: 424.06033pt x 82.86063pt.
-<images/profile-form.png, id=632, 1192.455pt x 614.295pt>
-File: images/profile-form.png Graphic file (type png)
-<use images/profile-form.png>
-Package pdftex.def Info: images/profile-form.png  used on input line 149.
-(pdftex.def)             Requested size: 275.63663pt x 141.98787pt.
 
-Overfull \hbox (1.71165pt too wide) in paragraph at lines 158--159
+Overfull \hbox (1.71165pt too wide) in paragraph at lines 146--147
 \OT1/cmtt/l/it/12 proved.svelte \OT1/cmr/m/n/12 dis-plays the users cur-rently ap-proved roles and trusts, and \OT1/cmtt/l/it/12 profile-
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 160.
+<images/profile-form.png, id=658, 1192.455pt x 614.295pt>
+File: images/profile-form.png Graphic file (type png)
+<use images/profile-form.png>
+Package pdftex.def Info: images/profile-form.png  used on input line 150.
+(pdftex.def)             Requested size: 275.63663pt x 141.98787pt.
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 159.
 (/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [26 <./images/profile-file-flow.png> <./images/profile-form.png>]
-<images/panel-flow.png, id=643, 1513.655pt x 742.775pt>
+) [26 <./images/profile-file-flow.png> <./images/profile-form.png>]
+<images/panel-flow.png, id=667, 1513.655pt x 742.775pt>
 File: images/panel-flow.png Graphic file (type png)
 <use images/panel-flow.png>
-Package pdftex.def Info: images/panel-flow.png  used on input line 165.
+Package pdftex.def Info: images/panel-flow.png  used on input line 164.
 (pdftex.def)             Requested size: 424.06033pt x 208.08891pt.
-<images/state.png, id=646, 1432.35126pt x 164.615pt>
+ [27{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/panel-flow.png>]
+<images/state.png, id=679, 1432.35126pt x 164.615pt>
 File: images/state.png Graphic file (type png)
 <use images/state.png>
 Package pdftex.def Info: images/state.png  used on input line 183.
 (pdftex.def)             Requested size: 424.06033pt x 48.73431pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [27{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/panel-flow.png>]
-<images/jd-q-flow.png, id=655, 855.195pt x 349.305pt>
+<images/jd-q-flow.png, id=681, 855.195pt x 349.305pt>
 File: images/jd-q-flow.png Graphic file (type png)
 <use images/jd-q-flow.png>
-Package pdftex.def Info: images/jd-q-flow.png  used on input line 198.
+Package pdftex.def Info: images/jd-q-flow.png  used on input line 199.
 (pdftex.def)             Requested size: 212.03017pt x 86.60115pt.
-<images/perms.png, id=657, 1349.04pt x 903.375pt>
+ [28 <./images/state.png> <./images/jd-q-flow.png>]
+<images/perms.png, id=690, 1349.04pt x 903.375pt>
 File: images/perms.png Graphic file (type png)
 <use images/perms.png>
-Package pdftex.def Info: images/perms.png  used on input line 212.
+Package pdftex.def Info: images/perms.png  used on input line 215.
 (pdftex.def)             Requested size: 318.04524pt x 212.96858pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [28 <./images/state.png> <./images/jd-q-flow.png> <./images/perms.png>]) (./chapters/review.tex
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [29]
+<images/aac-flow.png, id=692, 879.285pt x 228.855pt>
+File: images/aac-flow.png Graphic file (type png)
+<use images/aac-flow.png>
+Package pdftex.def Info: images/aac-flow.png  used on input line 230.
+(pdftex.def)             Requested size: 318.04524pt x 82.77884pt.
+ [29 <./images/perms.png> <./images/aac-flow.png>]) (./chapters/review.tex [30]
 Chapter 5.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-)
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
+) [31
 
- (./report-words.sum) [30
+] [32]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [31]
-Overfull \hbox (8.28969pt too wide) in paragraph at lines 58--58
-\OT1/cmtt/l/it/12 hee . nhs . uk / sites / default / files / documents / Cancer -[] Workforce -[] Document _
- []
-
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [32
+ [33
 
 ]
-Overfull \hbox (29.38556pt too wide) in paragraph at lines 58--58
-\OT1/cmtt/l/it/12 committee -[] aac / advisory -[] appointment -[] committee -[] faqs/$[] \OT1/cmr/m/n/12 (vis-ited on 11/26/2023). 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [33]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [34] (./chapters/appendices.tex
+ [34] [35] (./chapters/appendices.tex
 Appendix A.
-<images/full-database.png, id=738, 1775.63374pt x 1956.30875pt>
+<images/full-database.png, id=777, 1775.63374pt x 1956.30875pt>
 File: images/full-database.png Graphic file (type png)
 <use images/full-database.png>
 Package pdftex.def Info: images/full-database.png  used on input line 6.
 (pdftex.def)             Requested size: 424.06033pt x 467.19533pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [35
+[36
 
  <./images/full-database.png>]
 Appendix B.
-<images/endpoints.png, id=743, 2110.88625pt x 2910.875pt>
+<images/endpoints.png, id=783, 2110.88625pt x 2910.875pt>
 File: images/endpoints.png Graphic file (type png)
 <use images/endpoints.png>
 Package pdftex.def Info: images/endpoints.png  used on input line 10.
 (pdftex.def)             Requested size: 424.06033pt x 584.74084pt.
-<images/endpoint.png, id=744, 2105.8675pt x 2216.28pt>
+<images/endpoint.png, id=784, 2105.8675pt x 2216.28pt>
 File: images/endpoint.png Graphic file (type png)
 <use images/endpoint.png>
 Package pdftex.def Info: images/endpoint.png  used on input line 13.
 (pdftex.def)             Requested size: 424.06033pt x 446.29175pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
+[37
 
-(./report-words.sum) [36
-
- <./images/endpoints.png>]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [37 <./images/endpoint.png>]
+ <./images/endpoints.png>] [38 <./images/endpoint.png>]
 Appendix C.
-<images/mobile-profile.png, id=756, 750.805pt x 1547.7825pt>
+<images/mobile-profile.png, id=796, 750.805pt x 1547.7825pt>
 File: images/mobile-profile.png Graphic file (type png)
 <use images/mobile-profile.png>
 Package pdftex.def Info: images/mobile-profile.png  used on input line 18.
 (pdftex.def)             Requested size: 293.20229pt x 604.43527pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 23--23
-|[]\OT1/cmr/bx/n/14.4 Login|
+[][]\OT1/cmr/bx/n/14.4 Login|
  []
 
-<images/login.png, id=757, 674.52pt x 706.64pt>
+<images/login.png, id=797, 674.52pt x 706.64pt>
 File: images/login.png Graphic file (type png)
 <use images/login.png>
 Package pdftex.def Info: images/login.png  used on input line 24.
 (pdftex.def)             Requested size: 235.06384pt x 246.24945pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [38
+[39
 
  <./images/mobile-profile.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 26--26
 |[]\OT1/cmr/bx/n/14.4 Register|
  []
 
-<images/register.png, id=763, 674.52pt x 823.075pt>
+<images/register.png, id=803, 674.52pt x 823.075pt>
 File: images/register.png Graphic file (type png)
 <use images/register.png>
 Package pdftex.def Info: images/register.png  used on input line 27.
 (pdftex.def)             Requested size: 235.06384pt x 286.82465pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 29--29
-|[]\OT1/cmr/bx/n/17.28 Profile|
- []
-
-<images/profile.png, id=764, 1214.5375pt x 1088.065pt>
+<images/profile.png, id=804, 1214.5375pt x 1088.065pt>
 File: images/profile.png Graphic file (type png)
 <use images/profile.png>
-Package pdftex.def Info: images/profile.png  used on input line 30.
+Package pdftex.def Info: images/profile.png  used on input line 31.
 (pdftex.def)             Requested size: 424.06033pt x 379.89871pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [39 <./images/login.png> <./images/register.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 32--32
-|[]\OT1/cmr/bx/n/17.28 Panel|
- []
-
-<images/panel.png, id=771, 1374.13374pt x 1123.19624pt>
+[40 <./images/login.png> <./images/register.png>]
+<images/panel.png, id=811, 1374.13374pt x 1123.19624pt>
 File: images/panel.png Graphic file (type png)
 <use images/panel.png>
-Package pdftex.def Info: images/panel.png  used on input line 33.
+Package pdftex.def Info: images/panel.png  used on input line 34.
 (pdftex.def)             Requested size: 424.06033pt x 346.61049pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 33--35
-
- []
-
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [40 <./images/profile.png>]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [41 <./images/panel.png>]
+ [41 <./images/profile.png>]
+<images/jd-create.png, id=817, 448.67625pt x 710.655pt>
+File: images/jd-create.png Graphic file (type png)
+<use images/jd-create.png>
+Package pdftex.def Info: images/jd-create.png  used on input line 39.
+(pdftex.def)             Requested size: 381.6517pt x 604.51503pt.
+ [42 <./images/panel.png>]
+<images/jd-form.png, id=824, 952.55875pt x 941.5175pt>
+File: images/jd-form.png Graphic file (type png)
+<use images/jd-form.png>
+Package pdftex.def Info: images/jd-form.png  used on input line 43.
+(pdftex.def)             Requested size: 424.06033pt x 419.15355pt.
+ [43 <./images/jd-create.png>]
+<images/aac-form.png, id=830, 788.9475pt x 1052.93375pt>
+File: images/aac-form.png Graphic file (type png)
+<use images/aac-form.png>
+Package pdftex.def Info: images/aac-form.png  used on input line 46.
+(pdftex.def)             Requested size: 424.06033pt x 565.95692pt.
+ [44 <./images/jd-form.png>] [45 <./images/aac-form.png>]
 Appendix D.
-<images/project-plan.png, id=782, 1360.08125pt x 1648.1575pt>
+<images/project-plan.png, id=841, 1360.08125pt x 1648.1575pt>
 File: images/project-plan.png Graphic file (type png)
 <use images/project-plan.png>
-Package pdftex.def Info: images/project-plan.png  used on input line 40.
+Package pdftex.def Info: images/project-plan.png  used on input line 52.
 (pdftex.def)             Requested size: 424.06033pt x 513.86597pt.
-<images/risk-analysis.png, id=783, 1767.60374pt x 2304.61pt>
+<images/risk-analysis.png, id=842, 1767.60374pt x 2304.61pt>
 File: images/risk-analysis.png Graphic file (type png)
 <use images/risk-analysis.png>
-Package pdftex.def Info: images/risk-analysis.png  used on input line 43.
+Package pdftex.def Info: images/risk-analysis.png  used on input line 55.
 (pdftex.def)             Requested size: 424.06033pt x 552.87155pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
-(./report-words.sum) [42
+[46
 
  <./images/project-plan.png>]
-<images/objectives-research.png, id=791, 1762.585pt x 1285.80376pt>
+<images/objectives-research.png, id=848, 1762.585pt x 1285.80376pt>
 File: images/objectives-research.png Graphic file (type png)
 <use images/objectives-research.png>
-Package pdftex.def Info: images/objectives-research.png  used on input line 46.
+Package pdftex.def Info: images/objectives-research.png  used on input line 58.
 (pdftex.def)             Requested size: 424.06033pt x 309.34476pt.
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [43 <./images/risk-analysis.png>]
-runsystem(texcount -1 -sum -merge chapters/implementation/* report.tex 2>&1 | grep '^[0-9][0-9]*' > report-words.sum)...executed.
-
- (./report-words.sum) [44 <./images/objectives-research.png>]) [45] (./report.aux)
+ [47 <./images/risk-analysis.png>] [48 <./images/objectives-research.png>]) [49] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1443,7 +1357,7 @@ L3 programming layer <2024-02-20>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 22B83D95B65091FFCAE1F288593B9100;7066.
+(rerunfilecheck)             Checksum: B6DA9A097C4724276DFDBB23851C1D43;7381.
 runsystem(rm report.pyg)...executed.
 
 Package logreq Info: Writing requests to 'report.run.xml'.
@@ -1451,18 +1365,18 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25308 strings out of 476076
- 456559 string characters out of 5793775
- 1946187 words of memory out of 5000000
- 46802 multiletter control sequences out of 15000+600000
+ 25280 strings out of 476076
+ 456243 string characters out of 5793775
+ 1942187 words of memory out of 5000000
+ 46839 multiletter control sequences out of 15000+600000
  567100 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  82i,13n,84p,1693b,2014s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on report.pdf (46 pages, 4048269 bytes).
+Output written on report.pdf (50 pages, 4255892 bytes).
 PDF statistics:
- 898 PDF objects out of 1000 (max. 8388607)
- 758 compressed objects within 8 object streams
- 150 named destinations out of 1000 (max. 500000)
- 610 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 959 PDF objects out of 1000 (max. 8388607)
+ 806 compressed objects within 9 object streams
+ 159 named destinations out of 1000 (max. 500000)
+ 654 words of extra memory for PDF output out of 10000 (max. 10000000)
 

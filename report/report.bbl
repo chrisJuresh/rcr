@@ -43,7 +43,7 @@
       \field{month}{8}
       \field{title}{{PEP} 8 – Style Guide for Python Code {|} peps.python.org}
       \field{titleaddon}{Python Enhancement Proposals ({PEPs})}
-      \field{urlday}{27}
+      \field{urlday}{17}
       \field{urlmonth}{4}
       \field{urlyear}{2024}
       \field{year}{2013}
@@ -78,7 +78,7 @@
       \field{langid}{english}
       \field{title}{{iCIMS} {|} Recruiting Software Platform \& \#1 Applicant Tracking System}
       \field{titleaddon}{{iCIMS} {|} The Leading Cloud Recruiting Software}
-      \field{urlday}{25}
+      \field{urlday}{15}
       \field{urlmonth}{4}
       \field{urlyear}{2024}
       \field{urldateera}{ce}
@@ -399,7 +399,7 @@
       \field{langid}{english}
       \field{title}{Stack Overflow Developer Survey}
       \field{titleaddon}{Stack Overflow}
-      \field{urlday}{27}
+      \field{urlday}{17}
       \field{urlmonth}{4}
       \field{urlyear}{2024}
       \field{year}{2023}
@@ -433,7 +433,7 @@
       \field{abstract}{Access helps more than 60,000 customers transform the way their business software is used, giving every employee the freedom to do more of what’s important.}
       \field{langid}{english}
       \field{title}{The Access Group {|} Business software}
-      \field{urlday}{25}
+      \field{urlday}{15}
       \field{urlmonth}{4}
       \field{urlyear}{2024}
       \field{urldateera}{ce}
@@ -467,7 +467,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Flexible and Hybrid Working Practices in 2023}
-      \field{urlday}{27}
+      \field{urlday}{17}
       \field{urlmonth}{4}
       \field{urlyear}{2024}
       \field{year}{2023}
@@ -738,7 +738,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Refactoring {UI}}
-      \field{urlday}{27}
+      \field{urlday}{17}
       \field{urlmonth}{4}
       \field{urlyear}{2024}
       \field{year}{2018}

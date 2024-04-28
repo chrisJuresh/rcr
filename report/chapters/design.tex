@@ -1,4 +1,9 @@
-\chapter{Design}
+\chapter{Design} \label{Design}
+\begin{spacing}{0.8}
+\small
+Websites are increasingly replacing the traditional concept of standalone applications. They are an excellent solution to our problem. A diverse user base from various organisations, on differing operating systems, relies on this process. Email communication is already a necessity, so internet access is assumed. The security risks and logistical challenges with distributing executables to hundreds of users make it an unfeasible approach.
+\end{spacing}
+\vspace{-8pt}
 \section{Visuals}
 The interface will utilize a dual-theme approach: a light mode with a subtle dotted background to enhance readability during daytime, while a dark mode will reduce eye strain for those working later hours. With more employees choosing flexible working options due to the shift to working from home, it is important for users to reduce the amount of blue light in the evening \parencite{cipd2023flexible}. The primary colour, purple, aligns with the Royal College of Radiologists' (RCR’s) branding, creating a professional and cohesive aesthetic. Red will be used selectively for critical actions like logout and reject buttons, drawing immediate attention.
 
@@ -36,7 +41,7 @@ The use of a 'second backend' allows a more modular design. By allowing Django t
 
 \begin{figure}[h]
 \centering
-\frame{\includegraphics[width=0.8\linewidth]{images/svelte.png}}
+\frame{\includegraphics[width=0.6\linewidth]{images/svelte.png}}
 \caption{Svelte ranking}
 \vspace{-10pt}
 \caption*{Consistently one of the most admired web frameworks, scoring second highest in 2023}
@@ -108,7 +113,7 @@ Once saved, the next step is to be completed by the RCR Employee, who will have 
 Once a JD is approved, the Trust Employee will be able to click the New AAC link to create a new panel. They will be able to select as many JDs as they like from a list, along with the date of the panel. They will then be redirected accordingly to View AAC. This page will have a list of valid Representatives along with contact details, in order of suitability. The Trust can choose one Representative, who will be given access to that AAC. Either the Trust or Representative can then download and upload an Outcome Form, which will be sent to the RCR Employee for data analysis. The reason this step is not a form is that interview outcomes are sometimes written by hand, or in person, where a Doctor may prefer not to use a computer.
 
 \clearpage
-\section{Coding Style}
+\section{Code Style}
 The following style choices are personal preferences, with some influence from conventions. 
 
 PEP 8 \parencite{guido_van_rossum_pep_2013} will be followed for all python code, more specifically, Black, and this style will be kept the same for variables passed from Django to SvelteKit. New variables and functions defined in SvelteKit will use camel-case in line with JavaScript conventions. A deviation from PEP 8 is that comments will be avoided as much as possible. This encourages code that is self-explanatory, such as descriptive variable and function names, and smaller easy to follow algorithms. It removes the risk of comments, which are subjective, being misinterpreted or outdated. There are exceptions, such as complex code that performs a task that is not immediately obvious.

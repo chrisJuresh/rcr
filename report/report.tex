@@ -25,6 +25,7 @@
 }
 \pagestyle{empty} 
 \tableofcontents
+\newpage
 \listoffigures
 \listoftables
 \vspace{4em}
@@ -36,7 +37,7 @@
 \fancypagestyle{plain}{
     \fancyhf{} 
     \fancyhead[L]{\footnotesize{Automating the RCR's JD \& AAC Processes}} 
-    \fancyhead[R]{\footnotesize{Christian Juresh \wordcount}} 
+    \fancyhead[R]{\footnotesize{Christian Juresh}} 
     \fancyfoot[C]{\thepage} 
 }
 \pagestyle{plain} 
@@ -50,11 +51,13 @@
 
 \subfile{chapters/review}
 
+\sloppy
 \newpage
 \nocite{*}
 \begingroup
-\setlength\bibnamesep{10pt}
-\setlength\bibitemsep{5pt}
+\setstretch{1.5}
+\setlength\bibnamesep{15pt}
+\setlength\bibitemsep{10pt}
 \printbibliography[heading=bibintoc, title={References}]
 \endgroup
 

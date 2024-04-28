@@ -143,6 +143,7 @@ Users are automatically logged in as \texttt{hooks.server.ts} check whether cook
 \vspace{-5pt}
 \end{figure}
 
+Figure \ref{fig:profile-file-flow} presents the exact file structure and data flow of the profile page. \texttt{approved.svelte} displays the users currently approved roles and trusts, and \texttt{profile-form.svelte} displays a form for the user to edit. A higher level explanation of this setup can be found in \ref{Routes}. 
 
 \begin{figure}[h]
 \centering
@@ -155,11 +156,9 @@ Users are automatically logged in as \texttt{hooks.server.ts} check whether cook
 \vspace{-5pt}
 \end{figure}
 
-Figure \ref{fig:profile-file-flow} presents the exact file structure and data flow of the profile page. \texttt{approved.svelte} displays the users currently approved roles and trusts, and \texttt{profile-form.svelte} displays a form for the user to edit. A higher level explanation of this setup can be found in \ref{Routes}. 
+Figure \ref{fig:profile-form} presents the data flow in the form itself. Data is initially loaded from Django, and any existing data is used as the placeholder in the field. Otherwise the user is prompted to select an item. Fields are disabled in the order in the diagram, for example, a user cannot choose a Consultant Type unless they have chosen a Role that includes one. Specialities are far more complex. For example, if a user selects Radiology, they should only be shown Specialities related to Oncology. This field must be cleared any time there is a mismatch, and requires a surprising amount of code to handle all edge cases. And there are many such edge cases, as there are multiple sources of data to be taken into account - the data from the page load collected from Django, the current placeholder, and the user's current selection held in \texttt{\$formData}. \texttt{profile-form.svelte} is an especially complex component as there are over 10 different placeholders that are chosen and presented dependent on a variety of factors. Screenshots of the profile page can be found in Appendix \ref{app:Profile}.
 
-Figure \ref{fig:profile-form} presents the data flow in the form itself. Data is initially loaded from Django, and any existing data is used as the placeholder in the field. Otherwise the user is prompted to select an item. Fields are disabled in the order in the diagram, for example, a user cannot choose a Consultant Type unless they have chosen a Role that includes one. Specialities are far more complex. For example, if a user selects Radiology, they should only be shown Specialities related to Oncology. This field must be cleared any time there is a mismatch, and requires a surprising amount of code to handle all edge cases. And there are many such edge cases, as there are multiple sources of data to be taken into account, that is the data from the page load collected from Django, the current placeholder, and the user's current selection held in \texttt{\$formData}. \texttt{profile-form.svelte} is an especially complex component as there are over 10 different placeholders that are chosen and presented dependent on a variety of factors. Screenshots of the profile page can be found in Appendix \ref{app:Profile}.
-
-\section{Data Tables}
+\section{Data Tables} \label{Data Tables}
 \begin{figure}[h]
 \centering
 \frame{\includegraphics[width=\linewidth]{images/panel-flow.png}}
@@ -171,12 +170,13 @@ Figure \ref{fig:profile-form} presents the data flow in the form itself. Data is
 \vspace{-5pt}
 \end{figure}
 
-Figure \ref{fig:data-table-flow} presents the flow of data to the data tables. You can find an example in \ref{app:Panel}. These data tables are used to display various information dependent on the users roles, trusts, consultant type, and current page. This is not just limited to the data shown, but the columns are also dynamic - meaning that columns that aren't relevant to the page are automatically hidden. It is also sometimes embedded into forms to allow the user to select items. This is all possible because it is a single reusable component. The user can search and sort the data, as well as chose between pagination or increasing the number of items shown at once. A badge is placed next to the ID to show the user whether the entry is a JD, AAC, or Rep. Some pages have a button at the end of the table instead of a row-actions component. For example, the Edit JD page has an Edit $>$ button at the end of each row to reduce the number of button presses for the user, and to make them aware of the action they are expected to take.
+Figure \ref{fig:data-table-flow} presents the flow of data to the data tables. You can find an example in Appendix \ref{app:Panel}. These data tables are used to display various information dependent on the users roles, trusts, consultant type, and current page. This is not just limited to the data shown, but the columns are also dynamic - meaning that columns that aren't relevant to the page are automatically hidden. It is also sometimes embedded into forms to allow the user to select items. This is all possible because it is a single reusable component. The user can search and sort the data, as well as chose between pagination or increasing the number of items shown at once. A badge is placed next to the ID to show the user whether the entry is a JD, AAC, or Rep. Some pages have a button at the end of the table instead of a row-actions component. For example, the Edit JD page has an Edit $>$ button at the end of each row to reduce the number of button presses for the user, and to make them aware of the action they are expected to take.
 
 To make these tables so flexible, reactive variables have to be passed between through many layers. This data has to cleaned and placeholders have to be added to fit the format the table expects. Svelte's Logic blocks are used extensively to determine exactly how the table should be displayed.
 
 
 \section{Job Description Flow}
+Please see Appendix \ref{app:CreateJD} and \ref{app:EditJD} for examples of the flow discussed in this section. 
 \subsection{State Machine}
 \begin{figure}[h]
 \centering
@@ -189,9 +189,10 @@ To make these tables so flexible, reactive variables have to be passed between t
 \vspace{-5pt}
 \end{figure}
 
-\subsection{Forms}
+The method of handling the JD workflow is kept in its own \texttt{JDStateMachine} class, initialised as soon as a JD is created. An image of the entire state machine, with its current state highlighted, is automatically created whenever state changes. Figure \ref{fig:jd-state} presents an example where the JD is moving from RCR Approved state to RSA Rejected state due as the reviewer is not satisfied with the content. This state machine is displayed atop of the Edit JD pages for all users. It allows users to be aware of the previous, current, and future state of the JD. With so many steps, it would otherwise be a challenge to understand what needs to be done next.
 
-Figure \ref{fig:jd-state}
+\subsection{Forms}
+Learning a brand-new system can be overwhelming. By separating the Create JD and Edit JD form, we can reduce the cognitive load on users. Information that is split up improves clarity, and allows increased focus on the most important information. 
 
 \begin{figure}[h]
 \centering
@@ -204,7 +205,9 @@ Figure \ref{fig:jd-state}
 \vspace{-5pt}
 \end{figure}
 
-Figure \ref{fig:jd-q-flow}
+Figure \ref{fig:jd-q-flow} describes how the forms are processed. It may be useful to refer to Appendix \ref{app:Endpoint} to see the data schema. Generally, all the API endpoints follow a similar structure, where the unique ID is passed to ensure data integrity and remove the need to parse each field. In this case, a SvelteKit $[$slug$]$ is used to identify the JD the user is editing. Django returns the data according to the slug, which is then combined with Superforms in compliance with the Zod schema. This schema which now also contains data, is sent to the frontend to display the questions and answers. 
+
+This design choice allows fully dynamic forms. Not a single question has to be baked into the frontend. The RCR can add, remove, or edit questions as they please within the Django admin panel. Questions are dynamic based on JD, most notably between consultant types. The user still retains the ability to save the form, have a separate submit button, and see placeholders for the data they have submitted no matter how long ago they submitted. Furthermore, one the form is submitted, the user can still visit the page and see their entries. To avoid data being changed while a reviewer is underway, all fields and buttons are disabled. This method requires a substantial amount of code gen, but when completed, it requires no upkeep from the developer, no matter how often policies are changed.
 
 \subsection{Permissions}
 \begin{figure}[h]
@@ -218,16 +221,25 @@ Figure \ref{fig:jd-q-flow}
 \vspace{-5pt}
 \end{figure}
 
-Figure \ref{fig:jd-perms}
+With four different three, six different JD states, AACs, consultant types, trusts, and approval statuses, trying to display only the relevant JDs is overwhelming. The \texttt{user\_jds(user, panel=None)} service is responsible for returning only the JDs that the request wants to, and is approved to see. All we have to do is pass in the user, and which panel they are viewing. By applying the required filters step by step according to figure \ref{fig:jd-perms}, we can avoid resorting to trial and error, and ensure that all scenarios are covered. This is a great example of how creating diagrams prior to implementing code reduces the cognitive load significantly.
 
 \section{Advisory Appointment Committees Flow}
 
-\subsection{Form}
+\begin{figure}[h]
+\centering
+\frame{\includegraphics[width=0.75\linewidth]{images/aac-flow.png}}
+\vspace{-5pt}
+\caption{New AAC data flow}
+\vspace{-10pt}
+\caption*{(frontend/src/routes/protected/*)}
+\label{fig:aac-flow}
+\vspace{-5pt}
+\end{figure}
+
+The final part of this system is the AAC flow. Please see Appendix \ref{app:NewAAC} for a screenshot of the initial form. Embedded into this form is a data table with the option to select multiple JDs and create an AAC panel. Figure \ref{fig:aac-flow} presents the flow of data, as discussed in \ref{Data Tables}. There is also a field to pick date.
+
+viewAAC is the final page, and it is used to select the representative you would like on your panel. There is also a placeholder component for implementing an outcome form file download and upload. This completes the process.
 
 \section{Testing}
 
-django tests.py
-
-UAT
-
-going through the workflow
+All API endpoints in Appendix \ref{app:Endpoints} have been tested during and after development in SwaggerUI. Figures \ref{fig:jd} and \ref{fig:aac} cover every scenario in the workflow, and have been replicated successfully. However, some paths are specific to the website, outside the predefined workflows. For proper coverage, these tests will need to be carried out by a dedicated QA team. There is no \texttt{tests.py}, however this is mostly important during development, and can be perceived more as a powerful feature for developers, rather than a necessity. 

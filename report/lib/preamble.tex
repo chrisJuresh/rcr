@@ -27,11 +27,6 @@
 \clubpenalties=3 10000 10000 150
 \displaywidowpenalty = 10000
 
-\newcommand\wordcount{
-\immediate\write18{texcount -1 -sum -merge chapters/implementation/* \jobname.tex 2>&1 | grep '^[0-9][0-9]*' > \jobname-words.sum}
-  \input{\jobname-words.sum}
-}
-
 \hypersetup{
     linktoc=all,     
 }
@@ -63,4 +58,4 @@
 \titlespacing*{\subsection}{0pt}{12pt}{6pt}
 \titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
 
-
+\appto\bibsetup{\flushbottom}

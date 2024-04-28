@@ -2,7 +2,8 @@
 \contentsline {section}{\numberline {1.1}Background}{7}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{8}{section.1.2}%
 \contentsline {section}{\numberline {1.3}Aim}{9}{section.1.3}%
-\contentsline {subsubsection}{Specific Objectives}{9}{subsubsection*.2}%
+\contentsline {subsubsection}{Proposed Solution}{9}{subsubsection*.2}%
+\contentsline {subsubsection}{Research Objectives}{9}{subsubsection*.3}%
 \contentsline {chapter}{\numberline {2}Literature Review}{10}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Current Process}{10}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Job Descriptions}{10}{subsection.2.1.1}%
@@ -15,14 +16,14 @@
 \contentsline {section}{\numberline {3.1}Visuals}{13}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Frameworks}{13}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Django}{13}{subsection.3.2.1}%
-\contentsline {subsubsection}{Alternative API Framework}{14}{subsubsection*.5}%
-\contentsline {subsubsection}{PyTransitions}{14}{subsubsection*.7}%
+\contentsline {subsubsection}{Alternative API Framework}{14}{subsubsection*.6}%
+\contentsline {subsubsection}{PyTransitions}{14}{subsubsection*.8}%
 \contentsline {subsection}{\numberline {3.2.2}SvelteKit}{15}{subsection.3.2.2}%
-\contentsline {subsubsection}{Libraries}{16}{subsubsection*.9}%
+\contentsline {subsubsection}{Libraries}{16}{subsubsection*.10}%
 \contentsline {section}{\numberline {3.3}Deployment}{17}{section.3.3}%
 \contentsline {section}{\numberline {3.4}File Structure}{17}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Routes}{18}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Coding Style}{20}{section.3.6}%
+\contentsline {section}{\numberline {3.6}Code Style}{20}{section.3.6}%
 \contentsline {chapter}{\numberline {4}Implementation}{21}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Database}{21}{section.4.1}%
 \contentsline {section}{\numberline {4.2}API}{22}{section.4.2}%
@@ -37,27 +38,30 @@
 \contentsline {section}{\numberline {4.7}Job Description Flow}{28}{section.4.7}%
 \contentsline {subsection}{\numberline {4.7.1}State Machine}{28}{subsection.4.7.1}%
 \contentsline {subsection}{\numberline {4.7.2}Forms}{28}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Permissions}{28}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.3}Permissions}{29}{subsection.4.7.3}%
 \contentsline {section}{\numberline {4.8}Advisory Appointment Committees Flow}{29}{section.4.8}%
-\contentsline {subsection}{\numberline {4.8.1}Form}{29}{subsection.4.8.1}%
-\contentsline {section}{\numberline {4.9}Testing}{29}{section.4.9}%
-\contentsline {chapter}{\numberline {5}Project Review}{30}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Reflections}{30}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Further Work}{30}{subsection.5.1.1}%
-\contentsline {chapter}{References}{32}{chapter*.24}%
+\contentsline {section}{\numberline {4.9}Testing}{30}{section.4.9}%
+\contentsline {chapter}{\numberline {5}Project Review}{31}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Reflections}{31}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Further Work}{31}{subsection.5.1.1}%
+\contentsline {chapter}{References}{33}{chapter*.26}%
 \renewcommand {\cftchappresnum }{Appendix }
-\contentsline {chapter}{\numberline {A}Database}{35}{appendix.a.A}%
-\contentsline {chapter}{\numberline {B}Endpoints}{36}{appendix.a.B}%
-\contentsline {section}{\numberline {B.1}API Endpoints}{36}{section.a.B.1}%
-\contentsline {section}{\numberline {B.2}JD Checklist Endpoint}{37}{section.a.B.2}%
-\contentsline {chapter}{\numberline {C}User Interface}{38}{appendix.a.C}%
-\contentsline {section}{\numberline {C.1}Responsive \& Dark Mode}{38}{section.a.C.1}%
-\contentsline {section}{\numberline {C.2}Auth}{39}{section.a.C.2}%
-\contentsline {subsection}{\numberline {C.2.1}Login}{39}{subsection.a.C.2.1}%
-\contentsline {subsection}{\numberline {C.2.2}Register}{39}{subsection.a.C.2.2}%
-\contentsline {section}{\numberline {C.3}Profile}{40}{section.a.C.3}%
-\contentsline {section}{\numberline {C.4}Panel}{41}{section.a.C.4}%
-\contentsline {chapter}{\numberline {D}Preliminary Planning}{42}{appendix.a.D}%
-\contentsline {section}{\numberline {D.1}Project Plan}{42}{section.a.D.1}%
-\contentsline {section}{\numberline {D.2}Risk Identification}{43}{section.a.D.2}%
-\contentsline {section}{\numberline {D.3}Initial Objectives and Research Questions}{44}{section.a.D.3}%
+\contentsline {chapter}{\numberline {A}Database}{36}{appendix.a.A}%
+\contentsline {chapter}{\numberline {B}Endpoints}{37}{appendix.a.B}%
+\contentsline {section}{\numberline {B.1}API Endpoints}{37}{section.a.B.1}%
+\contentsline {section}{\numberline {B.2}JD Checklist Endpoint}{38}{section.a.B.2}%
+\contentsline {chapter}{\numberline {C}User Interface}{39}{appendix.a.C}%
+\contentsline {section}{\numberline {C.1}Responsive \& Dark Mode}{39}{section.a.C.1}%
+\contentsline {section}{\numberline {C.2}Auth}{40}{section.a.C.2}%
+\contentsline {subsection}{\numberline {C.2.1}Login}{40}{subsection.a.C.2.1}%
+\contentsline {subsection}{\numberline {C.2.2}Register}{40}{subsection.a.C.2.2}%
+\contentsline {section}{\numberline {C.3}Profile}{41}{section.a.C.3}%
+\contentsline {section}{\numberline {C.4}Panel}{42}{section.a.C.4}%
+\contentsline {section}{\numberline {C.5}Forms}{43}{section.a.C.5}%
+\contentsline {subsection}{\numberline {C.5.1}Create JD}{43}{subsection.a.C.5.1}%
+\contentsline {subsection}{\numberline {C.5.2}Edit JD}{44}{subsection.a.C.5.2}%
+\contentsline {subsection}{\numberline {C.5.3}New AAC}{45}{subsection.a.C.5.3}%
+\contentsline {chapter}{\numberline {D}Preliminary Planning}{46}{appendix.a.D}%
+\contentsline {section}{\numberline {D.1}Project Plan}{46}{section.a.D.1}%
+\contentsline {section}{\numberline {D.2}Risk Identification}{47}{section.a.D.2}%
+\contentsline {section}{\numberline {D.3}Initial Objectives and Research Questions}{48}{section.a.D.3}%
