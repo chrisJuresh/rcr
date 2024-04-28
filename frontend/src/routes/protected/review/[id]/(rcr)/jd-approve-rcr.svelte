@@ -11,7 +11,6 @@
 
 	let selectedReviewer: number = -1;
 
-	// Group reviewers by region
 	let groupedReviewers = reviewers.reduce((acc, reviewer) => {
 		let region = reviewer.same_region;
 		if (!acc[region]) {

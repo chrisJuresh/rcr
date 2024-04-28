@@ -32,9 +32,9 @@
 	export let consultant_type: string;
 
 	const mergeData = () => {
-		const safeAacs = Array.isArray(aacs) ? aacs : []; // Ensures `aacs` is always an array
-		const safeJds = Array.isArray(jds) ? jds : []; // Ensures `jds` is always an array
-		const safeReps = Array.isArray(reps) ? reps : []; // Ensures `reps` is always an array
+		const safeAacs = Array.isArray(aacs) ? aacs : []; 
+		const safeJds = Array.isArray(jds) ? jds : []; 
+		const safeReps = Array.isArray(reps) ? reps : []; 
 
 		const mappedJds = safeJds.map((jd) => ({
 			...jd,

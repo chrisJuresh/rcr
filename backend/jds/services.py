@@ -8,7 +8,15 @@ from django.db import transaction
 from django.db.models import Q
 
 
-def save_jd(request, jd: JDIn, file: UploadedFile, jd_obj=None):
+def save_jd(request, file: UploadedFile, jd=None, jd_obj=None):
+    if jd is None:
+        with transaction.atomic():
+            jd_obj = jd_obj or JD()
+            jd_obj.file = file
+            jd_obj.save()
+
+        return jd_obj
+
     with transaction.atomic():
         jd_obj = jd_obj or JD()
         jd_obj.file = file

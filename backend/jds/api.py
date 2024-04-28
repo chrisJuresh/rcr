@@ -21,18 +21,18 @@ router = Router()
 
 @router.post("/jd/", auth=JWTAuth(), response=JDID)
 def create_jd(request, jd: JDIn, file: File[UploadedFile]):
-    jd_obj = save_jd(request, jd, file)
+    jd_obj = save_jd(request, file, jd)
     jd_obj.create()
     return {"id": jd_obj.id}
 
 @router.put("{jd_id}/", auth=JWTAuth())
-def update_jd(request, jd_id: int, jd: JDIn, file: File[UploadedFile]):
+def update_jd(request, jd_id: int, file: File[UploadedFile]):
     try: 
         jd_obj = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
     except JD.DoesNotExist:
         raise HttpError(404, "JD not found")
 
-    jd_obj = save_jd(request, jd, file, jd_obj)
+    jd_obj = save_jd(request, file=file, jd_obj=jd_obj)
     return {"id": jd_obj.id}
 
 @router.get("/panel", auth=JWTAuth(), response=JDPanel)
@@ -117,6 +117,7 @@ def get_jd_checklist(request, jd_id: int):
     }
     return result
 
+# Needs refactoring...
 @router.put("{jd_id}/checklist/", auth=JWTAuth(), response=JDChecklistOut)
 def update_jd_checklist(request, jd_id: int, jd_checklist: JDChecklistIn, panel: Optional[str] = None):
     jd = get_object_or_404(JD, id=jd_id)

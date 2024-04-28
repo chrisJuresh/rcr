@@ -1,5 +1,8 @@
 \chapter{Implementation}
 \section{Database} \label{Database}
+\vspace{-5pt}
+{\footnotesize See Appendix \ref{app:Database} for the full database.}
+\vspace{-5pt}
 \begin{figure}[h]
 \centering
 \frame{\includegraphics[width=\linewidth]{images/database.png}}
@@ -8,27 +11,31 @@
 \vspace{-10pt}
 \caption*{(backend/*/models.py)}
 \label{fig:database}
-\vspace{-5pt}
+\vspace{-20pt}
 \end{figure}
-Figure \ref{fig:database} represents the database schema. Due to the large number of models, fields have been omitted in this figure to maintain readability. See Appendix \ref{app:Database} for a full version. This diagram aptly presents just how intertwined this system is, as well as the sheet number of data taken into consideration during the process.
+
+Figure \ref{fig:database} represents the database schema. Due to the large number of models, fields have been omitted in this figure to maintain readability. This diagram visualises just how intertwined this system is, as well as the sheer number of data taken into consideration during the process.
 
 This relational database schema allows for handing of detailed user profiles, Job Descriptions (JDs), and Advisory Appointment Committees (AACs). It allows for a sophisticated access control system based on roles, Trust, and consultant types. 
 
 Normalisation helps in organizing data efficiently and reduces the redundancy by ensuring that each data item is stored only once. For instance, separating user details from roles and trust levels allows for easy updates and management without unnecessary duplication. 
 
-The clear definition of relationships between entities, such as one-to-many and many-to-many, is a manifestation of thoughtful consideration of how the models should relate to each other. It allows accurate, error-minimal and efficient querying of the database by using the minimum number of tables necessary. Foreign keys ensure that relationships between entities are consistent and that orphan records are avoided.
+The clear definition of relationships between entities, such as one-to-many and many-to-many, is a manifestation of thoughtful consideration of how the models should relate to each other. It allows accurate, error-minimal, and efficient querying of the database by using the minimum number of tables necessary. Foreign keys ensure that relationships between entities are consistent and that orphan records are avoided.
 
-Separation of UserRole, UserTrust, and UserSpecialities is essential as users often have multiple roles and specialities. They may also be associated with different Trusts, which must be recorded to avoid conflicts of interest. A many-to-many relationship is not sufficient as each role and trust must be approved by an administrator first. We also need to ensure that users are not shown information from entities that they are approved for, but have not requested in the profile page. 
+Separation of UserRole, UserTrust, and UserSpecialities is essential as users often have multiple roles and specialities. They may also be associated with different Trusts, which must be recorded to avoid conflicts of interest. A many-to-many relationship is not sufficient as each role and trust must be approved by an administrator first. It also gives us a way to present or hide information from users depending on whether they are approved or have requested a role or Trust.
 
 Specialities and Trusts also have hierarchical relationships. Consultant Types are associated with differing specialities, so JDs should not be allowed to contain both radiology and oncology specialities. Trusts fall into Regions, which are used to decide which RSA should be prioritised to review the JD.
 
 As always, fields are give intuitive names, and the correct data types and constraints are used for data integrity. God tables are avoided entirely as large numbers of rows cause performance issues and increase complexity.
 
-Without such a detailed schema, at best the system would be completely static. Policies change often, new Trusts join or are renamed, and specialities are added or removed. Without an extremely flexible database, this website would be unusable within a matter of months.
+Without such a detailed schema, at best the system would be completely static. Policies change often, new Trusts join or are renamed, and specialities are added or removed. Without an extremely flexible database, the website would quickly become outdated.
 
 \usemintedstyle{tango}
 \section{API}
 \subsection{Endpoints}
+\vspace{-5pt}
+{\footnotesize See Appendix \ref{app:Endpoints} for a full list of endpoints.}
+\vspace{-5pt}
 \begin{listing}[!ht]
 \begin{minted}[
     frame=lines,
@@ -52,24 +59,26 @@ def register_authenticate(request, token: TokenIn):
 \caption{Registration endpoint example\\(backend/users/api.py)}
 \label{lst:register}
 \end{listing}
-\vspace{-5pt}
-The code in Listing \ref{lst:register} shows the general structure and practises of all the API endpoints. You can view the full list of endpoints in Appendix \ref{app:Endpoints}. 
+\vspace{-20pt}
+
+The code in Listing \ref{lst:register} shows the general structure and practises of all the API endpoints.
 
 Line 1 defines the endpoint configuration as a POST request to users/register-authenticate, which returns a \texttt{TokenOut} type, as defined in \texttt{schema.py}. The Schema is essential for the OpenAPI documentation, shared types in SvelteKit, and error avoidance thanks to checked types.
 
-Line 2 defines the function that will be called when the endpoint is hit. The function takes two arguments, \texttt{request} and \texttt{token}. The \texttt{request} argument is a Django request object which allows us to access various aspects of the incoming HTTP request. The \texttt{token} argument is a \texttt{TokenIn} type, just like in the response definition. This Pydantic model is used to validate and parse and validate the incoming data, and again, is used in the OpenAPI documentation.
+Line 2 defines the function that will be called when the endpoint is hit. The function takes two arguments, \texttt{request} and \texttt{token}. The \texttt{request} argument is a Django request object which allows us to access various aspects of the incoming HTTP request. The \texttt{token} argument is a \texttt{TokenIn} type, just like in the response definition. This Pydantic model is used to validate and parse the incoming data, and again, is used in the OpenAPI documentation.
 
-Line 3 to 8 define the business logic, which error handling from Line 4 to 5. It begins by retrieving the \texttt{UnauthenticatedUser} object from the database using the \texttt{get\_object\_or\_404} function. If this user already exists, then a 404 error is raised which can be handled by SvelteKit to show a user-friendly error message. As discussed in \ref{File Structure}, the custom functions \texttt{user\_exists}, \texttt{register\_user}, and \texttt{get\_tokens\_for\_user} are defined in the \texttt{services.py} file to abstract the business logic away from the API endpoints. Finally, line 9 returns the tokens to the request sender.
+Line 3 to 8 define the business logic, with error handling from Line 4 to 5. It begins by retrieving the \texttt{UnauthenticatedUser} object from the database using the \texttt{get\_object\_or\_404} function. If this user already exists, then a 404 error is raised which can be handled by SvelteKit to show a user-friendly error message. As discussed in \ref{File Structure}, the custom functions \texttt{user\_exists}, \texttt{register\_user}, and \texttt{get\_tokens\_for\_user} are defined in the \texttt{services.py} file to abstract the business logic away from the API endpoints. Finally, line 9 returns the tokens to the request sender.
 
-These patterns are used for all 27 endpoints, with a few occasional additions. For instance this PUT request to update a JD's checklist:
+These patterns are used for all 27 endpoints, with a few occasional additions. For instance in this PUT request for updating a JD's checklist:
 \mint[fontsize=\footnotesize]{python}|@router.put("{jd_id}/checklist/", auth=JWTAuth(), response=JDChecklistOut)|
 
 You can view the full documentation for this endpoint in Appendix \ref{app:Endpoint}. This request has two additional parameters. \texttt{jd\_id} is a path paramter used to identify the JD that the checklist is being updated for. The \texttt{auth} parameter specifies the authentication method that must be used. \texttt{JWTAuth} middleware checks if the request contains a valid JWT, if not, then the request is rejected before it can reach any part of the endpoint's function.
 
-There are a number of advantages to using many small endpoints rather than a few large ones. Firstly, it provides modularity in the design, where each endpoint is responsible for a single task. Since our REST API is for a website where almost all data is kept separate from the frontend, and said data is sent back and forth very frequently, it is important that endpoints are each to understand, develop, and maintain. We can also reuse simpler endpoints across multiple pages. Attempting to create a single endpoint that can handle a huge number of requests would quickly become unmanageable.
+There are a number of advantages to using many small endpoints rather than a few large ones. Firstly, it provides modularity in the design, where each endpoint is responsible for a single task. Since our REST API is for a website where almost all data is kept separate from the frontend, and said data is sent back and forth very frequently, it is important that endpoints are each to understand, develop, and maintain. We can also reuse simpler endpoints across multiple pages. Attempting to create a single endpoint that can handle a huge number of requests would quickly become unmanageable, and is more suited to a GraphQL API.
 
-
+\clearpage
 \subsection{Consumption}
+
 \begin{figure}[h]
 \centering
 \frame{\includegraphics[width=\linewidth]{images/api-lib.png}}
@@ -81,34 +90,35 @@ There are a number of advantages to using many small endpoints rather than a few
 \vspace{-5pt}
 \end{figure}
 
-As discussed in \ref{SvelteKit}, the API is consumed by the frontend using a custom-made API client. Figure \ref{fig:api-lib} presents a more detailed view. 
+As discussed in \ref{SvelteKit}, the API is consumed by the frontend using a custom-made API client. Figure \ref{fig:api-lib} presents a more detailed view. The functions in \texttt{api.ts} are called in the return statement of the server-side load function which runs asynchronously. A common mistake is assigning these calls to a variable before the return, and then passing them. This runs the calls synchronously causing much slower page loads.
 
 \texttt{api-utils.ts} defines the abstract functions and builds the required axios configuration dynamically based on the input parameters. Strong typing is especially important here as it ensures that errors are caught early. The use of promises ensures that errors are properly propagated and can be handled by the callers of these functions.
 
 \texttt{api.ts} defines the actual API calls for each endpoint with asynchronous functions for non-blocking execution. openapi-typescript generates a \texttt{types.d.ts} as discussed in \ref{SvelteKit}, and is combined with the response data to provide type safe data to SvelteKit.
 
 \section{Layout}
+As discussed in \ref{File Structure}, the layout is responsible for the header, body, and footer of all children. It is also responsible for importing the global CSS file \texttt{app.pcss}. The body of the page is a \texttt{<slot>} enclosed in containers that make the page fully responsive to all devices, aspect ratios, and zoom levels. A logo is provided in the footer as a placeholder. 
 \begin{figure}[h]
 \centering
+\frame{\includegraphics[width=\linewidth]{images/nav.png}}
+\vspace{-20pt}
 \caption{Navigation bar}
 \vspace{-10pt}
 \caption*{(frontend/src/routes/*.*/)}
-\vspace{-5pt}
-\frame{\includegraphics[width=\linewidth]{images/nav.png}}
 \label{fig:nav}
-\vspace{-20pt}
+\vspace{-15pt}
 \end{figure}
-As discussed in \ref{File Structure}, the layout is responsible for the header, body, and footer of all children. It is also responsible for importing the global CSS file \texttt{app.pcss}. 
 
-To present the correct buttons to the user in the nav-bar, a reactive store is used to keep track of the user's roles stored in the backend. If a user is not approved, but has requested a certain role, then they are still shown the button but in a greyed out format. This feedback makes the user aware of which roles they must select to gain access to specific parts of the system.
+To present the correct buttons to the user in the nav-bar, a reactive store is used in \texttt{lib/store.ts} to keep track of the user's roles stored in the backend. If a user is not approved, but has selected a role in the profile page, then they are shown a disabled greyed out button. This feedback makes the user aware of which roles they must select to gain access to specific parts of the system.
 
 Included in the nav-bar is a Log Out button in red, chosen to stand out and remind users not to stay logged in on shared computers (though the JWT will automatically expire if no requests are made for a while). There is also a dark and light mode toggle button.
 
-The body of the page is a \texttt{<slot>} enclosed in containers that make the page fully responsive to all devices, aspect ratios, and zoom levels. A logo is provided in the footer as a placeholder.
-
-See Appendix \ref{app:Mobile} for screenshots of the responsive layout on mobile devices, along with the dark mode feature.
+See Appendix \ref{app:Mobile} for a screenshot of the responsive layout on mobile devices, along with the dark mode feature.
 
 \section{Authentication}
+\vspace{-5pt}
+{\footnotesize See Appendix \ref{app:Auth} for screenshots of the login and registration components.}
+\vspace{-5pt}
 \begin{figure}[h]
 \centering
 \frame{\includegraphics[width=\linewidth]{images/auth.png}}
@@ -117,14 +127,14 @@ See Appendix \ref{app:Mobile} for screenshots of the responsive layout on mobile
 \vspace{-10pt}
 \caption*{(frontend/src/routes/auth/*) \& (backend/users/*)}
 \label{fig:auth}
-\vspace{-5pt}
+\vspace{-20pt}
 \end{figure}
 
-Figure \ref{fig:auth} represents the authentication process. A high level overview has already been provided in \ref{Routes}, so this section will focus on the security steps taken. In both components, email and password is validated according to a predefined Zod schema which add a layer of data integrity and security, ensuring that the credentials meet the system's standards before being sent to Django. Screenshots of the login and registration components, along with their validation errors, can be found in Appendix \ref{app:Auth}.
+Figure \ref{fig:auth} represents the authentication process. A high level overview has already been provided in \ref{Routes}, so this section will focus on the security steps taken. In both components, email and password is validated according to a predefined Zod schema which add a layer of data integrity and security, ensuring that the credentials meet the system's standards before being sent to Django. 
 \subsection{Registration}
 Email verification is a necessity to ensure that users do not create fraudulent accounts. Upon registration, the system generates a universally unique identifier (UUID) token and stores it in Django's database.  It is a one-time, non-guessable token that securely links the email verification request to the user's pending account status in the database. This UUID is embedded into a link which is sent to the user's email address with Postmark. Once the link is clicked, the system verifies the token and activates the user's account.
 
-For a more fluid user experience, this process returns a token automatically, so that the user does not have to log in manually. The token is stored in a Secure HTTP-only cookie, shielding access from client-side scripts. The HTTP-only restriction is an effective countermeasure against cross-site scripting (XSS) attacks, and the Secure flag, ensures that the cookie is only sent over HTTPS connections. A helpful addition is that the Secure flag is disabled in development mode.
+For a more fluid user experience, this process returns a token automatically, so that the user does not have to log in manually. The token is stored in a Secure HTTP-only cookie, shielding access from client-side scripts. The HTTP-only restriction is an effective countermeasure against cross-site scripting (XSS) attacks, and the Secure flag, ensures that the cookie is only transmitted over HTTPS connections. A helpful addition is that the Secure flag is disabled in development mode.
 
 Robust error handling is included to let users know why their login or registration attempts may have failed. Attempts to generate accounts with existing emails, or invalid login information is met with an immediate and clear error message. On the other hand, a successful registration attempt is met with a toast, as users require alternative positive feedback when there is no redirection.
 \subsection{Login}
@@ -132,6 +142,9 @@ Robust error handling is included to let users know why their login or registrat
 Users are automatically logged in as \texttt{hooks.server.ts} check whether cookies are present on every request. Otherwise the user is redirected to the auth route to log in.
 
 \section{Profile}
+\vspace{-5pt}
+{\footnotesize See Appendix \ref{app:Profile} for a screenshot of the profile component.}
+\vspace{-5pt}
 \begin{figure}[h]
 \centering
 \frame{\includegraphics[width=\linewidth]{images/profile-file-flow.png}}
@@ -140,7 +153,7 @@ Users are automatically logged in as \texttt{hooks.server.ts} check whether cook
 \vspace{-10pt}
 \caption*{(frontend/src/routes/profile/*) \& (backend/*)}
 \label{fig:profile-file-flow}
-\vspace{-5pt}
+\vspace{-20pt}
 \end{figure}
 
 Figure \ref{fig:profile-file-flow} presents the exact file structure and data flow of the profile page. \texttt{approved.svelte} displays the users currently approved roles and trusts, and \texttt{profile-form.svelte} displays a form for the user to edit. A higher level explanation of this setup can be found in \ref{Routes}. 
@@ -153,30 +166,34 @@ Figure \ref{fig:profile-file-flow} presents the exact file structure and data fl
 \vspace{-10pt}
 \caption*{(frontend/src/routes/profile/profile-form.svelte)}
 \label{fig:profile-form}
-\vspace{-5pt}
+\vspace{-15pt}
 \end{figure}
 
-Figure \ref{fig:profile-form} presents the data flow in the form itself. Data is initially loaded from Django, and any existing data is used as the placeholder in the field. Otherwise the user is prompted to select an item. Fields are disabled in the order in the diagram, for example, a user cannot choose a Consultant Type unless they have chosen a Role that includes one. Specialities are far more complex. For example, if a user selects Radiology, they should only be shown Specialities related to Oncology. This field must be cleared any time there is a mismatch, and requires a surprising amount of code to handle all edge cases. And there are many such edge cases, as there are multiple sources of data to be taken into account - the data from the page load collected from Django, the current placeholder, and the user's current selection held in \texttt{\$formData}. \texttt{profile-form.svelte} is an especially complex component as there are over 10 different placeholders that are chosen and presented dependent on a variety of factors. Screenshots of the profile page can be found in Appendix \ref{app:Profile}.
+Figure \ref{fig:profile-form} presents the data flow in the form itself. Data is initially loaded from Django, and any existing data is used as the placeholder in the field. Otherwise the user is prompted to select an item. Fields are disabled in the order in the diagram, for example, a user cannot choose a Consultant Type unless they have chosen a role that requires it. Specialities are far more complex. For example, if a user selects Radiology, they should only be shown Specialities related to Oncology. This field must be cleared any time there is a mismatch, and requires a surprising amount of code to handle all edge cases. And there are many such edge cases, as there are multiple sources of data to be taken into account - the data from the page load collected from Django, the current placeholder, and the user's current selection held in \texttt{\$formData}. \texttt{profile-form.svelte} is an especially complex component as there are over 10 different placeholders that are chosen and presented dependent on a variety of factors. Since a user can have multiple roles, a multiple select form field, compatible with placeholders had to be implemented - further complicating the relationships between fields.
 
 \section{Data Tables} \label{Data Tables}
+\vspace{-5pt}
+{\footnotesize See Appendix \ref{app:Panel} for a screenshot of the data table component.}
+\vspace{-5pt}
 \begin{figure}[h]
 \centering
 \frame{\includegraphics[width=\linewidth]{images/panel-flow.png}}
-\vspace{-20pt}
+\vspace{-15pt}
 \caption{Data table flow}
 \vspace{-10pt}
 \caption*{(frontend/src/routes/protected/*)}
 \label{fig:data-table-flow}
-\vspace{-5pt}
 \end{figure}
 
-Figure \ref{fig:data-table-flow} presents the flow of data to the data tables. You can find an example in Appendix \ref{app:Panel}. These data tables are used to display various information dependent on the users roles, trusts, consultant type, and current page. This is not just limited to the data shown, but the columns are also dynamic - meaning that columns that aren't relevant to the page are automatically hidden. It is also sometimes embedded into forms to allow the user to select items. This is all possible because it is a single reusable component. The user can search and sort the data, as well as chose between pagination or increasing the number of items shown at once. A badge is placed next to the ID to show the user whether the entry is a JD, AAC, or Rep. Some pages have a button at the end of the table instead of a row-actions component. For example, the Edit JD page has an Edit $>$ button at the end of each row to reduce the number of button presses for the user, and to make them aware of the action they are expected to take.
+Figure \ref{fig:data-table-flow} presents the flow of data to the data tables. These data tables are used to display various information dependent on the users roles, trusts, consultant type, and current page. This is not just limited to the data shown, but the columns are also dynamic - meaning that columns that aren't relevant to the page are automatically hidden. It is also sometimes embedded into forms to allow the user to select items. This is all possible because it is a single reusable component. The user can search and sort the data, as well as chose between pagination or increasing the number of items shown at once. A badge is placed next to the ID to show the user whether the entry is a JD, AAC, or Rep. Some pages have a button at the end of the table instead of a row-actions component. For example, the Edit JD page has an Edit $>$ button at the end of each row to reduce the number of button presses for the user, and to make them aware of the action they are expected to take.
 
-To make these tables so flexible, reactive variables have to be passed between through many layers. This data has to cleaned and placeholders have to be added to fit the format the table expects. Svelte's Logic blocks are used extensively to determine exactly how the table should be displayed.
+To make these tables so flexible, reactive variables have to be passed between through many layers. This data has to cleaned and placeholders have to be added to fit the format the table expects. Svelte's Logic Blocks are used extensively to determine exactly how the table should be displayed.
 
 
 \section{Job Description Flow}
-Please see Appendix \ref{app:CreateJD} and \ref{app:EditJD} for examples of the flow discussed in this section. 
+\vspace{-5pt}
+{\footnotesize See Appendix \ref{app:CreateJD} and \ref{app:EditJD} for screenshots of the JD components.}
+\vspace{-5pt}
 \subsection{State Machine}
 \begin{figure}[h]
 \centering
@@ -189,7 +206,7 @@ Please see Appendix \ref{app:CreateJD} and \ref{app:EditJD} for examples of the 
 \vspace{-5pt}
 \end{figure}
 
-The method of handling the JD workflow is kept in its own \texttt{JDStateMachine} class, initialised as soon as a JD is created. An image of the entire state machine, with its current state highlighted, is automatically created whenever state changes. Figure \ref{fig:jd-state} presents an example where the JD is moving from RCR Approved state to RSA Rejected state due as the reviewer is not satisfied with the content. This state machine is displayed atop of the Edit JD pages for all users. It allows users to be aware of the previous, current, and future state of the JD. With so many steps, it would otherwise be a challenge to understand what needs to be done next.
+The method of handling the JD workflow is kept in its own \texttt{JDStateMachine} class, initialised as soon as a JD is created. An image of the entire state machine, with its current state highlighted, is automatically created whenever state changes. Figure \ref{fig:jd-state} presents an example where the JD has moved from RCR Approved state to RSA Rejected state because the reviewer rejected it. This state machine is displayed atop of the Edit JD pages for all users. It allows users to be aware of the previous, current, and future state of the JD. With so many steps, it would otherwise be a challenge to understand what needs to be done next.
 
 \subsection{Forms}
 Learning a brand-new system can be overwhelming. By separating the Create JD and Edit JD form, we can reduce the cognitive load on users. Information that is split up improves clarity, and allows increased focus on the most important information. 
@@ -202,12 +219,12 @@ Learning a brand-new system can be overwhelming. By separating the Create JD and
 \vspace{-10pt}
 \caption*{(frontend/src/routes/protected/*)}
 \label{fig:jd-q-flow}
-\vspace{-5pt}
+\vspace{-15pt}
 \end{figure}
 
-Figure \ref{fig:jd-q-flow} describes how the forms are processed. It may be useful to refer to Appendix \ref{app:Endpoint} to see the data schema. Generally, all the API endpoints follow a similar structure, where the unique ID is passed to ensure data integrity and remove the need to parse each field. In this case, a SvelteKit $[$slug$]$ is used to identify the JD the user is editing. Django returns the data according to the slug, which is then combined with Superforms in compliance with the Zod schema. This schema which now also contains data, is sent to the frontend to display the questions and answers. 
+Figure \ref{fig:jd-q-flow} describes how the forms are processed. It may be useful to refer to Appendix \ref{app:Endpoint} to see the data schema. Generally, all the API endpoints follow a similar structure, where unique IDs are passed to ensure data integrity and remove the need to parse each field. In this case, a SvelteKit $[$slug$]$ is used to identify the JD the user is editing. Django returns the data according to the slug, which is then combined with Superforms in compliance with the Zod schema. This schema which now also contains data, is sent to the frontend to display the questions and answers. File proxy, correct encoding types, and SvelteKit's FormData must be used for file uploads.
 
-This design choice allows fully dynamic forms. Not a single question has to be baked into the frontend. The RCR can add, remove, or edit questions as they please within the Django admin panel. Questions are dynamic based on JD, most notably between consultant types. The user still retains the ability to save the form, have a separate submit button, and see placeholders for the data they have submitted no matter how long ago they submitted. Furthermore, one the form is submitted, the user can still visit the page and see their entries. To avoid data being changed while a reviewer is underway, all fields and buttons are disabled. This method requires a substantial amount of code gen, but when completed, it requires no upkeep from the developer, no matter how often policies are changed.
+This design choice allows fully dynamic forms. Not a single question has to be baked into the frontend. The RCR can add, remove, or edit questions as they please within the Django admin panel. Questions are dynamic based on JD, most notably between consultant types. Users can save and return to a form at a later date, upload an updated JD, or submit the form. Once the form is submitted, the user can still visit the page and see their entries. To prevent the user from making updates while a review is underway, all fields and buttons are disabled. This implementation requires a substantial amount of code, but when completed, it requires no upkeep from the developer, no matter how often policies are changed.
 
 \subsection{Permissions}
 \begin{figure}[h]
@@ -221,11 +238,13 @@ This design choice allows fully dynamic forms. Not a single question has to be b
 \vspace{-5pt}
 \end{figure}
 
-With four different three, six different JD states, AACs, consultant types, trusts, and approval statuses, trying to display only the relevant JDs is overwhelming. The \texttt{user\_jds(user, panel=None)} service is responsible for returning only the JDs that the request wants to, and is approved to see. All we have to do is pass in the user, and which panel they are viewing. By applying the required filters step by step according to figure \ref{fig:jd-perms}, we can avoid resorting to trial and error, and ensure that all scenarios are covered. This is a great example of how creating diagrams prior to implementing code reduces the cognitive load significantly.
+With three different roles, six different JD states, consultant types, trusts, and approval statuses, displaying the correct list of JDs is a complex task. The \texttt{user\_jds(user, panel=None)} service is responsible for returning a list of JDs, as requested by the user, provided they have the authorisation. Thanks to the relational database, all we have to do is pass in the user, and the panel they are viewing. By applying the required filters step by step according to figure \ref{fig:jd-perms}, we can keep code clean, and ensure that all scenarios are covered. This is a great example of how creating diagrams prior to implementing code reduces the cognitive load on developers.
 
 \section{Advisory Appointment Committees Flow}
-
-\begin{figure}[h]
+\vspace{-5pt}
+{\footnotesize See Appendix \ref{app:NewAAC} for a screenshot of the New AAC component.}
+\vspace{-5pt}
+\begin{figure}[H]
 \centering
 \frame{\includegraphics[width=0.75\linewidth]{images/aac-flow.png}}
 \vspace{-5pt}
@@ -233,13 +252,17 @@ With four different three, six different JD states, AACs, consultant types, trus
 \vspace{-10pt}
 \caption*{(frontend/src/routes/protected/*)}
 \label{fig:aac-flow}
-\vspace{-5pt}
+\vspace{-25pt}
 \end{figure}
 
-The final part of this system is the AAC flow. Please see Appendix \ref{app:NewAAC} for a screenshot of the initial form. Embedded into this form is a data table with the option to select multiple JDs and create an AAC panel. Figure \ref{fig:aac-flow} presents the flow of data, as discussed in \ref{Data Tables}. There is also a field to pick date.
+Embedded into the AAC form is a data table with the option to select multiple JDs and create an AAC panel. Figure \ref{fig:aac-flow} presents the flow of data. There is also a field to pick date. The design used here is a culmination of all the design patterns used in the previous few sections. Because of how reusable all the previous components were, there is effectively nothing new to discuss here.
 
-viewAAC is the final page, and it is used to select the representative you would like on your panel. There is also a placeholder component for implementing an outcome form file download and upload. This completes the process.
+View AAC is the final page, and it is used to select the representative you would like on your panel. There is also a placeholder component for implementing an outcome form file download and upload. This completes the final step of the process.
 
 \section{Testing}
+All API endpoints in Appendix \ref{app:Endpoints} have been tested during and after development in SwaggerUI. Figures \ref{fig:jd} and \ref{fig:aac} cover every scenario in the workflow, and have been replicated successfully. However, some paths are specific to the website, outside the predefined workflows. For proper coverage, these tests will need to be carried out by a dedicated QA team. There is no \texttt{tests.py}, however this is mostly important during development, and can be perceived more as a powerful feature for developers, rather than a method of testing. 
 
-All API endpoints in Appendix \ref{app:Endpoints} have been tested during and after development in SwaggerUI. Figures \ref{fig:jd} and \ref{fig:aac} cover every scenario in the workflow, and have been replicated successfully. However, some paths are specific to the website, outside the predefined workflows. For proper coverage, these tests will need to be carried out by a dedicated QA team. There is no \texttt{tests.py}, however this is mostly important during development, and can be perceived more as a powerful feature for developers, rather than a necessity. 
+\vfill
+\subsubsection{Disclaimer}
+\vspace{-5pt}
+Please note that I am the sole employee currently responsible for JDs and AACs, which explains the absence of external user feedback.

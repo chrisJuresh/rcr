@@ -14,6 +14,7 @@
 	import JDSubmit from './jd-submit.svelte';
 	import type { components } from '$lib/types.d.ts';
 	import LockClosed from 'svelte-radix/LockClosed.svelte';
+	import Upload from './upload-jd.svelte';
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	export let jd: components['schemas']['JDOut'];
@@ -131,9 +132,12 @@
 					</Table.Body>
 					<Table.Caption>
 						<Form.FieldErrors />
-						<div class="mb-2 mr-2 flex justify-end gap-2">
+						<div class="mx-2 mb-2 flex justify-between">
+							<Upload {disabled}/>
+						<div class="flex justify-end gap-2">
 							<Form.Button {disabled}>Save</Form.Button>
 							<JDSubmit {valid} />
+						</div>
 						</div>
 					</Table.Caption>
 				</Form.Fieldset>

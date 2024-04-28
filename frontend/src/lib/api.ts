@@ -100,3 +100,7 @@ export const getReps = async (aac_id: string, token: string) => {
 export const putAACRep = async (aac_id: string, rep_id: any, token: string) => {
     return putData(`/aacs/${aac_id}/${rep_id}/`, {}, { token });
 }
+
+export const putJD = async (jd_id: string, data: any, token: string) => {
+    return putData<components['schemas']['JDID']>(`/jds/${jd_id}/`, data, { token });
+}

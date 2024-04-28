@@ -1,4 +1,4 @@
-import { getJD, getJDIds, getJDChecklist, putJDChecklist, putJDState } from '$lib/api';
+import { getJD, getJDIds, getJDChecklist, putJDChecklist, putJDState, putJD } from '$lib/api';
 import type { PageServerLoad, Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
@@ -36,6 +36,20 @@ export const actions: Actions = {
 		try {
 			await putJDState(event.params.id, 'submit', token);
 		} catch {
+			//
+		}
+	},
+	upload: async (event) => {
+		const token = event.cookies.get('token');
+		const form = await event.request.formData();
+		const file = form.get('file');
+
+		const formData = new FormData();
+		formData.append('file', file);
+		try {
+		await putJD(event.params.id, formData, token);
+		} catch(e) {
+			console.log(e)
 			//
 		}
 	}

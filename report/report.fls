@@ -505,6 +505,7 @@ INPUT ./images/endpoint.png
 INPUT images/endpoint.png
 INPUT ./images/endpoint.png
 INPUT ./images/endpoint.png
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT ./images/mobile-profile.png
 INPUT ./images/mobile-profile.png
 INPUT images/mobile-profile.png
@@ -567,6 +568,7 @@ INPUT ./report.pyg
 INPUT ./report.pyg
 INPUT report.run.xml
 OUTPUT report.run.xml
+INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb

@@ -48,7 +48,7 @@ class AACOut(Schema):
 @router.post("/aac/", auth=JWTAuth())
 def create_aac(request, aac: AACIn):
     try:
-        jd_ids = json.loads(aac.JDs)  # Parse the JSON string to a Python list
+        jd_ids = json.loads(aac.JDs)  
     except json.JSONDecodeError as e:
         raise HttpError(400, "Invalid JSON string for 'jds' field")
     
