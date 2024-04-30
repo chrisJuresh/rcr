@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  28 APR 2024 11:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.16)  28 APR 2024 12:39
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1160,7 +1160,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 6.
 )
-Package hyperref Info: bookmark level for unknown listing defaults to 0 on input line 59.
+Package hyperref Info: bookmark level for unknown listing defaults to 0 on input line 61.
  [22]
 \openout4 = `report.pyg'.
 
@@ -1168,12 +1168,12 @@ Package hyperref Info: bookmark level for unknown listing defaults to 0 on input
 <images/api-lib.png, id=633, 1963.335pt x 1120.185pt>
 File: images/api-lib.png Graphic file (type png)
 <use images/api-lib.png>
-Package pdftex.def Info: images/api-lib.png  used on input line 84.
+Package pdftex.def Info: images/api-lib.png  used on input line 86.
 (pdftex.def)             Requested size: 424.06033pt x 241.94609pt.
 <images/nav.png, id=638, 2198.2125pt x 285.065pt>
 File: images/nav.png Graphic file (type png)
 <use images/nav.png>
-Package pdftex.def Info: images/nav.png  used on input line 103.
+Package pdftex.def Info: images/nav.png  used on input line 105.
 (pdftex.def)             Requested size: 424.06033pt x 54.98935pt.
 
 
@@ -1185,46 +1185,46 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <images/auth.png, id=647, 2180.145pt x 1108.14pt>
 File: images/auth.png Graphic file (type png)
 <use images/auth.png>
-Package pdftex.def Info: images/auth.png  used on input line 124.
+Package pdftex.def Info: images/auth.png  used on input line 126.
 (pdftex.def)             Requested size: 424.06033pt x 215.5369pt.
  [25 <./images/nav.png> <./images/auth.png>]
 <images/profile-file-flow.png, id=657, 1746.525pt x 341.275pt>
 File: images/profile-file-flow.png Graphic file (type png)
 <use images/profile-file-flow.png>
-Package pdftex.def Info: images/profile-file-flow.png  used on input line 150.
+Package pdftex.def Info: images/profile-file-flow.png  used on input line 152.
 (pdftex.def)             Requested size: 424.06033pt x 82.86063pt.
 
-Overfull \hbox (1.71165pt too wide) in paragraph at lines 159--160
+Overfull \hbox (1.71165pt too wide) in paragraph at lines 161--162
 \OT1/cmtt/l/it/12 proved.svelte \OT1/cmr/m/n/12 dis-plays the users cur-rently ap-proved roles and trusts, and \OT1/cmtt/l/it/12 profile-
  []
 
 <images/profile-form.png, id=660, 1192.455pt x 614.295pt>
 File: images/profile-form.png Graphic file (type png)
 <use images/profile-form.png>
-Package pdftex.def Info: images/profile-form.png  used on input line 163.
+Package pdftex.def Info: images/profile-form.png  used on input line 165.
 (pdftex.def)             Requested size: 275.63663pt x 141.98787pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 172.
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 174.
 (/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 ) [26 <./images/profile-file-flow.png>]
 <images/panel-flow.png, id=668, 1513.655pt x 742.775pt>
 File: images/panel-flow.png Graphic file (type png)
 <use images/panel-flow.png>
-Package pdftex.def Info: images/panel-flow.png  used on input line 180.
+Package pdftex.def Info: images/panel-flow.png  used on input line 182.
 (pdftex.def)             Requested size: 424.06033pt x 208.08891pt.
  [27{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/profile-form.png> <./images/panel-flow.png>]
 <images/state.png, id=679, 1432.35126pt x 164.615pt>
 File: images/state.png Graphic file (type png)
 <use images/state.png>
-Package pdftex.def Info: images/state.png  used on input line 200.
+Package pdftex.def Info: images/state.png  used on input line 201.
 (pdftex.def)             Requested size: 424.06033pt x 48.73431pt.
 <images/jd-q-flow.png, id=681, 855.195pt x 349.305pt>
 File: images/jd-q-flow.png Graphic file (type png)
 <use images/jd-q-flow.png>
-Package pdftex.def Info: images/jd-q-flow.png  used on input line 216.
+Package pdftex.def Info: images/jd-q-flow.png  used on input line 217.
 (pdftex.def)             Requested size: 212.03017pt x 86.60115pt.
 
 
@@ -1234,13 +1234,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <images/perms.png, id=690, 1349.04pt x 903.375pt>
 File: images/perms.png Graphic file (type png)
 <use images/perms.png>
-Package pdftex.def Info: images/perms.png  used on input line 232.
+Package pdftex.def Info: images/perms.png  used on input line 233.
 (pdftex.def)             Requested size: 318.04524pt x 212.96858pt.
  [29 <./images/jd-q-flow.png> <./images/perms.png>]
 <images/aac-flow.png, id=699, 879.285pt x 228.855pt>
 File: images/aac-flow.png Graphic file (type png)
 <use images/aac-flow.png>
-Package pdftex.def Info: images/aac-flow.png  used on input line 249.
+Package pdftex.def Info: images/aac-flow.png  used on input line 250.
 (pdftex.def)             Requested size: 318.04524pt x 82.77884pt.
 ) (./chapters/review.tex [30 <./images/aac-flow.png>]
 Chapter 5.
@@ -1321,11 +1321,11 @@ File: images/panel.png Graphic file (type png)
 Package pdftex.def Info: images/panel.png  used on input line 37.
 (pdftex.def)             Requested size: 424.06033pt x 346.61049pt.
  [41 <./images/profile.png>]
-<images/jd-create.png, id=819, 448.67625pt x 710.655pt>
+<images/jd-create.png, id=819, 707.64375pt x 1102.1175pt>
 File: images/jd-create.png Graphic file (type png)
 <use images/jd-create.png>
 Package pdftex.def Info: images/jd-create.png  used on input line 42.
-(pdftex.def)             Requested size: 381.6517pt x 604.51503pt.
+(pdftex.def)             Requested size: 381.6517pt x 594.41145pt.
  [42 <./images/panel.png>]
 <images/jd-form.png, id=826, 964.60374pt x 849.1725pt>
 File: images/jd-form.png Graphic file (type png)
@@ -1378,13 +1378,13 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 Here is how much of TeX's memory you used:
  25285 strings out of 476076
  456315 string characters out of 5793775
- 1942187 words of memory out of 5000000
+ 1943187 words of memory out of 5000000
  46840 multiletter control sequences out of 15000+600000
  567408 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  82i,13n,84p,1693b,2014s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on report.pdf (50 pages, 4266680 bytes).
+Output written on report.pdf (50 pages, 4292032 bytes).
 PDF statistics:
  965 PDF objects out of 1000 (max. 8388607)
  810 compressed objects within 9 object streams

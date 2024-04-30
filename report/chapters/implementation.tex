@@ -30,6 +30,8 @@ As always, fields are give intuitive names, and the correct data types and const
 
 Without such a detailed schema, at best the system would be completely static. Policies change often, new Trusts join or are renamed, and specialities are added or removed. Without an extremely flexible database, the website would quickly become outdated.
 
+A HistoricalRecord model is responsible for displaying the entire history of a JD in the admin panel. It provides an audit log of all changes in case of disputes, for tracking down bugs, or for data analysis.
+
 \usemintedstyle{tango}
 \section{API}
 \subsection{Endpoints}
@@ -188,7 +190,6 @@ Figure \ref{fig:profile-form} presents the data flow in the form itself. Data is
 Figure \ref{fig:data-table-flow} presents the flow of data to the data tables. These data tables are used to display various information dependent on the users roles, trusts, consultant type, and current page. This is not just limited to the data shown, but the columns are also dynamic - meaning that columns that aren't relevant to the page are automatically hidden. It is also sometimes embedded into forms to allow the user to select items. This is all possible because it is a single reusable component. The user can search and sort the data, as well as chose between pagination or increasing the number of items shown at once. A badge is placed next to the ID to show the user whether the entry is a JD, AAC, or Rep. Some pages have a button at the end of the table instead of a row-actions component. For example, the Edit JD page has an Edit $>$ button at the end of each row to reduce the number of button presses for the user, and to make them aware of the action they are expected to take.
 
 To make these tables so flexible, reactive variables have to be passed between through many layers. This data has to cleaned and placeholders have to be added to fit the format the table expects. Svelte's Logic Blocks are used extensively to determine exactly how the table should be displayed.
-
 
 \section{Job Description Flow}
 \vspace{-5pt}

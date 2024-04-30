@@ -190,7 +190,10 @@ from users.models import User
 def update_jd_state(request, jd_id: int, state: str, reviewer: Optional[str]=None):
     if state == 'submit' and 'Trust Employee' in get_user_roles(request.user, 'approved'):
         jd = JD.objects.get(id=jd_id, trust=get_user_trust(request.user))
-        jd.submit()
+        try:
+            jd.submit()
+        except:
+            jd.amend()
     elif state == 'approve' and ('RCR Employee' or 'Reviewer' in get_user_roles(request.user, 'approved')):
         jd = JD.objects.get(id=jd_id)
         if 'RCR Employee' in get_user_roles(request.user, ['approved', 'requested']):

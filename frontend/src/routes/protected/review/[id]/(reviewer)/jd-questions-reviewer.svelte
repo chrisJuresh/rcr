@@ -33,7 +33,7 @@
 
 	$: $formData = $formData;
 
-	$: disabled = jd.status !== ('RCR Approved' || 'Trust Amended');
+	$: disabled = jd.status !== 'RCR Approved' && jd.status !== 'Trust Amended';
 
 	$: valid = !disabled && !isTainted($tainted);
 </script>
