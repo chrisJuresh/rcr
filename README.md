@@ -1,5 +1,7 @@
 # This is my Dissertation Project.
 
+[View the report](report/report.pdf)
+
 The following installation guide assumes you are running Linux. It will run fine on Windows too but you may have to make some adaptations. Notably with entering the virtual environment.
 
 # Installation
