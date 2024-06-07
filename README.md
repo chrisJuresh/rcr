@@ -1,9 +1,4 @@
-I recommend viewing this file in MarkDown
-#
-
-The website will be hosted on https://rcr.chrisj.uk/
-
-However, since it will run on a home server, I cannot guarantee up-time.
+# This is my Dissertation Project.
 
 The following installation guide assumes you are running Linux. It will run fine on Windows too but you may have to make some adaptations. Notably with entering the virtual environment.
 
@@ -78,7 +73,5 @@ certbot
 
 # Postmark
 
-I have left my API token in my SvelteKit project in case you plan to test the app. Please use it responsibly.
+You will need to add your own api key in the SvelteKit code.
 
-#
-Please feel free to contact me if you run into any issues.
