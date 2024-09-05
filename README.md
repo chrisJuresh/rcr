@@ -2,6 +2,8 @@
 
 [View the report](report/report.pdf)
 
+I recieved 92.7% and won the Electronic Engineering and Computer Science Final Year Project Prize for Outstanding Achievement
+
 The following installation guide assumes you are running Linux. It will run fine on Windows too but you may have to make some adaptations. Notably with entering the virtual environment.
 
 # Installation
