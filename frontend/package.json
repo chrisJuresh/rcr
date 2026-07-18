@@ -5,7 +5,7 @@
 	"scripts": {
 		"generate-api-types": "openapi-typescript http://localhost:8000/api/openapi.json --output src/lib/types.d.ts",
 		"dev": "npm run generate-api-types; vite dev",
-		"build": "npm run generate-api-types; vite build",
+		"build": "vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -19,6 +19,7 @@
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-node": "^5.0.1",
+		"@sveltejs/adapter-vercel": "5.10.3",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "^8.56.0",

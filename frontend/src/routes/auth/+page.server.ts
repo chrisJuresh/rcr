@@ -5,6 +5,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { loginFormSchema, registerFormSchema } from './schema';
 import { v4 as uuidv4 } from 'uuid';
 import postmark from 'postmark';
+import { env } from '$env/dynamic/private';
 import { verifyUser, loginUser, registerUnauthenticatedUser } from '$lib/api';
 
 export const load: PageServerLoad = async ({ cookies, url }) => {
@@ -31,8 +32,10 @@ export const load: PageServerLoad = async ({ cookies, url }) => {
 
 const sendVerificationEmail = async (email, token, url) => {
 	const verificationUrl = `${url.origin}/auth/verify?token=${token}`;
-	const client = new postmark.ServerClient('cd8d27e7-e383-4d6d-ad5e-daa45fbcd2f5');
-	console.log(verificationUrl);
+	if (!env.POSTMARK_SERVER_TOKEN) {
+		throw new Error('POSTMARK_SERVER_TOKEN is not configured');
+	}
+	const client = new postmark.ServerClient(env.POSTMARK_SERVER_TOKEN);
 
 	try {
 		await client.sendEmail({
@@ -60,6 +63,11 @@ const setTokenCookie = (event, value) => {
 };
 
 export const actions: Actions = {
+	demo: async (event) => {
+		setTokenCookie(event, 'demo-access-token');
+		redirect(302, '/protected/panel');
+	},
+
 	login: async (event) => {
 		const form = await superValidate(event, zod(loginFormSchema));
 		if (!form.valid) {

@@ -1,0 +1,10 @@
+.env
+.vercel
+frontend/.vercel
+frontend/node_modules
+frontend/.svelte-kit
+frontend/build
+backend/venv
+**/__pycache__/
+*.py[cod]
+.DS_Store

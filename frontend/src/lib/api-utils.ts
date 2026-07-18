@@ -1,12 +1,12 @@
 import axios from 'axios';
 import type { AxiosRequestConfig, Method } from 'axios';
-
-const baseUrl = 'http://localhost:8000/api';
+import { env } from '$env/dynamic/public';
+import { getMockApiResponse } from './mock-api';
 
 type ApiConfig = {
 	token?: string;
 	headers?: Record<string, string>;
-    params?: Record<string, any>;
+	params?: Record<string, any>;
 };
 
 function buildAxiosConfig(config: ApiConfig): AxiosRequestConfig {
@@ -15,7 +15,7 @@ function buildAxiosConfig(config: ApiConfig): AxiosRequestConfig {
 			Authorization: `Bearer ${config.token}`,
 			...config.headers
 		},
-        params: config.params
+		params: config.params
 	};
 }
 
@@ -23,8 +23,13 @@ async function makeRequest<T>(
 	method: Method,
 	endpoint: string,
 	data: any = {},
-	config: ApiConfig = {},
+	config: ApiConfig = {}
 ): Promise<T> {
+	if (!env.PUBLIC_API_BASE_URL) {
+		return getMockApiResponse<T>(method, endpoint, data, config.params);
+	}
+
+	const baseUrl = env.PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
 	const fullUrl = `${baseUrl}${endpoint}`;
 	const axiosConfig = buildAxiosConfig(config);
 

@@ -3,6 +3,7 @@
 	import RegisterTab from './register.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
+	import { Button } from '$lib/components/ui/button';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -28,6 +29,14 @@
 							<RegisterTab data={data.registerForm} />
 						</Tabs.Content>
 					</Tabs.Root>
+					<div class="my-4 flex items-center gap-3 text-xs text-muted-foreground">
+						<div class="h-px flex-1 bg-border"></div>
+						<span>or</span>
+						<div class="h-px flex-1 bg-border"></div>
+					</div>
+					<form method="POST" action="?/demo">
+						<Button type="submit" variant="outline" class="w-full">Explore the demo</Button>
+					</form>
 				</Card.Content>
 			</Card.Root>
 		</div>

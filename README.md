@@ -64,9 +64,30 @@ npm run dev
 ```
 
 # Deployment
-You will have to find instructions elsewhere if you plan on deploying this in build mode.
 
-Here are the tools I used anyway:
+The public portfolio deployment is a self-contained SvelteKit demonstration using clearly labelled synthetic data. The original Django application remains in `backend/` as the dissertation implementation, but it is not required for the public demo.
+
+Vercel should be configured with:
+
+```text
+Framework preset: SvelteKit
+Root directory: frontend
+Build command: npm run build
+Output directory: leave at the framework default
+```
+
+The frontend uses Vercel's supported SvelteKit adapter. For local development:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The optional legacy authenticated routes can still connect to Django by setting `PUBLIC_API_BASE_URL` to the API base URL. Email verification additionally requires `POSTMARK_SERVER_TOKEN`.
+
+The original deployment architecture used:
+
 ```
 https://kit.svelte.dev/docs/adapter-node 
 nginx with the rcr config provided
